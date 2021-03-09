@@ -6,60 +6,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
   <meta name="description" content=""/>
   <meta name="author" content=""/>
-  <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+  <title>Login</title>
   <!-- loader-->
   <link href="{{asset('assets/css/pace.min.css')}}" rel="stylesheet"/>
   <script src="{{asset('assets/js/pace.min.js')}}"></script>
   <!--favicon-->
   <link rel="icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon">
-  <!-- Vector CSS -->
-  <link href="{{asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
-  <!-- simplebar CSS-->
-  <link href="{{asset('assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet"/>
   <!-- Bootstrap core CSS-->
   <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet"/>
   <!-- animate CSS-->
   <link href="{{asset('assets/css/animate.css')}}" rel="stylesheet" type="text/css"/>
   <!-- Icons CSS-->
   <link href="{{asset('assets/css/icons.css')}}" rel="stylesheet" type="text/css"/>
-  <!-- Sidebar CSS-->
-  <link href="{{asset('assets/css/sidebar-menu.css')}}" rel="stylesheet"/>
   <!-- Custom Style-->
   <link href="{{asset('assets/css/app-style.css')}}" rel="stylesheet"/>
   
 </head>
 
 <body class="bg-theme bg-theme1">
- 
+
+<!-- start loader -->
+   <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner" ><div class="loader"></div></div></div></div>
+   <!-- end loader -->
+
 <!-- Start wrapper-->
  <div id="wrapper">
- 
-  <!--Start sidebar-wrapper-->
-   @include('admin.partials.menu')
-   
-</div>
-   <!--End sidebar-wrapper-->
 
-<!--Start topbar header-->
-  @include('admin.partials.header')
-<!--End topbar header-->
-
-    @yield('content')
-   <!--Start Back To Top Button-->
+ <div class="loader-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
+	<div class="card card-authentication1 mx-auto my-5">
+		<div class="card-body">
+		 <div class="card-content p-2">
+		 	<div class="text-center">
+		 		<img src="{{asset('assets/images/logo-icon.png')}}" alt="logo icon">
+		 	</div>
+		  <div class="card-title text-uppercase text-center py-3">Sign In</div>
+            @if ( Session::has('error') )
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong>{{ Session::get('error') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+            @endif
+		    <form action="{{url('auth/login')}}" method="POST" >
+            @csrf
+			  <div class="form-group">
+			  <label for="exampleInputUsername" class="sr-only">Username</label>
+			   <div class="position-relative has-icon-right">
+				  <input name="email" type="text" id="exampleInputUsername" class="form-control input-shadow" placeholder="Enter Email">
+				  <div class="form-control-position">
+					  <i class="icon-user"></i>
+				  </div>
+			   </div>
+			  </div>
+			  <div class="form-group">
+			  <label for="exampleInputPassword" class="sr-only">Password</label>
+			   <div class="position-relative has-icon-right">
+				  <input type="password" name = "password" id="exampleInputPassword" class="form-control input-shadow" placeholder="Enter Password">
+				  <div class="form-control-position">
+					  <i class="icon-lock"></i>
+				  </div>
+			   </div>
+			  </div>
+			<div class="form-row">
+			 <div class="form-group col-6 text-right">
+			    <a href="reset-password.html">Reset Password</a>
+			 </div>
+			</div>
+			 <button type="submit" class="btn btn-light btn-block">Sign In</button>
+			</div>
+			 
+			 </form>
+		   </div>
+		  </div>
+	     </div>
+    
+     <!--Start Back To Top Button-->
     <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
     <!--End Back To Top Button-->
 	
-	<!--Start footer-->
-	<footer class="footer">
-      <div class="container">
-        <div class="text-center">
-          Copyright © 2018 Dashtreme Admin
-        </div>
-      </div>
-    </footer>
-	<!--End footer-->
-	
-  <!--start color switcher-->
+	<!--start color switcher-->
    <div class="right-sidebar">
     <div class="switcher-icon">
       <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
@@ -96,29 +123,19 @@
      </div>
    </div>
   <!--end color switcher-->
-   
-  </div><!--End wrapper-->
-
+	
+	</div><!--wrapper-->
+	
   <!-- Bootstrap core JavaScript-->
   <script src="{{asset('assets/js/jquery.min.js')}}"></script>
   <script src="{{asset('assets/js/popper.min.js')}}"></script>
   <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 	
- <!-- simplebar js -->
-  <script src="{{asset('assets/plugins/simplebar/js/simplebar.js')}}"></script>
   <!-- sidebar-menu js -->
   <script src="{{asset('assets/js/sidebar-menu.js')}}"></script>
-  <!-- loader scripts -->
-  <script src="{{asset('assets/js/jquery.loading-indicator.js')}}"></script>
+  
   <!-- Custom scripts -->
   <script src="{{asset('assets/js/app-script.js')}}"></script>
-  <!-- Chart js -->
-  
-  <script src="{{asset('assets/plugins/Chart.js/Chart.min.js')}}"></script>
- 
-  <!-- Index js -->
-  <script src="{{asset('assets/js/index.js')}}"></script>
-
   
 </body>
 </html>

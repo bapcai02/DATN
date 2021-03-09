@@ -17,6 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
+Route::prefix('auth')->group(function (){
+    Route::get('/login', 'Admin\LoginController@showlogin')->name('auth.login');
+    Route::post('/login', 'Admin\LoginController@login');
+});
+Route::group(['middleware' => 'checkRole'], function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
+    });
+
+    Route::prefix('customer')->group(function () {
+        Route::get('/home', 'Admin\HomeController@index')->name('customer.home');
+    });
 });
