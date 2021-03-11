@@ -19,11 +19,11 @@ class CheckRole
             return redirect(route("logout"));
         }
 
-        if(Auth::user()->role_id == 2)
+        if(Auth::user()->role_id == 3)
         {
             return redirect(route('admin.home'));
         }
-        if(Auth::user()->role_id == 1){
+        if(Auth::user()->role_id == 2){
             return redirect(route('customer.home'));
         }
 

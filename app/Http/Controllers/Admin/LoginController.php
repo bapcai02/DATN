@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
+use App\Notifications\ResetPassword;
+use App\Models\PasswordReset;
 use Auth;
 use Validator;
+use Mail;
+use Carbon\Carbon;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -51,7 +57,7 @@ class LoginController extends Controller
         
         
         if ($validator->fails()) {
-            return redirect('login')->withErrors($validator)->withInput();
+            return redirect('auth/login')->withErrors($validator)->withInput();
         } else {
             $email = $request->input('email');
             $password = $request->input('password');
@@ -59,13 +65,56 @@ class LoginController extends Controller
             if( Auth::attempt(['email' => $email, 'password' =>$password])) {
                 return redirect()->route("admin.home");
             } else {
-                Session::flash('error', 'Email hoặc mật khẩu không đúng!');
-                return redirect()->route("auth.login");
+                return redirect()->route("auth.login")->with('error', 'Email hoặc mật khẩu không đúng!');
             }
         }
     }
 
-    public function logout(){
+    public function confirm(){
+        return view('admin.pages.auths.confirm');
+    }
+
+    public function sendMail(Request $request){
+
+        if ($request->method() == 'GET') {
+            return view('admin.pages.auths.confirm');
+        }
+        
+        $user = $this->userRepository->checkUser($request->email);
+        if (!$user) {
+            $errors = new MessageBag(['errorlogin' => "Account does not exist, please check again !"]);
+            return redirect()->back()->withInput()->withErrors($errors);
+        }
+
+        $passwordReset = PasswordReset::updateOrCreate(['email' => $user->email], ['token' => Str::random(30)]);
+        if ($passwordReset) {
+            $user->notify(new ResetPassword($passwordReset->token));
+        }
+        return redirect(route('auth.confirm'))->with('message', "please check your email");
+    }
+
+    public function resetPassword(Request $request, $token = null)
+    {
+        if ($request->method() == 'GET') {
+            return view('admin.pages.auths.resetpassword', compact('token'));
+        }
+
+        $password = $request->input('password');
+        
+        $token = $request->input('token');
+        $passwordReset = PasswordReset::where('token', $token)->firstOrFail();
+        if (Carbon::parse($passwordReset->updated_at)->addMinutes(720)->isPast()) {
+            $passwordReset->delete();
+            return redirect()->back()->withErrors('error', 'Token has expired, please check again!');
+        }
+
+        $this->userRepository->resetPassword($passwordReset['email'], Hash::make($password));
+        $passwordReset->delete();
+        return redirect(route('auth.login'))->with('reset-success', 'password changed successfully!');
+
+    }
+
+    public function logout(Request $request){
         Auth::logout();
         $request->session()->flush();
         return redirect()->route("auth.login");
