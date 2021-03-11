@@ -26,7 +26,7 @@
       </li>
 
       <li>
-        <a href="tables.html">
+        <a href="{{ url('customer/product/') }}">
           <i class="zmdi zmdi-grid"></i> <span>Manage Product</span>
         </a>
       </li>

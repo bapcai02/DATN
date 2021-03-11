@@ -35,9 +35,9 @@ Route::prefix('auth')->group(function (){
         Route::get('/home', 'Customer\HomeController@index')->name('customer.home');
         Route::prefix('product')->group(function () {
             Route::get('/', 'Customer\ProductController@index')->name('customer.product'); 
-            Route::get('/edit', 'Customer\ProductController@index')->name('customer.product'); 
-            Route::get('/delete', 'Customer\ProductController@index')->name('customer.product'); 
-            Route::get('/new', 'Customer\ProductController@index')->name('customer.product'); 
+            Route::get('/edit', 'Customer\ProductController@index')->name('customer.product.edit'); 
+            Route::get('/delete', 'Customer\ProductController@index')->name('customer.product.delete'); 
+            Route::get('/add', 'Customer\ProductController@index')->name('customer.product.add'); 
         });
     });
 // });
