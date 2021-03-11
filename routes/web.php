@@ -24,15 +24,20 @@ Route::prefix('auth')->group(function (){
     Route::post('/p-confirm', 'Admin\LoginController@sendMail');
     Route::get('/set-password/{token}', 'Admin\LoginController@resetPassword')->name('auth.reset');
     Route::post('/set-password', 'Admin\LoginController@resetPassword')->name('auth.set-password');
-
     Route::any('/logout', 'Admin\LoginController@logout')->name('logout');
 });
-Route::group(['middleware' => 'checkRole'], function () {
+// Route::group(['middleware' => 'checkrole'], function () {
     Route::prefix('admin')->group(function () {
         Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
     });
 
     Route::prefix('customer')->group(function () {
         Route::get('/home', 'Customer\HomeController@index')->name('customer.home');
+        Route::prefix('product')->group(function () {
+            Route::get('/', 'Customer\ProductController@index')->name('customer.product'); 
+            Route::get('/edit', 'Customer\ProductController@index')->name('customer.product'); 
+            Route::get('/delete', 'Customer\ProductController@index')->name('customer.product'); 
+            Route::get('/new', 'Customer\ProductController@index')->name('customer.product'); 
+        });
     });
-});
+// });

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class CheckRole
@@ -21,7 +21,7 @@ class CheckRole
 
         if(Auth::user()->role_id == 3)
         {
-            return redirect(route('admin.home'));
+            return redirect('admin/home');
         }
         if(Auth::user()->role_id == 2){
             return redirect(route('customer.home'));
