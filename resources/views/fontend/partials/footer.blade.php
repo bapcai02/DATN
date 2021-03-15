@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <div class="newletter">
+    <!-- <div class="newletter">
       <div class="container">
         <div class="row justify-content-between align-items-center">
           <div class="col-12 col-md-7">
@@ -48,11 +48,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="footer-credit">
       <div class="container">
         <div class="footer-creadit_block d-flex flex-column flex-md-row justify-content-start justify-content-md-between align-items-baseline align-items-md-center">
-          <p class="author">Copyright © 2019 Ogami - All Rights Reserved.</p><img class="payment-method" src="assets/images/payment.png" alt="">
+          <p class="author">Copyright © HaDV1998.</p><img class="payment-method" src="assets/images/payment.png" alt="">
         </div>
       </div>
     </div>
