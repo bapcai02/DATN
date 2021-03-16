@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/cart','CartController@index')->name('cart');
-
+Route::get('/detail/{id}','DetailController@index')->name('cart');
 
 
 Route::prefix('auth')->group(function (){

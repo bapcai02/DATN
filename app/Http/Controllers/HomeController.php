@@ -8,7 +8,8 @@ use App\Repositories\ProductRepository;
 
 class HomeController extends Controller
 {
-    public $categoryRepository;
+    protected $categoryRepository;
+    protected $productRepository;
 
     public function __construct(
         CategoryRepository $categoryRepository,
@@ -26,8 +27,17 @@ class HomeController extends Controller
         $productVeget = $this->productRepository->getListProduct()->limit(6)->where('category_id', 2)->get();
         $productSea = $this->productRepository->getListProduct()->limit(6)->where('category_id', 4)->get();
         $productDealWeek = $this->productRepository->getListProduct()->orderBy('sale', 'DESC')->limit(5)->get();
-        
-        // dd($product);
+        $productMeatSale = $this->productRepository->getListProduct()->limit(6)->where('category_id', 1)->orderBy('sale', 'DESC')->get();
+        $productFuiSale = $this->productRepository->getListProduct()->limit(6)->where('category_id', 3)->orderBy('sale', 'DESC')->get();
+        $productVegetSale = $this->productRepository->getListProduct()->limit(6)->where('category_id', 2)->orderBy('sale', 'DESC')->get();
+        $productSeaSale = $this->productRepository->getListProduct()->limit(6)->where('category_id', 4)->orderBy('sale', 'DESC')->get();
+        $productSale = $this->productRepository->getListProduct()->orderBy('sale', 'DESC')->limit(6)->get();
+        $productMeatRan = $this->productRepository->getListProduct()->limit(6)->where('category_id', 1)->inRandomOrder()->get();
+        $productFuiRan = $this->productRepository->getListProduct()->limit(6)->where('category_id', 3)->inRandomOrder()->get();
+        $productVegetRan = $this->productRepository->getListProduct()->limit(6)->where('category_id', 2)->inRandomOrder()->get();
+        $productSeaRan = $this->productRepository->getListProduct()->limit(6)->where('category_id', 4)->inRandomOrder()->get();
+        $productRan = $this->productRepository->getListProduct()->inRandomOrder()->limit(6)->get();
+  
         return view('fontend.pages.home.index', compact(
             'category', 
             'product', 
@@ -35,7 +45,18 @@ class HomeController extends Controller
             'productFui', 
             'productVeget', 
             'productSea',
-            'productDealWeek'
+            'productDealWeek',
+            'productMeatSale',
+            'productFuiSale',
+            'productVegetSale',
+            'productSeaSale',
+            'productSale',
+            'productMeatRan',
+            'productFuiRan',
+            'productSeaRan',
+            'productVegetRan',
+            'productSeaRan',
+            'productRan'
         ));
     }
 }
