@@ -41,7 +41,7 @@
                 <div class="deal-block"> 
                   <div class="deal-block_detail">
                     <h5 class="deal-discount">-{{ $value->sale }}%</h5>
-                    <div class="deal-img"><a href="{{ url('/detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'.$value->image }}" alt="product image"></a></div>
+                    <div class="deal-img"><a href="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'.$value->image }}" alt="product image"></a></div>
                   
                     <div class="deal-info text-center">
                       <h5 class="color-type pink deal-type">{{ $value->category_name }}</h5><a class="deal-name" href="shop_detail.html">{{ $value->product_name }}</a>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="deal-select text-center">
                       <button class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
-                      <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                      <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                     </div>
                   </div>
                 </div>
@@ -216,10 +216,8 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
                           <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -244,10 +242,8 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
                           <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -271,10 +267,8 @@
                         <h3>{{ $value->product_price }}/kg</h3>
                       @endif
                       <div class="product-select">
-                        <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
                         <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                        <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                        <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                        <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                       </div>
                     </div>
                   </div>
@@ -298,10 +292,8 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
                           <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -329,7 +321,7 @@
                           <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
                           <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
                           <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -390,10 +382,8 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
                           <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -418,10 +408,8 @@
                             <h3>{{ $value->product_price }}/kg</h3>
                           @endif
                           <div class="product-select">
-                            <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
                             <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                            <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                            <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                           </div>
                         </div>
                       </div>
@@ -446,10 +434,8 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -474,10 +460,8 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -502,10 +486,8 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -551,7 +533,7 @@
                         @endif
                         <div class="product-select">
                           <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -577,7 +559,7 @@
                         @endif
                         <div class="product-select">
                           <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -603,7 +585,7 @@
                           @endif
                           <div class="product-select">
                             <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                            <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                           </div>
                         </div>
                       </div>
@@ -629,7 +611,7 @@
                         @endif
                         <div class="product-select">
                           <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>
@@ -655,7 +637,7 @@
                         @endif
                         <div class="product-select">
                           <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="quickview round-icon-btn pink"><i class="far fa-eye"></i></button>
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
                     </div>

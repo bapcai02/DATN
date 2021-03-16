@@ -18,7 +18,7 @@
       </div>
     </div>
     <nav class="navigation d-flex align-items-center">
-      <div class="container">
+      {{-- <div class="container">
         <div class="row">
           <div class="col-2"><a class="logo" href="index.html"><img src="assets/images/logo.png" alt=""></a></div>
           <div class="col-8">
@@ -81,7 +81,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
     </nav>
     <div id="mobile-menu">
       <div class="container">

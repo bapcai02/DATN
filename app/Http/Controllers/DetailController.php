@@ -21,10 +21,17 @@ class DetailController extends Controller
     }
     public function index($id){
         $category = $this->categoryRepository->getListCategory()->get();
-        $product = $this->productRepository->getProductById($id)->get();
+        $product = $this->productRepository->getProductById($id)->first();
+    
         $productImage = $this->productRepository->getProductImageById($id)->get();
-        $rating = $this->productRepository->getRatingImageById($id)->get();
-        // dd($product);
-        return view('fontend.pages.product.index', compact('category', 'product'));
+        $rating = $this->productRepository->getRatingImageById($id);
+
+        return view('fontend.pages.product.index', compact(
+                'category', 
+                'product', 
+                'productImage', 
+                'rating'
+            )
+        );
     }
 }

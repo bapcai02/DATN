@@ -33,16 +33,15 @@ class ProductRepository
         return DB::table('products')
             ->join('product_images', 'products.id', 'product_images.product_id')
             ->join('categories', 'products.category_id', 'categories.id')
-            ->where('product_status', 1)
+            ->where('products.product_status', 1)
             ->orderBy('products.created_at', 'DESC');
     }
 
     public function getProductById(int $id)
     {
         return DB::table('products')
-            ->join('product_images', 'products.id', 'product_images.product_id')
             ->join('categories', 'products.category_id', 'categories.id')
-            ->where('product_status', 1)
+            ->where('products.product_status', 1)
             ->where('products.id', $id)
             ->orderBy('products.created_at', 'DESC');
     }
@@ -57,6 +56,12 @@ class ProductRepository
 
     public function getRatingImageById(int $id)
     {
-
+        $rating = $this->rating->where('product_id', $id)->get();
+        $total_rail = 0;
+        $count = count($rating);
+        foreach($rating as $value){
+            $total_rail += ($value->rating) / $count;
+        }
+        return $total_rail;
     }
 }
