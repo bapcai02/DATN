@@ -22,15 +22,16 @@ class DetailController extends Controller
     public function index($id){
         $category = $this->categoryRepository->getListCategory()->get();
         $product = $this->productRepository->getProductById($id)->first();
-    
         $productImage = $this->productRepository->getProductImageById($id)->get();
         $rating = $this->productRepository->getRatingImageById($id);
+        $productRan = $this->productRepository->getListProduct()->inRandomOrder()->limit(6)->get();
 
         return view('fontend.pages.product.index', compact(
                 'category', 
                 'product', 
                 'productImage', 
-                'rating'
+                'rating',
+                'productRan'
             )
         );
     }

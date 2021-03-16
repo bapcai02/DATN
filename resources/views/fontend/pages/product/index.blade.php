@@ -48,13 +48,9 @@
                         <div class="product-describe_block">
                           <p class="product-describe">{{ $product->product_desc }}</p>
                         </div>
-                        <div class="product-category">
-                          <h5 class="category">SKU:<span>A1359</span></h5>
-                          <h5 class="category">Categories:<span><a href="product_grid+list_3col.html">Fastfood</a><a href="product_grid+list_3col.html">Orange</a></span></h5>
-                          <h5 class="category">Tag:<span><a href="product_grid+list_3col.html">Food</a><a href="product_grid+list_3col.html">Organic</a></span></h5>
-                        </div>
-                        <div class="product-share">
-                          <h5>Share link:</h5><a href=""><i class="fab fa-facebook-f"> </i></a><a href=""><i class="fab fa-twitter"></i></a><a href=""><i class="fab fa-invision"> </i></a><a href=""><i class="fab fa-pinterest-p"></i></a>
+                        <div class="product-category"
+                          <h5 class="category">Categories:<span><a href="product_grid+list_3col.html">{{ $product->category_name }}</a></span></h5>
+                          <h5 class="category">Tag:<span><a href="product_grid+list_3col.html">Food</a></span></h5>
                         </div>
                       </div>
                     </div>
@@ -66,10 +62,9 @@
                               <del>{{ $value->product_price }}</del>
                             </h3>
                           @else
+                            <h3>{{ $value->product_price }}/kg</h3>
+                          @endif
                           <h5 class="product-rated"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i><span>(15)</span></h5>
-                        </div>
-                        <div class="color-select">
-                          <h5>Select Color:</h5><a class="color bg-danger" href="#"></a><a class="color bg-success" href="#"></a><a class="color bg-info" href="#"></a>
                         </div>
                         <div class="quantity-select">
                           <label for="quantity">Quatity:</label>
@@ -80,9 +75,9 @@
                           <button class="add-to-compare normal-btn outline">+ Add to Compare</button>
                         </div>
                         <div class="product-guarante">
-                          <p class="guarante">Satisfaction 100% Guaranteed</p>
-                          <p class="guarante">Free shipping on orders over $99</p>
-                          <p class="guarante">14 day easy Return</p>
+                          <p class="guarante">Đảm bảo 100% sự hài lòng </p>
+                          <p class="guarante">Giao hàng miễn phí cho các đơn đặt hàng trên 200VND</p>
+                          <p class="guarante">2 ngày trả lại dễ dàng </p>
                         </div>
                       </div>
                     </div>
@@ -212,100 +207,29 @@
           <div class="col-12">
             <div class="related-product">
               <div class="related-product_top mini-tab-title underline">
-                <h2 class="title">Related Products</h2>
+                <h2 class="title">Dành cho bạn</h2>
               </div>
               <div class="related-product_bottom">
                 <div class="row no-gutters-sm">
+                @foreach($productRan as $key => $value)
                   <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
-                    <div class="product"><a class="product-img" href="shop_detail.html"><img src="assets/images/product/product02.png" alt=""></a>
-                      <h5 class="product-type">Oranges</h5>
-                      <h3 class="product-name">Pure Pineapple</h3>
-                      <h3 class="product-price">$14.00 
-                        <del>$35.00</del>
-                      </h3>
+                    <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image }}" alt=""></a>
+                      <h5 class="product-type">{{ $value->category_name }}</h5>
+                      <h3 class="product-name">{{ $value->product_name }}</h3>
+                        @if($product->sale != 0)
+                          <h3 class="product-price">{{ number_format(($value->product_price * $value->sale)/100). "VND/kg" }}
+                            <del>{{ $value->product_price }}</del>
+                          </h3>
+                        @else
+                          <h3>{{ $value->product_price }}/kg</h3>
+                        @endif
                       <div class="product-select">
-                        <button class="add-to-wishlist round-icon-btn"> <i class="icon_heart_alt"></i></button>
                         <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                        <button class="add-to-compare round-icon-btn"><i class="fas fa-random"></i></button>
-                        <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
+                        <button class="quickview round-icon-btn"><a href="{{ url('/detail') . '/'. $value->id }}"> <i class="far fa-eye"></i></a></button>
                       </div>
                     </div>
                   </div>
-                  <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
-                    <div class="product"><a class="product-img" href="shop_detail.html"><img src="assets/images/product/product03.png" alt=""></a>
-                      <h5 class="product-type">Oranges</h5>
-                      <h3 class="product-name">Apple</h3>
-                      <h3 class="product-price">$30.00
-                        <del>$45.00</del>
-                      </h3>
-                      <div class="product-select">
-                        <button class="add-to-wishlist round-icon-btn"> <i class="icon_heart_alt"></i></button>
-                        <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                        <button class="add-to-compare round-icon-btn"><i class="fas fa-random"></i></button>
-                        <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
-                    <div class="product"><a class="product-img" href="shop_detail.html"><img src="assets/images/product/product04.png" alt=""></a>
-                      <h5 class="product-type">Oranges</h5>
-                      <h3 class="product-name">Pure Pineapple</h3>
-                      <h3 class="product-price">$14.00 
-                        <del>$35.00</del>
-                      </h3>
-                      <div class="product-select">
-                        <button class="add-to-wishlist round-icon-btn"> <i class="icon_heart_alt"></i></button>
-                        <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                        <button class="add-to-compare round-icon-btn"><i class="fas fa-random"></i></button>
-                        <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
-                    <div class="product"><a class="product-img" href="shop_detail.html"><img src="assets/images/product/product05.png" alt=""></a>
-                      <h5 class="product-type">Oranges</h5>
-                      <h3 class="product-name">Pure Pineapple</h3>
-                      <h3 class="product-price">$14.00 
-                        <del>$35.00</del>
-                      </h3>
-                      <div class="product-select">
-                        <button class="add-to-wishlist round-icon-btn"> <i class="icon_heart_alt"></i></button>
-                        <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                        <button class="add-to-compare round-icon-btn"><i class="fas fa-random"></i></button>
-                        <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
-                    <div class="product"><a class="product-img" href="shop_detail.html"><img src="assets/images/product/product06.png" alt=""></a>
-                      <h5 class="product-type">Oranges</h5>
-                      <h3 class="product-name">Pure Pineapple</h3>
-                      <h3 class="product-price">$14.00 
-                        <del>$35.00</del>
-                      </h3>
-                      <div class="product-select">
-                        <button class="add-to-wishlist round-icon-btn"> <i class="icon_heart_alt"></i></button>
-                        <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                        <button class="add-to-compare round-icon-btn"><i class="fas fa-random"></i></button>
-                        <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
-                    <div class="product"><a class="product-img" href="shop_detail.html"><img src="assets/images/product/product07.png" alt=""></a>
-                      <h5 class="product-type">Oranges</h5>
-                      <h3 class="product-name">Apple</h3>
-                      <h3 class="product-price">$30.00
-                        <del>$45.00</del>
-                      </h3>
-                      <div class="product-select">
-                        <button class="add-to-wishlist round-icon-btn"> <i class="icon_heart_alt"></i></button>
-                        <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                        <button class="add-to-compare round-icon-btn"><i class="fas fa-random"></i></button>
-                        <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
-                      </div>
-                    </div>
-                  </div>
+                @endforeach
                 </div>
               </div>
             </div>

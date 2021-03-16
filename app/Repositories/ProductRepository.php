@@ -64,4 +64,9 @@ class ProductRepository
         }
         return $total_rail;
     }
+
+    public function getProductTag(int $id)
+    {
+        
+    }
 }
