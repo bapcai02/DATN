@@ -17,7 +17,7 @@ class DetailController extends Controller
     )
     {
         $this->categoryRepository = $categoryRepository;
-        $this->productRepository = $productRepository;;
+        $this->productRepository = $productRepository;
     }
     public function index($id){
         $category = $this->categoryRepository->getListCategory()->get();

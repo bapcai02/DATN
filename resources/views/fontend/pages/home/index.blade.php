@@ -50,8 +50,12 @@
                       </h3>
                     </div>
                     <div class="deal-select text-center">
-                      <button class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
-                      <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                      <form action="{{ url('/cart') }}" method = "POST">
+                        @csrf
+                        <input type="hidden" name="productId" value="{{ $value->id }}" >
+                        <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                        <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                      </form>           
                     </div>
                   </div>
                 </div>
@@ -216,8 +220,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -242,8 +250,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -292,8 +304,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -318,10 +334,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-wishlist round-icon-btn pink"><i class="icon_heart_alt"></i></button>
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="add-to-compare round-icon-btn pink"><i class="fas fa-random"></i></button>
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -382,8 +400,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -408,8 +430,12 @@
                             <h3>{{ $value->product_price }}/kg</h3>
                           @endif
                           <div class="product-select">
-                            <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                              <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                            </form> 
                           </div>
                         </div>
                       </div>
@@ -434,8 +460,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -460,8 +490,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -486,8 +520,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -532,8 +570,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -558,8 +600,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -584,8 +630,12 @@
                             <h3>{{ $value->product_price }}/kg</h3>
                           @endif
                           <div class="product-select">
-                            <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                              <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                            </form> 
                           </div>
                         </div>
                       </div>
@@ -610,8 +660,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>
@@ -636,8 +690,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <button class="add-to-cart round-icon-btn pink">  <i class="icon_bag_alt"></i></button>
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                          </form> 
                         </div>
                       </div>
                     </div>

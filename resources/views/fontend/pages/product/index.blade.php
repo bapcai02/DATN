@@ -224,8 +224,12 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                       <div class="product-select">
-                        <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                        <button class="quickview round-icon-btn"><a href="{{ url('/detail') . '/'. $value->id }}"> <i class="far fa-eye"></i></a></button>
+                        <form action="{{ url('/cart') }}" method = "POST">
+                          @csrf
+                          <input type="hidden" name="productId" value="{{ $value->id }}" >
+                          <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                        </form> 
                       </div>
                     </div>
                   </div>

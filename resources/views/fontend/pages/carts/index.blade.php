@@ -60,59 +60,33 @@
                   </colgroup>
                   <thead>
                     <tr>
-                      <th class="product-iamge" scope="col">Image</th>
-                      <th class="product-name" scope="col">Product name</th>
-                      <th class="product-price" scope="col">Price</th>
-                      <th class="product-quantity" scope="col">Quantity</th>
-                      <th class="product-total" scope="col">Total</th>
+                      <th class="product-iamge" scope="col">Ảnh</th>
+                      <th class="product-name" scope="col">Tên Sản Phẩm</th>
+                      <th class="product-price" scope="col">Giá</th>
+                      <th class="product-quantity" scope="col">số lượng</th>
+                      <th class="product-total" scope="col">Tổng Tiền</th>
                       <th class="product-clear" scope="col"> 
                         <button class="no-round-btn"><i class="icon_close"></i></button>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="product-iamge"> 
-                        <div class="img-wrapper"><img src="assets/images/product/product03.png" alt="product image"></div>
-                      </td>
-                      <td class="product-name">Pure Pineapple</td>
-                      <td class="product-price">$460.00</td>
-                      <td class="product-quantity"> 
-                        <input class="quantity no-round-input" type="number" min="1" value="1">
-                      </td>
-                      <td class="product-total">$460.00</td>
-                      <td class="product-clear"> 
-                        <button class="no-round-btn"><i class="icon_close"></i></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="product-iamge"> 
-                        <div class="img-wrapper"><img src="assets/images/product/product02.png" alt="product image"></div>
-                      </td>
-                      <td class="product-name">American lobster</td>
-                      <td class="product-price">$460.00</td>
-                      <td class="product-quantity"> 
-                        <input class="quantity no-round-input" type="number" min="1" value="1">
-                      </td>
-                      <td class="product-total">$460.00</td>
-                      <td class="product-clear"> 
-                        <button class="no-round-btn"><i class="icon_close"></i></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="product-iamge"> 
-                        <div class="img-wrapper"><img src="assets/images/product/product05.png" alt="product image"></div>
-                      </td>
-                      <td class="product-name">Chrysanthemum</td>
-                      <td class="product-price">$460.00</td>
-                      <td class="product-quantity">
-                        <input class="quantity no-round-input" type="number" min="1" value="2">
-                      </td>
-                      <td class="product-total">$920.00</td>
-                      <td class="product-clear"> 
-                        <button class="no-round-btn"><i class="icon_close"></i></button>
-                      </td>
-                    </tr>
+                    @foreach($cart as $key => $value)
+                      <tr>
+                        <td class="product-iamge"> 
+                          <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->options->image }}" alt="product image"></div>
+                        </td>
+                        <td class="product-name">{{ $value->name }}</td>
+                        <td class="product-price">{{ $value->price }}</td>
+                        <td class="product-quantity"> 
+                          <input class="quantity no-round-input" type="number" min="1" value="{{ $value->qty }}">
+                        </td>
+                        <td class="product-total">{{ number_format($value->price * $value->qty) }}</td>
+                        <td class="product-clear"> 
+                          <button class="no-round-btn"><i class="icon_close"></i></button>
+                        </td>
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

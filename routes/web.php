@@ -17,6 +17,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/cart','CartController@index')->name('cart');
 Route::get('/detail/{id}','DetailController@index')->name('cart');
 Route::get('/categories/{id}','CategoryController@index')->name('cart');
+Route::post('/cart', 'CartController@addCart');
 
 Route::prefix('auth')->group(function (){
     Route::get('/login', 'Admin\LoginController@showlogin')->name('auth.login');
