@@ -69,4 +69,14 @@ class ProductRepository
     {
         
     }
+
+    public function getProductByCategoryId(int $id){
+        return $this->product
+            ->join('product_images', 'products.id', 'product_images.product_id')
+            ->join('categories', 'products.category_id', 'categories.id')
+            ->where('products.product_status', 1)
+            ->where('category_id', $id)
+            ->orderBy('products.created_at')
+            ->paginate(9);
+    }
 }

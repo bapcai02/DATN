@@ -18,11 +18,11 @@
       </div>
     </div>
     <nav class="navigation d-flex align-items-center">
-      {{-- <div class="container">
+      <div class="container">
         <div class="row">
           <div class="col-2"><a class="logo" href="index.html"><img src="assets/images/logo.png" alt=""></a></div>
           <div class="col-8">
-            <div class="navgition-menu d-flex align-items-center justify-content-center">
+            {{-- <div class="navgition-menu d-flex align-items-center justify-content-center">
               <ul class="mb-0">
                 <li class="toggleable"> <a class="menu-item" href="{{ url('/') }}">Home</a>
                 </li>
@@ -72,7 +72,7 @@
                 </li>
                 <li class="toggleable"><a class="menu-item" href="about_us.html">About us</a></li>
               </ul>
-            </div>
+            </div> --}}
           </div>
           <div class="col-2">
             <div class="product-function d-flex align-items-center justify-content-end">
@@ -81,9 +81,9 @@
             </div>
           </div>
         </div>
-      </div> --}}
+      </div>
     </nav>
-    <div id="mobile-menu">
+    {{-- <div id="mobile-menu">
       <div class="container">
         <div class="row">
           <div class="col-3">
@@ -148,7 +148,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
     <div class="navigation-filter"> 
       <div class="container">
         <div class="row">
@@ -158,7 +158,7 @@
               <div class="department-dropdown-menu down">
                 <ul>
                   @foreach($category as $key => $value)
-                    <li><a href="shop_grid+list_3col.html"> <i class="icon-{{ $key+1 }}"></i>{{ $value->category_name }}</a></li>
+                    <li><a href="{{ url('categories') . '/' . $value->id  }}"> <i class="icon-{{ $key+1 }}"></i>{{ $value->category_name }}</a></li>
                   @endforeach
                 </ul>
               </div>

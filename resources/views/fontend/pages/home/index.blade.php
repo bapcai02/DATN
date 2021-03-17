@@ -188,7 +188,7 @@
                 </div>
                 <div class="col-12 col-md-8 text-lg-right">
                   <ul class="tab-control text-md-right">
-                    <li><a class="active" href="#tab1">All</a></li>
+                    <li><a class="active" href="#tab1">Tất Cả</a></li>
                     <li><a href="#tab2">Trái Cây & Hạt</a></li>
                     <li><a href="#tab3">Thịt Tươi Sống</a></li>
                     <li><a href="#tab4">Rau Sạch</a></li>
@@ -354,7 +354,7 @@
                 </div>
                 <div class="col-12 col-md-8 text-lg-right">
                   <ul class="tab-control text-md-right">
-                    <li><a class="active" href="#tab1">All</a></li>
+                    <li><a class="active" href="#tab1">Tất Cả</a></li>
                     <li><a href="#tab2">Trái Cây & Hạt</a></li>
                     <li><a href="#tab3">Thịt Tươi Sống</a></li>
                     <li><a href="#tab4">Rau Sạch</a></li>
@@ -504,7 +504,7 @@
                 </div>
                 <div class="col-12 col-md-8 text-lg-right">
                   <ul class="tab-control text-md-right">
-                    <li><a class="active" href="#tab1">All</a></li>
+                    <li><a class="active" href="#tab1">Tất Cả</a></li>
                     <li><a href="#tab2">Trái Cây & Hạt</a></li>
                     <li><a href="#tab3">Thịt Tươi Sống</a></li>
                     <li><a href="#tab4">Rau Sạch</a></li>
@@ -642,38 +642,6 @@
                       </div>
                     </div>
                   @endforeach
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-md-6">
-              <div class="quick-banner quick-banner-2">
-                <div class="row justify-content-center align-items-center">
-                  <div class="col-6 col-md-5">
-                    <div class="bannner-img text-center"><img class="img-fluid" src="assets/images/homepage03/quick_banner_2_img.png" alt=""></div>
-                  </div>
-                  <div class="col-6 col-md-5">
-                    <div class="banner-text text-center text-md-left">
-                      <h3 class="day">Black Friday </h3>
-                      <h3 class="sale">Sale Off <span>60%</span></h3><a class="normal-btn pink" href="shop_grid+list_3col.html">Shop now</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="quick-banner quick-banner-3">
-                <div class="row justify-content-center align-items-center">
-                  <div class="col-6 col-md-5">
-                    <div class="bannner-img text-center"><img class="img-fluid" src="assets/images/homepage03/quick_banner_3_img.png" alt=""></div>
-                  </div>
-                  <div class="col-6 col-md-5">
-                    <div class="banner-text text-center text-md-left">
-                      <h3 class="day">Summer</h3>
-                      <h3 class="sale">Sale Off <span>50%</span></h3><a class="normal-btn pink" href="shop_grid+list_3col.html">Shop now</a>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
