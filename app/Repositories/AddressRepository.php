@@ -29,7 +29,7 @@ class AddressRepository
     }
 
     public function getQuanHuyen(int $matp){
-        return $this->quanHuyen->where('mtp', $matp)->get();
+        return $this->quanHuyen->where('matp', $matp)->get();
     }
 
     public function getXaPhuong(int $maqh){

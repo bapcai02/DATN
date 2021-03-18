@@ -22,6 +22,8 @@ Route::prefix('cart')->group(function (){
     Route::post('/delete', 'CartController@deleteCart');
     Route::get('/update', 'CartController@updateCart');
     Route::get('/checkout','CartController@checkout');
+    Route::get('/quanhuyen','CartController@getQuanHuyen');
+    Route::get('/xaphuong','CartController@getXaPhuong');
 });
 
 

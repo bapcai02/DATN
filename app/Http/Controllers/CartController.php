@@ -75,4 +75,18 @@ class CartController extends Controller
 
         return view('fontend.pages.carts.checkout', compact('category', 'tinhThanhPho'));
     }
+
+    public function getQuanHuyen(Request $request){
+        $matp = $request->matp;
+        $data = $this->addressRepository->getQuanHuyen($matp);
+
+        return response()->json($data);
+    }
+
+    public function getXaPhuong(Request $request){
+        $maqh = $request->maqh;
+        $data = $this->addressRepository->getXaPhuong($maqh);
+
+        return response()->json($data);
+    }
 }

@@ -55,16 +55,16 @@
                 <div class="form-row">
                   <div class="form-group">
                     <label for="inputFirstName">Tên người nhận *</label>
-                    <input class="no-round-input-bg" id="inputFirstName" type="text" required>
+                    <input class="no-round-input-bg" name ='name' id="name" type="text" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputCompanyName">Số điện thoại</label>
-                  <input class="no-round-input-bg" id="inputCompanyName" type="text">
+                  <input class="no-round-input-bg" name='phone' id="phone" type="text" require>
                 </div>
                 <div class="form-group">
                   <label for="inputCountry">Tỉnh/Thành phố *</label>
-                  <select class="no-round-input-bg" id="inputContry">
+                  <select class="no-round-input-bg" name = "thanhpho" id="Contry">
                     @foreach($tinhThanhPho as $key => $value)
                       <option value="{{ $value->id }}">{{ $value->name }}</option>
                     @endforeach
@@ -72,15 +72,23 @@
                 </div>
                 <div class="form-group">
                   <label for="inputStreet">Quận/Huyện*</label>
-                  <input class="no-round-input-bg" id="inputStreet" type="text" required>
+                  <select class="no-round-input-bg" name = 'quanhuyen' id="quanhuyen">
+
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="inputZip">Xã/Phường/Thị Trấn</label>
-                  <input class="no-round-input-bg" id="inputZip" type="text">
+                  <select class="no-round-input-bg" name = 'xaphuong' id="xaphuong">
+
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="inputNote">Nhập lại địa chỉ </label>
+                  <textarea class="textarea-form-bg" id="inputNote" name="address" cols="10" rows="2"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="inputNote">Ghi chú </label>
-                  <textarea class="textarea-form-bg" id="inputNote" name="" cols="30" rows="7"></textarea>
+                  <textarea class="textarea-form-bg" id="inputNote" name="note" cols="30" rows="7"></textarea>
                 </div>
               </div>
               <div class="col-12 col-md-6 col-lg-4">
@@ -144,5 +152,79 @@
         </div>
       </div>
       <!-- End partner-->
-
 @endsection
+
+@push('script')
+  <script>
+    $(document).ready(function () {
+
+      var matp = $('#Contry').find('option:selected').val();
+      $.ajax({
+          url: "{{ url('/cart/quanhuyen') }}",
+          type: 'GET',
+          data: {
+            matp
+          },
+      }).done(function(res){
+        for(var i = 0; i < res.length - 1; i++){
+          $('#quanhuyen').append($('<option>', {
+              value: res[i]['id'],
+              text: res[i]['name']
+          }));
+        }
+
+        var maqh = $('#quanhuyen').find('option:selected').val();
+        $.ajax({
+            url: "{{ url('/cart/xaphuong') }}",
+            type: 'GET',
+            data: {
+              maqh
+            },
+        }).done(function(res){
+          for(var i = 0; i < res.length - 1; i++){
+            $('#xaphuong').append($('<option>', {
+                value: res[i]['id'],
+                text: res[i]['name']
+            }));
+          }
+        });
+      });
+
+      $('#Contry').change(function(){
+        var matp = $('#Contry').find('option:selected').val();
+        $.ajax({
+          url: "{{ url('/cart/quanhuyen') }}",
+          type: 'GET',
+          data: {
+            matp
+          },
+        }).done(function(res){
+            $('#quanhuyen').find('option').remove();
+            for(var i = 0; i < res.length - 1; i++){
+            $('#quanhuyen').append($('<option>', {
+                value: res[i]['id'],
+                text: res[i]['name']
+            }));
+          }
+
+          var maqh = $('#quanhuyen').find('option:selected').val();
+          $.ajax({
+              url: "{{ url('/cart/xaphuong') }}",
+              type: 'GET',
+              data: {
+                maqh
+              },
+          }).done(function(res){
+            $('#xaphuong').find('option').remove();
+            for(var i = 0; i < res.length - 1; i++){
+              $('#xaphuong').append($('<option>', {
+                  value: res[i]['id'],
+                  text: res[i]['name']
+              }));
+            }
+          });
+        })
+      })
+    });
+  </script>
+@endpush
