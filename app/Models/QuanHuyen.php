@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuanHuyen extends Model
 {
-    //
+    protected $table = 'vn_quanhuyen';
+    protected $fillable = [
+        'name', 'type', 'matp'
+    ];
 }

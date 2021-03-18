@@ -122,13 +122,6 @@
                       <td>{{ Cart::total() }}</td>
                     </tr>
                     <tr>
-                      <th>SHIPPING</th>
-                      <td>
-                        <p>Free shipping</p>
-                        <p>Calculate shipping</p>
-                      </td>
-                    </tr>
-                    <tr>
                       <th>TOTAL</th>
                       <td>{{ Cart::total() }}</td>
                     </tr>
@@ -173,8 +166,12 @@
         type: 'GET',
         data: {data},
       }).done(function(res){
-        location.reload();
-        swal("Thành Công!", "Update Thành công!", "success");   
+        swal("Thành Công!", "Update Thành công!", "success");
+        setTimeout(
+          () => {
+            location.reload();
+          }, 2000
+        )
       })
     })
   });

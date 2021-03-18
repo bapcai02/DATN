@@ -51,59 +51,35 @@
           <form action="" method="post">
             <div class="row">
               <div class="col-12 col-lg-8">
-                <h2 class="form-title">Billing details</h2>
+                <h2 class="form-title">THÔNG TIN NGƯỜI NHẬN</h2>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputFirstName">First Name*</label>
+                  <div class="form-group">
+                    <label for="inputFirstName">Tên người nhận *</label>
                     <input class="no-round-input-bg" id="inputFirstName" type="text" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputLastName">Last Name*</label>
-                    <input class="no-round-input-bg" id="inputLastName" type="text" required>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputCompanyName">Company name (optional)</label>
+                  <label for="inputCompanyName">Số điện thoại</label>
                   <input class="no-round-input-bg" id="inputCompanyName" type="text">
                 </div>
                 <div class="form-group">
-                  <label for="inputCountry">Country*</label>
+                  <label for="inputCountry">Tỉnh/Thành phố *</label>
                   <select class="no-round-input-bg" id="inputContry">
-                    <option value="1">Vietnam</option>
-                    <option value="2">USA</option>
-                    <option value="3">Italy</option>
-                    <option value="4">China</option>
-                    <option value="5">Japan</option>
-                    <option value="6">Russia</option>
+                    @foreach($tinhThanhPho as $key => $value)
+                      <option value="{{ $value->id }}">{{ $value->name }}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="inputStreet">Street address*</label>
+                  <label for="inputStreet">Quận/Huyện*</label>
                   <input class="no-round-input-bg" id="inputStreet" type="text" required>
                 </div>
                 <div class="form-group">
-                  <label for="inputZip">Postcode / ZIP (optional)</label>
+                  <label for="inputZip">Xã/Phường/Thị Trấn</label>
                   <input class="no-round-input-bg" id="inputZip" type="text">
                 </div>
                 <div class="form-group">
-                  <label for="inputCity">Town / City*</label>
-                  <input class="no-round-input-bg" id="inputCity" type="text" required>
-                </div>
-                <div class="form-group">
-                  <label for="inputPhone">Phone*</label>
-                  <input class="no-round-input-bg" id="inputPhone" type="text" required>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail">Email address *</label>
-                  <input class="no-round-input-bg" id="inputEmail" type="email" required>
-                </div>
-                <h2 class="form-title">Shipping Address</h2>
-                <div class="form-group">
-                  <input id="differentAddress" type="checkbox">
-                  <label for="differentAddress">Ship to a different address?</label>
-                </div>
-                <div class="form-group">
-                  <label for="inputNote">Order notes (optional)</label>
+                  <label for="inputNote">Ghi chú </label>
                   <textarea class="textarea-form-bg" id="inputNote" name="" cols="30" rows="7"></textarea>
                 </div>
               </div>
