@@ -22,11 +22,11 @@
         <div class="row">
           <div class="col-2"><a class="logo" href="index.html"><img src="assets/images/logo.png" alt=""></a></div>
           <div class="col-8">
-            {{-- <div class="navgition-menu d-flex align-items-center justify-content-center">
+            <div class="navgition-menu d-flex">
               <ul class="mb-0">
                 <li class="toggleable"> <a class="menu-item" href="{{ url('/') }}">Home</a>
                 </li>
-                <li class="toggleable"> <a class="menu-item" href="shop_grid+list_3col.html">Shop</a>
+                {{-- <li class="toggleable"> <a class="menu-item" href="shop_grid+list_3col.html">Shop</a>
                   <ul class="sub-menu shop d-flex">
                     <div class="nav-column">
                       <h2>Layout shop</h2>
@@ -70,14 +70,14 @@
                     <li><a href="404_error.html">404 error</a></li>
                   </ul>
                 </li>
-                <li class="toggleable"><a class="menu-item" href="about_us.html">About us</a></li>
+                <li class="toggleable"><a class="menu-item" href="about_us.html">About us</a></li> --}}
               </ul>
-            </div> --}}
+            </div>
           </div>
           <div class="col-2">
             <div class="product-function d-flex align-items-center justify-content-end">
-              <div id="wishlist"><a class="function-icon icon_heart_alt" href=""></a></div>
-              <div id="cart"><a class="function-icon icon_bag_alt" href=""><span>$150.00</span></a></div>
+              {{-- <div id="wishlist"><a class="function-icon icon_heart_alt" href=""></a></div> --}}
+              <div id="cart"><a class="function-icon icon_bag_alt" href="{{ url('/cart') }}"><span>{{ Cart::total() }}</span></a></div>
             </div>
           </div>
         </div>

@@ -14,10 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/cart','CartController@index')->name('cart');
-Route::get('/detail/{id}','DetailController@index')->name('cart');
-Route::get('/categories/{id}','CategoryController@index')->name('cart');
-Route::post('/cart', 'CartController@addCart');
+Route::get('/detail/{id}','DetailController@index')->name('detail');
+Route::get('/categories/{id}','CategoryController@index')->name('categories');
+Route::prefix('cart')->group(function (){
+    Route::get('/','CartController@index')->name('cart');
+    Route::post('/', 'CartController@addCart');
+    Route::post('/delete', 'CartController@deleteCart');
+    Route::get('/update', 'CartController@updateCart');
+});
+
 
 Route::prefix('auth')->group(function (){
     Route::get('/login', 'Admin\LoginController@showlogin')->name('auth.login');

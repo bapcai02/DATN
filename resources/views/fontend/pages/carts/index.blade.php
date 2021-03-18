@@ -49,46 +49,49 @@
           <div class="row">
             <div class="col-12">
               <div class="product-table">
-                <table class="table table-responsive"> 
-                  <colgroup>
-                    <col span="1" style="width: 15%">
-                    <col span="1" style="width: 30%">
-                    <col span="1" style="width: 15%">
-                    <col span="1" style="width: 15%">
-                    <col span="1" style="width: 15%">
-                    <col span="1" style="width: 10%">
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th class="product-iamge" scope="col">Ảnh</th>
-                      <th class="product-name" scope="col">Tên Sản Phẩm</th>
-                      <th class="product-price" scope="col">Giá</th>
-                      <th class="product-quantity" scope="col">số lượng</th>
-                      <th class="product-total" scope="col">Tổng Tiền</th>
-                      <th class="product-clear" scope="col"> 
-                        <button class="no-round-btn"><i class="icon_close"></i></button>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($cart as $key => $value)
+                  <table class="table table-responsive" id="myTable"> 
+                    <colgroup>
+                      <col span="1" style="width: 15%">
+                      <col span="1" style="width: 30%">
+                      <col span="1" style="width: 15%">
+                      <col span="1" style="width: 15%">
+                      <col span="1" style="width: 15%">
+                      <col span="1" style="width: 10%">
+                    </colgroup>
+                    <thead>
                       <tr>
-                        <td class="product-iamge"> 
-                          <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->options->image }}" alt="product image"></div>
-                        </td>
-                        <td class="product-name">{{ $value->name }}</td>
-                        <td class="product-price">{{ $value->price }}</td>
-                        <td class="product-quantity"> 
-                          <input class="quantity no-round-input" type="number" min="1" value="{{ $value->qty }}">
-                        </td>
-                        <td class="product-total">{{ number_format($value->price * $value->qty) }}</td>
-                        <td class="product-clear"> 
-                          <button class="no-round-btn"><i class="icon_close"></i></button>
-                        </td>
+                        <th class="product-iamge" scope="col">Ảnh</th>
+                        <th class="product-name" scope="col">Tên Sản Phẩm</th>
+                        <th class="product-price" scope="col">Giá</th>
+                        <th class="product-quantity" scope="col">số lượng</th>
+                        <th class="product-total" scope="col">Tổng Tiền</th>
+                        <th class="product-clear" scope="col"></th>
                       </tr>
-                    @endforeach
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      @foreach($cart as $key => $value)
+                        <tr>
+                          <td class="product-iamge"> 
+                            <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->options->image }}" alt="product image"></div>
+                          </td>
+                          <td class="product-name">{{ $value->name }}</td>
+                          <td class="product-price">{{ $value->price }}</td>
+                          <td class="product-quantity"> 
+                            <input class="quantity no-round-input" type="number" name="qty" min="1" value="{{ $value->qty }}">
+                          </td>
+                          <td class="product-total">{{ number_format($value->price * $value->qty) }}</td>
+                          <td class="product-clear"> 
+                            <form action="{{ url('cart/delete') }}" method="POST">
+                              @csrf
+                              <input class="rowId" type="hidden" name = 'rowId' value="{{ $value->rowId }}">
+                              <button type="submit" class="no-round-btn"><i class="icon_close"></i></button>
+                            </form>
+                          </td>
+                        </tr>
+                        
+                      @endforeach
+                    </tbody>
+                  </table>
               </div>
             </div>
             <div class="col-12 col-sm-8">
@@ -99,9 +102,9 @@
                 </form>
               </div>
             </div>
-            <div class="col-12 col-sm-4 text-right">
-              <button class="no-round-btn black cart-update">Upadate cart</button>
-            </div>
+            <div class="col-12 col-sm-4 text-right" style="float: right">
+              <button id="update" class="no-round-btn black cart-update">Upadate cart</button>
+          </div>
           </div>
           <div class="row justify-content-end">
             <div class="col-12 col-md-6 col-lg-4">
@@ -115,7 +118,7 @@
                   <tbody>
                     <tr>
                       <th>SUBTOTAL</th>
-                      <td>$169.00</td>
+                      <td>{{ Cart::total() }}</td>
                     </tr>
                     <tr>
                       <th>SHIPPING</th>
@@ -126,7 +129,7 @@
                     </tr>
                     <tr>
                       <th>TOTAL</th>
-                      <td>$169.00</td>
+                      <td>{{ Cart::total() }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -153,3 +156,26 @@
         </div>
       </div>
 @endsection
+@push('script')
+<script>
+  $(document).ready(function () {
+
+    $('#update').click(function(){
+      var data = new Array();
+      $('#myTable tbody tr').each(function(){
+        var qty = $(this).find(".quantity").val(); 
+        var rowId = $(this).find(".rowId").val(); 
+        data.push([qty,rowId])
+      });
+      
+      $.ajax({
+        url: "{{ url('/cart/update') }}",
+        type: 'GET',
+        data: {data},
+      }).done(function(res){
+        location.reload();
+      })
+    })
+  });
+</script>
+@endpush

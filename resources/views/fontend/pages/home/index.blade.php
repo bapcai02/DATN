@@ -1,6 +1,12 @@
 @extends('fontend.layouts.master')
 @section('content')
 
+
+@if(session('message'))
+  <div class="alert alert-success">
+    <strong>{{ session('message') }}</strong>
+  </div>
+@endif
 <div class="banner_v2">
     <div class="container">
       <div class="row">

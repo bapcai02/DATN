@@ -30,8 +30,9 @@ class CartController extends Controller
     public function addCart(Request $request){
         
         $product_id = $request ->productId;
-        $product =$this->productRepository->getProductById($product_id)
-                ->join('product_images', 'products.id', 'product_images.product_id')->first();
+        $product = $this->productRepository->getProductById($product_id)
+                ->join('product_images', 'products.id', 'product_images.product_id')
+                ->first();
         
         Cart::add([
             'id' => $product_id, 
@@ -45,6 +46,22 @@ class CartController extends Controller
             ]
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Thêm Giỏ Hàng Thành Công');
+    }
+
+    public function deleteCart(Request $request){
+        $rowId = $request->rowId;
+        Cart::remove($rowId);
+
+        return redirect()->back()->with('message', 'Xóa sản phẩm thành công');
+    }
+
+    public function updateCart(Request $request){
+        $data = $request->data;
+        foreach($data as $key => $value){
+            Cart::update($value[1], $value[0]);
+        }
+        $message = 'update thành công';
+        return response()->json($message);
     }
 }
