@@ -1,5 +1,6 @@
 @extends('fontend.layouts.master')
 @section('content')
+
 <div class="ogami-breadcrumb">
         <div class="container">
           <ul>
@@ -159,7 +160,6 @@
 @push('script')
 <script>
   $(document).ready(function () {
-
     $('#update').click(function(){
       var data = new Array();
       $('#myTable tbody tr').each(function(){
@@ -174,6 +174,7 @@
         data: {data},
       }).done(function(res){
         location.reload();
+        swal("Thành Công!", "Update Thành công!", "success");   
       })
     })
   });

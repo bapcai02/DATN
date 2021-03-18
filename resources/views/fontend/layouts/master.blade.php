@@ -39,6 +39,7 @@
     <script src="{{ asset('HTML/assets/js/numscroller-1.0.js') }}"></script>
     <script src="{{ asset('HTML/assets/js/vanilla-tilt.min.js') }}"></script>
     <script src="{{ asset('HTML/assets/js/main.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @stack('script')
   </body>
 </html>
