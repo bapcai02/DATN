@@ -128,7 +128,7 @@
                   </tbody>
                 </table>
                 <div class="checkout-method">
-                  <button class="normal-btn">Proceed to Checkout</button><span>- or -</span><a href="shop_checkout.html">Check out with PayPal</a>
+                  <button class="normal-btn"> <a href="{{ url('cart/checkout') }}" style="color:black"> Proceed to Checkout</a></button><span>- or -</span><a href="{{ url('cart/checkout') }}">Check out with PayPal</a>
                 </div>
               </div>
             </div>

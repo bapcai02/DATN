@@ -33,6 +33,9 @@ class ProductRepository
         return DB::table('products')
             ->join('product_images', 'products.id', 'product_images.product_id')
             ->join('categories', 'products.category_id', 'categories.id')
+            ->select('products.id', 'products.product_name', 'products.product_desc', 
+                'products.product_price', 'products.sale','products.product_status',
+                'product_images.image', 'categories.category_name')
             ->where('products.product_status', 1)
             ->orderBy('products.created_at', 'DESC');
     }

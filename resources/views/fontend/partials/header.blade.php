@@ -11,7 +11,12 @@
           <div class="col-12 col-md-6">
             <div class="header-right d-flex flex-column flex-md-row justify-content-md-end justify-content-center align-items-center">
               <div class="social-link d-flex"><a href=""><i class="fab fa-facebook-f"> </i></a><a href=""><i class="fab fa-twitter"></i></a><a href=""><i class="fab fa-invision"> </i></a><a href=""><i class="fab fa-pinterest-p"> </i></a></div>
-              <div class="login d-flex"><a href="login.html"><i class="fas fa-user"></i>Login</a></div>
+              @if(Auth::check())
+                <div class="login d-flex"><a href=""><i class="fas fa-user"></i>{{ Auth::user()->name }}</a></div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="d-flex"><a href="{{ url('logout') }}">Logout</a></div>    
+              @else
+                <div class="login d-flex"><a href="{{ url('login') }}"><i class="fas fa-user"></i>Login</a></div>
+              @endif
             </div>
           </div>
         </div>
@@ -20,7 +25,7 @@
     <nav class="navigation d-flex align-items-center">
       <div class="container">
         <div class="row">
-          <div class="col-2"><a class="logo" href="index.html"><img src="assets/images/logo.png" alt=""></a></div>
+          <div class="col-2"><a class="logo" href="{{ url('/') }}"><img src="{{ asset('HTML/assets/images/logo.png') }}" alt=""></a></div>
           <div class="col-8">
             <div class="navgition-menu d-flex">
               <ul class="mb-0">

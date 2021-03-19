@@ -26,6 +26,11 @@ Route::prefix('cart')->group(function (){
     Route::get('/xaphuong','CartController@getXaPhuong');
 });
 
+Route::get('/login', 'LoginController@getLogin')->name('login');
+Route::post('/login', 'LoginController@login');
+Route::get('/logout', 'LoginController@logout');
+Route::get('/register', 'LoginController@getregister')->name('register');
+Route::post('/register', 'LoginController@register');
 
 Route::prefix('auth')->group(function (){
     Route::get('/login', 'Admin\LoginController@showlogin')->name('auth.login');

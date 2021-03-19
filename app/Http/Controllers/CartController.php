@@ -72,8 +72,9 @@ class CartController extends Controller
     public function checkout(){
         $category = $this->categoryRepository->getListCategory()->get();
         $tinhThanhPho = $this->addressRepository->getTinhThanhPho();
+        $cart = Cart::content();
 
-        return view('fontend.pages.carts.checkout', compact('category', 'tinhThanhPho'));
+        return view('fontend.pages.carts.checkout', compact('category', 'tinhThanhPho', 'cart'));
     }
 
     public function getQuanHuyen(Request $request){
@@ -86,7 +87,7 @@ class CartController extends Controller
     public function getXaPhuong(Request $request){
         $maqh = $request->maqh;
         $data = $this->addressRepository->getXaPhuong($maqh);
-
+        
         return response()->json($data);
     }
 }

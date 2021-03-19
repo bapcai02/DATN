@@ -101,13 +101,15 @@
                         <col span="1" style="width: 50%">
                       </colgroup>
                       <tbody>
-                        <tr>
-                          <th class="name">Australian Kiwi × <span>1</span></th>
-                          <td class="price black" style="border-top: 0">$169.00</td>
-                        </tr>
+                        @foreach($cart as $key => $value)
+                          <tr>
+                              <th class="name">{{ $value->name }} × <span>{{ $value->qty }}</span></th>
+                              <td class="price black" style="border-top: 0">{{ $value->price }} VND</td>
+                          </tr>
+                        @endforeach
                         <tr>
                           <th>SUBTOTAL</th>
-                          <td class="price">$169.00</td>
+                          <td class="price">{{ Cart::total() }} VND</td>
                         </tr>
                         <tr>
                           <th>SHIPPING</th>
@@ -118,7 +120,7 @@
                         </tr>
                         <tr>
                           <th>TOTAL</th>
-                          <td class="total">$169.00</td>
+                          <td class="total">{{ Cart::total() }}</td>
                         </tr>
                       </tbody>
                     </table>
