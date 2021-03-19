@@ -59,4 +59,9 @@ class HomeController extends Controller
             'productRan'
         ));
     }
+
+    public function search(Request $request)
+    {
+        $text = $request->text;   
+    }
 }

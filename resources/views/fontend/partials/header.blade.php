@@ -31,51 +31,6 @@
               <ul class="mb-0">
                 <li class="toggleable"> <a class="menu-item" href="{{ url('/') }}">Home</a>
                 </li>
-                {{-- <li class="toggleable"> <a class="menu-item" href="shop_grid+list_3col.html">Shop</a>
-                  <ul class="sub-menu shop d-flex">
-                    <div class="nav-column">
-                      <h2>Layout shop</h2>
-                      <li><a href="shop_grid+list_fullwidth.html">Shop grid fullwidth</a></li>
-                      <li><a href="shop_grid+list_fullwidth.html">Shop list fullwidth</a></li>
-                      <li><a href="shop_grid+list_3col.html">shop grid 3 column</a></li>
-                      <li><a href="shop_grid+list_3col.html">shop list 3 column</a></li>
-                    </div>
-                    <div class="nav-column">
-                      <h2>Detail shop</h2>
-                      <li><a href="shop_detail_fullwidth.html">shop detail fullwidth</a></li>
-                      <li><a href="shop_detail.html">shop detail sidebar</a></li>
-                    </div>
-                    <div class="nav-column">
-                      <h2>Pages shop</h2>
-                      <li><a href="shop_checkout.html">checkout</a></li>
-                      <li><a href="shop_order_complete.html">order complete</a></li>
-                      <li><a href="shop_wishlist.html">wishlist</a></li>
-                      <li><a href="shop_compare.html">compare</a></li>
-                      <li><a href="shop_cart.html">cart</a></li>
-                    </div>
-                  </ul>
-                </li>
-                <li class="toggleable"><a class="menu-item" href="blog_list_sidebar.html">Blog</a>
-                  <ul class="sub-menu">
-                    <li><a href="blog_list_sidebar.html">Blog List Sidebar</a></li>
-                    <li><a href="blog_grid_2col.html">Blog Grid 2 column</a></li>
-                    <li><a href="blog_grid_sidebar.html">Blog Grid sidebar</a></li>
-                    <li><a href="blog_masonry.html">Blog masonry</a></li>
-                    <li><a href="blog_grid_1col.html">Blog Grid 1 column sidebar</a></li>
-                    <li><a href="blog_detail_sidebar.html">Blog detail sidebar</a></li>
-                  </ul>
-                </li>
-                <li class="toggleable"> <a class="menu-item" href="#">Pages</a>
-                  <ul class="sub-menu">
-                    <li><a href="login.html">login</a></li>
-                    <li><a href="register.html">register</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="coming_soon.html">coming soon</a></li>
-                    <li><a href="contact_us.html">contact us</a></li>
-                    <li><a href="404_error.html">404 error</a></li>
-                  </ul>
-                </li>
-                <li class="toggleable"><a class="menu-item" href="about_us.html">About us</a></li> --}}
               </ul>
             </div>
           </div>
@@ -174,14 +129,16 @@
               <div class="col-12 col-xl-8">
                 <div class="website-search">
                   <div class="row no-gutters">
-                    <div class="col-10 col-md-10 col-lg-6 col-xl-7">
-                      <div class="search-input">
-                        <input class="no-round-input no-border" type="text" placeholder="What do you need">
+                    <form action="{{ url('search') }}" method="POST">
+                      <div class="col-10 col-md-10 col-lg-6 col-xl-7">
+                        <div class="search-input">
+                          <input name="text" class="no-round-input no-border" type="text" placeholder="Nhập để tìm kiếm">
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-2 col-md-2 col-lg-2 col-xl-1">
-                      <button class="no-round-btn black"><i class="icon_search"></i></button>
-                    </div>
+                      <div class="col-2 col-md-2 col-lg-2 col-xl-1">
+                        <button type="submit" class="no-round-btn black"><i class="icon_search"></i></button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
