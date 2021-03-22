@@ -126,22 +126,18 @@
           </div>
           <div class="col-12 col-md-8 col-lg-8 col-xl-9 order-1 order-md-2">
             <div class="row">
-              <div class="col-12 col-xl-8">
-                <div class="website-search">
+              <div class="col-12 col-xl-7">
                   <div class="row no-gutters">
-                    <form action="{{ url('search') }}" method="POST">
-                      <div class="col-10 col-md-10 col-lg-6 col-xl-7">
-                        <div class="search-input">
+                    <form action="{{ url('search') }}" method="GET" class="row no-gutters">
+                      <div class="col-md-10 ">
                           <input name="text" class="no-round-input no-border" type="text" placeholder="Nhập để tìm kiếm">
-                        </div>
                       </div>
-                      <div class="col-2 col-md-2 col-lg-2 col-xl-1">
+                      <div class="col-md-2 ">
                         <button type="submit" class="no-round-btn black"><i class="icon_search"></i></button>
                       </div>
                     </form>
                   </div>
                 </div>
-              </div>
               <div class="col-0 col-xl-4">
                 <div class="phone-number">
                   <div class="phone-number_icon"><i class="icon_phone"></i></div>

@@ -1,7 +1,7 @@
 @extends('fontend.layouts.master')
 @section('content')
 
-<div class="ogami-breadcrumb">
+    <div class="ogami-breadcrumb">
         <div class="container">
           <ul>
             <li> <a class="breadcrumb-link" href="index.html"> <i class="fas fa-home"></i>Home</a></li>
@@ -82,7 +82,7 @@
                     <div class="row no-gutters-sm">
                       @foreach($product_category as $key => $value)
                         <div class="col-6 col-md-4">
-                          <div class="product pink"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image }}" alt=""></a>
+                          <div class="product pink"><a class="product-img" href="shop_detail.html"><img src="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                             @if($value->sale != 0)
                               <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                             @endif

@@ -31,11 +31,10 @@ class ProductRepository
     public function getListProduct()
     {
         return DB::table('products')
-            ->join('product_images', 'products.id', 'product_images.product_id')
             ->join('categories', 'products.category_id', 'categories.id')
             ->select('products.id', 'products.product_name', 'products.product_desc', 
                 'products.product_price', 'products.sale','products.product_status',
-                'product_images.image', 'categories.category_name')
+                'categories.category_name')
             ->where('products.product_status', 1)
             ->orderBy('products.created_at', 'DESC');
     }
@@ -75,11 +74,29 @@ class ProductRepository
 
     public function getProductByCategoryId(int $id){
         return $this->product
-            ->join('product_images', 'products.id', 'product_images.product_id')
             ->join('categories', 'products.category_id', 'categories.id')
+            ->select('products.id', 'products.product_name', 'products.product_desc', 
+                'products.product_price', 'products.sale','products.product_status',
+                'categories.category_name')
             ->where('products.product_status', 1)
             ->where('category_id', $id)
             ->orderBy('products.created_at')
             ->paginate(9);
+    }
+
+    public function Search(string $text){
+        return $this->product
+            ->join('categories', 'products.category_id', 'categories.id')
+            ->select('products.id', 'products.product_name', 'products.product_desc', 
+                'products.product_price', 'products.sale','products.product_status',
+                'categories.category_name')
+            ->where('products.product_status', 1)
+            ->where('product_name', 'LIKE', "%$text%")
+            ->orderBy('products.created_at')
+            ->paginate(9);
+    }
+
+    public static function getImage($id){ 
+        return DB::table('product_images')->where('product_id', $id)->select('image')->first();
     }
 }

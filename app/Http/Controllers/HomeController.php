@@ -62,6 +62,11 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
+        $category = $this->categoryRepository->getListCategory()->get();
+        // dd($this->productRepository->getImage(1)->image);
         $text = $request->text;   
+        $search = $this->productRepository->Search($text);
+
+        return view('fontend.pages.search.index', compact('search', 'category'));
     }
 }

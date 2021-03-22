@@ -1,7 +1,6 @@
 @extends('fontend.layouts.master')
 @section('content')
 
-
 @if(session('message'))
   <div class="alert alert-success">
     <strong>{{ session('message') }}</strong>
@@ -47,7 +46,7 @@
                 <div class="deal-block"> 
                   <div class="deal-block_detail">
                     <h5 class="deal-discount">-{{ $value->sale }}%</h5>
-                    <div class="deal-img"><a href="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'.$value->image }}" alt="product image"></a></div>
+                    <div class="deal-img"><a href="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt="product image"></a></div>
                   
                     <div class="deal-info text-center">
                       <h5 class="color-type pink deal-type">{{ $value->category_name }}</h5><a class="deal-name" href="shop_detail.html">{{ $value->product_name }}</a>
@@ -212,7 +211,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($product as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product pink"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image }}" alt=""></a>
+                      <div class="product pink"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -242,7 +241,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productFui as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -271,7 +270,7 @@
               <div id="tab3"> 
                 @foreach($productMeat as $key => $value)
                   <div class="col-6 col-md-4">
-                    <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                    <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                       @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -300,7 +299,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productVeget as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -330,7 +329,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productSea as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -396,7 +395,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productSale as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -426,7 +425,7 @@
                 <div class="row no-gutters-sm">
                     @foreach($productFuiSale as $key => $value)
                       <div class="col-6 col-md-4">
-                        <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                        <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                           @if($value->sale != 0)
                             <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                           @endif
@@ -456,7 +455,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productMeatSale as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -486,7 +485,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productVegetSale as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -516,7 +515,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productSeaSale as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -566,7 +565,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productRan as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -596,7 +595,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productFuiRan as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -626,7 +625,7 @@
                 <div class="row no-gutters-sm">
                     @foreach($productMeatRan as $key => $value)
                       <div class="col-6 col-md-4">
-                        <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                        <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                           @if($value->sale != 0)
                             <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                           @endif
@@ -656,7 +655,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productVegetRan as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
@@ -686,7 +685,7 @@
                 <div class="row no-gutters-sm">
                   @foreach($productSeaRan as $key => $value)
                     <div class="col-6 col-md-4">
-                      <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image}}" alt=""></a>
+                      <div class="product"><a class="product-img" href="{{ url('dateail') .'/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
                           <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
