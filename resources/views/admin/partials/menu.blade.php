@@ -32,7 +32,7 @@
       </li>
 
       <li>
-        <a href="calendar.html">
+        <a href="{{ url('customer/category') }}l">
           <i class="zmdi zmdi-calendar-check"></i> <span>Manage Categories</span>
         </a>
       </li>

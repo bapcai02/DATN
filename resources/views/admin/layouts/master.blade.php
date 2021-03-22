@@ -19,6 +19,7 @@
   <link href="{{asset('assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet"/>
   <!-- Bootstrap core CSS-->
   <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet"/>
+
   <!-- animate CSS-->
   <link href="{{asset('assets/css/animate.css')}}" rel="stylesheet" type="text/css"/>
   <!-- Icons CSS-->
@@ -114,12 +115,6 @@
   <!-- Custom scripts -->
   <script src="{{asset('assets/js/app-script.js')}}"></script>
   <!-- Chart js -->
-  
-  <script src="{{asset('assets/plugins/Chart.js/Chart.min.js')}}"></script>
- 
-  <!-- Index js -->
-  <script src="{{asset('assets/js/index.js')}}"></script>
-
-  
+  @stack('script')
 </body>
 </html>

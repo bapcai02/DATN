@@ -46,6 +46,12 @@ Route::prefix('auth')->group(function (){
 // Route::group(['middleware' => 'checkrole'], function () {
     Route::prefix('admin')->group(function () {
         Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
+        Route::prefix('category')->group(function () {
+            Route::get('/', 'Admin\CategoryController@index')->name('admin.category'); 
+            Route::get('/edit', 'Admin\CategoryController@index')->name('admin.category.edit'); 
+            Route::post('/delete', 'Admin\CategoryController@delete')->name('admin.category.delete'); 
+            Route::post('/create', 'Admin\CategoryController@create')->name('admin.category.add'); 
+        });
     });
 
     Route::prefix('customer')->group(function () {
