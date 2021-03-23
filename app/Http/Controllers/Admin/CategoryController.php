@@ -38,7 +38,7 @@ class CategoryController extends Controller
         if($check == null){
             $this->categoryRepository->create($data);
 
-            return redirect()->back()->widh('message', 'them moi thanh cong !');
+            return redirect()->back()->with('message', 'them moi thanh cong !');
         }
         return redirect()->back()->with('error', 'category da duoc tao vui long kiem tra lai !');
     }
@@ -46,12 +46,26 @@ class CategoryController extends Controller
     public function edit(Request $request){
         $data = $request->all();
         $check = $this->categoryRepository->check($data['name']);
+        $category = $this->categoryRepository->getOne($data['id']);
 
+        if($data['name'] == $category->category_name){
+            $this->categoryRepository->update($data);
+            return redirect()->back()->with('message', 'sua thanh cong !');
+        }
         if($check == null){
             $this->categoryRepository->update($data);
 
-            return redirect()->back()->widh('message', 'them moi thanh cong !');
+            return redirect()->back()->with('message', 'sua thanh cong !');
         }
         return redirect()->back()->with('error', 'category da duoc tao vui long kiem tra lai !');
+    }
+
+    public function search(Request $request)
+    {
+        $page = $request->page;
+        $data = $request->all();
+        $category = $this->categoryRepository->search($data);
+
+        return view('admin.pages.categories.index', compact('category', 'page'));
     }
 }

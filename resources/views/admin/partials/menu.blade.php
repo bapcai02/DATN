@@ -32,7 +32,7 @@
       </li>
 
       <li>
-        <a href="{{ url('customer/category') }}l">
+        <a href="{{ url('admins/category/') }}">
           <i class="zmdi zmdi-calendar-check"></i> <span>Manage Categories</span>
         </a>
       </li>
