@@ -14,7 +14,7 @@
       </li>
 
       <li>
-        <a href="icons.html">
+        <a href="{{ url('admins/customer/') }}">
           <i class="zmdi zmdi-invert-colors"></i> <span>Manage Customer</span>
         </a>
       </li>

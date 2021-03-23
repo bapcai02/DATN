@@ -240,9 +240,9 @@
             <tr>
                 <th>#</th>
                 <th>Tên</th>
-                <th>Mô Tả</th>
+                <th>Điện thoại</th>
+                <th>Địa Chỉ</th>
                 <th>Status</th>
-                <th>key</th>
                 <th>ngảy tạo</th>
                 <th></th>
             </tr>
@@ -251,17 +251,17 @@
             <tbody>
             <?php if (!isset($page) || $page == 1) $total = 1 ?>
             <?php if ($page >= 2) $total = ($page - 1) * 6 + 1 ?>
-              @foreach($category as $value)
+              @foreach($customer as $value)
                 <tr class="data-row">
                     <td>{{ $total++ }}</td>
-                    <td id="name"><p class = 'text'>{{ $value->category_name }}</p></td>
-                    <td id="desc"><p class = 'text'>{{ $value->category_description }}</p></td>
-                    @if($value->category_status == 1)
+                    <td id="name"><p class = 'text'>{{ $value->name }}</p></td>
+                    <td id="desc"><p class = 'text'>{{ $value->phone }}</p></td>
+                    <td id="desc"><p class = 'text'>{{ $value->address }}</p></td>
+                    @if($value->status == 1)
                       <td id="status" >Hiển thị</td>
                     @else
                       <td id="status" >Không Hiển thị</td>
                     @endif
-                    <td id="key"><p class = 'text'>{{ $value->category_keyword }}</p></td>
                     <td>{{ $value->created_at }}</td>
                     <td class="text-center">
                         <a id="delete-item"
@@ -282,7 +282,7 @@
                 @endforeach
                 </tbody>
               </table>
-              {{$category->links()}}
+              {{$customer->links()}}
             </div>
           </div>
         </div>
