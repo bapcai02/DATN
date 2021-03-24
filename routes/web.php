@@ -54,11 +54,23 @@ Route::prefix('auth')->group(function (){
             Route::get('/search', 'Admin\CategoryController@search')->name('admin.category.search');
         });
         Route::prefix('customer')->group(function () {
-            Route::get('/', 'Admin\CustomerController@index')->name('customer.category'); 
-            Route::post('/edit', 'Admin\CustomerController@edit')->name('customer.category.edit'); 
-            Route::post('/delete', 'Admin\CustomerController@delete')->name('customer.category.delete'); 
-            Route::post('/create', 'Admin\CustomerController@create')->name('customer.category.add');
-            Route::get('/search', 'Admin\CustomerController@search')->name('customer.category.search');
+            Route::get('/', 'Admin\CustomerController@index')->name('customer'); 
+            Route::post('/edit', 'Admin\CustomerController@edit')->name('customer.edit'); 
+            Route::post('/delete', 'Admin\CustomerController@delete')->name('customer.delete'); 
+            Route::post('/create', 'Admin\CustomerController@create')->name('customer.add');
+            Route::get('/search', 'Admin\CustomerController@search')->name('customer.search');
+        });
+        Route::prefix('addressShip')->group(function () {
+            Route::get('/', 'Admin\AddressController@index')->name('addressShip'); 
+            Route::post('/editTinh', 'Admin\AddressController@editTinh'); 
+            Route::post('/deleteTinh', 'Admin\AddressController@deleteTinh'); 
+            Route::post('/createTinh', 'Admin\AddressController@createTinh');
+            Route::post('/editHuyen', 'Admin\AddressController@editHuyen'); 
+            Route::post('/deleteHuyen', 'Admin\AddressController@deleteHuyen'); 
+            Route::post('/createHuyen', 'Admin\AddressController@createHuyen');
+            Route::post('/editXa', 'Admin\AddressController@editXa'); 
+            Route::post('/deleteXa', 'Admin\AddressController@deleteXa'); 
+            Route::post('/createXa', 'Admin\AddressController@createXa');
         });
     });
 

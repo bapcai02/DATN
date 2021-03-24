@@ -50,7 +50,7 @@
       </li>
 
        <li>
-        <a href="register.html" target="_blank">
+        <a href="{{ url('admins/addressShip/') }}" target="_blank">
           <i class="zmdi zmdi-account-circle"></i> <span>Manage Address Ship</span>
         </a>
       </li>
