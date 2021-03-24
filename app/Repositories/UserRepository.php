@@ -13,10 +13,18 @@ class UserRepository
     {
         $this->user = $user;
     }
+    
+    public function getById(int $id){
+        return $this->user->where('id', $id)->first();
+    }
 
     public function checkUser(string $email)
     {
         return $this->user->where('email', $email)->first();
+    }
+
+    public function getUserByRole(int $role){
+        return $this->user->where('role_id', $role);
     }
 
     public function getUser(int $id)
@@ -32,6 +40,11 @@ class UserRepository
     public function create($attributes)
     {
         return $this->user->create($attributes);
+    }
+
+    public function getNew()
+    {
+        return $this->user->where('role_id', 2)->orderBy('id', 'desc')->first();
     }
 
     public function update($login_id, $attributes)

@@ -54,7 +54,7 @@
                         <label class="form-label" for="simpleinput" style="color:black">
                             Tên category <span class="text-danger">*</span>
                         </label>
-                        <input placeholder="nhap ten category" type="text" required
+                        <input placeholder="nhap ten category" type="text" required maxlength="50"
                             name="name" id="name-create" class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="form-group">
@@ -70,14 +70,14 @@
                         <label class="form-label" for="simpleinput" style="color:black">
                             keyword <span class="text-danger">*</span>
                         </label>
-                        <input required placeholder="nhập keyword" type="text" name="key"
+                        <input required placeholder="nhập keyword" type="text" name="key" maxlength="20"
                             class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="simpleinput" style="color:black">
                             description
                         </label>
-                        <textarea  name="description" rows="4" cols="50" style= 'border: 1px solid black;color:black'></textarea>
+                        <textarea maxlength="255" name="description" rows="4" cols="50" style= 'border: 1px solid black;color:black'></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"

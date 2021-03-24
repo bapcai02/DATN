@@ -58,7 +58,7 @@ class CategoryRepository
 
         return $this->category
         ->when($name, function ($query) use ($name) {
-            return $query->Where('category_name', '=', $name);
+            return $query->Where('category_name', 'LIKE', "%$name%");
         })
         ->when($start_date, function ($query) use ($start_date) {
             return $query->WhereDate('created_at', '>=', $start_date);
