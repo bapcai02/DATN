@@ -8,6 +8,8 @@ use App\Repositories\AddressRepository;
 
 class AddressController extends Controller
 {
+    protected $addressRepository;
+    
     public function __construct(
         AddressRepository $addressRepository
     )

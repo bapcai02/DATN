@@ -1,12 +1,11 @@
 <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
      <div class="brand-logo">
-      <a href="index.html">
-       <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
-       <h5 class="logo-text">Dashtreme Admin</h5>
+      <a href="{{ url('admins/home') }}">
+       <img src="{{ asset('admin/assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
+       <h5 class="logo-text">Admin</h5>
      </a>
    </div>
    <ul class="sidebar-menu do-nicescrol">
-      <li class="sidebar-header">MAIN NAVIGATION</li>
       <li>
         <a href="{{ url('admin/home') }}">
           <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
@@ -20,11 +19,23 @@
       </li>
 
       <li>
-        <a href="forms.html">
+        <a href="{{ url('admins/user/') }}">
           <i class="zmdi zmdi-format-list-bulleted"></i> <span>Manage User</span>
         </a>
       </li>
 
+      <li>
+        <a href="profile.html">
+          <i class="zmdi zmdi-face"></i> <span>Manage Order</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="profile.html">
+          <i class="zmdi zmdi-chart"></i> <span>Manage Coupons</span>
+        </a>
+      </li>
+      
       <li>
         <a href="{{ url('customer/product/') }}">
           <i class="zmdi zmdi-grid"></i> <span>Manage Product</span>
@@ -39,36 +50,22 @@
 
       <li>
         <a href="profile.html">
-          <i class="zmdi zmdi-face"></i> <span>Manage Order</span>
+          <i class="zmdi zmdi-coffee">
+          </i> <span>Manage feeship</span>
         </a>
       </li>
 
       <li>
-        <a href="login.html" target="_blank">
+        <a href="login.html" >
           <i class="zmdi zmdi-lock"></i> <span>Config</span>
         </a>
       </li>
 
-       <li>
-        <a href="{{ url('admins/addressShip/') }}" target="_blank">
+      <li>
+        <a href="{{ url('admins/addressShip/') }}" >
           <i class="zmdi zmdi-account-circle"></i> <span>Manage Address Ship</span>
-        </a>
-      </li>
-      <li>
-        <a href=""><i class="zmdi zmdi-coffee text-danger">
-          </i> <span>Manage feeship</span>
-        </a>
-      </li>
-      <li>
-        <a href="">
-          <i class="zmdi zmdi-chart-donut text-success"></i> <span>Manage Coupons</span>
-        </a>
-      </li>
-      <li>
-        <a href="">
-          <i class="zmdi zmdi-share text-info"></i> 
-          <span>Information</span>
         </a>
       </li>
 
     </ul>
+</div>

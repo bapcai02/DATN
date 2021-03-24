@@ -53,6 +53,7 @@ Route::prefix('auth')->group(function (){
             Route::post('/create', 'Admin\CategoryController@create')->name('admin.category.add');
             Route::get('/search', 'Admin\CategoryController@search')->name('admin.category.search');
         });
+
         Route::prefix('customer')->group(function () {
             Route::get('/', 'Admin\CustomerController@index')->name('customer'); 
             Route::post('/edit', 'Admin\CustomerController@edit')->name('customer.edit'); 
@@ -60,6 +61,7 @@ Route::prefix('auth')->group(function (){
             Route::post('/create', 'Admin\CustomerController@create')->name('customer.add');
             Route::get('/search', 'Admin\CustomerController@search')->name('customer.search');
         });
+
         Route::prefix('addressShip')->group(function () {
             Route::get('/', 'Admin\AddressController@index')->name('addressShip'); 
             Route::post('/editTinh', 'Admin\AddressController@editTinh'); 
@@ -72,6 +74,11 @@ Route::prefix('auth')->group(function (){
             Route::post('/deleteXa', 'Admin\AddressController@deleteXa'); 
             Route::post('/createXa', 'Admin\AddressController@createXa');
         });
+
+        Route::prefix('user')->group(function () {   
+            Route::get('/', 'Admin\UserController@index'); 
+        });
+
     });
 
     Route::prefix('customer')->group(function () {
