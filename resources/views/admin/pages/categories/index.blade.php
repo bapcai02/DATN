@@ -63,7 +63,7 @@
                         </label>
                         <select required class="form-control" name="status" style= 'border: 1px solid black;color:black'>
                                 <option value ='1'>Hiển thị</option>
-                                <option value ='0'>Ẩn</option>
+                                <option value ='2'>Ẩn</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -119,7 +119,7 @@
                         </label>
                         <select required class="form-control" name="status" style= 'border: 1px solid black;color:black'>
                                 <option value ='1'>Hiển thị</option>
-                                <option value ='0'>Ẩn</option>
+                                <option value ='2'>Ẩn</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -182,7 +182,7 @@
                   <label class="form-label" for="simpleinput">Status</label>
                   <select class="form-control" id="" name="status">                     
                       <option value="">Chọn Status</option>
-                      <option value="0">Ẩn</option>
+                      <option value="2">Ẩn</option>
                       <option value="1">Hiển thị</option>
                   </select>
               </div>

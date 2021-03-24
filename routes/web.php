@@ -46,6 +46,7 @@ Route::prefix('auth')->group(function (){
 // Route::group(['middleware' => 'checkrole'], function () {
     Route::prefix('admins')->group(function () {
         Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
+        
         Route::prefix('category')->group(function () {
             Route::get('/', 'Admin\CategoryController@index')->name('admin.category'); 
             Route::post('/edit', 'Admin\CategoryController@edit')->name('admin.category.edit'); 
@@ -73,6 +74,14 @@ Route::prefix('auth')->group(function (){
             Route::post('/editXa', 'Admin\AddressController@editXa'); 
             Route::post('/deleteXa', 'Admin\AddressController@deleteXa'); 
             Route::post('/createXa', 'Admin\AddressController@createXa');
+        });
+        
+        Route::prefix('coupon')->group(function () {   
+            Route::get('/', 'Admin\CouponController@index'); 
+            Route::post('/edit', 'Admin\CouponController@edit'); 
+            Route::post('/delete', 'Admin\CouponController@delete'); 
+            Route::post('/create', 'Admin\CouponController@create');
+            Route::get('/search', 'Admin\CouponController@search');
         });
 
         Route::prefix('user')->group(function () {   

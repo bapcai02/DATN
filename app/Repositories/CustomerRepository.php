@@ -90,7 +90,7 @@ class CustomerRepository
         $end_date = isset($data['end-date']) ? $data['end-date'] . ' ' . "00:00:00" : false;
         $name = isset($data['customer']) ? $data['customer'] : false;
         $status = isset($data['status']) ? $data['status'] : false;
-
+        
         return $this->customer
         ->when($name, function ($query) use ($name) {
             return $query->Where('name', 'LIKE', "%$name%");
@@ -102,7 +102,7 @@ class CustomerRepository
             return $query->WhereDate('created_at', '<=', $end_date);
         })
         ->when($status, function ($query) use ($status) {
-            return $query->WhereDate('status', $status);
+            return $query->Where('status', $status);
         })
         ->orderBy('created_at')
         ->paginate(6);

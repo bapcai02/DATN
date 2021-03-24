@@ -12,20 +12,20 @@
    max-width:100px;
 }
 </style>
-<div class="modal fade" id="delete-customer-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="delete-counpon-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" style ='color:black'>Xóa Customer</h5>
+                <h5 class="modal-title" style ='color:black'>Xóa Mã Giảm Giá</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="fa fa-times"></i></span>
                 </button>
             </div>
             <div class="modal-body"> <p  style ='color:black'>Bạn có muốn xóa không ?</p> </div>
             <div class="modal-footer">
-                <form action="{{ url('admins/customer/delete') }}" method="POST">
+                <form action="{{ url('admins/coupon/delete') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="id" id="id_customer">
+                    <input type="hidden" name="id" id="id_coupon">
                     <button type="button" class="btn btn-secondary"
                         data-dismiss="modal">Đóng</button>
                     <button type="submit"
@@ -36,66 +36,57 @@
     </div>
 </div>
 
-<div class="modal fade" id="add-customer-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="add-counpon-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="background-color: rgb(43, 50, 51)">
             <div class="modal-header">
                 <h5 class="modal-title" style="color:black">
-                    Thêm mới Customer
+                    Thêm mới Giảm Giá
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="fa fa-times"></i></span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('admins/customer/create') }}" method="POST">
+                <form action="{{ url('admins/coupon/create') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label class="form-label" for="simpleinput" style="color:black">
-                            Tên Customer <span class="text-danger">*</span>
+                            Tên <span class="text-danger">*</span>
                         </label>
-                        <input placeholder="nhap ten customer" type="text" required maxlength="50"
-                            name="name" id="name" class="form-control" style= 'border: 1px solid black;color:black'>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="simpleinput" style="color:black">
-                            PassWord <span class="text-danger">*</span>
-                        </label>
-                        <input placeholder="nhap password" type="password" required maxlength="50"
-                            name="password" id="password" class="form-control" style= 'border: 1px solid black;color:black'>
+                        <input placeholder="nhap ten" type="text" required maxlength="50"
+                            name="name" class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="example-number" style="color:black">
                            Status <span class="text-danger">*</span>
                         </label>
                         <select required class="form-control" name="status" style= 'border: 1px solid black;color:black'>
-                                <option value ='1'>Hiển thị</option>
-                                <option value ='2'>Ẩn</option>
+                                <option value ='1'>Còn Hạn</option>
+                                <option value ='0'>Hết Hạn</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="example-number" style="color:black">
-                           Email <span class="text-danger">*</span>
+                        <label class="form-label" for="simpleinput" style="color:black">
+                            Mã <span class="text-danger">*</span>
                         </label>
-                        <input placeholder="nhap email" type="email" required maxlength="50"
-                        name="email" id="email" class="form-control" style= 'border: 1px solid black;color:black'>
+                        <input required placeholder="nhập Mã" type="text" name="code" maxlength="20"
+                            class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="simpleinput" style="color:black">
-                            Điện thoại <span class="text-danger">*</span>
+                            Số lượng <span class="text-danger">*</span>
                         </label>
-                        <input required placeholder="nhập số điện thoại" type="text" name="phone" maxlength="11"
+                        <input required placeholder="nhập Số lượng" type="number" name="qty" maxlength="20"
                             class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
-
                     <div class="form-group">
-                        <label class="form-label" for="simpleinput" style="color:black" maxlength="100">
-                            Địa chỉ <span class="text-danger">*</span>
+                        <label class="form-label" for="simpleinput" style="color:black">
+                            Giảm giá <span class="text-danger">*</span>
                         </label>
-                        <input required placeholder="nhập địa chỉ" type="text" name="address"
+                        <input required placeholder="nhập discoud" type="number" name="discoud" maxlength="20"
                             class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
                             data-dismiss="modal">Đóng</button>
@@ -108,7 +99,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="edit-customer-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="edit-counpon-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="background-color: rgb(43, 50, 51)">
             <div class="modal-header">
@@ -120,46 +111,44 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('admins/customer/edit') }}" method="POST">
+                <form action="{{ url('admins/coupon/edit') }}" method="POST">
                     @csrf
                     <input type="hidden" value="" id="id" name="id">
                     <div class="form-group">
                         <label class="form-label" for="simpleinput" style="color:black">
-                            Tên Customer <span class="text-danger">*</span>
+                            Tên <span class="text-danger">*</span>
                         </label>
-                        <input placeholder="nhap ten customer" type="text" required maxlength="50"
-                            name="name" id="names" class="form-control" style= 'border: 1px solid black;color:black'>
+                        <input placeholder="nhap ten" type="text" required maxlength="50"
+                            name="name" id ="names" class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
-                    
                     <div class="form-group">
                         <label class="form-label" for="example-number" style="color:black">
                            Status <span class="text-danger">*</span>
                         </label>
                         <select required class="form-control" id="statuss" name="status" style= 'border: 1px solid black;color:black'>
-                                <option value ='1'>Hiển thị</option>
-                                <option value ='2'>Ẩn</option>
+                                <option value ='1'>Còn Hạn</option>
+                                <option value ='0'>Hết Hạn</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="example-number" style="color:black">
-                          Email <span class="text-danger">*</span>
+                        <label class="form-label" for="simpleinput" style="color:black">
+                            Mã <span class="text-danger">*</span>
                         </label>
-                        <input placeholder="nhap email" type="email" required maxlength="50"
-                        name="email" id="emails" class="form-control" style= 'border: 1px solid black;color:black'>
+                        <input required placeholder="nhập Mã" id="codes" type="text" name="code" maxlength="20"
+                            class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="simpleinput" style="color:black">
-                            Điện thoại <span class="text-danger">*</span>
+                            Số lượng <span class="text-danger">*</span>
                         </label>
-                        <input required placeholder="nhập số điện thoại" id="phones" type="text" name="phone" maxlength="11"
+                        <input required placeholder="nhập Số lượng" id="qtys" type="number" name="qty" maxlength="20"
                             class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
-
                     <div class="form-group">
-                        <label class="form-label" for="simpleinput" style="color:black" maxlength="100">
-                            Địa chỉ <span class="text-danger">*</span>
+                        <label class="form-label" for="simpleinput" style="color:black">
+                            Giảm giá <span class="text-danger">*</span>
                         </label>
-                        <input required placeholder="nhập địa chỉ " id="addresss" type="text" name="address"
+                        <input required placeholder="nhập discoud" id ="discounts" type="number" name="discoud" maxlength="20"
                             class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="modal-footer">
@@ -176,7 +165,7 @@
 
 <div class="content-wrapper">
   <div class = "col-md-12 ">
-    <form action="{{ url('admins/customer/search') }}" method="GET">
+    <form action="{{ url('admins/coupon/search') }}" method="GET">
       <div class="row">
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
@@ -198,19 +187,20 @@
         
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
-                  <label class="form-label" for="simpleinput">Tên</label>
-                  <input type="text" name="customer" class="form-control" placeholder="customer Name"
-                  @if(isset($_GET['customer'])) value="{{ $_GET['customer'] }}"
-                    @else id="customer" @endif>
+                  <label class="form-label" for="simpleinput">Mã</label>
+                  <input type="text" name="code" class="form-control" placeholder="Nhap Ma"
+                  @if(isset($_GET['code'])) value="{{ $_GET['code'] }}"
+                    @else id="code" @endif>
               </div>
           </div>
+
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
                   <label class="form-label" for="simpleinput">Status</label>
-                  <select class="form-control" id="" name="status">                     
+                  <select class="form-control" name="status">                     
                       <option value="">Chọn Status</option>
-                      <option value="2">Ẩn</option>
-                      <option value="1">Hiển thị</option>
+                      <option value="1">Còn Hạn</option>
+                      <option value="2">Hết Hạn</option>
                   </select>
               </div>
           </div>
@@ -226,18 +216,18 @@
       </div>
     </form>
   </div>
-  @if (session('message'))
+  @if (session('message-coupon'))
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
         </button>
-        {{ session('message') }}
+        {{ session('message-coupon') }}
     </div>
   @endif
-  @if (session('error'))
+  @if (session('error-coupon'))
   <div class="alert alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
       </button>
-      {{ session('error') }}
+      {{ session('error-coupon') }}
   </div>
   @endif
   <div class="container-fluid"> 
@@ -253,11 +243,11 @@
                       id="add-worker"
                       href="javascript:void(0);"
                       data-toggle="modal"
-                      data-target="#add-customer-modal"
+                      data-target="#add-counpon-modal"
                       type="button">
                     <span>
                         <i class="fa fa-plus mr-1"></i>
-                        Thêm mới Customer
+                        Thêm mới Mã Giảm Giá
                     </span>
                     </a>
                 </div>
@@ -267,11 +257,11 @@
             <tr>
                 <th>#</th>
                 <th>Tên</th>
-                <th>Email</th>
-                <th>Điện thoại</th>
-                <th>Địa Chỉ</th>
-                <th>Status</th>
-                <th>ngảy tạo</th>
+                <th>Mã</th>
+                <th>Số Lượng</th>
+                <th>Giảm Giá (%)</th>
+                <th>Tình Trạng</th>
+                <th>ngày tạo</th>
                 <th></th>
             </tr>
             </thead>
@@ -279,19 +269,19 @@
             <tbody>
             <?php if (!isset($page) || $page == 1) $total = 1 ?>
             <?php if ($page >= 2) $total = ($page - 1) * 6 + 1 ?>
-              @foreach($customer as $value)
+              @foreach($coupons as $value)
                 <tr class="data-row">
                     <td>{{ $total++ }}</td>
                     <td id="name"><p class = 'text'>{{ $value->name }}</p></td>
-                    <td id="email"><p class = 'text'>{{ $value->email }}</p></td>
-                    <td id="phone"><p class = 'text'>{{ $value->phone }}</p></td>
-                    <td id="address"><p class = 'text'>{{ $value->address }}</p></td>
-                    @if($value->status == 1)
-                      <td id="status" >Hiển thị</td>
+                    <td id="code"><p class = 'text'>{{ $value->code }}</p></td>
+                    <td id="qty"><p class = 'text'>{{ $value->qty }}</p></td>
+                    <td id="discount"><p class = 'text'>{{ $value->discount_number }}</p></td>
+                    @if($value->feature == 1)
+                      <td id="status" >Còn Hạn</td>
                     @else
-                      <td id="status" >Không Hiển thị</td>
+                      <td id="status" >Hết Hạn</td>
                     @endif
-                    <td><p class = 'text'>{{ date($value->created_at) }}</p></td>
+                    <td>{{ date('Y-m-d', strtotime($value->created_at)) }}</td>
                     <td class="text-center">
                         <a id="delete-item"
                            class="btn btn-sm btn-danger btn-icon btn-inline-block mr-1 waves-effect waves-themed"
@@ -311,7 +301,7 @@
                 @endforeach
                 </tbody>
               </table>
-              {{$customer->links()}}
+              {{ $coupons->links() }}
             </div>
           </div>
         </div>
@@ -331,18 +321,18 @@
         var options = {
             'backdrop': 'static'
         };
-        $('#delete-customer-modal').modal(options)
+        $('#delete-counpon-modal').modal(options)
     })
 
-    $('#delete-customer-modal').on('show.bs.modal', function () {
+    $('#delete-counpon-modal').on('show.bs.modal', function () {
         var el = $(".delete-item-trigger-clicked");
         var id = el.data('item-id');
-        $("#id_customer").val(id);
+        $("#id_coupon").val(id);
     })
 
-    $('#delete-category-modal').on('hide.bs.modal', function () {
+    $('#delete-counpon-modal').on('hide.bs.modal', function () {
         $('.delete-item-trigger-clicked').removeClass('delete-item-trigger-clicked')
-        $("#id_category").trigger("reset");
+        $("#id_coupon").trigger("reset");
     })
 
     $(document).on('click', '#edit-item', function () {
@@ -351,29 +341,30 @@
         var options = {
             'backdrop': 'static'
         };
-        $('#edit-customer-modal').modal(options)
+        $('#edit-counpon-modal').modal(options)
     })
 
-    $('#edit-customer-modal').on('show.bs.modal', function () {
+    $('#edit-counpon-modal').on('show.bs.modal', function () {
         var el = $(".edit-item-trigger-clicked");
         var id = el.data('item-id');
         var row = el.closest(".data-row");
         var name = row.children("#name").text();
-        var email = row.children("#email").text();
-        var phone = row.children("#phone").text();
-        var address = row.children("#address").text();
+        var code = row.children("#code").text();
+        var qty = row.children("#qty").text();
+        var discount = row.children("#discount").text();
+        var status = row.children("#status").text();
 
         $("#id").val(id);
         $("#names").val(name);
-        $("#status").val(status);
-        $("#emails").val(email);
-        $("#phones").val(phone);
-        $("#addresss").val(address);
+        $("#codes").val(code);
+        $("#qtys").val(qty);
+        $("#discounts").val(discount);
+ 
     })
 
-    $('#edit-customer-modal').on('hide.bs.modal', function () {
+    $('#edit-counpon-modal').on('hide.bs.modal', function () {
         $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
-        $("#id_customer").trigger("reset");
+        $("#id_coupon").trigger("reset");
     })
     
   })

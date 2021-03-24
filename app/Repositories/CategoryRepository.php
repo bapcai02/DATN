@@ -67,7 +67,7 @@ class CategoryRepository
             return $query->WhereDate('created_at', '<=', $end_date);
         })
         ->when($status, function ($query) use ($status) {
-            return $query->WhereDate('category_status', $status);
+            return $query->Where('category_status', $status);
         })
         ->orderBy('created_at')
         ->paginate(6);

@@ -31,7 +31,7 @@
       </li>
 
       <li>
-        <a href="profile.html">
+        <a href="{{ url('admins/coupon/') }}">
           <i class="zmdi zmdi-chart"></i> <span>Manage Coupons</span>
         </a>
       </li>
