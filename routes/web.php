@@ -88,6 +88,14 @@ Route::prefix('auth')->group(function (){
             Route::get('/', 'Admin\UserController@index'); 
         });
 
+        Route::prefix('brand')->group(function () {   
+            Route::get('/', 'Admin\BrandController@index'); 
+            Route::post('/edit', 'Admin\BrandController@edit'); 
+            Route::post('/delete', 'Admin\BrandController@delete'); 
+            Route::post('/create', 'Admin\BrandController@create');
+            Route::get('/search', 'Admin\BrandController@search');
+        });
+
     });
 
     Route::prefix('customer')->group(function () {

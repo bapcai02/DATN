@@ -63,7 +63,7 @@
                         </label>
                         <select required class="form-control" name="status" style= 'border: 1px solid black;color:black'>
                                 <option value ='1'>Còn Hạn</option>
-                                <option value ='0'>Hết Hạn</option>
+                                <option value ='2'>Hết Hạn</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -127,7 +127,7 @@
                         </label>
                         <select required class="form-control" id="statuss" name="status" style= 'border: 1px solid black;color:black'>
                                 <option value ='1'>Còn Hạn</option>
-                                <option value ='0'>Hết Hạn</option>
+                                <option value ='2'>Hết Hạn</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -301,8 +301,9 @@
                 @endforeach
                 </tbody>
               </table>
-              {{ $coupons->links() }}
+             
             </div>
+            {{ $coupons->links() }}
           </div>
         </div>
       </div>
