@@ -12,6 +12,7 @@
   <link href="{{asset('assets/css/pace.min.css')}}" rel="stylesheet"/>
   <script src="{{asset('assets/js/pace.min.js')}}"></script>
   <!--favicon-->
+  <link href="{{asset('assets/plugins/fullcalendar/css/fullcalendar.min.css')}}" rel='stylesheet'/>
   <link rel="icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon">
   <!-- Vector CSS -->
   <link href="{{asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>

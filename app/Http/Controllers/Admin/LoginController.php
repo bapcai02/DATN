@@ -63,7 +63,17 @@ class LoginController extends Controller
             $password = $request->input('password');
      
             if( Auth::attempt(['email' => $email, 'password' =>$password])) {
-                return redirect()->route("admin.home");
+
+                if($request->user()->role_id == 3){
+
+                    return redirect(route('admin.home'));
+                }else if($request->user()->role_id == 2){
+        
+                    return redirect(route('customer.home'));
+                }else if($request->user()->role_id == 4){
+        
+                    return redirect(route('shiper.home'));
+                }
             } else {
                 return redirect()->route("auth.login")->with('error', 'Email hoặc mật khẩu không đúng!');
             }

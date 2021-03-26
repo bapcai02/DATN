@@ -6,6 +6,7 @@
      </a>
    </div>
    <ul class="sidebar-menu do-nicescrol">
+   @if(Auth::user()->role_id == 3)
       <li>
         <a href="{{ url('admin/home') }}">
           <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
@@ -37,7 +38,7 @@
       </li>
       
       <li>
-        <a href="{{ url('customer/product/') }}">
+        <a href="{{ url('admins/product/') }}">
           <i class="zmdi zmdi-grid"></i> <span>Manage Product</span>
         </a>
       </li>
@@ -78,6 +79,34 @@
           <i class="zmdi zmdi-account-circle"></i> <span>Manage Shiper</span>
         </a>
       </li>
-
+  @elseif(Auth::user()->role_id == 2)
+      <li>
+        <a href="{{ url('cusomer/home') }}">
+          <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{url('customer/order')}}">
+          <i class="zmdi zmdi-face"></i> <span>Manage Order</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url('customer/product/') }}">
+          <i class="zmdi zmdi-grid"></i> <span>Manage Product</span>
+        </a>
+      </li>
+     
+  @elseif(Auth::user()->role_id == 4)
+      <li>
+        <a href="{{ url('shiper/home') }}">
+          <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{url('shiper/order')}}">
+          <i class="zmdi zmdi-face"></i> <span>Manage Order</span>
+        </a>
+      </li>
+  @endif
     </ul>
 </div>

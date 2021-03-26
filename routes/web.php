@@ -43,7 +43,8 @@ Route::prefix('auth')->group(function (){
     Route::post('/set-password', 'Admin\LoginController@resetPassword')->name('auth.set-password');
     Route::any('/logout', 'Admin\LoginController@logout')->name('logout');
 });
-// Route::group(['middleware' => 'checkrole'], function () {
+
+Route::group(['middleware' => 'checkadmin'], function () {
     Route::prefix('admins')->group(function () {
         Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
         
@@ -115,7 +116,9 @@ Route::prefix('auth')->group(function (){
         });
 
     });
+});
 
+Route::group(['middleware' => 'checkcustomer'], function () {
     Route::prefix('customer')->group(function () {
         Route::get('/home', 'Customer\HomeController@index')->name('customer.home');
         Route::prefix('product')->group(function () {
@@ -125,4 +128,16 @@ Route::prefix('auth')->group(function (){
             Route::get('/add', 'Customer\ProductController@index')->name('customer.product.add'); 
         });
     });
-// });
+});
+
+Route::group(['middleware' => 'checkshiper'], function () {
+    Route::prefix('shiper')->group(function () {
+        Route::get('/home', 'Customer\HomeController@index')->name('shiper.home');
+        Route::prefix('product')->group(function () {
+            Route::get('/', 'Customer\ProductController@index')->name('shiper.product'); 
+            Route::get('/edit', 'Customer\ProductController@index')->name('shiper.product.edit'); 
+            Route::get('/delete', 'Customer\ProductController@index')->name('shiper.product.delete'); 
+            Route::get('/add', 'Customer\ProductController@index')->name('shiper.product.add'); 
+        });
+    });
+});
