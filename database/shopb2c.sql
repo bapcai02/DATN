@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 18, 2021 lúc 10:41 AM
+-- Thời gian đã tạo: Th3 26, 2021 lúc 11:19 AM
 -- Phiên bản máy phục vụ: 10.4.17-MariaDB
--- Phiên bản PHP: 7.4.15
+-- Phiên bản PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -74,7 +74,7 @@ CREATE TABLE `categories` (
   `category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_status` int(11) NOT NULL,
-  `category_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_keyword` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -93,7 +93,8 @@ INSERT INTO `categories` (`id`, `category_name`, `category_description`, `catego
 (6, 'Thức Ăn Nhanh', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 1, 'thuc-an-nhanh', 'butter & eggs', '2021-03-15 03:07:43', NULL),
 (7, 'Thực Phẩm Khô', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 1, 'thuc-an-kho', 'butter & eggs', '2021-03-15 03:07:43', NULL),
 (8, 'Thực Phâm Đóng Hộp', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 1, 'thuc-an-kho', 'butter & eggs', '2021-03-15 03:07:43', NULL),
-(9, 'Gạo & Nông Sản', '', 1, 'thuc-an-kho', 'butter & eggs', '2021-03-15 03:07:43', NULL);
+(9, 'Gạo & Nông Sản', '', 1, 'thuc-an-kho', 'butter & eggs', '2021-03-15 03:07:43', NULL),
+(10, '2nfadmin', 'uuuu', 1, NULL, '66666', '2021-03-26 00:31:11', '2021-03-26 00:31:11');
 
 -- --------------------------------------------------------
 
@@ -124,6 +125,7 @@ CREATE TABLE `customers` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -132,8 +134,8 @@ CREATE TABLE `customers` (
 -- Đang đổ dữ liệu cho bảng `customers`
 --
 
-INSERT INTO `customers` (`id`, `user_id`, `name`, `phone`, `address`, `created_at`, `updated_at`) VALUES
-(1, 3, 'Shop Hoa Quả', '012421413423', 'Ha Noi', '2021-03-15 04:04:38', NULL);
+INSERT INTO `customers` (`id`, `user_id`, `name`, `phone`, `address`, `status`, `created_at`, `updated_at`) VALUES
+(1, 3, 'Shop Hoa Quả', '012421413423', 'Ha Noi', 1, '2021-03-15 04:04:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -165,6 +167,13 @@ CREATE TABLE `feeships` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `feeships`
+--
+
+INSERT INTO `feeships` (`id`, `matp`, `maqh`, `maxptr`, `feeship`, `created_at`, `updated_at`) VALUES
+(2, 1, 1, 1, 666660.00, '2021-03-26 00:12:06', '2021-03-26 00:25:17');
 
 -- --------------------------------------------------------
 
@@ -416,9 +425,10 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `status`, `display_name`, `created_at`, `updated_at`) VALUES
-(1, 0, 'user', '2021-03-10 02:00:39', NULL),
+(1, 1, 'user', '2021-03-10 02:00:39', NULL),
 (2, 1, 'customer', '2021-03-10 02:00:39', NULL),
-(3, 2, 'admin', '2021-03-10 02:00:39', NULL);
+(3, 2, 'admin', '2021-03-10 02:00:39', NULL),
+(4, 1, 'shiper', '2021-03-10 02:00:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -450,14 +460,24 @@ INSERT INTO `sellers` (`id`, `customer_id`, `shop_info`, `shop_name`, `created_a
 
 CREATE TABLE `shippings` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `customer_id` bigint(20) UNSIGNED NOT NULL COMMENT 'customers.id',
+  `user_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `matp` int(11) DEFAULT NULL,
+  `maqh` int(11) DEFAULT NULL,
+  `maxptr` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `shippings`
+--
+
+INSERT INTO `shippings` (`id`, `user_id`, `name`, `phone`, `email`, `image`, `matp`, `maqh`, `maxptr`, `created_at`, `updated_at`) VALUES
+(1, 5, 'Dang Van Ha', '0397368768', 'bapcai19988@gmail.com', NULL, 1, 1, 1, '2021-03-26 09:06:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -517,8 +537,8 @@ INSERT INTO `tags` (`id`, `slug`, `name`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `role_id` bigint(20) UNSIGNED NOT NULL COMMENT 'user:0, customer:1, admin:2',
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL COMMENT 'user:1, customer:2, admin:3, ship: 4\r\n',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -531,7 +551,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `created_at`, `updated_at`) VALUES
 (2, 3, 'Admin', 'hadv62@wru.vn', '$2y$10$F5XZXU/TogwQiXBDNHTZ8OBvU0dREfdhLggOR.v3w.KeFiQ9pyvX2', '2021-03-10 02:01:26', '2021-03-11 02:00:44'),
-(3, 2, 'Customer', 'customer@gmail.com', '$2y$10$o828wF5m4k5a0V1QzKL6vubd4b6.4IidFEBEIJJ0e5/OJ1M2UZlge', '2021-03-10 02:01:26', NULL);
+(3, 2, 'Customer', 'customer@gmail.com', '$2y$10$o828wF5m4k5a0V1QzKL6vubd4b6.4IidFEBEIJJ0e5/OJ1M2UZlge', '2021-03-10 02:01:26', NULL),
+(4, 1, 'Uer', 'admin@2nf.com.vn', '$2y$10$gRSvnAIbna4ANxHBoFn4nuGC2jj9VA1Vo6Hu8btSAnmYcmowt8ffq', '2021-03-26 00:58:32', '2021-03-26 00:58:32'),
+(5, 4, 'Shiper', 'hadv@2nf.com.vn', '$2y$10$gRSvnAIbna4ANxHBoFn4nuGC2jj9VA1Vo6Hu8btSAnmYcmowt8ffq', '2021-03-26 00:58:32', '2021-03-26 00:58:32');
 
 -- --------------------------------------------------------
 
@@ -3009,8 +3031,7 @@ ALTER TABLE `sellers`
 -- Chỉ mục cho bảng `shippings`
 --
 ALTER TABLE `shippings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `customer_id` (`customer_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `sliders`
@@ -3079,7 +3100,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `coupons`
@@ -3103,7 +3124,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT cho bảng `feeships`
 --
 ALTER TABLE `feeships`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
@@ -3157,7 +3178,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT cho bảng `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `sellers`
@@ -3169,7 +3190,7 @@ ALTER TABLE `sellers`
 -- AUTO_INCREMENT cho bảng `shippings`
 --
 ALTER TABLE `shippings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `sliders`
@@ -3193,7 +3214,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `vn_quanhuyen`
@@ -3286,12 +3307,6 @@ ALTER TABLE `ratings`
 --
 ALTER TABLE `sellers`
   ADD CONSTRAINT `sellers_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
-
---
--- Các ràng buộc cho bảng `shippings`
---
-ALTER TABLE `shippings`
-  ADD CONSTRAINT `shippings_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
 
 --
 -- Các ràng buộc cho bảng `socials`

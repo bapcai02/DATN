@@ -73,5 +73,11 @@
         </a>
       </li>
 
+      <li>
+        <a href="{{ url('admins/shiper/') }}" >
+          <i class="zmdi zmdi-account-circle"></i> <span>Manage Shiper</span>
+        </a>
+      </li>
+
     </ul>
 </div>

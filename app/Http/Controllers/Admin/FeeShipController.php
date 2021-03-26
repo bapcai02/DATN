@@ -10,7 +10,8 @@ use App\Repositories\AddressRepository;
 class FeeShipController extends Controller
 {
     protected $feeShipRepository;
-
+    protected $addressRepository;
+    
     public function __construct(
         FeeShipRepository $feeShipRepository,
         AddressRepository $addressRepository
