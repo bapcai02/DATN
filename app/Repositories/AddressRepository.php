@@ -39,6 +39,21 @@ class AddressRepository
         return $this->quanHuyen->orderBy('created_at', 'desc')->paginate(6,  ['*'], 'page_huyen');
     }
 
+    public static function getThanhPhoById(int $id)
+    {
+        return DB::table('vn_tinhThanhPho')->where('id', $id)->first();
+    }
+
+    public static function getQuanHuyenById(int $id)
+    {
+        return DB::table('vn_quanHuyen')->where('id', $id)->first();
+    }
+
+    public static function getXaPhuongById(int $id)
+    {
+        return DB::table('vn_xaphuongthitran')->where('id', $id)->first();
+    }
+
     public function getQuanHuyen(int $matp)
     {
         return $this->quanHuyen->where('matp', $matp)->get();

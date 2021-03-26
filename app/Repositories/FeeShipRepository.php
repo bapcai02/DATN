@@ -15,12 +15,7 @@ class FeeShipRepository
     }
     
     public function getAll(){
-        return $this->feeship
-        ->join('vn_tinhthanhpho', 'feeships.matp', 'vn_tinhthanhpho.id')
-        ->join('vn_quanhuyen', 'feeships.maqh', 'vn_quanhuyen.id')
-        ->join('vn_xaphuongthitran', 'feeships.maxptr', 'vn_xaphuongthitran.id')
-        ->select('')
-        ->orderBy('created_at', 'desc')->paginate(6);
+        return $this->feeship->orderBy('created_at', 'desc')->paginate(6);
     }
 
     public function getById(int $id)
@@ -28,58 +23,49 @@ class FeeShipRepository
         return $this->feeship->where('id', $id)->first();
     }
 
-    public function check(string $code)
+    public function check(int $matp, int $maqh, int $maxptr)
     {
-        return $this->feeship->where('code', $code)->where('feature', 1)->first();
+        return $this->feeship->where('matp', $matp)->where('maqh', $maqh)->where('maxptr', $maxptr)->first();
     }
 
     public function create($data)
     {
         return $this->feeship->create([
-            'name' => $data['name'],
-            'code' => $data['code'],
-            'qty' => $data['qty'],
-            'feature' => $data['status'],
-            'discount_number' => $data['discoud']
+            'matp' => $data['matp'],
+            'maqh' => $data['maqh'],
+            'maxptr' => $data['maxptr'],
+            'feeship' => $data['feeship'],
         ]);
     }
 
     public function update($data)
     {
-        return $this->coupons->where('id', $data['id'])->update([
-            'name' => $data['name'],
-            'code' => $data['code'],
-            'qty' => $data['qty'],
-            'feature' => $data['status'],
-            'discount_number' => $data['discoud']
+        return $this->feeship->where('id', $data['id'])->update([
+            'feeship' => $data['feeship'],
         ]);
     }
 
     public function delete(int $id)
     {
-        return $this->coupons->where('id', $id)->delete();
+        return $this->feeship->where('id', $id)->delete();
     }
 
     public function search($data)
-    {
-        $start_date = isset($data['start-date']) ? $data['start-date'] . ' ' . "00:00:00" : false;
-        $end_date = isset($data['end-date']) ? $data['end-date'] . ' ' . "00:00:00" : false;
-        $code = isset($data['code']) ? $data['code'] : false;
-        $feature = isset($data['status']) ? (int)($data['status']) : false;
+    { 
+        $matp = isset($data['matp']) ? $data['matp'] : false;
+        $maqh = isset($data['maqh']) ? $data['maqh'] : false;
+        $maxptr = isset($data['maxptr']) ? $data['maxptr'] : false;
   
-        return $this->coupons
-        ->when($code, function ($query) use ($code) {
-            return $query->Where('code', 'LIKE', "%$code%");
+        return $this->feeship
+        ->when($matp, function ($query) use ($matp) {
+            return $query->Where('matp', $matp);
         })
-        ->when($feature, function ($query) use ($feature) {
-            return $query->where('feature', "=", $feature);
+        ->when($maqh, function ($query) use ($maqh) {
+            return $query->where('maqh', $maqh);
         })
-        ->when($start_date, function ($query) use ($start_date) {
-            return $query->WhereDate('created_at', '>=', $start_date);
+        ->when($maxptr, function ($query) use ($maxptr) {
+            return $query->where('maxptr', $maxptr);
         })
-        ->when($end_date, function ($query) use ($end_date) {
-            return $query->WhereDate('created_at', '<=', $end_date);
-        })  
         ->orderBy('created_at')
         ->paginate(6);
     }

@@ -213,7 +213,8 @@
                 <div class="row no-gutters-sm">
                 @foreach($productRan as $key => $value)
                   <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
-                    <div class="product"><a class="product-img" href="shop_detail.html"><img src="{{ asset('assets/images').'/'.$value->image }}" alt=""></a>
+
+                    <div class="product"><a class="product-img" href="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                       <h5 class="product-type">{{ $value->category_name }}</h5>
                       <h3 class="product-name">{{ $value->product_name }}</h3>
                         @if($product->sale != 0)

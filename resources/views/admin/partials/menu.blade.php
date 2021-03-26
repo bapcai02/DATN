@@ -49,7 +49,13 @@
       </li>
 
       <li>
-        <a href="profile.html">
+        <a href="{{ url('admins/brand/') }}">
+          <i class="zmdi zmdi-calendar-check"></i> <span>Manage Brand</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="{{ url('admins/feeship/') }}">
           <i class="zmdi zmdi-coffee">
           </i> <span>Manage feeship</span>
         </a>

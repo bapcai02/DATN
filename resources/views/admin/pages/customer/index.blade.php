@@ -340,9 +340,9 @@
         $("#id_customer").val(id);
     })
 
-    $('#delete-category-modal').on('hide.bs.modal', function () {
+    $('#delete-customer-modal').on('hide.bs.modal', function () {
         $('.delete-item-trigger-clicked').removeClass('delete-item-trigger-clicked')
-        $("#id_category").trigger("reset");
+        $("#id_customer").trigger("reset");
     })
 
     $(document).on('click', '#edit-item', function () {

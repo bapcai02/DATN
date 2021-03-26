@@ -96,6 +96,16 @@ Route::prefix('auth')->group(function (){
             Route::get('/search', 'Admin\BrandController@search');
         });
 
+        Route::prefix('feeship')->group(function () {   
+            Route::get('/', 'Admin\FeeShipController@index'); 
+            Route::get('/quanhuyen', 'Admin\FeeShipController@getQuanHuyen');
+            Route::get('/xaphuong', 'Admin\FeeShipController@getXaPhuong');
+            Route::post('/edit', 'Admin\FeeShipController@edit'); 
+            Route::post('/delete', 'Admin\FeeShipController@delete'); 
+            Route::post('/create', 'Admin\FeeShipController@create');
+            Route::get('/search', 'Admin\FeeShipController@search');
+        });
+
     });
 
     Route::prefix('customer')->group(function () {
