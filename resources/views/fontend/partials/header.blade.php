@@ -37,7 +37,11 @@
           <div class="col-2">
             <div class="product-function d-flex align-items-center justify-content-end">
               {{-- <div id="wishlist"><a class="function-icon icon_heart_alt" href=""></a></div> --}}
-              <div id="cart"><a class="function-icon icon_bag_alt" href="{{ url('/cart') }}"><span>{{ Cart::total() }}</span></a></div>
+              @if(Auth::check())
+                <div id="cart"><a class="function-icon icon_bag_alt" href="{{ url('/cart') }}"><span>{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }} VND</span></a></div>
+              @else
+                <div id="cart"><a class="function-icon icon_bag_alt" href="{{ url('/cart') }}"><span>{{ Cart::total() }} VND</span></a></div>
+              @endif
             </div>
           </div>
         </div>

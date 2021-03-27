@@ -6,26 +6,36 @@ use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\AddressRepository;
+use App\Repositories\UserCartRepository;
 use Cart;
+use Auth;
 
 class CartController extends Controller
 {
     protected $categoryRepository;
     protected $productRepository;
     protected $addressRepository;
+    protected $userCartRepository;
 
     public function __construct(
         CategoryRepository $categoryRepository,
         ProductRepository $productRepository,
-        AddressRepository $addressRepository
+        AddressRepository $addressRepository,
+        UserCartRepository $userCartRepository
     )
     {
         $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
         $this->addressRepository = $addressRepository;
+        $this->userCartRepository = $userCartRepository;
     }
-    public function index(){
+    public function index(Request $request){
         $category = $this->categoryRepository->getListCategory()->get();
+
+        if(Auth::check()){
+            $user_cart = $this->userCartRepository->getById(Auth::user()->id);
+            return view('fontend.pages.carts.index', compact('category', 'user_cart'));
+        }
         $cart = Cart::content();
 
         return view('fontend.pages.carts.index', compact('category', 'cart'));

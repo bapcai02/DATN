@@ -7,20 +7,25 @@ use App\Repositories\CategoryRepository;
 use Validator;
 use Auth;
 use App\Repositories\UserRepository;
+use App\Repositories\UserCartRepository;
 use Hash;
+use Cart;
 
 class LoginController extends Controller
 {
     protected $categoryRepository;
-    protected $userRepositiry;
+    protected $userRepository;
+    protected $userCartRepository;
     
     public function __construct(
         CategoryRepository $categoryRepository,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        UserCartRepository $userCartRepository
     )
     {
         $this->categoryRepository = $categoryRepository;
         $this->userRepository = $userRepository;
+        $this->userCartRepository = $userCartRepository;
     }
 
     public function getLogin(){
@@ -50,6 +55,14 @@ class LoginController extends Controller
             $password = $request->input('password');
             $role = 1;
             if( Auth::attempt(['email' => $email, 'password' =>$password, 'role_id' => $role])) {
+                $user_id = Auth::user()->id;
+                $cart = Cart::content();
+                if(count($cart) > 0){
+                    foreach($cart as $value){
+                        $this->userCartRepository->create($value, $user_id);
+                        Cart::remove($value->rowId);
+                    }                
+                }
                 return redirect()->route("home");
             } else {
                 return redirect()->route("login")->with('errorlogin', 'Email hoặc mật khẩu không đúng!');

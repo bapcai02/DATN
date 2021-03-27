@@ -55,11 +55,19 @@
                       </h3>
                     </div>
                     <div class="deal-select text-center">
-                      <form action="{{ url('/cart') }}" method = "POST">
-                        @csrf
-                        <input type="hidden" name="productId" value="{{ $value->id }}" >
-                        <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
-                      </form>    
+                      @if(!Auth::check())
+                        <form action="{{ url('/cart') }}" method = "POST">
+                          @csrf
+                          <input type="hidden" name="productId" value="{{ $value->id }}" >
+                          <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                        </form>   
+                      @else
+                        <form action="{{ url('/usercart/add') }}" method = "POST">
+                          @csrf
+                          <input type="hidden" name="productId" value="{{ $value->id }}" >
+                          <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                        </form> 
+                      @endif
                       <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>       
                     </div>
                   </div>
@@ -225,11 +233,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
-                          </form> 
+                          @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif 
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -255,11 +271,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                          @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -284,11 +308,19 @@
                         <h3>{{ $value->product_price }}/kg</h3>
                       @endif
                       <div class="product-select">
-                        <form action="{{ url('/cart') }}" method = "POST">
-                          @csrf
-                          <input type="hidden" name="productId" value="{{ $value->id }}" >
-                          <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                        </form> 
+                          @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif 
                         <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                       </div>
                     </div>
@@ -313,11 +345,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                        @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -343,11 +383,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                        @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -409,11 +457,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                        @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif 
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -439,11 +495,19 @@
                             <h3>{{ $value->product_price }}/kg</h3>
                           @endif
                           <div class="product-select">
+                          @if(!Auth::check())
                             <form action="{{ url('/cart') }}" method = "POST">
                               @csrf
                               <input type="hidden" name="productId" value="{{ $value->id }}" >
-                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
                             </form> 
+                          @endif 
                             <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                           </div>
                         </div>
@@ -469,11 +533,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                        @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif 
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -499,11 +571,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                        @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif 
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -529,11 +609,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                        @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif 
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -579,11 +667,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                        @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif 
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -609,11 +705,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                        @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif 
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -639,11 +743,19 @@
                             <h3>{{ $value->product_price }}/kg</h3>
                           @endif
                           <div class="product-select">
+                          @if(!Auth::check())
                             <form action="{{ url('/cart') }}" method = "POST">
                               @csrf
                               <input type="hidden" name="productId" value="{{ $value->id }}" >
-                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
                             </form> 
+                          @endif 
                             <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                           </div>
                         </div>
@@ -669,11 +781,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                        @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif 
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>
@@ -699,11 +819,19 @@
                           <h3>{{ $value->product_price }}/kg</h3>
                         @endif
                         <div class="product-select">
-                          <form action="{{ url('/cart') }}" method = "POST">
-                            @csrf
-                            <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>                           
-                          </form> 
+                        @if(!Auth::check())
+                            <form action="{{ url('/cart') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $value->id }}" >
+                              <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                            </form> 
+                          @endif 
                           <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                         </div>
                       </div>

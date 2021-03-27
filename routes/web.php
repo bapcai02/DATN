@@ -28,6 +28,17 @@ Route::prefix('cart')->group(function (){
     Route::get('/xaphuong','CartController@getXaPhuong');
 });
 
+Route::prefix('usercart')->group(function (){
+    Route::get('/','UserCartController@index')->name('cart');
+    Route::post('/add', 'UserCartController@addCart');
+    Route::post('/delete', 'UserCartController@deleteCart');
+    Route::get('/update', 'UserCartController@updateCart');
+    Route::get('/checkout','UserCartController@checkout');
+    Route::get('/quanhuyen','UserCartController@getQuanHuyen');
+    Route::get('/xaphuong','UserCartController@getXaPhuong');
+});
+
+
 Route::get('/login', 'LoginController@getLogin')->name('login');
 Route::post('/login', 'LoginController@login');
 Route::get('/logout', 'LoginController@logout');

@@ -70,27 +70,51 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($cart as $key => $value)
-                        <tr>
-                          <td class="product-iamge"> 
-                            <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->options->image }}" alt="product image"></div>
-                          </td>
-                          <td class="product-name">{{ $value->name }}</td>
-                          <td class="product-price">{{ $value->price }}</td>
-                          <td class="product-quantity"> 
-                            <input class="quantity no-round-input" type="number" name="qty" min="1" value="{{ $value->qty }}">
-                          </td>
-                          <td class="product-total">{{ number_format($value->price * $value->qty) }}</td>
-                          <td class="product-clear"> 
-                            <form action="{{ url('cart/delete') }}" method="POST">
-                              @csrf
-                              <input class="rowId" type="hidden" name = 'rowId' value="{{ $value->rowId }}">
-                              <button type="submit" class="no-round-btn"><i class="icon_close"></i></button>
-                            </form>
-                          </td>
-                        </tr>
-                        
-                      @endforeach
+                    @if(isset($user_cart))
+                        @foreach($user_cart as $key => $value)
+                          <tr>
+                            <td class="product-iamge"> 
+                              <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->image }}" alt="product image"></div>
+                            </td>
+                            <td class="product-name">{{ $value->name }}</td>
+                            <td class="product-price">{{ $value->price }}</td>
+                            <td class="product-quantity"> 
+                              <input class="quantity no-round-input" type="number" name="qty" min="1" value="{{ $value->qty }}">
+                            </td>
+                            <td class="product-total">{{ number_format($value->price * $value->qty) }}</td>
+                            <td class="product-clear"> 
+                              <form action="{{ url('usercart/delete') }}" method="POST">
+                                @csrf
+                                <input class="id" type="hidden" name = 'id' value="{{ $value->id }}">
+                                <button type="submit" class="no-round-btn"><i class="icon_close"></i></button>
+                              </form>
+                            </td>
+                          </tr>
+                          
+                        @endforeach
+                    @else
+                        @foreach($cart as $key => $value)
+                          <tr>
+                            <td class="product-iamge"> 
+                              <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->options->image }}" alt="product image"></div>
+                            </td>
+                            <td class="product-name">{{ $value->name }}</td>
+                            <td class="product-price">{{ $value->price }}</td>
+                            <td class="product-quantity"> 
+                              <input class="quantity no-round-input" type="number" name="qty" min="1" value="{{ $value->qty }}">
+                            </td>
+                            <td class="product-total">{{ number_format($value->price * $value->qty) }}</td>
+                            <td class="product-clear"> 
+                              <form action="{{ url('cart/delete') }}" method="POST">
+                                @csrf
+                                <input class="rowId" type="hidden" name = 'rowId' value="{{ $value->rowId }}">
+                                <button type="submit" class="no-round-btn"><i class="icon_close"></i></button>
+                              </form>
+                            </td>
+                          </tr>
+                          
+                        @endforeach
+                      @endif
                     </tbody>
                   </table>
               </div>
@@ -104,7 +128,11 @@
               </div>
             </div>
             <div class="col-12 col-sm-4 text-right" style="float: right">
+            @if(!Auth::check())
               <button id="update" class="no-round-btn black cart-update">Upadate cart</button>
+            @else
+              <button id="update2" class="no-round-btn black cart-update">Upadate cart</button>
+            @endif
           </div>
           </div>
           <div class="row justify-content-end">
@@ -117,14 +145,25 @@
                     <col span="1" style="width: 50%">
                   </colgroup>
                   <tbody>
-                    <tr>
-                      <th>SUBTOTAL</th>
-                      <td>{{ Cart::total() }}</td>
-                    </tr>
-                    <tr>
-                      <th>TOTAL</th>
-                      <td>{{ Cart::total() }}</td>
-                    </tr>
+                    @if(!Auth::check())
+                      <tr>
+                        <th>SUBTOTAL</th>
+                        <td>{{ Cart::total() }} VND</td>
+                      </tr>
+                      <tr>
+                        <th>TOTAL</th>
+                        <td>{{ Cart::total() }} VND</td>
+                      </tr>
+                    @else
+                      <tr>
+                        <th>SUBTOTAL</th>
+                        <td>{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }} VND</td>
+                      </tr>
+                      <tr>
+                        <th>TOTAL</th>
+                        <td>{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }} VND</td>
+                      </tr>
+                    @endif
                   </tbody>
                 </table>
                 <div class="checkout-method">
@@ -163,6 +202,29 @@
       
       $.ajax({
         url: "{{ url('/cart/update') }}",
+        type: 'GET',
+        data: {data},
+      }).done(function(res){
+        swal("Thành Công!", "Update Thành công!", "success");
+        setTimeout(
+          () => {
+            location.reload();
+          }, 2000
+        )
+      })
+    });
+
+
+    $('#update2').click(function(){
+      var data = new Array();
+      $('#myTable tbody tr').each(function(){
+        var qty = $(this).find(".quantity").val(); 
+        var id = $(this).find(".id").val(); 
+        data.push([qty,id])
+      });
+      
+      $.ajax({
+        url: "{{ url('/usercart/update') }}",
         type: 'GET',
         data: {data},
       }).done(function(res){
