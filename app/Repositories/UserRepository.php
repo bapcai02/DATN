@@ -47,13 +47,18 @@ class UserRepository
         return $this->user->where('role_id', 2)->orderBy('id', 'desc')->first();
     }
 
-    public function update($login_id, $attributes)
+    public function update(int $login_id, $attributes)
     {
         return $this->user->where('id', $login_id)->update($attributes);
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
         return $this->user->where('id', $id)->delete();
+    }
+
+    public function deleteByEmail(int $email)
+    {
+        return $this->user->where('email', $email)->delete();
     }
 }

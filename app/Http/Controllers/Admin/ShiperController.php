@@ -42,42 +42,29 @@ class ShiperController extends Controller
 
     public function create(Request $request)
     {
-        $data = $request->all();
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $file_name = $file->getClientOriginalName();
-            $file->move('assets/images', $file->getClientOriginalName());
-        }
-        $this->shiperRepository->create($data, $file_name);
-
-        return redirect()->back()->with('message-shiper', 'them moi thanh cong');
-    }
-
-    public function edit(Request $request)
-    {
-        $data = $request->all();
-        $code = $this->shiperRepository->check($data['code']);
-        $shiper = $this->shiperRepository->getById($data['id']);
-
-        if($shiper->code != $data['code']){
-            if($code != null){
-                return redirect()->back()->with('error-shiper', 'ma giam gia da duoc tao, vui long kiem tra lai !');
+        $check = $this->userRepository->checkUser($request->email);
+        if($check == null){
+            $data = $request->all();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $file_name = $file->getClientOriginalName();
+                $file->move('assets/images', $file->getClientOriginalName());
             }
-            $this->shiperRepository->update($data);
+            $this->shiperRepository->create($data, $file_name);
 
-            return redirect()->back()->with('message-shiper', 'chinh sua thanh cong');
+            return redirect()->back()->with('message-shiper', 'them moi thanh cong');
         }
-
-        $this->shiperRepository->update($data);
-
-        return redirect()->back()->with('message-shiper', 'chinh sua thanh cong');
+        return redirect()->back()->with('error-shiper', 'email da ton tai, vui long kiem tra lai');
+        
     }
 
     public function search(Request $request)
     {
         $page = $request->page;
         $shiper = $this->shiperRepository->search($request->all());
+        $user = $this->userRepository->getUserByRole(4)->get();
+        $tinhtp = $this->addressRepository->getTinhThanhPho();
 
-        return view('admin.pages.shiper.index', compact('shiper', 'page'));
+        return view('admin.pages.shiper.index', compact('shiper', 'page', 'user', 'tinhtp'));
     }
 }

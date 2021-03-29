@@ -120,7 +120,6 @@ Route::group(['middleware' => 'checkadmin'], function () {
 
         Route::prefix('shiper')->group(function () {   
             Route::get('/', 'Admin\ShiperController@index'); 
-            Route::post('/edit', 'Admin\ShiperController@edit'); 
             Route::post('/delete', 'Admin\ShiperController@delete'); 
             Route::post('/create', 'Admin\ShiperController@create');
             Route::get('/search', 'Admin\ShiperController@search');

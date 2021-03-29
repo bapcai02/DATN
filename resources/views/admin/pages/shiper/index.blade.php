@@ -76,6 +76,13 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="example-number" style="color:black">
+                           Nhập Password <span class="text-danger">*</span>
+                        </label>
+                        <input placeholder="nhập password" type="password" required maxlength="10"
+                        name="password" id="password" class="form-control" style= 'border: 1px solid black;color:black'>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="example-number" style="color:black">
                            Số Điện Thoại <span class="text-danger">*</span>
                         </label>
                         <input placeholder="nhập Số Điện Thoại" type="text" required maxlength="50"
@@ -303,12 +310,12 @@
                            title="">
                             <i class="fa fa-times"></i>
                         </a>
-                        <a id="edit-item"
+                        {{-- <a id="edit-item"
                            class="btn btn-sm btn-primary btn-icon btn-inline-block mr-1"
                            title="Edit"
                            data-item-id="{{$value->id}}">
                             <i class="fa fa-edit"></i>
-                        </a>
+                        </a> --}}
                     </td>
                 </tr>
                 @endforeach
