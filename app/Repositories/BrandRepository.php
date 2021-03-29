@@ -14,6 +14,10 @@ class BrandRepository
         $this->brand = $brand;
     }
     
+    public function get(){
+        return $this->brand->orderBy('created_at', 'desc')->get();
+    }
+
     public function getAll(){
         return $this->brand->orderBy('created_at', 'desc')->paginate(6);
     }
@@ -47,6 +51,11 @@ class BrandRepository
             'brand_status' => $data['status'],
             'brand_keyword' => $data['key'],
         ]);
+    }
+
+    public static function checkBrandName(int $id)
+    {
+        return DB::table('brands')->where('id', $id)->first();
     }
 
     public function delete(int $id)

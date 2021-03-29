@@ -40,6 +40,11 @@ class CategoryRepository
         ]);
     }
 
+    public static function checkCategoryName(int $id)
+    {
+        return DB::table('categories')->where('id', $id)->first();
+    }
+    
     public function update($data){
         return $this->category->where('id', $data['id'])->update([
             'category_name' => $data['name'],

@@ -72,6 +72,24 @@ class ProductRepository
         
     }
 
+    public function delete(int $id)
+    {
+        $this->productImage->where('product_id', $id)->delete();
+        return $this->product->where('id', $id)->delete();
+    }
+    public function getProductByCustomer(int $id)
+    {
+        return $this->product
+        ->join('sellers', 'products.seller_id', 'sellers.id')
+        ->join('customers', 'sellers.customer_id', 'customers.id')
+        ->where('customers.user_id', $id)
+        ->select('products.id', 'products.product_name', 'products.product_desc', 
+                'products.product_price', 'products.sale','products.product_status',
+                'products.product_content','products.category_id', 'products.brand_id',
+                'products.seller_id')
+        ->paginate(6);
+    }
+
     public function getProductByCategoryId(int $id){
         return $this->product
             ->join('categories', 'products.category_id', 'categories.id')
