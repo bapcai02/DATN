@@ -55,4 +55,9 @@ class ProductController extends Controller
             'brand', 'category', 'product', 'page'
         ));
     }
+
+    public function add(Request $request)
+    {
+        return view('admin.pages.product.create');
+    }
 }

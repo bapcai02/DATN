@@ -359,6 +359,7 @@
     if((val) && val.length > 0) {
         swal("Thất Bại!", "Thao Tác Thất Bại!", "error");
     }
+    
     $(document).on('click', '#delete-item', function () {
         $(this).addClass('delete-item-trigger-clicked');
         var name = $(this).data('name');
