@@ -39,7 +39,7 @@
  
 <div class="content-wrapper">
   <div class = "col-md-12 ">
-    <form action="" method="GET">
+    <form action="{{url('customer/product/search')}}" method="GET">
       <div class="row">
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
@@ -51,7 +51,7 @@
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
                   <label class="form-label" for="simpleinput">product</label>
-                  <input type="text" name="customer" class="form-control" placeholder="product name">
+                  <input type="text" name="product_name" class="form-control" placeholder="product name">
               </div>
           </div>
           <div class="col-md-4 col-xs-12 mb-2">
@@ -69,7 +69,7 @@
               <div class="form-group">
                   <label class="form-label" for="example-select">Category</label>
                   <select class="form-control" id="example-select" name="category">
-                      <option value="0">Chọn Category</option>
+                      <option value="">Chọn Category</option>
                       @foreach($category as $key => $value)
                         <option value="{{ $value->id }}">{{ $value->category_name }}</option>
                       @endforeach
@@ -113,13 +113,12 @@
                 <div class="col-12">
                     <a class="btn btn-success btn-sm js-btn-add"
                       id="add-worker"
-                      href="javascript:void(0);"
+                      href="{{url('customer/product/add')}}"
                       data-toggle="modal"
-                      data-target="#add-worker-modal"
                       type="button">
                     <span>
                         <i class="fa fa-plus mr-1"></i>
-                        add_new
+                        Thêm Mới Sản Phẩm
                     </span>
                     </a>
                 </div>

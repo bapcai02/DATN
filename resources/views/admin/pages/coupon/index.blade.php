@@ -220,14 +220,14 @@
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
         </button>
-        {{ session('message-coupon') }}
+        <input id='message-coupon' type = 'hidden' value="{{ session('message-coupon') }}" />
     </div>
   @endif
   @if (session('error-coupon'))
   <div class="alert alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
       </button>
-      {{ session('error-coupon') }}
+      <input id='error-coupon' type = 'hidden' value="{{ session('error-coupon') }}" />
   </div>
   @endif
   <div class="container-fluid"> 
@@ -315,6 +315,16 @@
 @push('script')
 <script>
   $(document).ready(function() {
+
+    var val = $('#message-coupon').val();
+    if((val) && val.length > 0) {
+        swal("Thành Công!", "Thao Tác Thành công!", "success");
+    }
+
+    var val = $('#error-coupon').val();
+    if((val) && val.length > 0) {
+        swal("Thất Bại!", "Thao Tác Thất Bại!", "error");
+    }
 
     $(document).on('click', '#delete-item', function () {
         $(this).addClass('delete-item-trigger-clicked');

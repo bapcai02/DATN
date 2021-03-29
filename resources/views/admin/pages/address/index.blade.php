@@ -27,6 +27,36 @@
 <script>
   $(document).ready(function() {
 
+    var val = $('#message-huyen').val();
+    if((val) && val.length > 0) {
+        swal("Thành Công!", "Thao Tác Thành công!", "success");
+    }
+
+    var val = $('#error-huyen').val();
+    if((val) && val.length > 0) {
+        swal("Thất Bại!", "Thao Tác Thất Bại!", "error");
+    }
+
+    var val = $('#message-tinh').val();
+    if((val) && val.length > 0) {
+        swal("Thành Công!", "Thao Tác Thành công!", "success");
+    }
+
+    var val = $('#error-tinh').val();
+    if((val) && val.length > 0) {
+        swal("Thất Bại!", "Thao Tác Thất Bại!", "error");
+    }
+
+    var val = $('#message-xa').val();
+    if((val) && val.length > 0) {
+        swal("Thành Công!", "Thao Tác Thành công!", "success");
+    }
+
+    var val = $('#error-xa').val();
+    if((val) && val.length > 0) {
+        swal("Thất Bại!", "Thao Tác Thất Bại!", "error");
+    }
+
     $(document).on('click', '#delete-item-xa', function () {
         $(this).addClass('delete-item-trigger-clicked');
         var options = {

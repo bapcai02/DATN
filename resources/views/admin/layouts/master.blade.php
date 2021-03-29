@@ -116,6 +116,7 @@
   <!-- Custom scripts -->
   <script src="{{asset('assets/js/app-script.js')}}"></script>
   <!-- Chart js -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   @stack('script')
 </body>
 </html>

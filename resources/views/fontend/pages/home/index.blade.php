@@ -3,7 +3,7 @@
 
 @if(session('message'))
   <div class="alert alert-success">
-    <strong>{{ session('message') }}</strong>
+  <input id='message' type = 'hidden' value="{{ session('message') }}" />
   </div>
 @endif
 <div class="banner_v2">
@@ -859,5 +859,19 @@
       </div>
     </div>
   </div>
+
+@push('script')
+
+<script>
+  $(document).ready(function () {
+    var val = $('#message').val();
+    if((val) && val.length > 0) {
+        swal("Thành Công!", "Thao Tác Thành công!", "success");
+    }
+  });
+</script>
+
+@endpush
+
 
 @endsection

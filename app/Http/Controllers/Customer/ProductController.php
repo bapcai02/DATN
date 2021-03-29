@@ -43,4 +43,16 @@ class ProductController extends Controller
 
         return redirect()->back()->with('message', 'xoa thanh cong');
     }
+
+    public function search(Request $request)
+    {
+        $brand = $this->brandRepository->get();
+        $category = $this->categoryRepository->getListCategory()->get();
+        $product = $this->productRepository->searchProductCustomer($request->all(), Auth::user()->id);
+        $page = $request->page;
+    
+        return view('admin.pages.product.index', compact(
+            'brand', 'category', 'product', 'page'
+        ));
+    }
 }

@@ -210,14 +210,14 @@
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
         </button>
-        {{ session('message-brand') }}
+        <input id='message' type = 'hidden' value="{{ session('message-brand') }}" />
     </div>
   @endif
   @if (session('error-brand'))
   <div class="alert alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
       </button>
-      {{ session('error-brand') }}
+      <input id='error' type = 'hidden' value="{{ session('error-brand') }}" />
   </div>
   @endif
 
@@ -304,6 +304,16 @@
   @push('script')
 <script>
   $(document).ready(function() {
+
+    var val = $('#message').val();
+    if((val) && val.length > 0) {
+        swal("Thành Công!", "Thao Tác Thành công!", "success");
+    }
+
+    var val = $('#error').val();
+    if((val) && val.length > 0) {
+        swal("Thất Bại!", "Thao Tác Thất Bại!", "error");
+    }
 
     $(document).on('click', '#delete-item', function () {
         $(this).addClass('delete-item-trigger-clicked');

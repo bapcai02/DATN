@@ -136,6 +136,7 @@ Route::group(['middleware' => 'checkcustomer'], function () {
             Route::get('/edit', 'Customer\ProductController@index')->name('customer.product.edit'); 
             Route::get('/delete', 'Customer\ProductController@index')->name('customer.product.delete'); 
             Route::get('/add', 'Customer\ProductController@index')->name('customer.product.add'); 
+            Route::get('/search', 'Customer\ProductController@search')->name('customer.product.add'); 
         });
     });
 });

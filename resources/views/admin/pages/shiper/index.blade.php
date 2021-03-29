@@ -236,14 +236,14 @@
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
         </button>
-        {{ session('message-shiper') }}
+        <input id='message-shiper' type = 'hidden' value="{{ session('message-shiper') }}" />
     </div>
   @endif
   @if (session('error-shiper'))
   <div class="alert alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
       </button>
-      {{ session('error-shiper') }}
+      <input id='error-shiper' type = 'hidden' value="{{ session('error-shiper') }}" />
   </div>
   @endif
   <div class="container-fluid"> 
@@ -349,7 +349,16 @@
 </script>
 <script>
   $(document).ready(function() {
-  
+
+    var val = $('#message-shiper').val();
+    if((val) && val.length > 0) {
+        swal("Thành Công!", "Thao Tác Thành công!", "success");
+    }
+
+    var val = $('#error-shiper').val();
+    if((val) && val.length > 0) {
+        swal("Thất Bại!", "Thao Tác Thất Bại!", "error");
+    }
     $(document).on('click', '#delete-item', function () {
         $(this).addClass('delete-item-trigger-clicked');
         var name = $(this).data('name');

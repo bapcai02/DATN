@@ -122,14 +122,14 @@
   <div class="alert alert-success">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
       </button>
-      {{ session('message-xa') }}
+      <input id='message-xa' type = 'hidden' value="{{ session('message-xa') }}" />
   </div>
 @endif
 @if (session('error-xa'))
 <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
     </button>
-    {{ session('error-xa') }}
+    <input id='error-xa' type = 'hidden' value="{{ session('error-xa') }}" />
 </div>
 @endif
 <div class="container-fluid"> 
