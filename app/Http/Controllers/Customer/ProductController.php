@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
 use App\Repositories\BrandRepository;
 use App\Repositories\CategoryRepository;
+use App\Repositories\SellerRepository;
 use Auth;
 
 class ProductController extends Controller
@@ -14,16 +15,19 @@ class ProductController extends Controller
     protected $brandRepository;
     protected $productRepository;
     protected $categoryRepository;
+    protected $sellerRepository;
 
     public function __construct(
         BrandRepository $brandRepository,
         ProductRepository $productRepository,
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        SellerRepository $sellerRepository
     )
     {
         $this->brandRepository = $brandRepository;
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->sellerRepository = $sellerRepository;
     }
 
     public function index(Request $request){
@@ -58,6 +62,15 @@ class ProductController extends Controller
 
     public function add(Request $request)
     {
-        return view('admin.pages.product.create');
+        $brand = $this->brandRepository->get();
+        $category = $this->categoryRepository->getListCategory()->get();
+        $seller = $this->sellerRepository->getByCustomerId(Auth::user()->id);
+        
+        return view('admin.pages.product.create', compact('brand', 'category', 'seller'));
+    }
+
+    public function create(Request $request)
+    {
+        $this->productRepository->create($request->all());
     }
 }

@@ -32,16 +32,19 @@ class ShiperRepository
 
     public function create($data, $file_name)
     {
+   
         $attr = [
             'role_id' => 4,
             'name' => 'Shiper',
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ];
+
         $this->userRepository->create($attr);
+        $user = $this->userRepository->checkUser($data['email']);
 
         return $this->shiper->create([
-            'user_id' => $data['user_id'],
+            'user_id' => $user->id,
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],

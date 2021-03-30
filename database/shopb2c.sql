@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 29, 2021 lúc 04:28 PM
+-- Thời gian đã tạo: Th3 30, 2021 lúc 04:21 PM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.3.19
 
@@ -448,9 +448,10 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `status`, `display_name`, `created_at`, `updated_at`) VALUES
-(1, 0, 'user', '2021-03-10 02:00:39', NULL),
+(1, 1, 'user', '2021-03-10 02:00:39', NULL),
 (2, 1, 'customer', '2021-03-10 02:00:39', NULL),
-(3, 2, 'admin', '2021-03-10 02:00:39', NULL);
+(3, 1, 'admin', '2021-03-10 02:00:39', NULL),
+(4, 1, 'shiper', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -482,14 +483,24 @@ INSERT INTO `sellers` (`id`, `customer_id`, `shop_info`, `shop_name`, `created_a
 
 CREATE TABLE `shippings` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `customer_id` bigint(20) UNSIGNED NOT NULL COMMENT 'customers.id',
+  `user_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `matp` int(11) NOT NULL,
+  `maqh` int(11) NOT NULL,
+  `maxptr` int(11) NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `shippings`
+--
+
+INSERT INTO `shippings` (`id`, `user_id`, `name`, `phone`, `email`, `matp`, `maqh`, `maxptr`, `image`, `created_at`, `updated_at`) VALUES
+(1, 7, 'dvha', '09999999', 'shiper@gmail.com', 1, 1, 1, '121488684_3549607858416096_6061398820996775194_o.jpg', '2021-03-30 07:11:53', '2021-03-30 07:11:53');
 
 -- --------------------------------------------------------
 
@@ -564,7 +575,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `created_at`, `updated_at`) VALUES
 (2, 3, 'Admin', 'hadv62@wru.vn', '$2y$10$F5XZXU/TogwQiXBDNHTZ8OBvU0dREfdhLggOR.v3w.KeFiQ9pyvX2', '2021-03-10 02:01:26', '2021-03-11 02:00:44'),
 (3, 2, 'Customer', 'customer@gmail.com', '$2y$10$o828wF5m4k5a0V1QzKL6vubd4b6.4IidFEBEIJJ0e5/OJ1M2UZlge', '2021-03-10 02:01:26', NULL),
-(4, 1, NULL, 'bapyeu9x@gmail.com', '$2y$10$hh8DPv8.KrV0wFQWjVUNJOd0z0.NxCneqZqBC1/e1KbZqOwmZJ7m.', '2021-03-26 20:46:32', '2021-03-26 20:46:32');
+(7, 4, 'Shiper', 'shiper@gmail.com', '$2y$10$pgnHUzIVSxhUygt735MhH.K2dfqFpiGMWxMOMOeBZbKQQzZOTIWLy', '2021-03-30 07:11:52', '2021-03-30 07:11:52');
 
 -- --------------------------------------------------------
 
@@ -3048,8 +3059,7 @@ ALTER TABLE `sellers`
 -- Chỉ mục cho bảng `shippings`
 --
 ALTER TABLE `shippings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `customer_id` (`customer_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `sliders`
@@ -3202,7 +3212,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT cho bảng `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `sellers`
@@ -3214,7 +3224,7 @@ ALTER TABLE `sellers`
 -- AUTO_INCREMENT cho bảng `shippings`
 --
 ALTER TABLE `shippings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `sliders`
@@ -3238,7 +3248,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `vn_quanhuyen`
@@ -3331,12 +3341,6 @@ ALTER TABLE `ratings`
 --
 ALTER TABLE `sellers`
   ADD CONSTRAINT `sellers_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
-
---
--- Các ràng buộc cho bảng `shippings`
---
-ALTER TABLE `shippings`
-  ADD CONSTRAINT `shippings_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
 
 --
 -- Các ràng buộc cho bảng `socials`

@@ -50,7 +50,7 @@
             <div class="modal-body">
                 <form action="{{ url('admins/shiper/create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="form-label" for="example-number" style="color:black">
                            Chọn User <span class="text-danger">*</span>
                         </label>
@@ -59,7 +59,7 @@
                                 <option value ='{{ $value->id }}'>{{ $value->name }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label class="form-label" for="example-number" style="color:black">
                            Tên <span class="text-danger">*</span>
@@ -263,7 +263,7 @@
                       type="button">
                     <span>
                         <i class="fa fa-plus mr-1"></i>
-                        Thêm mới Phí Ship
+                        Thêm mới Shiper
                     </span>
                     </a>
                 </div>

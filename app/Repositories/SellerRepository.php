@@ -21,6 +21,14 @@ class SellerRepository
         return $this->seller->orderBy('created_at', 'desc')->paginate(6);
     }
 
+    public function getByCustomerId(int $id)
+    {
+        return DB::table('sellers')->join('customers', 'sellers.customer_id', 'customers.id')
+            ->where('customers.user_id', $id)
+            ->select('sellers.*')
+            ->get();
+    }
+
     public function getById(int $id)
     {
         return $this->seller->where('id', $id)->first();

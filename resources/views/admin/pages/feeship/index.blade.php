@@ -178,8 +178,7 @@
         <div class="col-md-4 col-xs-12 mb-2">
             <div class="form-group">
                 <label class="form-label" for="simpleinput">Xã Phường Thị Trấn</label>
-                <select class="form-control" id="maxptrs" name="maxptr">                     
-                </select>
+                
             </div>
         </div>
 

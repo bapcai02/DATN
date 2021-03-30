@@ -72,6 +72,10 @@ class ProductRepository
         
     }
 
+    public function create($data)
+    {
+        
+    }
     public function delete(int $id)
     {
         $this->productImage->where('product_id', $id)->delete();
