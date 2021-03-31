@@ -72,9 +72,46 @@ class ProductRepository
         
     }
 
-    public function create($data)
+    public function create($data, $id, $file_name1,  $file_name2, $file_name3, $file_name4)
     {
-        
+  
+        $this->product->create([
+            'category_id' => $data['category'],
+            'brand_id' => $data['brand'],
+            'seller_id' => $data['seller'],
+            'product_name' => $data['category'],
+            'product_desc' => $data['category'],
+            'product_content' => $data['category'],
+            'product_price' => $data['price'],
+            'sale' => $data['count'],
+            'product_status' => $data['status'],
+        ]);
+         
+        $product = DB::table('products')
+            ->join('sellers', 'products.seller_id', 'sellers.id')
+            ->join('customers', 'sellers.customer_id', 'customers.id')
+            ->select('products.id')
+            ->where('customers.user_id', $id)
+            ->orderBy('products.created_at', 'desc')
+            ->first();
+
+        $this->productImage->create([
+            'product_id' => $product->id,
+            'image' => $file_name1
+        ]);
+        $this->productImage->create([
+            'product_id' => $product->id,
+            'image' => $file_name2
+        ]);
+        $this->productImage->create([
+            'product_id' => $product->id,
+            'image' => $file_name3
+        ]);
+        $this->productImage->create([
+            'product_id' => $product->id,
+            'image' => $file_name4
+        ]);
+    
     }
     public function delete(int $id)
     {
@@ -91,6 +128,7 @@ class ProductRepository
                 'products.product_price', 'products.sale','products.product_status',
                 'products.product_content','products.category_id', 'products.brand_id',
                 'products.seller_id')
+        ->orderBy('products.created_at', 'desc')
         ->paginate(6);
     }
 
@@ -119,7 +157,7 @@ class ProductRepository
     }
 
     public static function getImage($id){ 
-        return DB::table('product_images')->where('product_id', $id)->select('image')->first();
+        return DB::table('product_images')->where('product_id', $id)->first();
     }
 
     public function searchProductCustomer($data, $customer_id)

@@ -31,10 +31,10 @@ class ProductController extends Controller
     }
 
     public function index(Request $request){
+        $page = $request->page;
         $brand = $this->brandRepository->get();
         $category = $this->categoryRepository->getListCategory()->get();
         $product = $this->productRepository->getProductByCustomer(Auth::user()->id);
-        $page = $request->page;
     
         return view('admin.pages.product.index', compact(
             'brand', 'category', 'product', 'page'
@@ -71,6 +71,24 @@ class ProductController extends Controller
 
     public function create(Request $request)
     {
-        $this->productRepository->create($request->all());
+
+        $file1 = $request->file('image1');
+        $file2 = $request->file('image2');
+        $file3 = $request->file('image3');
+        $file4 = $request->file('image4');
+
+        $file_name1 = $file1->getClientOriginalName();
+        $file_name2 = $file2->getClientOriginalName();
+        $file_name3 = $file3->getClientOriginalName();
+        $file_name4 = $file4->getClientOriginalName();
+
+        $file1->move('assets/images', $file_name1);
+        $file2->move('assets/images', $file_name2);
+        $file3->move('assets/images', $file_name3);
+        $file4->move('assets/images', $file_name4);
+
+        $this->productRepository->create($request->all(), Auth::user()->id, $file_name1,  $file_name2, $file_name3, $file_name4);
+
+        return redirect()->back()->with('message', 'them moi thanh cong');
     }
 }

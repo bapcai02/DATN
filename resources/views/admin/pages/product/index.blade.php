@@ -150,7 +150,11 @@
                             <td>{{ \App\Repositories\CategoryRepository::checkCategoryName($value->category_id)->category_name }}</td>
                             <td>{{ \App\Repositories\BrandRepository::checkBrandName($value->brand_id)->brand_name }}</td>
                             <td>{{ \App\Repositories\SellerRepository::checkByName($value->seller_id)->shop_name }}</td>
-                            <td><img width="120px" height="120px" src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></td>
+                            @if(\App\Repositories\ProductRepository::getImage($value->id) != null)
+                                <td><img width="120px" height="120px" src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""/></td>
+                            @else 
+                                <td><img src="" alt=""></td>
+                            @endif
                             <td>{{ $value->product_price }} VND</td>
                             <td>{{ $value->sale }} %</td>
                             <td><p class="text">{{ $value->product_desc }} ...</p></td>
