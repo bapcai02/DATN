@@ -20,6 +20,7 @@ Route::get('/search', 'HomeController@search');
 
 Route::prefix('user')->group(function (){
     Route::get('/', 'UserProfileController@index');
+    Route::post('/update','UserProfileController@update');
 });
 
 Route::prefix('cart')->group(function (){

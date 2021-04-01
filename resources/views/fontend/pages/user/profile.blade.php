@@ -19,8 +19,15 @@ input.hidden {
 	.tital{ font-size:16px; font-weight:500;}
 	.bot-border{ border-bottom:1px #f8f8f8 solid;  margin:5px 0  5px 0
 }	
+.form{
+    margin-bottom:100px;
+    margin-top:100px;
+}
 </style>
 
+@if(session('message'))
+  <input id='message' type = 'hidden' value="{{ session('message') }}" />
+@endif
 
 <div class="ogami-breadcrumb">
     <div class="ogami-container-fluid">
@@ -40,16 +47,17 @@ input.hidden {
                     <div class="panel-body">
                         <div class="box box-info">  
                             <div class="box-body">
-                                <form action="" method="POST" enctype="multipart/form-data">
+                                <form action="{{ url('user/update') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="col-sm-6">
                                         @if($employee->image == null)
                                             <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
-                                                <input id="profile-image-upload" class="hidden" type="file" name="image" >
+                                                <input id="profile-image-upload" class="hidden" type="file" name="image" accept="image/*" onchange="loadFile(event)">
                                                 <div style="color:#999;" >click here to change profile image</div>
                                             </div><br>
                                         @else
                                             <div  align="center"> <img alt="User Pic" src="{{  asset('assets/images').'/'.$employee->image }}" id="profile-image1" class="img-circle img-responsive"> 
-                                                <input id="profile-image-upload" class="hidden" type="file" name="image" >
+                                                <input id="profile-image-upload" class="hidden" type="file" name="image" accept="image/*" onchange="loadFile(event)" >
                                                 <div style="color:#999;" >click here to change profile image</div>
                                             </div><br>
                                         @endif
@@ -63,7 +71,7 @@ input.hidden {
                                     <div class="col-sm-5 col-xs-6 tital " >Ngày sinh:</div><div class="col-sm-7"><input type="date" class="form-control" name="date" value="{{ $employee->date }}"></div>
                                         <div class="clearfix"></div>
                                     <div class="bot-border"></div>
-                                    <div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7"> <input type="email" class="form-control" name="email" value="{{ $employee->email }}"></div>
+                                    <div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7"> <input disabled type="email" class="form-control" name="email" value="{{ $employee->email }}"></div>
                                         <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
@@ -84,37 +92,68 @@ input.hidden {
         </div>
     </div>
 </div>  
-
-<div class="table-responsive">
-    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-      <thead class="bg-primary-600">
-      <tr>
-          <th>#</th>
-          <th>Tên</th>
-          <th>Email</th>
-          <th>Điện thoại</th>
-          <th>Địa Chỉ</th>
-          <th>Status</th>
-          <th>ngảy tạo</th>
-          <th></th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <?php if (!isset($page) || $page == 1) $total = 1 ?>
-      <?php if ($page >= 2) $total = ($page - 1) * 6 + 1 ?>
-       
-          </tbody>
+<div class = 'form'>
+    <div>
+        <h3 style = "margin-bottom:50px; margin-top:50px;margin-left:40%">Thông Tin Đơn Hàng</h3>
+    </div>
+    <div class="table-responsive">
+        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+        <thead class="bg-primary-600">
+            <tr>
+                <th>#</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Hình Ảnh</th>
+                <th>Số Lượng</th>
+                <th>Thanh Toán</th>
+                <th>Tình Trạng đơn hàng</th>
+                <th>Ngày Đặt</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php if (!isset($page) || $page == 1) $total = 1 ?>
+        <?php if ($page >= 2) $total = ($page - 1) * 6 + 1 ?>
+        @foreach($orderDetail as $value)
+            <td>{{$total++}}</td>
+            <td>{{ $value->product_name }}</td>
+            <td><img width = '130px' height = '130px' src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></td>
+            <td>{{ $value->qty }}</td>
+            <td>{{ number_format($value->price) }} VND</td>
+            @if($value->status == 1) 
+                <td><button type="button" class="btn btn-primary">Đơn Hàng được xác nhận</button></td>
+            @elseif($value->status == 2)
+                <td><button type="button" class="btn btn-warning">Đơn Hàng đang vận chuyển</button></td>
+            @elseif($value->status == 3)
+                <td><button type="button" class="btn btn-success">Đơn Hàng đã thanh toán</button></td>
+            @elseif($value->status == 4)
+                <td><button type="button" class="btn btn-danger">Đơn Hàng được thất bại</button></td>
+            @endif
+            
+            <td>{{ $value->created_at }}</td>
+        @endforeach
+        </tbody>
         </table>
         {{$orderDetail->links()}}
-      </div>
     </div>
-  </div>
 </div>
+
 
 @push('script')
 
     <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('profile-image1');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    $(document).ready(function () {
+        var val = $('#message').val();
+        if((val) && val.length > 0) {
+            swal("Thành Công!", "Thao Tác Thành công!", "success");
+        }
+    });
         $(function() {
             $('#profile-image1').on('click', function() {
                 $('#profile-image-upload').click();

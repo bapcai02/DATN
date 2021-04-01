@@ -39,4 +39,19 @@ class UserProfileController extends Controller
 
         return view('fontend.pages.user.profile', compact('category', 'employee', 'page', 'orderDetail'));
     }
+
+    public function update(Request $request)
+    {
+        $file_name = '';
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $file_name = $file->getClientOriginalName();
+            $file->move('assets/images', $file->getClientOriginalName());
+
+        }
+
+        $this->employeeRepository->update($request->all(), $file_name);
+
+        return redirect()->back()->with('message', 'chỉnh sửa thành công');
+    }
 }

@@ -30,6 +30,8 @@ class OrderRepository
             ->join('order_details','orders.id', 'order_details.order_id')
             ->join('products','order_details.product_id', 'products.id')
             ->where('orders.user_id', $id)
+            ->select('products.product_name', 'products.id', 'orders.status', 'order_details.product_id', 
+                    'order_details.qty', 'order_details.address_ship','order_details.created_at', 'order_details.price')
             ->orderBy('orders.created_at', 'desc')
             ->paginate(6);
     }

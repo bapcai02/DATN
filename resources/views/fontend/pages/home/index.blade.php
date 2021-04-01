@@ -2,9 +2,7 @@
 @section('content')
 
 @if(session('message'))
-  <div class="alert alert-success">
   <input id='message' type = 'hidden' value="{{ session('message') }}" />
-  </div>
 @endif
 <div class="banner_v2">
     <div class="container">

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 01, 2021 lúc 12:30 PM
--- Phiên bản máy phục vụ: 10.4.18-MariaDB
--- Phiên bản PHP: 7.4.16
+-- Thời gian đã tạo: Th4 01, 2021 lúc 04:23 PM
+-- Phiên bản máy phục vụ: 10.4.13-MariaDB
+-- Phiên bản PHP: 7.3.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -192,7 +192,7 @@ CREATE TABLE `employer` (
 
 INSERT INTO `employer` (`id`, `user_id`, `name`, `phone`, `date`, `address`, `image`, `created_at`, `updated_at`) VALUES
 (1, 8, 'DVHA', '0982932342', NULL, NULL, NULL, '2021-04-01 03:36:11', '2021-04-01 03:36:47'),
-(2, 10, 'Dang Van ha', '24634634', NULL, 'Ha Noi', NULL, '2021-04-01 09:24:37', '2021-04-01 09:24:37');
+(2, 10, 'Dang Van Ha', '24634634', '2021-03-31', 'Ha Noi', 'hinh-anh-anime-phong-canh-la-nhat-840x504.jpg', '2021-04-01 14:23:03', '2021-04-01 07:23:03');
 
 -- --------------------------------------------------------
 
@@ -292,11 +292,18 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL,
   `customer_id` bigint(20) UNSIGNED NOT NULL COMMENT 'customers.id',
   `shipping_id` bigint(20) UNSIGNED NOT NULL COMMENT 'shippings.id',
-  `payment_id` bigint(20) UNSIGNED NOT NULL COMMENT 'payments.id',
+  `payment_id` bigint(20) UNSIGNED DEFAULT NULL COMMENT 'payments.id',
   `status` int(11) NOT NULL COMMENT '1:đơn hàng được xác nhận\r\n2: đơn hàng đang vận chuyển\r\n3: đơn hàng đã thanh toán\r\n4: đơn hàng thất bại\r\n2: ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `customer_id`, `shipping_id`, `payment_id`, `status`, `created_at`, `updated_at`) VALUES
+(4, 10, 1, 1, NULL, 1, '2021-04-01 13:43:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -313,9 +320,17 @@ CREATE TABLE `order_details` (
   `fee_ship` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
   `price` int(11) NOT NULL,
+  `address_ship` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `seller_id`, `coupon`, `fee_ship`, `qty`, `price`, `address_ship`, `created_at`, `updated_at`) VALUES
+(1, 4, 1, 1, '10', 15000, 10, 3000000, 'Ha Noi, Ha Dong', '2021-04-01 13:43:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -3212,13 +3227,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `payments`
