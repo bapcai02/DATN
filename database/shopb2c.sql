@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 30, 2021 lúc 04:21 PM
--- Phiên bản máy phục vụ: 10.4.13-MariaDB
--- Phiên bản PHP: 7.3.19
+-- Thời gian đã tạo: Th4 01, 2021 lúc 12:30 PM
+-- Phiên bản máy phục vụ: 10.4.18-MariaDB
+-- Phiên bản PHP: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -86,7 +86,8 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `user_id`, `product_id`, `name`, `qty`, `sale`, `price`, `image`, `created_at`, `updated_at`) VALUES
-(2, 4, 1, 'Xoài ', 1, 22, 10000, '1-1200x676-46.jpg', '2021-03-27 06:24:18', '2021-03-27 06:24:18');
+(3, 8, 3, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-03-31 19:08:53', '2021-03-31 19:08:53'),
+(4, 8, 5, 'Cải Thảo', 1, 10, 20000, 'mua-cai-thao-da-lat-tai-ha-noi.jpg', '2021-03-31 19:09:06', '2021-03-31 19:09:06');
 
 -- --------------------------------------------------------
 
@@ -166,6 +167,32 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `user_id`, `name`, `phone`, `address`, `created_at`, `updated_at`) VALUES
 (1, 3, 'Shop Hoa Quả', '012421413423', 'Ha Noi', '2021-03-15 04:04:38', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `employer`
+--
+
+CREATE TABLE `employer` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `date` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `employer`
+--
+
+INSERT INTO `employer` (`id`, `user_id`, `name`, `phone`, `date`, `address`, `image`, `created_at`, `updated_at`) VALUES
+(1, 8, 'DVHA', '0982932342', NULL, NULL, NULL, '2021-04-01 03:36:11', '2021-04-01 03:36:47'),
+(2, 10, 'Dang Van ha', '24634634', NULL, 'Ha Noi', NULL, '2021-04-01 09:24:37', '2021-04-01 09:24:37');
 
 -- --------------------------------------------------------
 
@@ -262,11 +289,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
   `customer_id` bigint(20) UNSIGNED NOT NULL COMMENT 'customers.id',
   `shipping_id` bigint(20) UNSIGNED NOT NULL COMMENT 'shippings.id',
   `payment_id` bigint(20) UNSIGNED NOT NULL COMMENT 'payments.id',
-  `total` double(8,2) NOT NULL,
-  `status` int(11) NOT NULL,
+  `status` int(11) NOT NULL COMMENT '1:đơn hàng được xác nhận\r\n2: đơn hàng đang vận chuyển\r\n3: đơn hàng đã thanh toán\r\n4: đơn hàng thất bại\r\n2: ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -284,7 +311,8 @@ CREATE TABLE `order_details` (
   `seller_id` bigint(20) UNSIGNED NOT NULL COMMENT 'sellers.id',
   `coupon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fee_ship` int(11) NOT NULL,
-  `product_sales_quantity` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -575,7 +603,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `created_at`, `updated_at`) VALUES
 (2, 3, 'Admin', 'hadv62@wru.vn', '$2y$10$F5XZXU/TogwQiXBDNHTZ8OBvU0dREfdhLggOR.v3w.KeFiQ9pyvX2', '2021-03-10 02:01:26', '2021-03-11 02:00:44'),
 (3, 2, 'Customer', 'customer@gmail.com', '$2y$10$o828wF5m4k5a0V1QzKL6vubd4b6.4IidFEBEIJJ0e5/OJ1M2UZlge', '2021-03-10 02:01:26', NULL),
-(7, 4, 'Shiper', 'shiper@gmail.com', '$2y$10$pgnHUzIVSxhUygt735MhH.K2dfqFpiGMWxMOMOeBZbKQQzZOTIWLy', '2021-03-30 07:11:52', '2021-03-30 07:11:52');
+(7, 4, 'Shiper', 'shiper@gmail.com', '$2y$10$pgnHUzIVSxhUygt735MhH.K2dfqFpiGMWxMOMOeBZbKQQzZOTIWLy', '2021-03-30 07:11:52', '2021-03-30 07:11:52'),
+(8, 1, 'Employee', 'builder1@gmail.com', '$2y$10$wK1ufsCMUE8aP0MabBIyyuw4Q0/dEKDBXEgnVsGOtvoyzBckRDkYy', '2021-03-31 19:08:38', '2021-03-31 19:08:38'),
+(10, 1, 'Employee', 'builder@2nf.com.vn', '$2y$10$GwvXk9.7nrd8SLTMexhVsuVsn16yGQvjRhHXwl1/VXhBIrrdObgHq', '2021-03-31 21:47:44', '2021-03-31 21:47:44');
 
 -- --------------------------------------------------------
 
@@ -2965,6 +2995,12 @@ ALTER TABLE `customers`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Chỉ mục cho bảng `employer`
+--
+ALTER TABLE `employer`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -3128,7 +3164,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -3147,6 +3183,12 @@ ALTER TABLE `coupons`
 --
 ALTER TABLE `customers`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT cho bảng `employer`
+--
+ALTER TABLE `employer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
@@ -3248,7 +3290,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `vn_quanhuyen`

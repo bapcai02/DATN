@@ -8,6 +8,7 @@ use Validator;
 use Auth;
 use App\Repositories\UserRepository;
 use App\Repositories\UserCartRepository;
+use App\Repositories\EmployeeRepository;
 use Hash;
 use Cart;
 
@@ -16,16 +17,19 @@ class LoginController extends Controller
     protected $categoryRepository;
     protected $userRepository;
     protected $userCartRepository;
-    
+    protected $employeeRepository;
+
     public function __construct(
         CategoryRepository $categoryRepository,
         UserRepository $userRepository,
-        UserCartRepository $userCartRepository
+        UserCartRepository $userCartRepository,
+        EmployeeRepository $employeeRepository
     )
     {
         $this->categoryRepository = $categoryRepository;
         $this->userRepository = $userRepository;
         $this->userCartRepository = $userCartRepository;
+        $this->employeeRepository = $employeeRepository;
     }
 
     public function getLogin(){
@@ -54,7 +58,8 @@ class LoginController extends Controller
             $email = $request->input('email');
             $password = $request->input('password');
             $role = 1;
-            if( Auth::attempt(['email' => $email, 'password' =>$password, 'role_id' => $role])) {
+
+            if( Auth::attempt(['email' => $email, 'password' =>$password, 'role_id' => $role ])) {
                 $user_id = Auth::user()->id;
                 $cart = Cart::content();
                 if(count($cart) > 0){
@@ -100,9 +105,12 @@ class LoginController extends Controller
                 $data = [
                     'email' => $email,
                     'password' => $password,
-                    'role_id' => 1
+                    'role_id' => 1,
+                    'name' =>'Employee'
                 ];
                 $this->userRepository->create($data);
+                $this->employeeRepository->create($email);
+
                 return redirect()->route("login")->with('success', 'đăng ký thành công !');
             }
         }

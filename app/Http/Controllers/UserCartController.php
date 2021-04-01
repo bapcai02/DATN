@@ -13,6 +13,9 @@ use Auth;
 class UserCartController extends Controller
 {
     protected $userCartRepository;
+    protected $categoryRepository;
+    protected $productRepository;
+    protected $addressRepository;
 
     public function __construct(
         CategoryRepository $categoryRepository,

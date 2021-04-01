@@ -262,6 +262,7 @@
                             <i class="fa fa-times"></i>
                         </a>
                         <a id="edit-item"
+                            data-toggle="modal"
                            class="btn btn-sm btn-primary btn-icon btn-inline-block mr-1"
                            title="Edit"
                            data-item-id="{{$value->id}}">
