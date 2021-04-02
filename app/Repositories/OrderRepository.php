@@ -36,6 +36,17 @@ class OrderRepository
             ->paginate(6);
     }
 
+    public function getOrderByCustomer(int $id)
+    {
+        return DB::table('orders')
+            ->join('order_details','orders.id', 'order_details.order_id')
+            ->join('products','order_details.product_id', 'products.id')
+            ->where('orders.customer_id', $id)
+            ->select('products.product_name', 'products.id', 'orders.status', 'order_details.*')
+            ->orderBy('orders.created_at', 'desc')
+            ->paginate(6);
+    }
+
     public function getById(int $id)
     {
         return $this->feeship->where('id', $id)->first();

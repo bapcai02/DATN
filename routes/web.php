@@ -144,6 +144,12 @@ Route::group(['middleware' => 'checkcustomer'], function () {
             Route::post('/create', 'Customer\ProductController@create')->name('customer.product.add'); 
             Route::get('/search', 'Customer\ProductController@search')->name('customer.product.search'); 
         });
+
+        Route::prefix('order')->group(function () {
+            Route::get('/', 'Customer\OrderController@index')->name('customer.order'); 
+            Route::post('/delete', 'Customer\OrderController@delete')->name('customer.order.delete');
+            Route::get('/search', 'Customer\OrderController@search')->name('customer.order.search'); 
+        });
     });
 });
 
