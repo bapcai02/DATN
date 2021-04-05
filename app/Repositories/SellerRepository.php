@@ -68,4 +68,9 @@ class SellerRepository
 
         return $this->seller->where('id', $id)->delete();
     }
+
+    public static function checkName(int $id)
+    {
+        return DB::table('sellers')->where('id', $id)->first();
+    }
 }

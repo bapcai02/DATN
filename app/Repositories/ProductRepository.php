@@ -190,4 +190,9 @@ class ProductRepository
             })
             ->paginate(6);
     }
+
+    public function getBySeller(int $id)
+    {
+        return $this->product->where('seller_id', $id)->paginate(6);
+    }
 }

@@ -51,6 +51,7 @@
                         <div class="product-category"
                           <h5 class="category">Categories:<span><a href="product_grid+list_3col.html">{{ $product->category_name }}</a></span></h5>
                           <h5 class="category">Tag:<span><a href="product_grid+list_3col.html">Food</a></span></h5>
+                          <h5 class="category">Thông Tin Shop: <a href="{{url('customer') . '/' . $product->seller_id}}">{{ App\Repositories\SellerRepository::checkName($product->seller_id)->shop_name }}</a></h5>
                         </div>
                       </div>
                     </div>

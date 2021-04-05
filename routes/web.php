@@ -23,7 +23,7 @@ Route::prefix('user')->group(function (){
     Route::post('/update','UserProfileController@update');
 });
 
-Route::get('/customers','CustomerController@index');
+Route::get('/customers/{id}','CustomerController@index');
 
 Route::prefix('cart')->group(function (){
     Route::get('/','CartController@index')->name('cart');
