@@ -52,27 +52,6 @@ class OrderRepository
         return $this->feeship->where('id', $id)->first();
     }
 
-    public function create($data)
-    {
-        return $this->feeship->create([
-            'matp' => $data['matp'],
-            'maqh' => $data['maqh'],
-            'maxptr' => $data['maxptr'],
-            'feeship' => $data['feeship'],
-        ]);
-    }
-
-    public function update($data)
-    {
-        return $this->feeship->where('id', $data['id'])->update([
-            'feeship' => $data['feeship'],
-        ]);
-    }
-
-    public function delete(int $id)
-    {
-        return $this->feeship->where('id', $id)->delete();
-    }
 
     public function search($data)
     { 
@@ -92,5 +71,12 @@ class OrderRepository
         })
         ->orderBy('created_at')
         ->paginate(6);
+    }
+
+    public function addOrder()
+    {
+        DB::table('orders')->update([
+            
+        ]);
     }
 }

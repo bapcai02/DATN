@@ -7,6 +7,7 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\AddressRepository;
 use App\Repositories\UserCartRepository;
+use App\Repositories\OrderRepository;
 use Cart;
 use Auth;
 use DB;
@@ -17,23 +18,28 @@ class UserCartController extends Controller
     protected $categoryRepository;
     protected $productRepository;
     protected $addressRepository;
+    protected $orderRepository;
 
     public function __construct(
         CategoryRepository $categoryRepository,
         ProductRepository $productRepository,
         AddressRepository $addressRepository,
-        UserCartRepository $userCartRepository
+        UserCartRepository $userCartRepository,
+        OrderRepository $orderRepository
     )
     {
         $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
         $this->addressRepository = $addressRepository;
         $this->userCartRepository = $userCartRepository;
+        $this->orderRepository = $orderRepository;
     }
 
-    public function index()
+    public function checkout(Request $request)
     {
+        $data = $request->all();
 
+        dd($data);
     }
 
     public function addCart(Request $request)

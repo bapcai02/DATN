@@ -36,6 +36,8 @@ Route::prefix('cart')->group(function (){
     Route::get('/xaphuong','CartController@getXaPhuong');
 });
 
+Route::post('checkouts', 'UserCartController@checkout');
+
 Route::prefix('usercart')->group(function (){
     Route::get('/','UserCartController@index')->name('cart');
     Route::post('/add', 'UserCartController@addCart');
