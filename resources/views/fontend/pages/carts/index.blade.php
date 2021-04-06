@@ -99,7 +99,7 @@
                               <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->options->image }}" alt="product image"></div>
                             </td>
                             <td class="product-name">{{ $value->name }}</td>
-                            <td class="product-price">{{ $value->price }}</td>
+                            <td class="product-price">{{ number_format($value->price) }}</td>
                             <td class="product-quantity"> 
                               <input class="quantity no-round-input" type="number" name="qty" min="1" value="{{ $value->qty }}">
                             </td>
@@ -114,24 +114,24 @@
                           </tr>
                           
                         @endforeach
-                      @endif
+                    @endif
                     </tbody>
                   </table>
               </div>
             </div>
             <div class="col-12 col-sm-8">
               <div class="coupon">
-                <form action="" method="post">
-                  <input class="no-round-input" type="text" placeholder="Coupon code">
-                  <button class="no-round-btn smooth">Apply coupon</button>
+                <form>
+                  <input id="coupon" class="no-round-input" type="text" placeholder="Mã giảm giá">
+                  <button type="button" id="apply_coupon" class="no-round-btn smooth">Apply coupon</button>
                 </form>
               </div>
             </div>
             <div class="col-12 col-sm-4 text-right" style="float: right">
             @if(!Auth::check())
-              <button id="update" class="no-round-btn black cart-update">Upadate cart</button>
+              <button id="update" class="no-round-btn black cart-update">Update cart</button>
             @else
-              <button id="update2" class="no-round-btn black cart-update">Upadate cart</button>
+              <button id="update2" class="no-round-btn black cart-update">Update cart</button>
             @endif
           </div>
           </div>
@@ -167,7 +167,11 @@
                   </tbody>
                 </table>
                 <div class="checkout-method">
-                  <button class="normal-btn"> <a href="{{ url('cart/checkout') }}" style="color:black"> Proceed to Checkout</a></button><span>- or -</span><a href="{{ url('cart/checkout') }}">Check out with PayPal</a>
+                  @if(Auth::check())
+                    <button class="normal-btn"> <a href="{{ url('cart/checkout') }}" style="color:black"> Proceed to Checkout</a></button><span>- or -</span><a>Check out with PayPal</a>
+                  @else
+                    <button id="payment" class="normal-btn" style="color:black"> Proceed to Checkout</button><span>- or -</span><a>Check out with PayPal</a>
+                  @endif      
                 </div>
               </div>
             </div>
@@ -188,10 +192,36 @@
           </div>
         </div>
       </div>
+
 @endsection
 @push('script')
 <script>
   $(document).ready(function () {
+    $('#payment').click(function (){
+        swal("Thông báo", "Bạn cần đăng nhập để thanh toán !" , "warning").then(function(){location.reload();});
+    });
+
+    $('#apply_coupon').click(function(){
+      var coupon = $('#coupon').val();
+      if(coupon.length == 0){
+        swal("Thông báo", "Bạn cần nhập mã giảm giá !" , "warning");
+      }else{
+        $.ajax({
+          type:"GET",
+          url:"{{ url('cart/coupon') }}",
+          data:{coupons: coupon}
+        }).done(function(res){
+          if(res == 'error'){
+            swal("Thông báo", "Không tồn tại mã giảm giá hoặc mã đã hết hạn !" , "warning");
+          }
+          else{
+            $('#coupon').css('dissable', 'true');
+            swal("Thông báo", "Áp dụng mã giảm giá thành công !" , "success").then(function(){location.reload();});
+          }
+        })
+      }
+    });
+
     $('#update').click(function(){
       var data = new Array();
       $('#myTable tbody tr').each(function(){
@@ -216,7 +246,7 @@
 
 
     $('#update2').click(function(){
-      var data = new Array();
+      var data = [];
       $('#myTable tbody tr').each(function(){
         var qty = $(this).find(".quantity").val(); 
         var id = $(this).find(".id").val(); 
@@ -233,7 +263,7 @@
           () => {
             location.reload();
           }, 2000
-        )
+        )  
       })
     })
   });

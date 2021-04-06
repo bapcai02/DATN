@@ -29,6 +29,7 @@ Route::prefix('cart')->group(function (){
     Route::get('/','CartController@index')->name('cart');
     Route::post('/', 'CartController@addCart');
     Route::post('/delete', 'CartController@deleteCart');
+    Route::get('/coupon','CartController@CartCoupon');
     Route::get('/update', 'CartController@updateCart');
     Route::get('/checkout','CartController@checkout');
     Route::get('/quanhuyen','CartController@getQuanHuyen');

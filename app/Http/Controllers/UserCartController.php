@@ -9,6 +9,7 @@ use App\Repositories\AddressRepository;
 use App\Repositories\UserCartRepository;
 use Cart;
 use Auth;
+use DB;
 
 class UserCartController extends Controller
 {
@@ -61,7 +62,19 @@ class UserCartController extends Controller
     public function updateCart(Request $request)
     {
         $user_id = Auth::user()->id; 
-        $qty = $request->qty;
-        $id = $request->id;
+        $data = $request->data;
+
+        foreach($data as $key => $value){
+            $cart = DB::table('carts')->where('id', $value[1])->first();
+            if($cart->qty != $value[0]){
+                DB::table('carts')->where('id', $value[1])->update([
+                    'qty' => $value[0],
+                    'price' => $cart->price * $value[0]
+                ]);
+            }
+        }
+
+        $message = 'update thành công';
+        return response()->json($message);
     }
 }

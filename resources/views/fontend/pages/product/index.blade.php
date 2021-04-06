@@ -72,8 +72,19 @@
                           <input class="no-round-input" id="quantity" type="number" min="0" value="1">
                         </div>
                         <div class="product-select">
-                          <button class="add-to-cart normal-btn outline">Add to Cart</button>
-                          <button class="add-to-compare normal-btn outline">+ Add to Compare</button>
+                          @if(!Auth::check())
+                          <form action="{{ url('/cart') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $product->id }}" >
+                            <button type = 'submit' class="add-to-cart normal-btn outline">Thêm giỏ hàng</button> 
+                          </form>   
+                          @else
+                            <form action="{{ url('/usercart/add') }}" method = "POST">
+                              @csrf
+                              <input type="hidden" name="productId" value="{{ $product->id }}" >
+                              <button type = 'submit' class="add-to-cart normal-btn outline"></button> 
+                            </form> 
+                          @endif 
                         </div>
                         <div class="product-guarante">
                           <p class="guarante">Đảm bảo 100% sự hài lòng </p>
@@ -261,5 +272,19 @@
         </div>
       </div>
     </div>
+    @if(session('message'))
+      <input id='message' type = 'hidden' value="{{ session('message') }}" />
+    @endif
 
+@push('script')
+    <script>
+       $(document).ready(function () {
+          var val = $('#message').val();
+          if((val) && val.length > 0) {
+              swal("Thành Công!", "Thao Tác Thành công!", "success");
+          }
+       })
+      
+    </script>
+@endpush
 @endsection

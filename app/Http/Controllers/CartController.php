@@ -7,8 +7,10 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\AddressRepository;
 use App\Repositories\UserCartRepository;
+use App\Repositories\CouponRepository;
 use Cart;
 use Auth;
+use DB;
 
 class CartController extends Controller
 {
@@ -16,18 +18,21 @@ class CartController extends Controller
     protected $productRepository;
     protected $addressRepository;
     protected $userCartRepository;
+    protected $couponRepository;
 
     public function __construct(
         CategoryRepository $categoryRepository,
         ProductRepository $productRepository,
         AddressRepository $addressRepository,
-        UserCartRepository $userCartRepository
+        UserCartRepository $userCartRepository,
+        CouponRepository $couponRepository
     )
     {
         $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
         $this->addressRepository = $addressRepository;
         $this->userCartRepository = $userCartRepository;
+        $this->couponRepository = $couponRepository;
     }
     public function index(Request $request){
         $category = $this->categoryRepository->getListCategory()->get();
@@ -77,6 +82,43 @@ class CartController extends Controller
         }
         $message = 'update thành công';
         return response()->json($message);
+    }
+
+    public function CartCoupon(Request $request)
+    {
+        $code = $request->coupons;
+        $coupon = DB::table('coupons')->where('code',$code)->where('qty', '!=', 0)->first();
+        if($coupon != null){
+            DB::table('coupons')->where('id',$coupon->id)
+                ->update(['qty' => $coupon->qty-1]);
+            if(!Auth::check()){
+                $cart = Cart::content();
+                foreach($cart as $value){
+                    $price = $value->price - ($value->price * (($coupon->discount_number)/100));
+                    $price = $price > 0 ? $price : 0 ;
+                    Cart::update($value->rowId, ['price' => $price]);
+                }
+                $message = "thêm mã giảm giá thành công";
+                
+                return response()->json($message);
+            }else{
+                $user_cart =  DB::table('carts')->where('user_id',Auth::user()->id)->get();
+                foreach($user_cart as $value){
+                    $price = $value->price - ($value->price * (($coupon->discount_number)/100));
+                    $price = $price > 0 ? $price : 0 ;
+
+                    DB::table('carts')->where('user_id',Auth::user()->id)->update([
+                        'price' => $price,
+                    ]);
+                }
+                $message = "thêm mã giảm giá thành công";
+                
+                return response()->json($message);
+            }
+        }else{
+            $message2='error';
+            return response()->json($message2);
+        }
     }
 
     public function checkout(){
