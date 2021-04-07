@@ -44,8 +44,6 @@ Route::get('/vnpay_php/return',function(){
 });
 Route::post('/payment', 'PaymentController@payment');
 
-Route::post('checkouts', 'UserCartController@checkout');
-
 Route::prefix('usercart')->group(function (){
     Route::get('/','UserCartController@index')->name('cart');
     Route::post('/add', 'UserCartController@addCart');
@@ -125,24 +123,6 @@ Route::group(['middleware' => 'checkadmin'], function () {
             Route::post('/create', 'Admin\BrandController@create');
             Route::get('/search', 'Admin\BrandController@search');
         });
-
-        Route::prefix('feeship')->group(function () {   
-            Route::get('/', 'Admin\FeeShipController@index'); 
-            Route::get('/quanhuyen', 'Admin\FeeShipController@getQuanHuyen');
-            Route::get('/xaphuong', 'Admin\FeeShipController@getXaPhuong');
-            Route::post('/edit', 'Admin\FeeShipController@edit'); 
-            Route::post('/delete', 'Admin\FeeShipController@delete'); 
-            Route::post('/create', 'Admin\FeeShipController@create');
-            Route::get('/search', 'Admin\FeeShipController@search');
-        });
-
-        Route::prefix('shiper')->group(function () {   
-            Route::get('/', 'Admin\ShiperController@index'); 
-            Route::post('/delete', 'Admin\ShiperController@delete'); 
-            Route::post('/create', 'Admin\ShiperController@create');
-            Route::get('/search', 'Admin\ShiperController@search');
-        });
-
     });
 });
 

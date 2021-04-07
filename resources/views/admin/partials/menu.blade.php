@@ -56,13 +56,6 @@
       </li>
 
       <li>
-        <a href="{{ url('admins/feeship/') }}">
-          <i class="zmdi zmdi-coffee">
-          </i> <span>Manage feeship</span>
-        </a>
-      </li>
-
-      <li>
         <a href="login.html" >
           <i class="zmdi zmdi-lock"></i> <span>Config</span>
         </a>
@@ -74,11 +67,6 @@
         </a>
       </li>
 
-      <li>
-        <a href="{{ url('admins/shiper/') }}" >
-          <i class="zmdi zmdi-account-circle"></i> <span>Manage Shiper</span>
-        </a>
-      </li>
   @elseif(Auth::user()->role_id == 2)
       <li>
         <a href="{{ url('cusomer/home') }}">

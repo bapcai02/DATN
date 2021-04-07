@@ -35,11 +35,11 @@ class UserCartController extends Controller
         $this->orderRepository = $orderRepository;
     }
 
-    public function checkout(Request $request)
+    public function checkout()
     {
-        $data = $request->all();
+        $product = $this->userCartRepository->getAll(Auth::user()->id);
 
-        dd($data);
+        return response()->json($product);
     }
 
     public function addCart(Request $request)

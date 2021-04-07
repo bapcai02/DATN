@@ -23,6 +23,13 @@ class UserCartRepository
         return $this->userCart->where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(6);
     }
 
+    public function getAll(int $user_id)
+    {
+        return $this->userCart->where('user_id', $user_id)
+            ->select('name', 'qty as quantity', 'price')
+            ->orderBy('created_at', 'desc')->get();
+    }
+
     public function check(string $code)
     {
         return $this->userCart->where('code', $code)->where('feature', 1)->first();

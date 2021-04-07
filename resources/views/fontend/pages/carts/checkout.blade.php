@@ -48,8 +48,7 @@
       <!-- End order step-->
       <div class="shop-checkout">
         <div class="container">
-          <form action="{{ url('checkouts') }}" method="POST">
-            @csrf
+          <form>
             <div class="row">
               <div class="col-12 col-lg-8">
                 <h2 class="form-title">THÔNG TIN NGƯỜI NHẬN</h2>
@@ -85,7 +84,7 @@
                 </div>
                 <div class="form-group">
                   <label for="inputNote">Nhập lại địa chỉ </label>
-                  <textarea class="textarea-form-bg" id="inputNote" name="address" cols="10" rows="2"></textarea>
+                  <textarea class="textarea-form-bg" id="confirm_address" name="address" cols="10" rows="2"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="inputNote">Ghi chú </label>
@@ -120,7 +119,7 @@
                         @else
                           <tr>
                             <th>SUBTOTAL</th>
-                            <td>{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }} VND</td>
+                            <td>{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }}</td>
                           </tr>
                           <tr>
                             <th>SHIPPING</th>
@@ -130,7 +129,7 @@
                           </tr>
                           <tr>
                             <th>TOTAL</th>
-                            <td>{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }} VND</td>
+                            <td id = "total">{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }}</td>
                           </tr>
                         @endif
                       </tbody>
@@ -144,7 +143,7 @@
                     <input type="radio" name="paymethod" id="paypal" value="1">
                     <label for="paypal">Paypal</label>
                   </div>
-                  <button type="submit" class="normal-btn submit-btn">Thanh Toán</button>
+                  <button type="button" id="checkout" class="normal-btn submit-btn">Thanh Toán</button>
                 </div>
               </div>
             </div>
@@ -170,6 +169,67 @@
 @push('script')
   <script>
     $(document).ready(function () {
+      $('#checkout').click(function(){
+        var name = $('#name').val();
+        var phone = $('#phone').val();
+        var thanhpho = $('#Contry').find('option:selected').text();
+        var quanhuyen = $('#quanhuyen').find('option:selected').text();
+        var xaphuong = $('#xaphuong').find('option:selected').text();
+        var note = $('#note').val();
+        var total = $('#total').text();
+        var confirm_address = $('#confirm_address').val();
+
+        if(name.trim() == '' || phone.trim() == '' || confirm_address.trim() == ''){
+          swal("Thông báo", "Bạn cần nhập đầy đủ thông tin !" , "warning");
+        }else{
+        
+          var address = xaphuong + "," + quanhuyen + "," + thanhpho;
+          console.log(total);
+          $.ajax({
+            url: "{{ url('/usercart/checkout') }}",
+            type: 'GET',      
+            dataType: 'json',
+          }).done(function (data) {
+              $.ajax({
+                url: "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create",
+                type: 'POST', 
+                headers: {
+                  "Token" : "bf76117c-97a5-11eb-8be2-c21e19fc6803",
+                  "ShopId" : "78746",
+                  "Content-Type" : "application/json"
+                } ,
+                data: {
+                  "cod_amount" : total,
+                  "payment_type_id": 2,
+                  "note": note,
+                  "required_note": "CHOXEMHANGKHONGTHU",
+                  "to_name": name,
+                  "to_phone": phone,
+                  "to_address": address,
+                  "weight": 200,
+                  "length": 1,
+                  "width": 19,
+                  "height": 10,
+                  "deliver_station_id": 2,
+                  "service_id": 0,
+                  "service_type_id":2,
+                  "order_value":130000,
+                  "to_ward_code": "20308",
+                  "items": [
+                    data  
+                  ]
+                }    
+              }).done(function(res){
+                console.log(res);
+              }).fail(function(error) {
+                  console.log(error);
+                  swal("System Notification", textStatus + ': ' + textStatus.message , "error").then(function(){location.reload();});
+              });
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+              swal("System Notification", textStatus + ': ' + errorThrown , "error").then(function(){location.reload();});
+          });
+        }
+      });
 
       var matp = $('#Contry').find('option:selected').val();
       $.ajax({
