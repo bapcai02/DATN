@@ -36,6 +36,14 @@ Route::prefix('cart')->group(function (){
     Route::get('/xaphuong','CartController@getXaPhuong');
 });
 
+Route::get('/vnpay_php',function(){
+    return view('fontend.vnpay_php.index');
+});
+Route::get('/vnpay_php/return',function(){
+    return view('fontend.vnpay_php.vnpay_return');
+});
+Route::post('/payment', 'PaymentController@payment');
+
 Route::post('checkouts', 'UserCartController@checkout');
 
 Route::prefix('usercart')->group(function (){
