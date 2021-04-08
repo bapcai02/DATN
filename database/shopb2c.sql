@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 08, 2021 lúc 12:37 PM
--- Phiên bản máy phục vụ: 10.4.17-MariaDB
--- Phiên bản PHP: 7.2.34
+-- Thời gian đã tạo: Th4 08, 2021 lúc 05:28 PM
+-- Phiên bản máy phục vụ: 10.4.13-MariaDB
+-- Phiên bản PHP: 7.3.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -102,8 +102,7 @@ CREATE TABLE `carts` (
 INSERT INTO `carts` (`id`, `user_id`, `product_id`, `name`, `qty`, `sale`, `price`, `image`, `created_at`, `updated_at`) VALUES
 (3, 8, 3, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-03-31 19:08:53', '2021-03-31 19:08:53'),
 (4, 8, 5, 'Cải Thảo', 1, 10, 20000, 'mua-cai-thao-da-lat-tai-ha-noi.jpg', '2021-03-31 19:09:06', '2021-03-31 19:09:06'),
-(5, 10, 3, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-04-07 23:34:26', '2021-04-07 23:34:26'),
-(6, 10, 6, 'Thịt Bò', 1, 10, 70000, 'photo-1-1482451521171.jpg', '2021-04-07 23:34:42', '2021-04-07 23:34:42');
+(5, 10, 5, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-04-07 23:34:26', '2021-04-07 23:34:26');
 
 -- --------------------------------------------------------
 
@@ -292,8 +291,8 @@ CREATE TABLE `orders` (
   `Order_Code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `customer_id` bigint(20) UNSIGNED NOT NULL COMMENT 'customers.id',
-  `shipping_id` bigint(20) UNSIGNED NOT NULL COMMENT 'shippings.id',
-  `payment_id` bigint(20) UNSIGNED DEFAULT NULL COMMENT 'payments.id',
+  `ship_id` bigint(20) UNSIGNED NOT NULL COMMENT 'ships_id',
+  `payment` bigint(20) UNSIGNED DEFAULT NULL,
   `status` int(11) NOT NULL COMMENT '1:đơn hàng được xác nhận\r\n2: đơn hàng đang vận chuyển\r\n3: đơn hàng đã thanh toán\r\n4: đơn hàng thất bại\r\n2: ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -303,8 +302,10 @@ CREATE TABLE `orders` (
 -- Đang đổ dữ liệu cho bảng `orders`
 --
 
-INSERT INTO `orders` (`id`, `Order_Code`, `user_id`, `customer_id`, `shipping_id`, `payment_id`, `status`, `created_at`, `updated_at`) VALUES
-(4, '5Chjv', 10, 1, 1, NULL, 1, '2021-04-01 13:43:03', NULL);
+INSERT INTO `orders` (`id`, `Order_Code`, `user_id`, `customer_id`, `ship_id`, `payment`, `status`, `created_at`, `updated_at`) VALUES
+(4, '5Chjv', 10, 1, 1, 0, 1, '2021-04-01 13:43:03', NULL),
+(5, 'ZGSNY', 10, 1, 1, NULL, 1, '2021-04-08 06:58:46', '2021-04-08 06:58:46'),
+(6, 'ZGSNE', 10, 1, 1, NULL, 1, '2021-04-08 07:12:17', '2021-04-08 07:12:17');
 
 -- --------------------------------------------------------
 
@@ -317,7 +318,6 @@ CREATE TABLE `order_details` (
   `order_id` bigint(20) UNSIGNED NOT NULL COMMENT 'orders.id',
   `product_id` bigint(20) UNSIGNED NOT NULL COMMENT 'products.id',
   `seller_id` bigint(20) UNSIGNED NOT NULL COMMENT 'sellers.id',
-  `coupon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `qty` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `address_ship` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -329,8 +329,10 @@ CREATE TABLE `order_details` (
 -- Đang đổ dữ liệu cho bảng `order_details`
 --
 
-INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `seller_id`, `coupon`, `qty`, `price`, `address_ship`, `created_at`, `updated_at`) VALUES
-(1, 4, 1, 1, '10', 10, 3000000, 'Ha Noi, Ha Dong', '2021-04-01 13:43:26', NULL);
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `seller_id`, `qty`, `price`, `address_ship`, `created_at`, `updated_at`) VALUES
+(1, 4, 1, 1, 10, 3000000, 'Ha Noi, Ha Dong', '2021-04-01 13:43:26', NULL),
+(2, 5, 6, 1, 1, 70000, 'Phường Phúc Xá,Quận Ba Đình,Thành phố Hà Nội', '2021-04-08 06:58:46', '2021-04-08 06:58:46'),
+(3, 6, 7, 1, 1, 70000, 'Phường Phúc Xá,Quận Ba Đình,Thành phố Hà Nội', '2021-04-08 07:12:17', '2021-04-08 07:12:17');
 
 -- --------------------------------------------------------
 
@@ -341,25 +343,6 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `seller_id`, `coupo
 CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `token` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `payments`
---
-
-CREATE TABLE `payments` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `order_id` bigint(20) UNSIGNED NOT NULL COMMENT 'orders.id',
-  `thanh_vien` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `money` double(8,2) NOT NULL,
-  `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vnp_response_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code_vnpay` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code_bank` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -521,44 +504,25 @@ INSERT INTO `sellers` (`id`, `customer_id`, `shop_info`, `shop_name`, `created_a
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `shippings`
---
-
-CREATE TABLE `shippings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `matp` int(11) NOT NULL,
-  `maqh` int(11) NOT NULL,
-  `maxptr` int(11) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `shippings`
---
-
-INSERT INTO `shippings` (`id`, `user_id`, `name`, `phone`, `email`, `matp`, `maqh`, `maxptr`, `image`, `created_at`, `updated_at`) VALUES
-(1, 7, 'dvha', '09999999', 'shiper@gmail.com', 1, 1, 1, '121488684_3549607858416096_6061398820996775194_o.jpg', '2021-03-30 07:11:53', '2021-03-30 07:11:53');
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `ships`
 --
 
 CREATE TABLE `ships` (
   `id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
+  `seller_id` int(11) NOT NULL,
   `shopID` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `ships`
+--
+
+INSERT INTO `ships` (`id`, `seller_id`, `shopID`, `Token`, `created_at`, `updated_at`) VALUES
+(1, 1, '78746', 'bf76117c-97a5-11eb-8be2-c21e19fc6803', NULL, NULL),
+(2, 1, '78746', 'bf76117c-97a5-11eb-8be2-c21e19fc6803', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3047,9 +3011,7 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `customer_id` (`customer_id`),
-  ADD KEY `shipping_id` (`shipping_id`),
-  ADD KEY `payment_id` (`payment_id`);
+  ADD KEY `customer_id` (`customer_id`);
 
 --
 -- Chỉ mục cho bảng `order_details`
@@ -3059,13 +3021,6 @@ ALTER TABLE `order_details`
   ADD KEY `order_id` (`order_id`),
   ADD KEY `product_id` (`product_id`),
   ADD KEY `seller_id` (`seller_id`);
-
---
--- Chỉ mục cho bảng `payments`
---
-ALTER TABLE `payments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`);
 
 --
 -- Chỉ mục cho bảng `products`
@@ -3113,9 +3068,9 @@ ALTER TABLE `sellers`
   ADD KEY `customer_id` (`customer_id`);
 
 --
--- Chỉ mục cho bảng `shippings`
+-- Chỉ mục cho bảng `ships`
 --
-ALTER TABLE `shippings`
+ALTER TABLE `ships`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3185,7 +3140,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -3227,19 +3182,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT cho bảng `payments`
---
-ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -3278,10 +3227,10 @@ ALTER TABLE `sellers`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `shippings`
+-- AUTO_INCREMENT cho bảng `ships`
 --
-ALTER TABLE `shippings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `ships`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `sliders`
@@ -3345,9 +3294,7 @@ ALTER TABLE `customers`
 -- Các ràng buộc cho bảng `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`shipping_id`) REFERENCES `shippings` (`id`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
 
 --
 -- Các ràng buộc cho bảng `order_details`

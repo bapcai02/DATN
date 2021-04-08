@@ -92,51 +92,89 @@ input.hidden {
         </div>
     </div>
 </div>  
-<div class = 'form'>
-    <div>
-        <h3 style = "margin-bottom:50px; margin-top:50px;margin-left:40%">Thông Tin Đơn Hàng</h3>
+<div class="container-fluid"> 
+      <div class="row ">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Đơn hàng</h5>
+                <div class="table-responsive">
+               <table class="table">
+                  <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Hình Ảnh</th>
+                        <th>Số Lượng</th>
+                        <th>Thanh Toán</th>
+                        <th>Tình Trạng đơn hàng</th>
+                        <th>Ngày Đặt</th>
+                        <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php if (!isset($page) || $page == 1) $total = 1 ?>
+                    <?php if ($page >= 2) $total = ($page - 1) * 6 + 1 ?>
+                    @foreach($orderDetail as $value)
+                        <tr>
+                            <td>{{$total++}}</td>
+                            <td>{{ $value->product_name }}</td>
+                            <td><img width = '130px' height = '130px' src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></td>
+                            <td>{{ $value->qty }}</td>
+                            <td>{{ number_format($value->price) }} VND</td>
+                            @if($value->status == 1) 
+                                <td><button type="button" class="btn btn-primary">Đơn Hàng được xác nhận</button></td>
+                            @elseif($value->status == 2)
+                                <td><button type="button" class="btn btn-warning">Đơn Hàng đang vận chuyển</button></td>
+                            @elseif($value->status == 3)
+                                <td><button type="button" class="btn btn-success">Đơn Hàng đã thanh toán</button></td>
+                            @elseif($value->status == 4)
+                                <td><button type="button" class="btn btn-danger">Đơn Hàng được thất bại</button></td>
+                            @endif
+                            
+                            <td>{{ $value->created_at }}</td>
+                        </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+            </div>
+            {{ $orderDetail->links() }}
+            </div>
+          </div>
+        </div>
+      </div><!--End Row-->
     </div>
-    <div class="table-responsive">
-        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-        <thead class="bg-primary-600">
-            <tr>
-                <th>#</th>
-                <th>Tên Sản Phẩm</th>
-                <th>Hình Ảnh</th>
-                <th>Số Lượng</th>
-                <th>Thanh Toán</th>
-                <th>Tình Trạng đơn hàng</th>
-                <th>Ngày Đặt</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php if (!isset($page) || $page == 1) $total = 1 ?>
-        <?php if ($page >= 2) $total = ($page - 1) * 6 + 1 ?>
-        @foreach($orderDetail as $value)
-            <td>{{$total++}}</td>
-            <td>{{ $value->product_name }}</td>
-            <td><img width = '130px' height = '130px' src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></td>
-            <td>{{ $value->qty }}</td>
-            <td>{{ number_format($value->price) }} VND</td>
-            @if($value->status == 1) 
-                <td><button type="button" class="btn btn-primary">Đơn Hàng được xác nhận</button></td>
-            @elseif($value->status == 2)
-                <td><button type="button" class="btn btn-warning">Đơn Hàng đang vận chuyển</button></td>
-            @elseif($value->status == 3)
-                <td><button type="button" class="btn btn-success">Đơn Hàng đã thanh toán</button></td>
-            @elseif($value->status == 4)
-                <td><button type="button" class="btn btn-danger">Đơn Hàng được thất bại</button></td>
-            @endif
-            
-            <td>{{ $value->created_at }}</td>
-        @endforeach
-        </tbody>
-        </table>
-        {{$orderDetail->links()}}
-    </div>
-</div>
 
+    <div class="partner">
+    <div class="container">
+      <div class="partner_block d-flex justify-content-between" data-slick="{&quot;slidesToShow&quot;: 6}">
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-vietcombank.png" alt = "VCB Mobile-B@anking" title="VCB Mobile-B@anking"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-agribank.png" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-bidv.png" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-ipay.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-ipay.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://sandbox.vnpayment.vn/paymentv2/images/bank/qr-vnpayewallet.png" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-vcbpay.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-vietcombank.png" alt = "VCB Mobile-B@anking" title="VCB Mobile-B@anking"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://sandbox.vnpayment.vn/paymentv2/images/bank/qr-scb.png" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-abbank.png" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-seabank.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-ivb.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-vietbank.png" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-eximbank.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-ojb.png" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-nab.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://sandbox.vnpayment.vn/paymentv2/images/bank/qr-baovietbank.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-hdbank.png" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-tpbank.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://sandbox.vnpayment.vn/paymentv2/images/bank/qr-vtcpay.png" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-vnptpay.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-vimass.png" alt="partner" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-pvcombank.png" title="partner logo"></a></div>
+        <div class="partner--logo"> <a href="#"><img width = "120px" src="https://pay.vnpay.vn/images/bank/qr-viviet.png" alt="partner" title="partner logo"></a></div>
+      </div>
+    </div>
+  </div>
 
 @push('script')
 

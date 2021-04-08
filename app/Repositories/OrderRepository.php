@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use DB;
+use Auth;
 
 class OrderRepository
 {
@@ -47,30 +48,29 @@ class OrderRepository
             ->paginate(6);
     }
 
-    public function search($data)
-    { 
-        $matp = isset($data['matp']) ? $data['matp'] : false;
-        $maqh = isset($data['maqh']) ? $data['maqh'] : false;
-        $maxptr = isset($data['maxptr']) ? $data['maxptr'] : false;
-  
-        return $this->feeship
-        ->when($matp, function ($query) use ($matp) {
-            return $query->Where('matp', $matp);
-        })
-        ->when($maqh, function ($query) use ($maqh) {
-            return $query->where('maqh', $maqh);
-        })
-        ->when($maxptr, function ($query) use ($maxptr) {
-            return $query->where('maxptr', $maxptr);
-        })
-        ->orderBy('created_at')
-        ->paginate(6);
-    }
-
-    public function addOrder()
+    public function addOrder($data)
     {
-        DB::table('orders')->update([
-            
+        $this->order->create([
+            'Order_Code' => $data['order_code'],
+            'user_id' => Auth::user()->id,
+            'customer_id' => 1,
+            'ship_id' => 1,
+            'payment' => 0,
+            'status' => 1,
         ]);
+
+        $order = $this->order->where('user_id', Auth::user()->id)->orderBy('created_at','DESC')->first();
+        $cart = DB::table('carts')->where('id',$data['cart_id'])->first();
+
+        $this->orderDetail->create([
+            'order_id' => $order->id,
+            'product_id' => $data['product_id'],
+            'seller_id' => 1,
+            'qty' => $cart->qty,
+            'price' => $data['total'],
+            'address_ship' => $data['address'],
+        ]);
+
+        DB::table('carts')->where('id',$data['cart_id'])->delete();
     }
 }

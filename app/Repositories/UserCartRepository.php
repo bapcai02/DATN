@@ -19,7 +19,7 @@ class UserCartRepository
     }
 
     public function GetCart($user_id, int $product_id){
-        return DB::table('carts')->select('product_id', 'price', 'name', 'qty')->where('product_id', $product_id)->where('user_id', $user_id)->first();
+        return DB::table('carts')->select('id', 'product_id', 'price', 'name', 'qty')->where('product_id', $product_id)->where('user_id', $user_id)->first();
     }
 
     public function getById(int $user_id)

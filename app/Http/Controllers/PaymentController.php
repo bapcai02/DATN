@@ -69,6 +69,6 @@ class PaymentController extends Controller
             , 'message' => 'success'
             , 'data' => $vnp_Url);
             
-        return response()->json($returnData);
+        return redirect($vnp_Url);
     }
 }
