@@ -53,6 +53,7 @@
                   <table class="table table-responsive" id="myTable"> 
                     <colgroup>
                       <col span="1" style="width: 15%">
+                      <col span="1" style="width: 15%">
                       <col span="1" style="width: 30%">
                       <col span="1" style="width: 15%">
                       <col span="1" style="width: 15%">
@@ -61,6 +62,7 @@
                     </colgroup>
                     <thead>
                       <tr>
+                        <th></th>
                         <th class="product-iamge" scope="col">Ảnh</th>
                         <th class="product-name" scope="col">Tên Sản Phẩm</th>
                         <th class="product-price" scope="col">Giá</th>
@@ -73,6 +75,7 @@
                     @if(isset($user_cart))
                         @foreach($user_cart as $key => $value)
                           <tr>
+                            <td><input type="radio" name="checkk" class="product_id" value="{{ $value->id }}"></td>
                             <td class="product-iamge"> 
                               <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->image }}" alt="product image"></div>
                             </td>
@@ -95,6 +98,7 @@
                     @else
                         @foreach($cart as $key => $value)
                           <tr>
+                            <td><input type="radio"></td>
                             <td class="product-iamge"> 
                               <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->options->image }}" alt="product image"></div>
                             </td>
@@ -138,39 +142,17 @@
           <div class="row justify-content-end">
             <div class="col-12 col-md-6 col-lg-4">
               <div class="cart-total_block">
-                <h2>Cart total</h2>
                 <table class="table">
                   <colgroup>
                     <col span="1" style="width: 50%">
                     <col span="1" style="width: 50%">
                   </colgroup>
-                  <tbody>
-                    @if(!Auth::check())
-                      <tr>
-                        <th>SUBTOTAL</th>
-                        <td>{{ Cart::total() }} VND</td>
-                      </tr>
-                      <tr>
-                        <th>TOTAL</th>
-                        <td>{{ Cart::total() }} VND</td>
-                      </tr>
-                    @else
-                      <tr>
-                        <th>SUBTOTAL</th>
-                        <td>{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }} VND</td>
-                      </tr>
-                      <tr>
-                        <th>TOTAL</th>
-                        <td>{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }} VND</td>
-                      </tr>
-                    @endif
-                  </tbody>
                 </table>
                 <div class="checkout-method">
                   @if(Auth::check())
-                    <button class="normal-btn"> <a href="{{ url('cart/checkout') }}" style="color:black"> Proceed to Checkout</a></button><span>- or -</span><a>Check out with PayPal</a>
+                    <button id="check" class="normal-btn"> Proceed to Checkout </button>
                   @else
-                    <button id="payment" class="normal-btn" style="color:black"> Proceed to Checkout</button><span>- or -</span><a>Check out with PayPal</a>
+                    <button id="payment" class="normal-btn" style="color:black"> Proceed to Checkout</button>
                   @endif      
                 </div>
               </div>
@@ -197,6 +179,14 @@
 @push('script')
 <script>
   $(document).ready(function () {
+    $('#check').click(function(){
+        if ($('.product_id').is(':checked')) {
+          var id = $('.product_id').val();
+          location.href = "{{ url('cart/checkout') }}" + '/' + id;
+        }else{
+          swal("Thông báo", "Bạn cần chọn đơn hàng để thanh toán !" , "warning");
+        }
+    })
     $('#payment').click(function (){
         swal("Thông báo", "Bạn cần đăng nhập để thanh toán !" , "warning").then(function(){location.reload();});
     });

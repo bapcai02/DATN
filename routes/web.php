@@ -31,7 +31,7 @@ Route::prefix('cart')->group(function (){
     Route::post('/delete', 'CartController@deleteCart');
     Route::get('/coupon','CartController@CartCoupon');
     Route::get('/update', 'CartController@updateCart');
-    Route::get('/checkout','CartController@checkout');
+    Route::get('/checkout/{id}','CartController@checkout');
     Route::get('/quanhuyen','CartController@getQuanHuyen');
     Route::get('/xaphuong','CartController@getXaPhuong');
 });
@@ -49,7 +49,7 @@ Route::prefix('usercart')->group(function (){
     Route::post('/add', 'UserCartController@addCart');
     Route::post('/delete', 'UserCartController@deleteCart');
     Route::get('/update', 'UserCartController@updateCart');
-    Route::get('/checkout','UserCartController@checkout');
+    Route::post('/order','OrderController@create');
     Route::get('/quanhuyen','UserCartController@getQuanHuyen');
     Route::get('/xaphuong','UserCartController@getXaPhuong');
 });

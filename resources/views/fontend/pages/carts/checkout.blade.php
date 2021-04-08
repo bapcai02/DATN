@@ -99,49 +99,33 @@
                       <colgroup>
                         <col span="1" style="width: 50%">
                         <col span="1" style="width: 50%">
+                        <col span="1" style="width: 50%">
+                        <col span="1" style="width: 50%">
                       </colgroup>
                       <tbody>
-                        @if(!Auth::check())
                           <tr>
-                            <th>SUBTOTAL</th>
-                            <td>{{ Cart::total() }} VND</td>
+                            <th>Tên sản phẩm</th>
+                            <input type="hidden" id="product_id" value="{{ $cartUser->product_id }}" >
+                            <td id="product_name">{{ $cartUser->name }}</td>
                           </tr>
                           <tr>
-                            <th>SHIPPING</th>
-                            <td>
-                              <p>Free shipping</p>
-                            </td>
+                            <th>Số lượng</th>
+                            <td id="product_qty">{{ $cartUser->qty }}</td>
                           </tr>
                           <tr>
-                            <th>TOTAL</th>
-                            <td>{{ Cart::total() }} VND</td>
+                            <th>Thanh toán</th>
+                            <td id = "total">{{ $cartUser->price}}</td>
                           </tr>
-                        @else
-                          <tr>
-                            <th>SUBTOTAL</th>
-                            <td>{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }}</td>
-                          </tr>
-                          <tr>
-                            <th>SHIPPING</th>
-                            <td>
-                              <p>Free shipping</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th>TOTAL</th>
-                            <td id = "total">{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }}</td>
-                          </tr>
-                        @endif
                       </tbody>
                     </table>                   
                   </div>
                   <div class="form-group">
-                    <input type="radio" name="paymethod" id="shipping" value="0" checked>
+                    <input type="radio" name="paymethod" id="shipping" value="0">
                     <label for="shipping">Thanh toán khi nhận hàng</label>
                   </div>
                   <div class="form-group">
                     <input type="radio" name="paymethod" id="paypal" value="1">
-                    <label for="paypal">Paypal</label>
+                    <label for="paypal">Thanh Toán qua VNPAY</label>
                   </div>
                   <button type="button" id="checkout" class="normal-btn submit-btn">Thanh Toán</button>
                 </div>
@@ -150,56 +134,34 @@
           </form>
         </div>
       </div>
-      <div class="partner">
-        <div class="container">
-          <div class="partner_block d-flex justify-content-between" data-slick="{&quot;slidesToShow&quot;: 6}">
-            <div class="partner--logo" href=""> <a href="#"><img src="assets/images/partner/partner_01.png" alt="partner logo"></a></div>
-            <div class="partner--logo" href=""> <a href="#"><img src="assets/images/partner/partner_02.png" alt="partner logo"></a></div>
-            <div class="partner--logo" href=""> <a href="#"><img src="assets/images/partner/partner_01.png" alt="partner logo"></a></div>
-            <div class="partner--logo" href=""> <a href="#"><img src="assets/images/partner/partner_02.png" alt="partner logo"></a></div>
-            <div class="partner--logo" href=""> <a href="#"><img src="assets/images/partner/partner_01.png" alt="partner logo"></a></div>
-            <div class="partner--logo" href=""> <a href="#"><img src="assets/images/partner/partner_02.png" alt="partner logo"></a></div>
-            <div class="partner--logo" href=""> <a href=""><img src="assets/images/partner/partner_01.png" alt="partner logo"></a></div>
-          </div>
-        </div>
-      </div>
       <!-- End partner-->
 @endsection
 
 @push('script')
   <script>
     $(document).ready(function () {
-      $('#checkout').click(function(){
-        var name = $('#name').val();
-        var phone = $('#phone').val();
-        var thanhpho = $('#Contry').find('option:selected').text();
-        var quanhuyen = $('#quanhuyen').find('option:selected').text();
-        var xaphuong = $('#xaphuong').find('option:selected').text();
-        var note = $('#note').val();
-        var total = $('#total').text();
-        var confirm_address = $('#confirm_address').val();
 
-        if(name.trim() == '' || phone.trim() == '' || confirm_address.trim() == ''){
-          swal("Thông báo", "Bạn cần nhập đầy đủ thông tin !" , "warning");
-        }else{
-        
-          var address = xaphuong + "," + quanhuyen + "," + thanhpho;
-          console.log(total);
-          $.ajax({
-            url: "{{ url('/usercart/checkout') }}",
-            type: 'GET',      
-            dataType: 'json',
-          }).done(function (data) {
-              $.ajax({
-                url: "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create",
-                type: 'POST', 
-                headers: {
-                  "Token" : "bf76117c-97a5-11eb-8be2-c21e19fc6803",
-                  "ShopId" : "78746",
-                  "Content-Type" : "application/json"
-                } ,
-                data: {
-                  "cod_amount" : total,
+      $('#shipping').click(function () {
+          if ($(this).is(':checked')) {
+            $('#checkout').click(function(){
+              var product_id = $('#product_id').val();
+              var product_name = $('#product_name').text();
+              var product_qty = $('#product_qty').text();
+              var name = $('#name').val();
+              var phone = $('#phone').val();
+              var thanhpho = $('#Contry').find('option:selected').text();
+              var quanhuyen = $('#quanhuyen').find('option:selected').text();
+              var xaphuong = $('#xaphuong').find('option:selected').text();
+              var note = $('#note').val();
+              var total = $('#total').text();
+              var confirm_address = $('#confirm_address').val();
+
+              if(name.trim() == '' || phone.trim() == '' || confirm_address.trim() == ''){
+                swal("Thông báo", "Bạn cần nhập đầy đủ thông tin !" , "warning");
+              }else{      
+                var address = xaphuong + "," + quanhuyen + "," + thanhpho;
+                var datas =  {
+                  "cod_amount" : parseInt(total),
                   "payment_type_id": 2,
                   "note": note,
                   "required_note": "CHOXEMHANGKHONGTHU",
@@ -215,21 +177,54 @@
                   "service_type_id":2,
                   "order_value":130000,
                   "to_ward_code": "20308",
-                  "items": [
-                    data  
-                  ]
-                }    
-              }).done(function(res){
-                console.log(res);
-              }).fail(function(error) {
-                  console.log(error);
-                  swal("System Notification", textStatus + ': ' + textStatus.message , "error").then(function(){location.reload();});
-              });
-          }).fail(function(jqXHR, textStatus, errorThrown) {
-              swal("System Notification", textStatus + ': ' + errorThrown , "error").then(function(){location.reload();});
-          });
-        }
+                  "items": [{ 
+                    "name": product_name, 
+                    "quantity": parseInt(product_qty), 
+                    "price":  parseInt(total)
+                  }]
+                };
+
+                $.ajax({
+                  url: "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create",
+                  type: 'POST', 
+                  headers: {
+                    "Token" : "bf76117c-97a5-11eb-8be2-c21e19fc6803",
+                    "ShopId" : "78746",
+                    "Content-Type" : "application/json",
+                  } ,
+                  data:  JSON.stringify(datas),
+                }).done(function(res){
+                  if(res.code == 200){
+                    $.ajax({
+                      type: "POST",
+                      url: "{{ url('usercart/order') }}",
+                      data: {
+                        '_token': "{{ csrf_token() }}",
+                        'total' : parseInt(total) + res.total_fee,
+                        'order_code' : res.order_code,
+                        'product_id' : product_id,
+                        'address': address,
+                      }
+                    });
+                  }else if(res.code == 400){
+                    swal("System Notification", "Thông tin không đúng" , "error");
+                  }
+                }).fail(function(res) {
+                    swal("System Notification", "Thông tin không đúng" , "error");
+                });
+              }
+            });
+          }
       });
+
+      $('#paypal').click(function () {
+          if ($(this).is(':checked')) {
+            $('#checkout').click(function(){
+              location.href = "{{ url('vnpay_php') }}";
+            });
+          }
+      });
+      
 
       var matp = $('#Contry').find('option:selected').val();
       $.ajax({

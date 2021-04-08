@@ -121,12 +121,12 @@ class CartController extends Controller
         }
     }
 
-    public function checkout(){
+    public function checkout(int $id){
         $category = $this->categoryRepository->getListCategory()->get();
         $tinhThanhPho = $this->addressRepository->getTinhThanhPho();
-        $cart = Cart::content();
+        $cartUser = $this->userCartRepository->GetCart(Auth::user()->id, $id);
 
-        return view('fontend.pages.carts.checkout', compact('category', 'tinhThanhPho', 'cart'));
+        return view('fontend.pages.carts.checkout', compact('category', 'tinhThanhPho', 'cartUser'));
     }
 
     public function getQuanHuyen(Request $request){

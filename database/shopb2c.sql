@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 01, 2021 lúc 04:23 PM
--- Phiên bản máy phục vụ: 10.4.13-MariaDB
--- Phiên bản PHP: 7.3.19
+-- Thời gian đã tạo: Th4 08, 2021 lúc 12:37 PM
+-- Phiên bản máy phục vụ: 10.4.17-MariaDB
+-- Phiên bản PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,6 +37,20 @@ CREATE TABLE `admins` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `banks`
+--
+
+CREATE TABLE `banks` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -87,7 +101,9 @@ CREATE TABLE `carts` (
 
 INSERT INTO `carts` (`id`, `user_id`, `product_id`, `name`, `qty`, `sale`, `price`, `image`, `created_at`, `updated_at`) VALUES
 (3, 8, 3, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-03-31 19:08:53', '2021-03-31 19:08:53'),
-(4, 8, 5, 'Cải Thảo', 1, 10, 20000, 'mua-cai-thao-da-lat-tai-ha-noi.jpg', '2021-03-31 19:09:06', '2021-03-31 19:09:06');
+(4, 8, 5, 'Cải Thảo', 1, 10, 20000, 'mua-cai-thao-da-lat-tai-ha-noi.jpg', '2021-03-31 19:09:06', '2021-03-31 19:09:06'),
+(5, 10, 3, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-04-07 23:34:26', '2021-04-07 23:34:26'),
+(6, 10, 6, 'Thịt Bò', 1, 10, 70000, 'photo-1-1482451521171.jpg', '2021-04-07 23:34:42', '2021-04-07 23:34:42');
 
 -- --------------------------------------------------------
 
@@ -212,22 +228,6 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `feeships`
---
-
-CREATE TABLE `feeships` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `matp` bigint(20) UNSIGNED NOT NULL COMMENT 'vn_tinhthanhpho.id',
-  `maqh` bigint(20) UNSIGNED NOT NULL COMMENT 'vn_quanhuyen.id',
-  `maxptr` bigint(20) UNSIGNED NOT NULL COMMENT 'vn_xaphuongthitran.id',
-  `feeship` double(8,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `migrations`
 --
 
@@ -289,6 +289,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `Order_Code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `customer_id` bigint(20) UNSIGNED NOT NULL COMMENT 'customers.id',
   `shipping_id` bigint(20) UNSIGNED NOT NULL COMMENT 'shippings.id',
@@ -302,8 +303,8 @@ CREATE TABLE `orders` (
 -- Đang đổ dữ liệu cho bảng `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `customer_id`, `shipping_id`, `payment_id`, `status`, `created_at`, `updated_at`) VALUES
-(4, 10, 1, 1, NULL, 1, '2021-04-01 13:43:03', NULL);
+INSERT INTO `orders` (`id`, `Order_Code`, `user_id`, `customer_id`, `shipping_id`, `payment_id`, `status`, `created_at`, `updated_at`) VALUES
+(4, '5Chjv', 10, 1, 1, NULL, 1, '2021-04-01 13:43:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -317,7 +318,6 @@ CREATE TABLE `order_details` (
   `product_id` bigint(20) UNSIGNED NOT NULL COMMENT 'products.id',
   `seller_id` bigint(20) UNSIGNED NOT NULL COMMENT 'sellers.id',
   `coupon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fee_ship` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `address_ship` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -329,8 +329,8 @@ CREATE TABLE `order_details` (
 -- Đang đổ dữ liệu cho bảng `order_details`
 --
 
-INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `seller_id`, `coupon`, `fee_ship`, `qty`, `price`, `address_ship`, `created_at`, `updated_at`) VALUES
-(1, 4, 1, 1, '10', 15000, 10, 3000000, 'Ha Noi, Ha Dong', '2021-04-01 13:43:26', NULL);
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `seller_id`, `coupon`, `qty`, `price`, `address_ship`, `created_at`, `updated_at`) VALUES
+(1, 4, 1, 1, '10', 10, 3000000, 'Ha Noi, Ha Dong', '2021-04-01 13:43:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -544,6 +544,21 @@ CREATE TABLE `shippings` (
 
 INSERT INTO `shippings` (`id`, `user_id`, `name`, `phone`, `email`, `matp`, `maqh`, `maxptr`, `image`, `created_at`, `updated_at`) VALUES
 (1, 7, 'dvha', '09999999', 'shiper@gmail.com', 1, 1, 1, '121488684_3549607858416096_6061398820996775194_o.jpg', '2021-03-30 07:11:53', '2021-03-30 07:11:53');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ships`
+--
+
+CREATE TABLE `ships` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `shopID` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -3022,15 +3037,6 @@ ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `feeships`
---
-ALTER TABLE `feeships`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `matp` (`matp`),
-  ADD KEY `maqh` (`maqh`),
-  ADD KEY `maxptr` (`maxptr`);
-
---
 -- Chỉ mục cho bảng `migrations`
 --
 ALTER TABLE `migrations`
@@ -3179,7 +3185,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -3209,12 +3215,6 @@ ALTER TABLE `employer`
 -- AUTO_INCREMENT cho bảng `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `feeships`
---
-ALTER TABLE `feeships`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -3340,14 +3340,6 @@ ALTER TABLE `admins`
 --
 ALTER TABLE `customers`
   ADD CONSTRAINT `customers_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Các ràng buộc cho bảng `feeships`
---
-ALTER TABLE `feeships`
-  ADD CONSTRAINT `feeships_ibfk_1` FOREIGN KEY (`matp`) REFERENCES `vn_tinhthanhpho` (`id`),
-  ADD CONSTRAINT `feeships_ibfk_2` FOREIGN KEY (`maqh`) REFERENCES `vn_quanhuyen` (`id`),
-  ADD CONSTRAINT `feeships_ibfk_3` FOREIGN KEY (`maxptr`) REFERENCES `vn_xaphuongthitran` (`id`);
 
 --
 -- Các ràng buộc cho bảng `orders`

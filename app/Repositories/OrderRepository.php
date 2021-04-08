@@ -47,12 +47,6 @@ class OrderRepository
             ->paginate(6);
     }
 
-    public function getById(int $id)
-    {
-        return $this->feeship->where('id', $id)->first();
-    }
-
-
     public function search($data)
     { 
         $matp = isset($data['matp']) ? $data['matp'] : false;

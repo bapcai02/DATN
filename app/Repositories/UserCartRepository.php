@@ -14,8 +14,12 @@ class UserCartRepository
         $this->userCart = $userCart;
     }
     
-    public static function CountPrice($user_id){
+    public static function CountPrice(int $user_id){
         return DB::table('carts')->select(DB::raw("SUM(price) as totalPrice"))->where('user_id', $user_id)->first();
+    }
+
+    public function GetCart($user_id, int $product_id){
+        return DB::table('carts')->select('product_id', 'price', 'name', 'qty')->where('product_id', $product_id)->where('user_id', $user_id)->first();
     }
 
     public function getById(int $user_id)
