@@ -26,7 +26,7 @@
       </li>
 
       <li>
-        <a href="profile.html">
+        <a href="{{ url('admins/order/') }}">
           <i class="zmdi zmdi-face"></i> <span>Manage Order</span>
         </a>
       </li>

@@ -165,6 +165,9 @@ class PaymentController extends Controller
 
         $this->orderRepository->orderByPayment($ordercode, $cart);
 
+        $request->session()->forget('cart');
+        $request->session()->forget('order');
+
         return view('fontend.vnpay_php.vnpay_return');
     }
 }

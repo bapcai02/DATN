@@ -39,11 +39,11 @@ class OrderRepository
 
     public function getOrderByCustomer(int $id)
     {
+        $customer = DB::table('customers')->where('user_id', $id)->first();
+
         return DB::table('orders')
             ->join('order_details','orders.id', 'order_details.order_id')
-            ->join('products','order_details.product_id', 'products.id')
-            ->where('orders.customer_id', $id)
-            ->select('products.product_name', 'products.id', 'orders.status', 'order_details.*')
+            ->where('orders.customer_id', $customer->id)
             ->orderBy('orders.created_at', 'desc')
             ->paginate(6);
     }
@@ -98,5 +98,37 @@ class OrderRepository
         ]);
 
         DB::table('carts')->where('id',$data['cart_id'])->delete();
+    }
+
+    public function getByAdmin()
+    {
+        return DB::table('orders')->join('order_details', 'orders.id', 'order_details.order_id')
+                ->orderBy('orders.created_at', 'desc')
+                ->paginate(6);
+    }
+
+    public function search($data)
+    {
+        $start_date = isset($data['start-date']) ? $data['start-date'] . ' ' . "00:00:00" : false;
+        $end_date = isset($data['end-date']) ? $data['end-date'] . ' ' . "00:00:00" : false;
+        $code = isset($data['code']) ? $data['code'] : false;
+        $status = isset($data['status']) ? (int)($data['status']) : false;
+  
+        return  DB::table('orders')
+            ->join('order_details', 'orders.id', 'order_details.order_id')
+            ->when($code, function ($query) use ($code) {
+                return $query->Where('orders.Order_Code', $code);
+            })
+            ->when($status, function ($query) use ($status) {
+                return $query->where('orders.status', "=", $status);
+            })
+            ->when($start_date, function ($query) use ($start_date) {
+                return $query->WhereDate('orders.created_at', '>=', $start_date);
+            })
+            ->when($end_date, function ($query) use ($end_date) {
+                return $query->WhereDate('orders.created_at', '<=', $end_date);
+            })  
+            ->orderBy('orders.created_at')
+            ->paginate(6);
     }
 }

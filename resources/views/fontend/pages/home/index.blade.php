@@ -14,13 +14,13 @@
               <div class="col-10 col-md-5 col-xl-6">
                 <div class="banner-text text-center text-md-left">
                   <h5 class="color-subtitle pink">Butter & Eggs</h5>
-                  <h2 class="title">Spice 100% Organnic</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p><a class="normal-btn pink" href="shop_grid+list_3col.html">Shop now</a>
+                  <h2 class="title">100% Hữu Cơ</h2>
+                  <p>{{ $slider[0]->descript }}</p><a class="normal-btn pink" href="{{  url('/detail') . '/'. $slider[0]->product_id  }}">Shop now</a>
                 </div>
               </div>
               <div class="col-12 col-md-5 col-xl-5">
                 <div class="banner-img">
-                  <div class="img-block text-center"><img class="mymove" src="assets/images/homepage03/banner_img.png" alt=""></div>
+                  <div class="img-block text-center"><img style="right:30%" width="600px" height="400px" class="mymove" src="{{ asset('assets/images').'/'.$slider[0]->images }}" alt=""></div>
                 </div>
               </div>
             </div>
@@ -47,7 +47,7 @@
                     <div class="deal-img"><a href="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt="product image"></a></div>
                   
                     <div class="deal-info text-center">
-                      <h5 class="color-type pink deal-type">{{ $value->category_name }}</h5><a class="deal-name" href="shop_detail.html">{{ $value->product_name }}</a>
+                      <h5 class="color-type pink deal-type">{{ $value->category_name }}</h5><a class="deal-name" href="#">{{ $value->product_name }}</a>
                       <h3 class="product-price">{{ number_format(($value->product_price * $value->sale)/100). "VND/kg" }}
                         <del>{{ $value->product_price }}</del>
                       </h3>
@@ -119,46 +119,18 @@
             </div>
             <div class="sale-product_bottom">
               <div class="row">
-                <div class="col-12">
-                  <div class="mini-product column">
-                    <div class="mini-product_img"><a href="shop_detail.html"><img src="assets/images/product/product13.png" alt=""></a></div>
-                    <div class="mini-product_info"> <a href="shop_detail.html">Fresh Met</a>
-                      <p>$37.00 
-                        <del>$45.00</del>
-                      </p>
+                @foreach($productRan as $key => $value)
+                  <div class="col-12">
+                    <div class="mini-product column">
+                      <div class="mini-product_img"><a href="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt="product image"></a></div>
+                      <div class="mini-product_info"> <a href="#">{{ $value->category_name }}</a>
+                        <p>{{ number_format(($value->product_price * $value->sale)/100). "VND/kg" }}
+                          <del>{{ $value->product_price }}</del>
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-12">
-                  <div class="mini-product column">
-                    <div class="mini-product_img"><a href="shop_detail.html"><img src="assets/images/product/product14.png" alt=""></a></div>
-                    <div class="mini-product_info"> <a href="shop_detail.html">Coconut</a>
-                      <p>$37.00 
-                        <del>$45.00</del>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="mini-product column">
-                    <div class="mini-product_img"><a href="shop_detail.html"><img src="assets/images/product/product15.png" alt=""></a></div>
-                    <div class="mini-product_info"> <a href="shop_detail.html">Venion</a>
-                      <p>$37.00 
-                        <del>$45.00</del>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="mini-product column">
-                    <div class="mini-product_img"><a href="shop_detail.html"><img src="assets/images/product/product16.png" alt=""></a></div>
-                    <div class="mini-product_info"> <a href="shop_detail.html">Coconut</a>
-                      <p>$37.00 
-                        <del>$45.00</del>
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                @endforeach
               </div>
             </div>
           </div>

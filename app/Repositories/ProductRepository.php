@@ -195,4 +195,9 @@ class ProductRepository
     {
         return $this->product->where('seller_id', $id)->paginate(6);
     }
+
+    public static function getName(int $id)
+    {
+        return DB::table('products')->where('id', $id)->select('product_name')->first();
+    }
 }

@@ -107,4 +107,9 @@ class CustomerRepository
         ->orderBy('created_at')
         ->paginate(6);
     }
+
+    public static function getNameCustomer(int $id)
+    {
+        return DB::table('customers')->where('id', $id)->select('name')->first();
+    }
 }

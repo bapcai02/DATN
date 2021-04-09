@@ -119,6 +119,11 @@ Route::group(['middleware' => 'checkadmin'], function () {
             Route::post('/create', 'Admin\BrandController@create');
             Route::get('/search', 'Admin\BrandController@search');
         });
+
+        Route::prefix('order')->group(function () {   
+            Route::get('/', 'Admin\OrderController@index'); 
+            Route::get('/search', 'Admin\OrderController@search');
+        });
     });
 });
 
@@ -136,7 +141,6 @@ Route::group(['middleware' => 'checkcustomer'], function () {
 
         Route::prefix('order')->group(function () {
             Route::get('/', 'Customer\OrderController@index')->name('customer.order'); 
-            Route::post('/delete', 'Customer\OrderController@delete')->name('customer.order.delete');
             Route::get('/search', 'Customer\OrderController@search')->name('customer.order.search'); 
         });
     });

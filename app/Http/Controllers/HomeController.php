@@ -5,19 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
+use App\Repositories\SliderRepository;
 
 class HomeController extends Controller
 {
     protected $categoryRepository;
     protected $productRepository;
+    protected $sliderRepository;
 
     public function __construct(
         CategoryRepository $categoryRepository,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        SliderRepository $sliderRepository
     )
     {
         $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
+        $this->sliderRepository = $sliderRepository;
     }
     public function index(Request $request){
         $category = $this->categoryRepository->getListCategory()->get();
@@ -37,7 +41,8 @@ class HomeController extends Controller
         $productVegetRan = $this->productRepository->getListProduct()->limit(6)->where('category_id', 2)->inRandomOrder()->get();
         $productSeaRan = $this->productRepository->getListProduct()->limit(6)->where('category_id', 4)->inRandomOrder()->get();
         $productRan = $this->productRepository->getListProduct()->inRandomOrder()->limit(6)->get();
-  
+        $slider = $this->sliderRepository->get();
+
         return view('fontend.pages.home.index', compact(
             'category', 
             'product', 
@@ -56,14 +61,14 @@ class HomeController extends Controller
             'productSeaRan',
             'productVegetRan',
             'productSeaRan',
-            'productRan'
+            'productRan',
+            'slider'
         ));
     }
 
     public function search(Request $request)
     {
         $category = $this->categoryRepository->getListCategory()->get();
-        // dd($this->productRepository->getImage(1)->image);
         $text = $request->text;   
         $search = $this->productRepository->Search($text);
 

@@ -1,20 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Customer;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\UserRepository;
-use App\Repositories\EmployeeRepository;
 use App\Repositories\OrderRepository;
-use App\Repositories\AddressRepository;
-use App\Repositories\CategoryRepository;
-use Auth;
 
 class OrderController extends Controller
 {
     protected $orderRepository;
-    
+
     public function __construct(
         OrderRepository $orderRepository
     )
@@ -25,17 +20,17 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $page = $request->page;
-        $order = $this->orderRepository->getOrderByCustomer(Auth::user()->id);
-        
-        return view('admin.pages.orders.customer', compact('page', 'order'));
+        $order = $this->orderRepository->getByAdmin();
+
+        return view('admin.pages.orders.index',compact('order', 'page'));
     }
-    
+
     public function search(Request $request)
     {
         $page = $request->page;
         $data = $request->all();
         $order = $this->orderRepository->search($data);
         
-        return view('admin.pages.orders.customer',compact('order', 'page'));
+        return view('admin.pages.orders.index',compact('order', 'page'));
     }
 }
