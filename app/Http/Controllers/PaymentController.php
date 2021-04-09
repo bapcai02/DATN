@@ -1,11 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Response;
+use DB;
 use Illuminate\Http\Request;
+use App\Repositories\OrderRepository;
 
 class PaymentController extends Controller
 {
+    protected $orderRepository;
+
+    public function __construct(
+        OrderRepository $orderRepository
+    )
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
     public function payment(Request $request)
     {
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
@@ -70,5 +83,88 @@ class PaymentController extends Controller
             , 'data' => $vnp_Url);
             
         return redirect($vnp_Url);
+    }
+
+    public function getPayment(Request $request)
+    {
+        $data = $request->all();
+
+        $tp = DB::table('vn_tinhthanhpho')->where('id', $data['thanhpho'])->first();
+        $qh = DB::table('vn_quanhuyen')->where('id', $data['quanhuyen'])->first();
+        $xp = DB::table('vn_xaphuongthitran')->where('id', $data['xaphuong'])->first();
+        $userCart = DB::table('carts')->where('id', $data['cartuserID'])->first();
+
+        $address = $xp->name . ", " . $qh->name . ", " . $xp->name;
+
+        $datas =  [
+            "cod_amount" => $userCart->price,
+            "payment_type_id"=> 2,
+            "note"=> $data['note'],
+            "required_note"=> "CHOXEMHANGKHONGTHU",
+            "to_name"=> $data['name'],
+            "to_phone"=> $data['phone'],
+            "to_address"=> $address,
+            "weight"=> 200,
+            "length"=> 1,
+            "width"=> 19,
+            "height"=> 10,
+            "deliver_station_id"=> 2,
+            "service_id"=> 0,
+            "service_type_id"=> 2,
+            "order_value"=> 130000,
+            "to_ward_code"=> "20308",
+            "items"=> [
+                [
+                    "name"=> $userCart->name, 
+                    "quantity"=> $userCart->qty, 
+                    "price"=>  $userCart->price
+                ]
+            ]
+        ];
+        $cart = [
+            'total' =>  $userCart->price,
+            'product_id' => $data['productId'],
+            'cart_id' => $data['cartuserID'],
+            'address'=> $address,
+        ];
+
+        $request->session()->put('order', $datas);
+        $request->session()->put('cart', $cart);
+
+        return view('fontend.vnpay_php.index');
+    }
+
+    public function returnUrl(Request $request)
+    {
+        $data = $request->all();
+        $token = "bf76117c-97a5-11eb-8be2-c21e19fc6803";
+        $client = new Client([
+            "base_uri" => "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create",
+            "headers" => [
+                'Content-Type' => 'application/json',
+                'Token' => $token,
+                'ShopId' => '78746'
+            ]
+        ]);
+        $url = "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create";
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Token' => $token,
+            'ShopId' => '78746'
+        ];
+        $body = json_encode($request->session()->get('order'));
+
+        $response = $client->request('POST', $url, [
+            'body' => $body,
+            'headers' => $headers
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+        $cart = $request->session()->get('cart');
+        $ordercode = $data['data']['order_code'];
+
+        $this->orderRepository->orderByPayment($ordercode, $cart);
+
+        return view('fontend.vnpay_php.vnpay_return');
     }
 }

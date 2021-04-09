@@ -73,4 +73,30 @@ class OrderRepository
 
         DB::table('carts')->where('id',$data['cart_id'])->delete();
     }
+
+    public function orderByPayment($orderCode, $data)
+    {
+        $this->order->create([
+            'Order_Code' => $orderCode,
+            'user_id' => Auth::user()->id,
+            'customer_id' => 1,
+            'ship_id' => 1,
+            'payment' => 1,
+            'status' => 1,
+        ]);
+
+        $order = $this->order->where('user_id', Auth::user()->id)->orderBy('created_at','DESC')->first();
+        $cart = DB::table('carts')->where('id',$data['cart_id'])->first();
+
+        $this->orderDetail->create([
+            'order_id' => $order->id,
+            'product_id' => $data['product_id'],
+            'seller_id' => 1,
+            'qty' => $cart->qty,
+            'price' => $data['total'],
+            'address_ship' => $data['address'],
+        ]);
+
+        DB::table('carts')->where('id',$data['cart_id'])->delete();
+    }
 }

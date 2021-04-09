@@ -13,6 +13,7 @@
         <!-- Custom styles for this template -->
         <link href="{{asset('css/jumbotron-narrow.css')}}" rel="stylesheet">  
         <script src="{{asset('css/jquery-1.11.3.min.js')}}"></script>
+        
     </head>
 
     <body>
@@ -83,7 +84,7 @@
                         </select>
                     </div>
 
-                    <!-- <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Popup</button> -->
+                    {{-- <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Popup</button> --}}
                     <button type="submit" class="btn btn-default">Thanh toán</button>
 
                 </form>

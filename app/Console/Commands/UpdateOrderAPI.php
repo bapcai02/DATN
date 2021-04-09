@@ -7,7 +7,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use DB;
-use Log;
 
 class UpdateOrderAPI extends Command
 {
@@ -78,11 +77,11 @@ class UpdateOrderAPI extends Command
                     DB::table('orders')->where('id', $val->id)->update([
                         "status" => 2,
                     ]);
-                }else if($data['data']['storing'] == "picked"){
+                }else if($data['data']['status'] == "storing"){
                     DB::table('orders')->where('id', $val->id)->update([
                         "status" => 3,
                     ]);
-                }else if($data['data']['return'] == "picked"){
+                }else if($data['data']['status'] == "return"){
                     DB::table('orders')->where('id', $val->id)->update([
                         "status" => 4,
                     ]);

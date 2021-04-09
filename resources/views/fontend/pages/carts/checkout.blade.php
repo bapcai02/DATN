@@ -48,7 +48,7 @@
       <!-- End order step-->
       <div class="shop-checkout">
         <div class="container">
-          <form>
+          <form method="GET" action="{{ url('vnpay_php') }}">
             <div class="row">
               <div class="col-12 col-lg-8">
                 <h2 class="form-title">THÔNG TIN NGƯỜI NHẬN</h2>
@@ -105,8 +105,8 @@
                       <tbody>
                           <tr>
                             <th>Tên sản phẩm</th>
-                            <input type="hidden" id="product_id" value="{{ $cartUser->product_id }}" >
-                            <input type="hidden" id="cart_id" value="{{ $cartUser->id }}" >
+                            <input type="hidden" name="productId" id="product_id" value="{{ $cartUser->product_id }}" >
+                            <input type="hidden" name="cartuserID" id="cart_id" value="{{ $cartUser->id }}" >
                             <td id="product_name">{{ $cartUser->name }}</td>
                           </tr>
                           <tr>
@@ -129,6 +129,7 @@
                     <label for="paypal">Thanh Toán qua VNPAY</label>
                   </div>
                   <button type="button" id="checkout" class="normal-btn submit-btn">Thanh Toán</button>
+                  <button type="submit" id="checkout2" class="normal-btn submit-btn" style="display:none" >Thanh Toán</button>
                 </div>
               </div>
             </div>
@@ -257,8 +258,16 @@
 
       $('#paypal').click(function () {
           if ($(this).is(':checked')) {
-            $('#checkout').click(function(){
-              location.href = "{{ url('vnpay_php') }}";
+            $('#checkout').css('display', 'none');
+            $('#checkout2').css('display', 'block');
+
+            $('#checkout2').click(function(){
+              var name = $('#name').val();
+              var phone = $('#phone').val();
+              var confirm_address = $('#confirm_address').val();
+              if(name.trim() == '' || phone.trim() == '' || confirm_address.trim() == ''){
+                swal("Thông báo", "Bạn cần nhập đầy đủ thông tin !" , "warning");
+              }
             });
           }
       });

@@ -75,7 +75,7 @@
                     @if(isset($user_cart))
                         @foreach($user_cart as $key => $value)
                           <tr>
-                            <td><input type="radio" name="checkk" class="product_id" value="{{ $value->id }}"></td>
+                            <td><input type="radio" name="checkk" class="product_id" value="{{ $value->product_id }}"></td>
                             <td class="product-iamge"> 
                               <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->image }}" alt="product image"></div>
                             </td>
@@ -99,7 +99,7 @@
                         @foreach($cart as $key => $value)
                           <tr>
                             <td><input type="radio"></td>
-                            <td class="product-iamge"> 
+                            <td class="product-image"> 
                               <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->options->image }}" alt="product image"></div>
                             </td>
                             <td class="product-name">{{ $value->name }}</td>

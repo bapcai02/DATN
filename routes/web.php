@@ -23,25 +23,21 @@ Route::prefix('user')->group(function (){
     Route::post('/update','UserProfileController@update');
 });
 
-Route::get('/customers/{id}','CustomerController@index');
+Route::get('/customers/{id}', 'CustomerController@index');
 
 Route::prefix('cart')->group(function (){
-    Route::get('/','CartController@index')->name('cart');
+    Route::get('/', 'CartController@index')->name('cart');
     Route::post('/', 'CartController@addCart');
     Route::post('/delete', 'CartController@deleteCart');
-    Route::get('/coupon','CartController@CartCoupon');
+    Route::get('/coupon', 'CartController@CartCoupon');
     Route::get('/update', 'CartController@updateCart');
-    Route::get('/checkout/{id}','CartController@checkout');
-    Route::get('/quanhuyen','CartController@getQuanHuyen');
-    Route::get('/xaphuong','CartController@getXaPhuong');
+    Route::get('/checkout/{id}', 'CartController@checkout');
+    Route::get('/quanhuyen', 'CartController@getQuanHuyen');
+    Route::get('/xaphuong', 'CartController@getXaPhuong');
 });
 
-Route::get('/vnpay_php',function(){
-    return view('fontend.vnpay_php.index');
-});
-Route::get('/vnpay_php/return',function(){
-    return view('fontend.vnpay_php.vnpay_return');
-});
+Route::get('/vnpay_php', 'PaymentController@getPayment');
+Route::get('/vnpay_php/return', 'PaymentController@returnUrl');
 Route::post('/payment', 'PaymentController@payment');
 
 Route::prefix('usercart')->group(function (){
@@ -49,9 +45,9 @@ Route::prefix('usercart')->group(function (){
     Route::post('/add', 'UserCartController@addCart');
     Route::post('/delete', 'UserCartController@deleteCart');
     Route::get('/update', 'UserCartController@updateCart');
-    Route::post('/order','OrderController@create');
-    Route::get('/quanhuyen','UserCartController@getQuanHuyen');
-    Route::get('/xaphuong','UserCartController@getXaPhuong');
+    Route::post('/order', 'OrderController@create');
+    Route::get('/quanhuyen', 'UserCartController@getQuanHuyen');
+    Route::get('/xaphuong', 'UserCartController@getXaPhuong');
 });
 
 
