@@ -50,7 +50,7 @@
                         </div>
                         <div class="product-category"
                           <h5 class="category">Categories:<span><a href="product_grid+list_3col.html">{{ $product->category_name }}</a></span></h5>
-                          <h5 class="category">Tag:<span><a href="product_grid+list_3col.html">Food</a></span></h5>
+                          {{-- <h5 class="category">Tag:<span><a href="product_grid+list_3col.html">Food</a></span></h5> --}}
                           <h5 class="category">Thông Tin Shop: <a href="{{url('customer') . '/' . $product->seller_id}}">{{ App\Repositories\SellerRepository::checkName($product->seller_id)->shop_name }}</a></h5>
                         </div>
                       </div>
@@ -82,7 +82,7 @@
                             <form action="{{ url('/usercart/add') }}" method = "POST">
                               @csrf
                               <input type="hidden" name="productId" value="{{ $product->id }}" >
-                              <button type = 'submit' class="add-to-cart normal-btn outline"></button> 
+                              <button type = 'submit' class="add-to-cart normal-btn outline"> Thêm giỏ hàng</button> 
                             </form> 
                           @endif 
                         </div>
@@ -99,20 +99,19 @@
                   <div class="shop-detail_more-info">
                     <div id="tab-so3">
                       <ul class="mb-0">
-                        <li class="active"><a href="#tab-1">DESCRIPTION</a></li>
-                        <li><a href="#tab-2">SPECIFICATIONS</a></li>
-                        <li> <a href="#tab-3">Customer Reviews (02)</a></li>
+                        <li class="active"><a href="#tab-1">CHI TIẾT SẢN PHẨM</a></li>
+                        <li> <a href="#tab-3">Đánh GIÁ</a></li>
                       </ul>
                       <div id="tab-1">
                         <div class="description-block">
                           <div class="description-item_block">
                             <div class="row align-items-center justify-content-around">
                               <div class="col-12 col-md-4">
-                                <div class="description-item_img"><img class="img-fluid" src="assets/images/shop/shop_detail_full_img.png" alt="description image"></div>
+                                <div class="description-item_img"><img class="img-fluid" src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($product->id)->image }}" alt="description image"></div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="description-item_text">
-                                  <h2>Product information</h2>
+                                  <h2>Thông tin sản phẩm</h2>
                                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiustempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. S totam rem aperiam, eaque ipsa</p>
                                 </div>
                               </div>
@@ -120,89 +119,46 @@
                           </div>
                         </div>
                       </div>
-                      <div id="tab-2">
-                        <div class="specifications_block">
-                          <table class="shop_attributes table-bordered">
-                            <tbody>
-                              <tr>
-                                <th>Weight</th>
-                                <td class="product_weight">10 oz</td>
-                              </tr>
-                              <tr>
-                                <th>Dimensions</th>
-                                <td class="product_dimensions">15 × 12 × 20 in</td>
-                              </tr>
-                              <tr>
-                                <th>Color</th>
-                                <td class="product_color">Black, Blue, Gray, Green</td>
-                              </tr>
-                              <tr>
-                                <th>Size</th>
-                                <td class="product_size">L, M, S, XL</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
                       <div id="tab-3"> 
                         <div class="customer-reviews_block">
+                          @foreach($rating as $value)
                           <div class="customer-review">
                             <div class="row">
-                              <div class="col-12 col-sm-3 col-lg-2 col-xxl-1">
-                                <div class="customer-review_left">
-                                  <div class="customer-review_img text-center"><img class="img-fluid" src="assets/images/shop/reviewer_01.png" alt="customer image"></div>
-                                  <div class="customer-rate"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i></div>
-                                </div>
-                              </div>
                               <div class="col-12 col-sm-9 col-lg-10 col-xxl-11">
                                 <div class="customer-comment"> 
-                                  <h5 class="comment-date">27 Aug 2016</h5>
-                                  <h3 class="customer-name">Jenney Kelley</h3>
-                                  <p class="customer-commented">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                                  <h5 class="comment-date">{{ date('Y-m-d', strtotime($value->created_at))}}</h5>
+                                  <h3 class="customer-name">{{ $value->name }}</h3>
+                                  <p class="customer-commented">{{ $value->message }}</p>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="customer-review">
-                            <div class="row">
-                              <div class="col-12 col-sm-3 col-lg-2 col-xxl-1">
-                                <div class="customer-review_left">
-                                  <div class="customer-review_img text-center"><img class="img-fluid" src="assets/images/shop/reviewer_02.png" alt="customer image"></div>
-                                  <div class="customer-rate"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i></div>
-                                </div>
-                              </div>
-                              <div class="col-12 col-sm-9 col-lg-10 col-xxl-11">
-                                <div class="customer-comment"> 
-                                  <h5 class="comment-date">27 Aug 2016</h5>
-                                  <h3 class="customer-name">Jenney Kelley</h3>
-                                  <p class="customer-commented">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          @endforeach
                           <div class="add-review">
                             <div class="add-review_top">
-                              <h2>Add Review</h2>
+                              <h2>Đánh giá</h2>
                             </div>
                             <div class="add-review_bottom">
-                              <form action="" method="post">
+                              <form>
                                 <div class="row">
-                                  <div class="col-12 col-md-6">
-                                    <input class="no-round-input" type="text" placeholder="Name*">
-                                  </div>
-                                  <div class="col-12 col-md-6">
-                                    <input class="no-round-input" type="text" placeholder="Email*">
-                                  </div>
                                   <div class="col-12">
                                     <div class="rating">
-                                      <h5>Your rating:</h5><span><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></span>
+                                      <h5>Your rating:</h5><span><div id="rateYo"></div></span>
                                     </div>
                                   </div>
                                   <div class="col-12">
                                     <textarea class="textarea-form" id="review" name="" cols="30" rows="5" placeholder="Message"></textarea>
                                   </div>
+                                 
+
                                   <div class="col-12">
-                                    <button class="normal-btn">Submit Review</button>
+                                    @if(Auth::check())
+                                      <input type="hidden" id="productid" value="{{ $product->id }}">
+                                      <input type="hidden" id="userid" value="{{ Auth::user()->id }}">
+                                      <button id="rating" type="button" class="normal-btn">Đánh giá</button>
+                                    @else
+                                      <button id="rating2" type="button" class="normal-btn">Đánh giá</button>
+                                    @endif
                                   </div>
                                 </div>
                               </form>
@@ -296,7 +252,40 @@
           if((val) && val.length > 0) {
               swal("Thành Công!", "Thao Tác Thành công!", "success");
           }
-       })
+          
+          $('#rating2').click(function(){
+            swal("Thông báo !", "Bạn cần đăng nhập để đánh giá !", "warning");
+          })
+
+          $("#rateYo").rateYo({
+            onSet: function (rating, rateYoInstance) {
+                $('#rating').click(function(){
+                  var text = $('#review').val();
+                  var product_id = $('#productid').val();
+                  var user_id = $('#userid').val();
+
+                  if(text.length == 0 || rating == 0) {
+                      swal("Thông báo!", "vui lòng nhập đầy đủ thông tin!", "warning");
+                  }else{
+                    $.ajax({
+                      type:'GET',
+                      url:"{{ url('rating') }}",
+                      data:{
+                        'text': text,
+                        'rating' : rating,
+                        'productid': product_id,
+                        'userid' : user_id
+                      }
+                    }).done(function(res){
+                      console.log(res);
+                      location.reload();
+                    })
+                  }
+                })
+              }
+          });
+          
+        });
       
     </script>
 @endpush

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('HTML/assets/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('HTML/assets/css/jquery.fancybox.min.css') }}">
     <link rel="shortcut icon" href="{{ asset('HTML/assets/images/shortcut_logo.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
   </head>
   <body>
     <div id="main">
@@ -40,6 +41,7 @@
     <script src="{{ asset('HTML/assets/js/vanilla-tilt.min.js') }}"></script>
     <script src="{{ asset('HTML/assets/js/main.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     @stack('script')
   </body>
 </html>

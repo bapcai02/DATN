@@ -45,6 +45,9 @@ class ProductRepository
             ->join('categories', 'products.category_id', 'categories.id')
             ->where('products.product_status', 1)
             ->where('products.id', $id)
+            ->select('products.id', 'products.product_name', 'products.product_desc', 'products.seller_id', 
+                'products.product_price', 'products.sale','products.product_status',
+                'categories.category_name')
             ->orderBy('products.created_at', 'DESC');
     }
 
@@ -242,5 +245,22 @@ class ProductRepository
     public static function getName(int $id)
     {
         return DB::table('products')->where('id', $id)->select('product_name')->first();
+    }
+
+    public function rating($data)
+    {
+        $this->rating->create([
+            'product_id' => $data['productid'],
+            'user_id' => $data['userid'],
+            'rating' => $data['rating'],
+            'message' => $data['text']
+        ]);
+    }
+
+    public function getRating(int $id)
+    {
+        return $this->rating->where('product_id', $id)
+            ->join('users', 'ratings.user_id', 'users.id')
+            ->orderBy('ratings.created_at', 'desc')->paginate(5);
     }
 }
