@@ -74,4 +74,16 @@ class HomeController extends Controller
 
         return view('fontend.pages.search.index', compact('search', 'category'));
     }
+
+    public function about()
+    {
+        $category = $this->categoryRepository->getListCategory()->get();
+        return view('fontend.pages.home.about', compact('category'));
+    }
+
+    public function contact()
+    {
+        $category = $this->categoryRepository->getListCategory()->get();
+        view('fontend.pages.home.contact', compact('category'));
+    }
 }

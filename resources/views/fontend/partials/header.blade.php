@@ -31,12 +31,16 @@
               <ul class="mb-0">
                 <li class="toggleable"> <a class="menu-item" href="{{ url('/') }}">Home</a>
                 </li>
+                <li class="toggleable"> <a class="menu-item" href="{{ url('/contact') }}">Liên Hệ</a>
+                </li>
+                <li class="toggleable"> <a class="menu-item" href="{{ url('/about') }}">Thông tin</a>
+                </li>
               </ul>
             </div>
           </div>
           <div class="col-2">
             <div class="product-function d-flex align-items-center justify-content-end">
-              {{-- <div id="wishlist"><a class="function-icon icon_heart_alt" href=""></a></div> --}}
+
               @if(Auth::check())
                 <div id="cart"><a class="function-icon icon_bag_alt" href="{{ url('/cart') }}"><span>{{ number_format(App\Repositories\UserCartRepository::CountPrice(Auth::user()->id)->totalPrice) }} VND</span></a></div>
               @else
@@ -118,8 +122,8 @@
         <div class="row">
           <div class="col-12 col-md-4 col-lg-4 col-xl-3 order-2 order-md-1">
             <div class="department-menu_block down">
-              <div class="department-menu d-flex justify-content-between align-items-center"><i class="fas fa-bars"></i>DANH MỤC SẢN PHẨM<span><i class="arrow_carrot-up"></i></span></div>
-              <div class="department-dropdown-menu down">
+              <div class="department-menu d-flex justify-content-between align-items-center"><i class="fas fa-bars"></i>DANH MỤC SẢN PHẨM<span><i class="arrow_carrot-down"></i></span></div>
+              <div class="department-dropdown-menu">
                 <ul>
                   @foreach($category as $key => $value)
                     <li><a href="{{ url('categories') . '/' . $value->id  }}"> <i class="icon-{{ $key+1 }}"></i>{{ $value->category_name }}</a></li>
