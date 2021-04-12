@@ -228,14 +228,14 @@
             <div class="card-body">
               <h5 class="card-title">Thương Hiệu</h5>
                 <div class="table-responsive">
-                <div class="row mb-3">
+                    <div class="row mb-3">
                         <div class="col-12">
                             <a class="btn btn-success btn-sm js-btn-add"
-                              id="add-worker"
-                              href="javascript:void(0);"
-                              data-toggle="modal"
-                              data-target="#add-brand-modal"
-                              type="button">
+                                id="add-worker"
+                                href="javascript:void(0);"
+                                data-toggle="modal"
+                                data-target="#add-brand-modal"
+                                type="button">
                             <span>
                                 <i class="fa fa-plus mr-1"></i>
                                 Thêm mới Thương Hiệu

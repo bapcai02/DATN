@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-xl-3"></div>
         <div class="col-12 col-xl-9">
-          <div class="banner-block"> 
+          <div class="banner-block" style="background-image: url({{ asset('assets/images').'/'.$slider[0]->images }});"> 
             <div class="row no-gutters justify-content-center align-items-md-center">
               <div class="col-10 col-md-5 col-xl-6">
                 <div class="banner-text text-center text-md-left">
@@ -20,7 +20,7 @@
               </div>
               <div class="col-12 col-md-5 col-xl-5">
                 <div class="banner-img">
-                  <div class="img-block text-center"><img style="right:30%" width="600px" height="400px" class="mymove" src="{{ asset('assets/images').'/'.$slider[0]->images }}" alt=""></div>
+                  <div class="img-block text-center"></div>
                 </div>
               </div>
             </div>
@@ -44,7 +44,7 @@
                 <div class="deal-block"> 
                   <div class="deal-block_detail">
                     <h5 class="deal-discount">-{{ $value->sale }}%</h5>
-                    <div class="deal-img"><a href="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt="product image"></a></div>
+                    <div class="deal-img"><a href="{{ url('/detail') . '/'. $value->id }}"><img width="300px" height="350px" src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt="product image"></a></div>
                   
                     <div class="deal-info text-center">
                       <h5 class="color-type pink deal-type">{{ $value->category_name }}</h5><a class="deal-name" href="#">{{ $value->product_name }}</a>
@@ -132,37 +132,6 @@
                   </div>
                 @endforeach
               </div>
-            </div>
-          </div>
-          <div class="customer-satisfied text-center">
-            <div class="customer-satisfied_border">
-              <div class="customer-satisfied_wrapper">
-                <div class="customer-satisfied_block">
-                  <div class="customer-img mx-auto"><img src="assets/images/homepage03/customer_img_1.png" alt="customer"></div>
-                  <div class="customer-info">
-                    <h5 class="customer-name">Steven Ady</h5>
-                    <p class="customer-comment">Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do accusantium </p>
-                    <div class="customer-rate"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i></div>
-                  </div>
-                </div>
-                <div class="customer-satisfied_block">
-                  <div class="customer-img mx-auto"><img src="assets/images/homepage03/customer_img_1.png" alt="customer"></div>
-                  <div class="customer-info">
-                    <h5 class="customer-name">Steven Ady</h5>
-                    <p class="customer-comment">Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do accusantium </p>
-                    <div class="customer-rate"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i></div>
-                  </div>
-                </div>
-                <div class="customer-satisfied_block">
-                  <div class="customer-img mx-auto"><img src="assets/images/homepage03/customer_img_1.png" alt="customer"></div>
-                  <div class="customer-info">
-                    <h5 class="customer-name">Steven Ady</h5>
-                    <p class="customer-comment">Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do accusantium </p>
-                    <div class="customer-rate"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="customer-satisfied_control"></div>
             </div>
           </div>
         </div>
@@ -375,10 +344,10 @@
               </div>
             </div>
           </div>
-          <div class="quick-banner">
+          <div class="quick-banner" style="background-image: url({{ asset('assets/images').'/'.$slider[0]->images }});">
             <div class="row justify-content-center align-items-center flex-column flex-md-row">
               <div class="col-12 col-md-5">
-                <div class="bannner-img text-center"><img class="img-fluid" src="assets/images/homepage03/quick_banner_1_img.png" alt=""></div>
+                <div class="bannner-img text-center"></div>
               </div>
               <div class="col-10 col-md-5">
                 <div class="banner-text text-center text-md-left">
@@ -386,7 +355,7 @@
                     <h2 class="big-number">50</h2>
                     <h3>%OFF<br>Black <span>Friday</span></h3>
                   </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur oce omnis iste natus error sit  </p><a class="normal-btn pink" href="shop_grid+list_3col.html">Shop now</a>
+                  <p>{{ $slider[0]->descript }}</p><a class="normal-btn pink" href="{{  url('/detail') . '/'. $slider[1]->product_id  }}">Shop now</a>
                 </div>
               </div>
             </div>

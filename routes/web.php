@@ -124,6 +124,12 @@ Route::group(['middleware' => 'checkadmin'], function () {
             Route::get('/', 'Admin\OrderController@index'); 
             Route::get('/search', 'Admin\OrderController@search');
         });
+
+        Route::prefix('slider')->group(function () {   
+            Route::get('/', 'Admin\SliderController@index'); 
+            Route::post('/delete', 'Admin\SliderController@delete'); 
+            Route::post('/create', 'Admin\SliderController@create');
+        });
     });
 });
 

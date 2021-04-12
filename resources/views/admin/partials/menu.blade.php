@@ -56,8 +56,8 @@
       </li>
 
       <li>
-        <a href="login.html" >
-          <i class="zmdi zmdi-lock"></i> <span>Config</span>
+        <a href="{{ url('admins/slider') }}" >
+          <i class="zmdi zmdi-lock"></i> <span>Manage Slider</span>
         </a>
       </li>
 
