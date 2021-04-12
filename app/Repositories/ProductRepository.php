@@ -132,6 +132,19 @@ class ProductRepository
         ->paginate(6);
     }
 
+    public function getByAdmin()
+    {
+        return $this->product
+        ->join('sellers', 'products.seller_id', 'sellers.id')
+        ->join('customers', 'sellers.customer_id', 'customers.id')
+        ->select('products.id', 'products.product_name', 'products.product_desc', 'products.created_at',
+                'products.product_price', 'products.sale','products.product_status',
+                'products.product_content','products.category_id', 'products.brand_id',
+                'products.seller_id')
+        ->orderBy('products.created_at', 'desc')
+        ->paginate(6);
+    }
+
     public function getProductByCategoryId(int $id){
         return $this->product
             ->join('categories', 'products.category_id', 'categories.id')
@@ -172,6 +185,36 @@ class ProductRepository
             ->join('sellers', 'products.seller_id', 'sellers.id')
             ->join('customers', 'sellers.customer_id', 'customers.id')
             ->where('customers.user_id', $customer_id)
+            ->select('products.id', 'products.product_name', 'products.product_desc', 
+                    'products.product_price', 'products.sale','products.product_status',
+                    'products.product_content','products.category_id', 'products.brand_id',
+                    'products.seller_id')
+            ->when($date, function ($query) use ($date) {
+                return $query->whereDate('created', $date);
+            })
+            ->when($product_name, function ($query) use ($product_name) {
+                return $query->where('product_name','LIKE', "%$product_name%");
+            })
+            ->when($brand, function ($query) use ($brand) {
+                return $query->where('brand_id', $brand);
+            })
+            ->when($category, function ($query) use ($category) {
+                return $query->where('category_id', $category);
+            })
+            ->paginate(6);
+    }
+
+    public function searchAdmin($data)
+    {
+       
+        $date = isset($data['date']) ? $data['date'] . ' ' . "00:00:00" : false;
+        $product_name = isset($data['product_name']) ? $data['product_name'] : false;
+        $brand = isset($data['brand']) ? $data['brand'] : false;
+        $category =  isset($data['category']) ? $data['category'] : false;
+
+        return $this->product
+            ->join('sellers', 'products.seller_id', 'sellers.id')
+            ->join('customers', 'sellers.customer_id', 'customers.id')
             ->select('products.id', 'products.product_name', 'products.product_desc', 
                     'products.product_price', 'products.sale','products.product_status',
                     'products.product_content','products.category_id', 'products.brand_id',

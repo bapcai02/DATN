@@ -130,6 +130,11 @@ Route::group(['middleware' => 'checkadmin'], function () {
             Route::post('/delete', 'Admin\SliderController@delete'); 
             Route::post('/create', 'Admin\SliderController@create');
         });
+
+        Route::prefix('product')->group(function () {
+            Route::get('/', 'Admin\ProductController@index')->name('customer.product'); 
+            Route::get('/search', 'Admin\ProductController@search')->name('customer.product.search'); 
+        });
     });
 });
 
