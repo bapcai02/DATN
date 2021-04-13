@@ -2,97 +2,85 @@
      <div class="brand-logo">
       <a href="{{ url('admins/home') }}">
        <img src="{{ asset('admin/assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
-       <h5 class="logo-text">Admin</h5>
+       <h5 class="logo-text">Quản Lý</h5>
      </a>
    </div>
    <ul class="sidebar-menu do-nicescrol">
    @if(Auth::user()->role_id == 3)
       <li>
-        <a href="{{ url('admin/home') }}">
-          <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
+        <a href="{{ url('admins/home') }}">
+          <i class="zmdi zmdi-view-dashboard"></i> <span>Trang Chủ</span>
         </a>
       </li>
 
       <li>
         <a href="{{ url('admins/customer/') }}">
-          <i class="zmdi zmdi-invert-colors"></i> <span>Manage Customer</span>
+          <i class="zmdi zmdi-invert-colors"></i> <span>Quản Lý Doanh nghiệp</span>
         </a>
       </li>
 
       <li>
         <a href="{{ url('admins/user/') }}">
-          <i class="zmdi zmdi-format-list-bulleted"></i> <span>Manage User</span>
+          <i class="zmdi zmdi-format-list-bulleted"></i> <span>Quản Lý Người Dùng</span>
         </a>
       </li>
 
       <li>
         <a href="{{ url('admins/order/') }}">
-          <i class="zmdi zmdi-face"></i> <span>Manage Order</span>
+          <i class="zmdi zmdi-face"></i> <span>Quản Lý Đơn Hàng</span>
         </a>
       </li>
 
       <li>
         <a href="{{ url('admins/coupon/') }}">
-          <i class="zmdi zmdi-chart"></i> <span>Manage Coupons</span>
+          <i class="zmdi zmdi-chart"></i> <span>Quản Lý Mã Giảm Giá</span>
         </a>
       </li>
       
       <li>
         <a href="{{ url('admins/product/') }}">
-          <i class="zmdi zmdi-grid"></i> <span>Manage Product</span>
+          <i class="zmdi zmdi-grid"></i> <span>Quản Lý Sản Phẩm</span>
         </a>
       </li>
 
       <li>
         <a href="{{ url('admins/category/') }}">
-          <i class="zmdi zmdi-calendar-check"></i> <span>Manage Categories</span>
+          <i class="zmdi zmdi-calendar-check"></i> <span>Quản Lý Thể Loại Sản Phẩm</span>
         </a>
       </li>
 
       <li>
         <a href="{{ url('admins/brand/') }}">
-          <i class="zmdi zmdi-calendar-check"></i> <span>Manage Brand</span>
+          <i class="zmdi zmdi-calendar-check"></i> <span>Quản Lý Nhãn Hàng</span>
         </a>
       </li>
 
       <li>
         <a href="{{ url('admins/slider') }}" >
-          <i class="zmdi zmdi-lock"></i> <span>Manage Slider</span>
+          <i class="zmdi zmdi-lock"></i> <span>Quản Lý Slider</span>
         </a>
       </li>
 
       <li>
         <a href="{{ url('admins/addressShip/') }}" >
-          <i class="zmdi zmdi-account-circle"></i> <span>Manage Address Ship</span>
+          <i class="zmdi zmdi-account-circle"></i> <span>Quản Lý Địa Chỉ</span>
         </a>
       </li>
 
   @elseif(Auth::user()->role_id == 2)
       <li>
         <a href="{{ url('cusomer/home') }}">
-          <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
+          <i class="zmdi zmdi-view-dashboard"></i> <span>Trang Chủ</span>
         </a>
       </li>
       <li>
         <a href="{{url('customer/order')}}">
-          <i class="zmdi zmdi-face"></i> <span>Manage Order</span>
+          <i class="zmdi zmdi-face"></i> <span>Quản Lý Đơn Hàng</span>
         </a>
       </li>
       <li>
         <a href="{{ url('customer/product/') }}">
-          <i class="zmdi zmdi-grid"></i> <span>Manage Product</span>
-        </a>
-      </li>
-     
-  @elseif(Auth::user()->role_id == 4)
-      <li>
-        <a href="{{ url('shiper/home') }}">
-          <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{url('shiper/order')}}">
-          <i class="zmdi zmdi-face"></i> <span>Manage Order</span>
+          <i class="zmdi zmdi-grid"></i> <span>Quản Lý Sản Phẩm</span>
         </a>
       </li>
   @endif

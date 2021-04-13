@@ -35,7 +35,7 @@
             </a>
           </li>
           <li class="dropdown-divider"></li>
-          <li class="dropdown-item"><i class="icon-power mr-2"></i><a href="{{ url('auth/logout') }}"> Logout</a></li>
+          <li class="dropdown-item"><i class="icon-power mr-2"></i><a href="{{ url('auth/logout') }}">Đăng Xuất</a></li>
         </ul>
       @elseif(Auth::user()->role_id == 2)
       <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">

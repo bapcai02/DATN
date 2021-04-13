@@ -13,9 +13,9 @@
               <div class="social-link d-flex"><a href=""><i class="fab fa-facebook-f"> </i></a><a href=""><i class="fab fa-twitter"></i></a><a href=""><i class="fab fa-invision"> </i></a><a href=""><i class="fab fa-pinterest-p"> </i></a></div>
               @if(Auth::check())
                 <div class="login d-flex"><a href="{{ url('user') }}"><i class="fas fa-user"></i>{{ Auth::user()->name }}</a></div>&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="d-flex"><a href="{{ url('logout') }}">Logout</a></div>    
+                <div class="d-flex"><a href="{{ url('logout') }}">Đăng Xuất</a></div>    
               @else
-                <div class="login d-flex"><a href="{{ url('login') }}"><i class="fas fa-user"></i>Login</a></div>
+                <div class="login d-flex"><a href="{{ url('login') }}"><i class="fas fa-user"></i>Đăng Nhập</a></div>
               @endif
             </div>
           </div>
@@ -29,7 +29,7 @@
           <div class="col-8">
             <div class="navgition-menu d-flex">
               <ul class="mb-0">
-                <li class="toggleable"> <a class="menu-item" href="{{ url('/') }}">Home</a>
+                <li class="toggleable"> <a class="menu-item" href="{{ url('/') }}">Trang Chủ</a>
                 </li>
                 <li class="toggleable"> <a class="menu-item" href="{{ url('/contact') }}">Liên Hệ</a>
                 </li>

@@ -4,8 +4,8 @@
         <div class="col-12 col-sm-12 col-md-4 text-sm-center text-md-left">
           <div class="footer-logo"><img src="{{ asset('HTML/assets/images/logo.png') }}" alt=""></div>
           <div class="footer-contact">
-            <p>Address: Thanh Xuan, Ha Noi</p>
-            <p>Phone: +397.368.768</p>
+            <p>Địa chỉ: Thanh Xuan, Ha Noi</p>
+            <p>Số điện thoại: +397.368.768</p>
             <p>Email: hadv62@wru.vn</p>
           </div>
           <div class="footer-social"><a class="round-icon-btn pink" href=""><i class="fab fa-facebook-f"> </i></a><a class="round-icon-btn pink" href=""><i class="fab fa-twitter"></i></a><a class="round-icon-btn pink" href=""><i class="fab fa-invision"> </i></a><a class="round-icon-btn pink" href=""><i class="fab fa-pinterest-p"></i></a></div>
@@ -14,7 +14,7 @@
           <div class="row">
             <div class="col-12 col-sm-4 text-sm-center text-md-left">
               <div class="footer-quicklink">
-                <h5>Infomation</h5><a href="{{ url('about') }}">About us</a><a href="{{ url('contact') }}">Contact</a>
+                <h5>Infomation</h5><a href="{{ url('about') }}">Thông tin</a><a href="{{ url('contact') }}">Liên hệ</a>
               </div>
             </div>
           </div>

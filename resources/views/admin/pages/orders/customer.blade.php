@@ -26,7 +26,7 @@
         
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
-                  <label class="form-label" for="simpleinput">Tên</label>
+                  <label class="form-label" for="simpleinput">Mã Đơn Hàng</label>
                   <input type="text" name="code" class="form-control" placeholder="Mã đơn hàng"
                   @if(isset($_GET['code'])) value="{{ $_GET['code'] }}"
                     @else id="code" @endif>
@@ -34,9 +34,9 @@
           </div>
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
-                  <label class="form-label" for="simpleinput">Status</label>
+                  <label class="form-label" for="simpleinput">Hình Thức Thanh Toán</label>
                   <select class="form-control" id="" name="status">                     
-                      <option value="">Chọn Status</option>
+                      <option value="">Chọn Hình Thức</option>
                       <option value="2">Thanh toán khi nhận hàng</option>
                       <option value="1">Thanh toán qua thẻ ngân hàng</option>
                   </select>

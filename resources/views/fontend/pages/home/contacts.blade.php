@@ -21,32 +21,32 @@
           <div class="col-12 col-md-4">
             <div class="method-block"><i class="icon_pin_alt"></i>
               <div class="method-block_text">
-                <p>60-49 Road 11378 </p>
-                <p>New York</p>
+                <p>268 Lê Trọng Tấn, Thanh Xuân</p>
+                <p>Hà Nội</p>
               </div>
             </div>
           </div>
           <div class="col-12 col-md-4">
             <div class="method-block"><i class="icon_mail_alt"></i>
               <div class="method-block_text">
-                <p> <span>Phone:</span>60-49 Road 11378 </p>
-                <p><span>Mail:</span>info.deercreative@gmail.com</p>
+                <p> <span>Số Điện Thoại:</span>+84.397.368.768 </p>
+                <p><span>Mail:</span>hadv62@wru.vn</p>
               </div>
             </div>
           </div>
           <div class="col-12 col-md-4">
             <div class="method-block"><i class="icon_clock_alt"></i>
               <div class="method-block_text">
-                <p> <span>Week Days:</span>10:00 – 22:00</p>
-                <p><span>Sunday:</span>Close</p>
+                <p> <span>Giờ Làm Việc:</span>10:00 – 22:00</p>
+                <p><span>Chủ Nhật:</span>Close</p>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="leave-message">
-        <h1 class="title">Leave Message</h1>
-        <p>Our staff will call back later and answer your questions.</p>
+        <h1 class="title">Để lại tin nhắn</h1>
+        <p>Nhân viên sẽ gọi lại sau và trả lời câu hỏi của bạn.</p>
         <form action="" method="post">
           <div class="row">
             <div class="col-12 col-md-6">

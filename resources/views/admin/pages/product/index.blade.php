@@ -50,15 +50,15 @@
 
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
-                  <label class="form-label" for="simpleinput">product</label>
+                  <label class="form-label" for="simpleinput">Tên Sản Phẩm</label>
                   <input type="text" name="product_name" class="form-control" placeholder="product name">
               </div>
           </div>
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
-                  <label class="form-label" for="simpleinput">Brand</label>
+                  <label class="form-label" for="simpleinput">Thương Hiệu</label>
                   <select class="form-control" id="" name="brand">                     
-                      <option value="">Chọn Brand</option>
+                      <option value="">Chọn Thương Hiệu</option>
                       @foreach($brand as $key => $value)
                         <option value="{{ $value->id }}">{{ $value->brand_name }}</option>
                       @endforeach
@@ -67,7 +67,7 @@
           </div>
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
-                  <label class="form-label" for="example-select">Category</label>
+                  <label class="form-label" for="example-select">Doanh Nghiệp</label>
                   <select class="form-control" id="example-select" name="category">
                       <option value="">Chọn Category</option>
                       @foreach($category as $key => $value)
@@ -134,7 +134,7 @@
                 <th>Giá</th>
                 <th>Giảm giá</th>
                 <th>Mô Tả</th>
-                <th>Content</th>
+                <th>Mô Tả</th>
                 <th>Status</th>
                 <th></th>
             </tr>
