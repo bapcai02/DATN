@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 08, 2021 lúc 05:28 PM
--- Phiên bản máy phục vụ: 10.4.13-MariaDB
--- Phiên bản PHP: 7.3.19
+-- Thời gian đã tạo: Th4 13, 2021 lúc 05:20 AM
+-- Phiên bản máy phục vụ: 10.4.17-MariaDB
+-- Phiên bản PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,20 +37,6 @@ CREATE TABLE `admins` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `banks`
---
-
-CREATE TABLE `banks` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -102,7 +88,7 @@ CREATE TABLE `carts` (
 INSERT INTO `carts` (`id`, `user_id`, `product_id`, `name`, `qty`, `sale`, `price`, `image`, `created_at`, `updated_at`) VALUES
 (3, 8, 3, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-03-31 19:08:53', '2021-03-31 19:08:53'),
 (4, 8, 5, 'Cải Thảo', 1, 10, 20000, 'mua-cai-thao-da-lat-tai-ha-noi.jpg', '2021-03-31 19:09:06', '2021-03-31 19:09:06'),
-(5, 10, 5, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-04-07 23:34:26', '2021-04-07 23:34:26');
+(10, 10, 1, 'Xoài ', 2, 22, 10000, '1-1200x676-46.jpg', '2021-04-12 19:26:56', '2021-04-12 19:26:56');
 
 -- --------------------------------------------------------
 
@@ -292,7 +278,7 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL,
   `customer_id` bigint(20) UNSIGNED NOT NULL COMMENT 'customers.id',
   `ship_id` bigint(20) UNSIGNED NOT NULL COMMENT 'ships_id',
-  `payment` bigint(20) UNSIGNED DEFAULT NULL,
+  `payment` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL COMMENT '1:đơn hàng được xác nhận\r\n2: đơn hàng đang vận chuyển\r\n3: đơn hàng đã thanh toán\r\n4: đơn hàng thất bại\r\n2: ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -303,9 +289,12 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `Order_Code`, `user_id`, `customer_id`, `ship_id`, `payment`, `status`, `created_at`, `updated_at`) VALUES
-(4, '5Chjv', 10, 1, 1, 0, 1, '2021-04-01 13:43:03', NULL),
-(5, 'ZGSNY', 10, 1, 1, NULL, 1, '2021-04-08 06:58:46', '2021-04-08 06:58:46'),
-(6, 'ZGSNE', 10, 1, 1, NULL, 1, '2021-04-08 07:12:17', '2021-04-08 07:12:17');
+(5, 'ZGSNY', 10, 1, 1, 0, 1, '2021-04-08 06:58:46', '2021-04-08 06:58:46'),
+(6, 'ZGSNE', 10, 1, 1, 0, 1, '2021-04-08 07:12:17', '2021-04-08 07:12:17'),
+(7, 'ZGSXB', 10, 1, 1, 1, 1, '2021-04-09 00:35:18', '2021-04-09 00:35:18'),
+(8, 'ZGSAX', 10, 1, 1, 1, 1, '2021-04-09 01:05:11', '2021-04-09 01:05:11'),
+(9, 'ZGSAE', 10, 1, 1, 1, 1, '2021-04-09 01:07:28', '2021-04-09 01:07:28'),
+(10, 'ZGS8Q', 2, 1, 1, 1, 1, '2021-04-09 01:42:41', '2021-04-09 01:42:41');
 
 -- --------------------------------------------------------
 
@@ -330,9 +319,11 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `seller_id`, `qty`, `price`, `address_ship`, `created_at`, `updated_at`) VALUES
-(1, 4, 1, 1, 10, 3000000, 'Ha Noi, Ha Dong', '2021-04-01 13:43:26', NULL),
 (2, 5, 6, 1, 1, 70000, 'Phường Phúc Xá,Quận Ba Đình,Thành phố Hà Nội', '2021-04-08 06:58:46', '2021-04-08 06:58:46'),
-(3, 6, 7, 1, 1, 70000, 'Phường Phúc Xá,Quận Ba Đình,Thành phố Hà Nội', '2021-04-08 07:12:17', '2021-04-08 07:12:17');
+(3, 6, 7, 1, 1, 70000, 'Phường Phúc Xá,Quận Ba Đình,Thành phố Hà Nội', '2021-04-08 07:12:17', '2021-04-08 07:12:17'),
+(4, 7, 6, 1, 1, 70000, 'Phường Phúc Xá,Quận Ba Đình,Thành phố Hà Nội', '2021-04-09 00:35:18', '2021-04-09 00:35:18'),
+(5, 9, 5, 1, 1, 10000, 'Phường Phúc Xá, Quận Ba Đình, Phường Phúc Xá', '2021-04-09 01:07:28', '2021-04-09 01:07:28'),
+(6, 10, 2, 1, 1, 10000, 'Phường Vĩnh Phúc, Quận Ba Đình, Phường Vĩnh Phúc', '2021-04-09 01:42:41', '2021-04-09 01:42:41');
 
 -- --------------------------------------------------------
 
@@ -346,6 +337,13 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`, `updated_at`) VALUES
+('hadv62@wru.vn', 'fxeojzGslvaFDbWIDMyOtqAAJvjBHO', '2021-04-12 18:47:43', '2021-04-12 19:11:11');
 
 -- --------------------------------------------------------
 
@@ -444,6 +442,7 @@ CREATE TABLE `ratings` (
   `product_id` bigint(20) UNSIGNED NOT NULL COMMENT 'products.id',
   `user_id` bigint(20) UNSIGNED NOT NULL COMMENT 'users.id',
   `rating` int(11) NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -452,8 +451,9 @@ CREATE TABLE `ratings` (
 -- Đang đổ dữ liệu cho bảng `ratings`
 --
 
-INSERT INTO `ratings` (`id`, `product_id`, `user_id`, `rating`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, 2, '2021-03-16 03:38:00', NULL);
+INSERT INTO `ratings` (`id`, `product_id`, `user_id`, `rating`, `message`, `created_at`, `updated_at`) VALUES
+(1, 1, 3, 2, 'Sản phẩm tốt', '2021-03-16 03:38:00', NULL),
+(2, 1, 10, 4, 'Sản phẩm rất ngon', '2021-04-12 00:41:29', '2021-04-12 00:41:29');
 
 -- --------------------------------------------------------
 
@@ -534,9 +534,20 @@ CREATE TABLE `sliders` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `images` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descript` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `sliders`
+--
+
+INSERT INTO `sliders` (`id`, `product_id`, `images`, `descript`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, '1-1200x676-46.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do', 1, '2021-04-09 10:07:09', NULL),
+(2, 2, '1-1200x676-46.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do', 1, '2021-04-09 10:07:09', NULL),
+(3, 1, '1-1200x676-46.jpg', 'test', 2, '2021-04-11 19:55:56', '2021-04-11 19:55:56');
 
 -- --------------------------------------------------------
 
@@ -3140,7 +3151,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -3182,13 +3193,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -3212,7 +3223,7 @@ ALTER TABLE `product_tags`
 -- AUTO_INCREMENT cho bảng `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -3236,7 +3247,7 @@ ALTER TABLE `ships`
 -- AUTO_INCREMENT cho bảng `sliders`
 --
 ALTER TABLE `sliders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `socials`

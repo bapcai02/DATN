@@ -14,8 +14,6 @@
   <!--favicon-->
   <link href="{{asset('assets/plugins/fullcalendar/css/fullcalendar.min.css')}}" rel='stylesheet'/>
   <link rel="icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon">
-  <!-- Vector CSS -->
-  <link href="{{asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
   <!-- simplebar CSS-->
   <link href="{{asset('assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet"/>
   <!-- Bootstrap core CSS-->
@@ -111,8 +109,6 @@
   <script src="{{asset('assets/plugins/simplebar/js/simplebar.js')}}"></script>
   <!-- sidebar-menu js -->
   <script src="{{asset('assets/js/sidebar-menu.js')}}"></script>
-  <!-- loader scripts -->
-  <script src="{{asset('assets/js/jquery.loading-indicator.js')}}"></script>
   <!-- Custom scripts -->
   <script src="{{asset('assets/js/app-script.js')}}"></script>
   <!-- Chart js -->

@@ -98,7 +98,7 @@ class LoginController extends Controller
 
         $passwordReset = PasswordReset::updateOrCreate(['email' => $user->email], ['token' => Str::random(30)]);
         if ($passwordReset) {
-            $user->notify(new ResetPassword($passwordReset->token));
+            $user->notify(new ResetPassword($passwordReset->token, $user->email));
         }
         return redirect(route('auth.confirm'))->with('message', "please check your email");
     }

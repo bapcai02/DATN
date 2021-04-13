@@ -84,6 +84,6 @@ class HomeController extends Controller
     public function contact()
     {
         $category = $this->categoryRepository->getListCategory()->get();
-        view('fontend.pages.home.contact', compact('category'));
+        return view('fontend.pages.home.contacts', compact('category'));
     }
 }

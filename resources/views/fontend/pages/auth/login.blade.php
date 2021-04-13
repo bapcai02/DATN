@@ -5,7 +5,7 @@
 <div class="ogami-breadcrumb">
     <div class="container">
       <ul>
-        <li> <a class="breadcrumb-link" href="index.html"> <i class="fas fa-home"></i>Home</a></li>
+        <li> <a class="breadcrumb-link" href="{{ url('/') }}"> <i class="fas fa-home"></i>Home</a></li>
         <li> <a class="breadcrumb-link active" href="#">Login</a></li>
       </ul>
     </div>
@@ -40,6 +40,11 @@
                 <input class="no-round-input" name="email" id="user-name" type="email" value="{{ old('email') }}">
             <label for="password">Password *</label>
                 <input class="no-round-input" name="password" id="password" type="password" value="{{ old('password') }}">
+            <div class="form-row">
+              <div class="form-group col-6 text-right">
+                  <a href="{{ url('auth/confirm') }}">Reset Password</a>
+              </div>
+            </div>
             <div class="account-function">
               <button class="no-round-btn">Sign in</button>
             </div>

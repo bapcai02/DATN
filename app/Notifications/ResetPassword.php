@@ -17,10 +17,12 @@ class ResetPassword extends Notification
      * @return void
      */
     protected  $token;
+    protected  $email;
 
-    public function __construct($token)
+    public function __construct($token, $email)
     {
         $this->token = $token;
+        $this->email = $email;
     }
 
     /**
@@ -44,6 +46,7 @@ class ResetPassword extends Notification
     {
         $url = url('auth/set-password/'.$this->token);
         return (new MailMessage)
+                    ->from($this->email)
                     ->line('Your Reset Password Subject Here')
                     ->action('Notification Action', url($url))
                     ->line('If you did not request a password reset, no further action is required.');

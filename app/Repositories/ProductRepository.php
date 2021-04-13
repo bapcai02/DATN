@@ -263,4 +263,18 @@ class ProductRepository
             ->join('users', 'ratings.user_id', 'users.id')
             ->orderBy('ratings.created_at', 'desc')->paginate(5);
     }
+
+    public function FilterProductByPrice($data)
+    {
+        return $this->product
+            ->join('categories', 'products.category_id', 'categories.id')
+            ->select('products.id', 'products.product_name', 'products.product_desc', 
+                'products.product_price', 'products.sale','products.product_status',
+                'categories.category_name')
+            ->where('products.product_status', 1)
+            ->where('products.product_price', '>=',$data['min-value'])
+            ->where('products.product_price', '<=',$data['max-value'])
+            ->orderBy('products.created_at')
+            ->paginate(9);
+    }
 }

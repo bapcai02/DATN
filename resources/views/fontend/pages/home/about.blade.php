@@ -4,8 +4,8 @@
 <div class="ogami-breadcrumb">
     <div class="container">
       <ul>
-        <li> <a class="breadcrumb-link" href="index.html"> <i class="fas fa-home"></i>Home</a></li>
-        <li> <a class="breadcrumb-link active" href="#">About us</a></li>
+        <li> <a class="breadcrumb-link" href="{{ url('/') }}"> <i class="fas fa-home"></i>Home</a></li>
+        <li> <a class="breadcrumb-link active">About us</a></li>
       </ul>
     </div>
   </div>

@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/contact', 'HomeController@contact')->name('home');
-Route::get('/about', 'HomeController@about')->name('home');
+Route::get('/contact', 'HomeController@contact');
+Route::get('/about', 'HomeController@about');
 Route::get('/detail/{id}','DetailController@index')->name('detail');
 Route::get('/categories/{id}','CategoryController@index')->name('categories');
 Route::get('/search', 'HomeController@search');
 Route::get('rating','DetailController@rating');
+Route::get('filter','CategoryController@FilterByPrice');
 
 Route::prefix('user')->group(function (){
     Route::get('/', 'UserProfileController@index');

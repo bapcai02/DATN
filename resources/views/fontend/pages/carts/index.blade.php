@@ -99,7 +99,7 @@
                         @foreach($cart as $key => $value)
                           <tr>
                             <td><input type="radio"></td>
-                            <td class="product-image"> 
+                            <td class="product-iamge"> 
                               <div class="img-wrapper"><img src="{{ asset('assets/images').'/'.$value->options->image }}" alt="product image"></div>
                             </td>
                             <td class="product-name">{{ $value->name }}</td>

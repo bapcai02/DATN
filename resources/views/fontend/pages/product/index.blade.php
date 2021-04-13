@@ -4,9 +4,9 @@
     <div class="ogami-breadcrumb">
       <div class="ogami-container-fluid">
         <ul>
-          <li> <a class="breadcrumb-link" href="index.html"> <i class="fas fa-home"></i>Home</a></li>
-          <li> <a class="breadcrumb-link" href="shop_grid+list_3col.html">Shop</a></li>
-          <li> <a class="breadcrumb-link active" href="">Shop Detail</a></li>
+          <li> <a class="breadcrumb-link" href="{{ url('/') }}"> <i class="fas fa-home"></i>Home</a></li>
+          <li> <a class="breadcrumb-link" href="#">Shop</a></li>
+          <li> <a class="breadcrumb-link active" href="#">Shop Detail</a></li>
         </ul>
       </div>
     </div>

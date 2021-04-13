@@ -2,7 +2,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-sm-12 col-md-4 text-sm-center text-md-left">
-          <div class="footer-logo"><img src="assets/images/logo.png" alt=""></div>
+          <div class="footer-logo"><img src="{{ asset('HTML/assets/images/logo.png') }}" alt=""></div>
           <div class="footer-contact">
             <p>Address: Thanh Xuan, Ha Noi</p>
             <p>Phone: +397.368.768</p>
@@ -14,7 +14,7 @@
           <div class="row">
             <div class="col-12 col-sm-4 text-sm-center text-md-left">
               <div class="footer-quicklink">
-                <h5>Infomation</h5><a href="about_us.html">About us</a><a href="contact.html">Contact</a>
+                <h5>Infomation</h5><a href="{{ url('about') }}">About us</a><a href="{{ url('contact') }}">Contact</a>
               </div>
             </div>
           </div>
@@ -24,7 +24,7 @@
     <div class="footer-credit">
       <div class="container">
         <div class="footer-creadit_block d-flex flex-column flex-md-row justify-content-start justify-content-md-between align-items-baseline align-items-md-center">
-          <p class="author">Copyright © HaDV1998.</p><img class="payment-method" src="assets/images/payment.png" alt="">
+          <p class="author">Copyright © HaDV1998.</p><img class="payment-method" src="{{ asset('HTML/assets/images/payment.png') }}" alt="">
         </div>
       </div>
     </div>

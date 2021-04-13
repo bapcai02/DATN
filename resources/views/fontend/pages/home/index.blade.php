@@ -78,7 +78,7 @@
               <div class="our-benefits column shadowless benefit-border">
                 <div class="row">
                   <div class="col-12 col-md-6 col-xl-12">
-                    <div class="benefit-detail d-flex flex-row align-items-center"><img class="benefit-img" src="assets/images/homepage02/benefit-icon1.png" alt="">
+                    <div class="benefit-detail d-flex flex-row align-items-center"><img class="benefit-img" src="{{ url('HTML/assets/images/homepage02/benefit-icon1.png') }}" alt="">
                       <div class="benefit-detail_info">
                         <h5 class="benefit-title">Free Ship</h5>
                         <p class="benefit-describle">Giá trị đơn hàng lớn hơn 200.000VND</p>
@@ -86,7 +86,7 @@
                     </div>
                   </div>
                   <div class="col-12 col-md-6 col-xl-12">
-                    <div class="benefit-detail d-flex flex-row align-items-center"><img class="benefit-img" src="assets/images/homepage02/benefit-icon2.png" alt="">
+                    <div class="benefit-detail d-flex flex-row align-items-center"><img class="benefit-img" src="{{ url('HTML/assets/images/homepage02/benefit-icon2.png') }}" alt="">
                       <div class="benefit-detail_info">
                         <h5 class="benefit-title">Giao Hàng Đúng Hạn</h5>
                         <p class="benefit-describle">Nhanh Chóng, Tiện Lợi</p>
@@ -94,7 +94,7 @@
                     </div>
                   </div>
                   <div class="col-12 col-md-6 col-xl-12">
-                    <div class="benefit-detail d-flex flex-row align-items-center"><img class="benefit-img" src="assets/images/homepage02/benefit-icon3.png" alt="">
+                    <div class="benefit-detail d-flex flex-row align-items-center"><img class="benefit-img" src="{{ url('HTML/assets/images/homepage02/benefit-icon3.png') }}" alt="">
                       <div class="benefit-detail_info">
                         <h5 class="benefit-title">Thanh Toán An Toàn</h5>
                         <p class="benefit-describle">100% Bảo Mật</p>
@@ -102,7 +102,7 @@
                     </div>
                   </div>
                   <div class="col-12 col-md-6 col-xl-12">
-                    <div class="benefit-detail boderless d-flex flex-row align-items-center"><img class="benefit-img" src="assets/images/homepage02/benefit-icon4.png" alt="">
+                    <div class="benefit-detail boderless d-flex flex-row align-items-center"><img class="{{ url('HTML/assets/images/homepage02/benefit-icon4.png') }}" alt="">
                       <div class="benefit-detail_info">
                         <h5 class="benefit-title">Hỗ Trợ 24/7</h5>
                         <p class="benefit-describle">Hỗ Trợ Tận Tâm</p>

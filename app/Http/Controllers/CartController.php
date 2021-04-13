@@ -49,10 +49,11 @@ class CartController extends Controller
     public function addCart(Request $request){
         
         $product_id = $request ->productId;
-        $product = $this->productRepository->getProductById($product_id)
+        $product = DB::table('products')
                 ->join('product_images', 'products.id', 'product_images.product_id')
+                ->where('products.id', $product_id)
                 ->first();
-        
+
         Cart::add([
             'id' => $product_id, 
             'name' => $product->product_name, 

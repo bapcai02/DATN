@@ -5,13 +5,13 @@
 <div class="ogami-breadcrumb">
     <div class="container">
       <ul>
-        <li> <a class="breadcrumb-link" href="index.html"> <i class="fas fa-home"></i>Home</a></li>
+        <li> <a class="breadcrumb-link" href="{{ url('/') }}"> <i class="fas fa-home"></i>Home</a></li>
         <li> <a class="breadcrumb-link active" href="#">Contact us</a></li>
       </ul>
     </div>
-  </div>
+</div>
   <!-- End breadcrumb-->
-  <div class="contact-us">
+<div class="contact-us">
     <div class="container">
       <div class="feature map">
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3023.6752502007657!2d-73.992009!3d40.725165!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259851c1e9037%3A0x74407071825a96a4!2sCBGB!5e0!3m2!1sen!2sus!4v1395419817211"></iframe>
@@ -62,7 +62,7 @@
         </form>
       </div>
     </div>
-  </div>
+</div>
   <!-- End contact us-->
 
 @endsection

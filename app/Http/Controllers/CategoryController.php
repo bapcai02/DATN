@@ -23,6 +23,15 @@ class CategoryController extends Controller
     public function index($id){
         $category = $this->categoryRepository->getListCategory()->get();
         $product_category = $this->productRepository->getProductByCategoryId($id);
+
+        return view('fontend.pages.categories.index', compact('category', 'product_category'));
+    }
+
+    public function FilterByPrice(Request $request)
+    {
+        $category = $this->categoryRepository->getListCategory()->get();
+        $product_category = $this->productRepository->FilterProductByPrice($request->all());
+        
         return view('fontend.pages.categories.index', compact('category', 'product_category'));
     }
 }
