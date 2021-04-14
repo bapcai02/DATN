@@ -6,7 +6,7 @@
     <div class="container">
       <ul>
         <li> <a class="breadcrumb-link" href="{{ url('/') }}"> <i class="fas fa-home"></i>Home</a></li>
-        <li> <a class="breadcrumb-link active" href="#">Login</a></li>
+        <li> <a class="breadcrumb-link active" href="#">Đăng  Nhập</a></li>
       </ul>
     </div>
   </div>
@@ -42,15 +42,15 @@
                 <input class="no-round-input" name="password" id="password" type="password" value="{{ old('password') }}">
             <div class="form-row">
               <div class="form-group col-6 text-right">
-                  <a href="{{ url('auth/confirm') }}">Reset Password</a>
+                  <a href="{{ url('auth/confirm') }}">Quên Mật Khẩu</a>
               </div>
             </div>
             <div class="account-function">
-              <button class="no-round-btn">Sign in</button>
+              <button class="no-round-btn">Đăng Nhập</button>
             </div>
           </form>
           <div class="account-function">
-          <button class="no-round-btn" style="width:100%"><a href="{{ url('/register') }}">Or create an account</a></button>
+          <button class="no-round-btn" style="width:100%"><a href="{{ url('/register') }}">Đăng Ký</a></button>
           </div>
         </div>
       </div>

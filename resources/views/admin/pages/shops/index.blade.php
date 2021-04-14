@@ -14,7 +14,7 @@
             </div>
             <div class="modal-body"> <p  style ='color:black'>Bạn có muốn xóa không ?</p> </div>
             <div class="modal-footer">
-                <form action="{{ url('admins/shop/delete') }}" method="POST">
+                <form action="{{ url('customer/shop/delete') }}" method="POST">
                     @csrf
                     <input type="hidden" name="id" id="id_shop">
                     <button type="button" class="btn btn-secondary"
@@ -79,44 +79,33 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('admins/shop/edit') }}" method="POST">
+                <form action="{{ url('customer/shop/edit') }}" method="POST">
                     @csrf
                     <input type="hidden" value="" id="id" name="id">
+                    <label class="form-label" for="simpleinput" style="color:black">
+                            Tên shop <span class="text-danger">*</span>
+                        </label>
+                        <input placeholder="nhap ten shop" type="text" required maxlength="50"
+                            name="name" class="form-control" id ="name" style= 'border: 1px solid black;color:black'>
                     <div class="form-group">
                         <label class="form-label" for="simpleinput" style="color:black">
-                            Tên <span class="text-danger">*</span>
+                            Thông tin shop <span class="text-danger">*</span>
                         </label>
-                        <input placeholder="nhap ten" type="text" required maxlength="50"
-                            name="name" id ="names" class="form-control" style= 'border: 1px solid black;color:black'>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="example-number" style="color:black">
-                           Status <span class="text-danger">*</span>
-                        </label>
-                        <select required class="form-control" id="statuss" name="status" style= 'border: 1px solid black;color:black'>
-                                <option value ='1'>Còn Hạn</option>
-                                <option value ='2'>Hết Hạn</option>
-                        </select>
+                        <input required placeholder="nhập thông tin" type="text" name="info" maxlength="20"
+                            class="form-control" id="info" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="simpleinput" style="color:black">
-                            Mã <span class="text-danger">*</span>
+                            Mã Shop <span class="text-danger">*</span>
                         </label>
-                        <input required placeholder="nhập Mã" id="codes" type="text" name="code" maxlength="20"
-                            class="form-control" style= 'border: 1px solid black;color:black'>
+                        <input placeholder="nhập Mã" type="text" name="shopID" maxlength="20"
+                            class="form-control" id="shopid" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="simpleinput" style="color:black">
-                            Số lượng <span class="text-danger">*</span>
+                            Token<span class="text-danger">*</span>
                         </label>
-                        <input required placeholder="nhập Số lượng" id="qtys" type="number" name="qty" maxlength="20"
-                            class="form-control" style= 'border: 1px solid black;color:black'>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="simpleinput" style="color:black">
-                            Giảm giá <span class="text-danger">*</span>
-                        </label>
-                        <input required placeholder="nhập discoud" id ="discounts" type="number" name="discoud" maxlength="20"
+                        <input placeholder="nhập token" id="token" type="text" name="token" maxlength="20"
                             class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="modal-footer">
@@ -133,31 +122,14 @@
 
 <div class="content-wrapper">
   <div class = "col-md-12 ">
-    <form action="{{ url('admins/coupon/search') }}" method="GET">
+    <form action="{{ url('customer/shop/search') }}" method="GET">
       <div class="row">
-          <div class="col-md-4 col-xs-12 mb-2">
-              <div class="form-group">
-                <label class="form-label" for="example-date">Từ</label>
-                <input class="form-control" type="date" name="start-date"
-                @if(isset($_GET['start-date'])) value="{{ $_GET['start-date'] }}"
-                @else id="start-date" @endif>
-              </div>
-          </div>
-
-          <div class="col-md-4 col-xs-12 mb-2">
-            <div class="form-group">
-              <label class="form-label" for="example-date">Đến</label>
-              <input class="form-control" type="date" name="end-date" 
-              @if(isset($_GET['end-date'])) value="{{ $_GET['end-date'] }}"
-              @else id="end-date" @endif>
-            </div>
-        </div>
         
           <div class="col-md-4 col-xs-12 mb-2">
               <div class="form-group">
-                  <label class="form-label" for="simpleinput">Mã</label>
-                  <input type="text" name="code" class="form-control" placeholder="Nhap Ma"
-                  @if(isset($_GET['code'])) value="{{ $_GET['code'] }}"
+                  <label class="form-label" for="simpleinput">Tên Shop</label>
+                  <input type="text" name="name" class="form-control" placeholder="Nhap Ten"
+                  @if(isset($_GET['name'])) value="{{ $_GET['name'] }}"
                     @else id="code" @endif>
               </div>
           </div>
@@ -228,12 +200,10 @@
               @foreach($shop as $value)
                 <tr class="data-row">
                     <td>{{ $total++ }}</td>
-                    <td id="name"><p class = 'text'>{{ $value->shop_name }}</p></td>
-                    <td id="info"><p class = 'text'>{{ $value->shop_info }}</p></td>
-                    @if(App\Http\Controllers\Customer\ShopController::chekShip($value->id)->shopID != null)
-                        <td id="shopID"><p class = 'text'>{{ App\Http\Controllers\Customer\ShopController::chekShip($value->id)->shopID }}</p></td>
-                    @endif
-                    <td id="discount"><p class = 'text'>{{ App\Http\Controllers\Customer\ShopController::chekShip($value->id)->Token }}</p></td>
+                    <td id="names"><p class = 'text'>{{ $value->shop_name }}</p></td>
+                    <td id="infos"><p class = 'text'>{{ $value->shop_info }}</p></td>
+                    <td id="shopIDs"><p class = 'text'>{{ App\Repositories\CustomerRepository::chekShip($value->id) ? App\Repositories\CustomerRepository::chekShip($value->id)->shopID : NULL }}</p></td>
+                    <td id="tokens"><p class = 'text'>{{ App\Repositories\CustomerRepository::chekShip($value->id) ? App\Repositories\CustomerRepository::chekShip($value->id)->Token : NULL }}</p></td>
                     <td>{{ date('Y-m-d', strtotime($value->created_at)) }}</td>
                     <td class="text-center">
                         <a id="delete-item"
@@ -310,20 +280,17 @@
         var el = $(".edit-item-trigger-clicked");
         var id = el.data('item-id');
         var row = el.closest(".data-row");
-        var name = row.children("#name").text();
-        var code = row.children("#code").text();
-        var qty = row.children("#qty").text();
-        var discount = row.children("#discount").text();
-        var status = row.children("#status").text();
+        var name = row.children("#names").text();
+        var info = row.children("#infos").text();
+        var shopid = row.children("#shopIDs").text();
+        var token = row.children("#tokens").text();
 
         $("#id").val(id);
-        $("#names").val(name);
-        $("#codes").val(code);
-        $("#qtys").val(qty);
-        $("#discounts").val(discount);
- 
+        $("#name").val(name);
+        $("#info").val(info);
+        $("#shopid").val(shopid);
+        $("#token").val(token);
     })
-    
   })
 </script>
 @endpush

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
   <meta name="description" content=""/>
   <meta name="author" content=""/>
-  <title>Login</title>
+  <title>Đăng Nhập</title>
   <!-- loader-->
   <link href="{{asset('assets/css/pace.min.css')}}" rel="stylesheet"/>
   <script src="{{asset('assets/js/pace.min.js')}}"></script>
@@ -64,9 +64,9 @@
                 </div>
             @endif
 			  <div class="form-group">
-			  <label for="exampleInputUsername" class="sr-only">Username</label>
+			  <label for="exampleInputUsername" class="sr-only">Địa chỉ Email</label>
 			   <div class="position-relative has-icon-right">
-				  <input name="email" type="text" id="exampleInputUsername" class="form-control input-shadow" placeholder="Enter Email" required value="{{ old('email') }}">
+				  <input name="email" type="text" id="exampleInputUsername" class="form-control input-shadow" placeholder="Đia chỉ Email" required value="{{ old('email') }}">
 				  <div class="form-control-position">
 					  <i class="icon-user"></i>
 				  </div>
@@ -75,7 +75,7 @@
 			  <div class="form-group">
 			  <label for="exampleInputPassword" class="sr-only">Password</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="password" name = "password" id="exampleInputPassword" class="form-control input-shadow" placeholder="Enter Password" required value="{{ old('password') }}">
+				  <input type="password" name = "password" id="exampleInputPassword" class="form-control input-shadow" placeholder="Nhập Password" required value="{{ old('password') }}">
 				  <div class="form-control-position">
 					  <i class="icon-lock"></i>
 				  </div>
@@ -83,10 +83,10 @@
 			  </div>
 			<div class="form-row">
 			 <div class="form-group col-6 text-right">
-			    <a href="{{ url('auth/confirm') }}">Reset Password</a>
+			    <a href="{{ url('auth/confirm') }}">Quên Mật Khẩu ?</a>
 			 </div>
 			</div>
-			 <button type="submit" class="btn btn-light btn-block">Sign In</button>
+			 <button type="submit" class="btn btn-light btn-block">Đăng Nhập</button>
 			</div>
 			 
 			 </form>

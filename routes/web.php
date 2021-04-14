@@ -161,7 +161,7 @@ Route::group(['middleware' => 'checkcustomer'], function () {
 
         Route::prefix('shop')->group(function () {
             Route::get('/', 'Customer\ShopController@index')->name('customer.shop'); 
-            Route::get('/edit', 'Customer\ShopController@edit')->name('customer.shop.edit'); 
+            Route::post('/edit', 'Customer\ShopController@edit')->name('customer.shop.edit'); 
             Route::post('/delete', 'Customer\ShopController@delete')->name('customer.shop.delete'); 
             Route::get('/add', 'Customer\ShopController@add')->name('customer.shop.add'); 
             Route::post('/create', 'Customer\ShopController@create')->name('customer.shop.add'); 

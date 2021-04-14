@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
   <meta name="description" content=""/>
   <meta name="author" content=""/>
-  <title>Dashtreme - Multipurpose Bootstrap4 Admin Template</title>
+  <title>Quên Mật Khẩu</title>
   <!-- loader-->
   <link href="{{asset('assets/css/pace.min.css')}}" rel="stylesheet"/>
   <script src="{{asset('assets/js/pace.min.js')}}"></script>
@@ -32,18 +32,18 @@
 	<div class="card card-authentication1 mb-0">
 		<div class="card-body">
 		 <div class="card-content p-2">
-		  <div class="card-title text-uppercase pb-2">Reset Password</div>
+		  <div class="card-title text-uppercase pb-2">Lấy Lại Mật Khẩu</div>
 		    <form action="{{ url('auth/set-password') }}" method="POST">
 			  <div class="form-group">
-			  <label for="exampleInputEmailAddress" class="">Password Reset</label>
+			  <label for="exampleInputEmailAddress" class="">Password Mới</label>
 			   <div class="position-relative has-icon-right">
            <input type="hidden" name="token" value="{{ $token }}">
            @csrf
-				  <input type="password" name="password" class="form-control input-shadow" placeholder="Enter New PassWord">
+				  <input type="password" name="password" class="form-control input-shadow" placeholder="Nhập PassWord mới">
 			   </div>
 			  </div>
 			 
-			  <button type="submit" class="btn btn-light btn-block mt-3">Reset Password</button>
+			  <button type="submit" class="btn btn-light btn-block mt-3">Lấy lại</button>
 			 </form>
 		   </div>
 		  </div>

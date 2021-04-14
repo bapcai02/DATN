@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
   <meta name="description" content=""/>
   <meta name="author" content=""/>
-  <title>Dashtreme - Multipurpose Bootstrap4 Admin Template</title>
+  <title>Shop</title>
   <!-- loader-->
   <link href="{{asset('assets/css/pace.min.css')}}" rel="stylesheet"/>
   <script src="{{asset('assets/js/pace.min.js')}}"></script>
@@ -32,7 +32,7 @@
 	<div class="card card-authentication1 mb-0">
 		<div class="card-body">
 		 <div class="card-content p-2">
-		  <div class="card-title text-uppercase pb-2">Reset Password</div>
+		  <div class="card-title text-uppercase pb-2">Lấy Lại Mật Khẩu</div>
         @if(session('message'))
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -48,21 +48,21 @@
                 </div>
             @endif
           <div class="form-group">
-            <label for="exampleInputEmailAddress" class="">Email Address</label>
+            <label for="exampleInputEmailAddress" class="">Địa chỉ email</label>
             <div class="position-relative has-icon-right">
-              <input type="email" name="email" class="form-control input-shadow" placeholder="Email Address" required>
+              <input type="email" name="email" class="form-control input-shadow" placeholder="Địa chỉ Email" required>
               <div class="form-control-position">
                 <i class="icon-envelope-open"></i>
               </div>
             </div>
           </div>
         
-          <button type="submit" class="btn btn-light btn-block mt-3">Reset Password</button>
+          <button type="submit" class="btn btn-light btn-block mt-3">Lấy lại Mật khẩu</button>
 			 </form>
 		   </div>
 		  </div>
 		   <div class="card-footer text-center py-3">
-		    <p class="text-warning mb-0">Return to the <a href="{{ url('auth/login') }}"> Sign In</a></p>
+		    <p class="text-warning mb-0">Vê Trang <a href="{{ url('auth/login') }}">Đăng Nhập</a></p>
 		  </div>
 	     </div>
 	     </div>

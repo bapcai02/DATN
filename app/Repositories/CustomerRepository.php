@@ -112,4 +112,9 @@ class CustomerRepository
     {
         return DB::table('customers')->where('id', $id)->select('name')->first();
     }
+
+    public static function chekShip(int $id)
+    {
+        return DB::table('ships')->where('seller_id', $id)->first();
+    }
 }
