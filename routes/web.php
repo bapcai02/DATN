@@ -158,17 +158,14 @@ Route::group(['middleware' => 'checkcustomer'], function () {
             Route::get('/', 'Customer\OrderController@index')->name('customer.order'); 
             Route::get('/search', 'Customer\OrderController@search')->name('customer.order.search'); 
         });
-    });
-});
 
-Route::group(['middleware' => 'checkshiper'], function () {
-    Route::prefix('shiper')->group(function () {
-        Route::get('/home', 'Customer\HomeController@index')->name('shiper.home');
-        Route::prefix('product')->group(function () {
-            Route::get('/', 'Customer\ProductController@index')->name('shiper.product'); 
-            Route::get('/edit', 'Customer\ProductController@index')->name('shiper.product.edit'); 
-            Route::get('/delete', 'Customer\ProductController@index')->name('shiper.product.delete'); 
-            Route::get('/add', 'Customer\ProductController@index')->name('shiper.product.add'); 
+        Route::prefix('shop')->group(function () {
+            Route::get('/', 'Customer\ShopController@index')->name('customer.shop'); 
+            Route::get('/edit', 'Customer\ShopController@edit')->name('customer.shop.edit'); 
+            Route::post('/delete', 'Customer\ShopController@delete')->name('customer.shop.delete'); 
+            Route::get('/add', 'Customer\ShopController@add')->name('customer.shop.add'); 
+            Route::post('/create', 'Customer\ShopController@create')->name('customer.shop.add'); 
+            Route::get('/search', 'Customer\ShopController@search')->name('customer.shop.search'); 
         });
     });
 });

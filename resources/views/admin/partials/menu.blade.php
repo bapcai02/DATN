@@ -83,6 +83,12 @@
           <i class="zmdi zmdi-grid"></i> <span>Quản Lý Sản Phẩm</span>
         </a>
       </li>
+
+      <li>
+        <a href="{{ url('customer/shop/') }}">
+          <i class="zmdi zmdi-grid"></i> <span>Quản Lý Shop</span>
+        </a>
+      </li>
   @endif
     </ul>
 </div>

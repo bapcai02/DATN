@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 13, 2021 lúc 05:20 AM
+-- Thời gian đã tạo: Th4 14, 2021 lúc 12:06 PM
 -- Phiên bản máy phục vụ: 10.4.17-MariaDB
 -- Phiên bản PHP: 7.2.34
 
@@ -20,23 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `shopb2c`
 --
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `admins`
---
-
-CREATE TABLE `admins` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL COMMENT 'users.id',
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -60,7 +43,7 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `brand_name`, `brand_description`, `brand_status`, `brand_slug`, `brand_keyword`, `created_at`, `updated_at`) VALUES
-(1, 'Hoa Quả Việt', '', 1, '', '', '2021-03-15 04:08:14', NULL);
+(1, 'Hoa Quả Việt', 'hoa quả viet nam', 1, 'hoa-qua-viet', 'hoaquaviet', '2021-03-15 04:08:14', NULL);
 
 -- --------------------------------------------------------
 
@@ -88,7 +71,9 @@ CREATE TABLE `carts` (
 INSERT INTO `carts` (`id`, `user_id`, `product_id`, `name`, `qty`, `sale`, `price`, `image`, `created_at`, `updated_at`) VALUES
 (3, 8, 3, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-03-31 19:08:53', '2021-03-31 19:08:53'),
 (4, 8, 5, 'Cải Thảo', 1, 10, 20000, 'mua-cai-thao-da-lat-tai-ha-noi.jpg', '2021-03-31 19:09:06', '2021-03-31 19:09:06'),
-(10, 10, 1, 'Xoài ', 2, 22, 10000, '1-1200x676-46.jpg', '2021-04-12 19:26:56', '2021-04-12 19:26:56');
+(10, 10, 1, 'Xoài ', 2, 22, 10000, '1-1200x676-46.jpg', '2021-04-12 19:26:56', '2021-04-12 19:26:56'),
+(11, 10, 1, 'Xoài ', 1, 22, 10000, '1-1200x676-46.jpg', '2021-04-13 01:41:34', '2021-04-13 01:41:34'),
+(12, 10, 5, 'Cải Thảo', 1, 10, 20000, 'mua-cai-thao-da-lat-tai-ha-noi.jpg', '2021-04-13 21:37:06', '2021-04-13 21:37:06');
 
 -- --------------------------------------------------------
 
@@ -158,6 +143,7 @@ CREATE TABLE `customers` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -166,8 +152,8 @@ CREATE TABLE `customers` (
 -- Đang đổ dữ liệu cho bảng `customers`
 --
 
-INSERT INTO `customers` (`id`, `user_id`, `name`, `phone`, `address`, `created_at`, `updated_at`) VALUES
-(1, 3, 'Shop Hoa Quả', '012421413423', 'Ha Noi', '2021-03-15 04:04:38', NULL);
+INSERT INTO `customers` (`id`, `user_id`, `name`, `phone`, `address`, `status`, `created_at`, `updated_at`) VALUES
+(1, 3, 'Shop Hoa Quả', '012421413423', 'Ha Noi', 1, '2021-03-15 04:04:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -438,7 +424,7 @@ INSERT INTO `product_tags` (`id`, `product_id`, `tag_id`, `created_at`, `updated
 --
 
 CREATE TABLE `ratings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `product_id` bigint(20) UNSIGNED NOT NULL COMMENT 'products.id',
   `user_id` bigint(20) UNSIGNED NOT NULL COMMENT 'users.id',
   `rating` int(11) NOT NULL,
@@ -547,7 +533,8 @@ CREATE TABLE `sliders` (
 INSERT INTO `sliders` (`id`, `product_id`, `images`, `descript`, `status`, `created_at`, `updated_at`) VALUES
 (1, 1, '1-1200x676-46.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do', 1, '2021-04-09 10:07:09', NULL),
 (2, 2, '1-1200x676-46.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do', 1, '2021-04-09 10:07:09', NULL),
-(3, 1, '1-1200x676-46.jpg', 'test', 2, '2021-04-11 19:55:56', '2021-04-11 19:55:56');
+(3, 1, '1-1200x676-46.jpg', 'test', 2, '2021-04-11 19:55:56', '2021-04-11 19:55:56'),
+(4, 1, '1-1200x676-46.jpg', 'fdhdh', 1, '2021-04-13 02:46:40', '2021-04-13 02:46:40');
 
 -- --------------------------------------------------------
 
@@ -2962,13 +2949,6 @@ INSERT INTO `vn_xaphuongthitran` (`id`, `maqh`, `name`, `type`, `created_at`, `u
 --
 
 --
--- Chỉ mục cho bảng `admins`
---
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- Chỉ mục cho bảng `brands`
 --
 ALTER TABLE `brands`
@@ -3136,12 +3116,6 @@ ALTER TABLE `vn_xaphuongthitran`
 --
 
 --
--- AUTO_INCREMENT cho bảng `admins`
---
-ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT cho bảng `brands`
 --
 ALTER TABLE `brands`
@@ -3151,7 +3125,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -3223,7 +3197,7 @@ ALTER TABLE `product_tags`
 -- AUTO_INCREMENT cho bảng `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -3247,7 +3221,7 @@ ALTER TABLE `ships`
 -- AUTO_INCREMENT cho bảng `sliders`
 --
 ALTER TABLE `sliders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `socials`
@@ -3288,12 +3262,6 @@ ALTER TABLE `vn_xaphuongthitran`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
-
---
--- Các ràng buộc cho bảng `admins`
---
-ALTER TABLE `admins`
-  ADD CONSTRAINT `admins_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Các ràng buộc cho bảng `customers`

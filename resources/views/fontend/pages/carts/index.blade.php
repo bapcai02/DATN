@@ -127,15 +127,15 @@
               <div class="coupon">
                 <form>
                   <input id="coupon" class="no-round-input" type="text" placeholder="Mã giảm giá">
-                  <button type="button" id="apply_coupon" class="no-round-btn smooth">Apply coupon</button>
+                  <button type="button" id="apply_coupon" class="no-round-btn smooth">Nhập mã giảm giá</button>
                 </form>
               </div>
             </div>
             <div class="col-12 col-sm-4 text-right" style="float: right">
             @if(!Auth::check())
-              <button id="update" class="no-round-btn black cart-update">Update cart</button>
+              <button id="update" class="no-round-btn black cart-update">Cập nhật giỏ hàng</button>
             @else
-              <button id="update2" class="no-round-btn black cart-update">Update cart</button>
+              <button id="update2" class="no-round-btn black cart-update">Cập nhật giỏ hàng</button>
             @endif
           </div>
           </div>
@@ -150,9 +150,9 @@
                 </table>
                 <div class="checkout-method">
                   @if(Auth::check())
-                    <button id="check" class="normal-btn"> Proceed to Checkout </button>
+                    <button id="check" class="normal-btn"> Thanh toán </button>
                   @else
-                    <button id="payment" class="normal-btn" style="color:black"> Proceed to Checkout</button>
+                    <button id="payment" class="normal-btn" style="color:black"> Thanh toán</button>
                   @endif      
                 </div>
               </div>

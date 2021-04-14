@@ -20,21 +20,21 @@
                   <div class="col-12 col-md-4">
                     <div class="step-block step-block--1">
                       <div class="step">
-                        <h2>Shopping Cart</h2><span>01</span>
+                        <h2>Giỏ Hàng</h2><span>01</span>
                       </div>
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
                     <div class="step-block active">
                       <div class="step">
-                        <h2>Check Out</h2><span>02</span>
+                        <h2>Thanh Toán</h2><span>02</span>
                       </div>
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
                     <div class="step-block">
                       <div class="step">
-                        <h2>Order Completed</h2><span>03</span>
+                        <h2>Đơn Hàng</h2><span>03</span>
                       </div>
                     </div>
                   </div>
