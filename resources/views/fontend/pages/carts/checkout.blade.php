@@ -65,7 +65,7 @@
                   <label for="inputCountry">Tỉnh/Thành phố *</label>
                   <select class="no-round-input-bg" name = "thanhpho" id="Contry">
                     @foreach($tinhThanhPho as $key => $value)
-                      <option value="{{ $value->id }}">{{ $value->name }}</option>
+                      <option value="{{ $value->matp }}">{{ $value->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -187,6 +187,7 @@
               var note = $('#note').val();
               var total = $('#total').text();
               var confirm_address = $('#confirm_address').val();
+              var to_ward_code = $('#xaphuong').find('option:selected').val();
 
               if(name.trim() == '' || phone.trim() == '' || confirm_address.trim() == ''){
                 swal("Thông báo", "Bạn cần nhập đầy đủ thông tin !" , "warning");
@@ -208,7 +209,7 @@
                   "service_id": 0,
                   "service_type_id":2,
                   "order_value":130000,
-                  "to_ward_code": "20308",
+                  "to_ward_code": to_ward_code,
                   "items": [{ 
                     "name": product_name, 
                     "quantity": parseInt(product_qty), 
@@ -282,7 +283,7 @@
       }).done(function(res){
         for(var i = 0; i < res.length - 1; i++){
           $('#quanhuyen').append($('<option>', {
-              value: res[i]['id'],
+              value: res[i]['maqh'],
               text: res[i]['name']
           }));
         }
@@ -297,7 +298,7 @@
         }).done(function(res){
           for(var i = 0; i < res.length - 1; i++){
             $('#xaphuong').append($('<option>', {
-                value: res[i]['id'],
+                value: res[i]['maxptr'],
                 text: res[i]['name']
             }));
           }
@@ -316,7 +317,7 @@
             $('#quanhuyen').find('option').remove();
             for(var i = 0; i < res.length - 1; i++){
             $('#quanhuyen').append($('<option>', {
-                value: res[i]['id'],
+                value: res[i]['maqh'],
                 text: res[i]['name']
             }));
           }
@@ -332,7 +333,7 @@
             $('#xaphuong').find('option').remove();
             for(var i = 0; i < res.length - 1; i++){
               $('#xaphuong').append($('<option>', {
-                  value: res[i]['id'],
+                  value: res[i]['maxptr'],
                   text: res[i]['name']
               }));
             }
