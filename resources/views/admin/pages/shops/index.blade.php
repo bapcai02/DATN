@@ -39,26 +39,52 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('customer/shop/create') }}" method="POST">
+                <form >
                     @csrf
                     <div class="form-group">
                         <label class="form-label" for="simpleinput" style="color:black">
                             Tên shop <span class="text-danger">*</span>
                         </label>
-                        <input placeholder="nhap ten shop" type="text" required maxlength="50"
-                            name="name" class="form-control" style= 'border: 1px solid black;color:black'>
+                        <input placeholder="nhap ten shop" type="text" maxlength="50"
+                            id = "name" name="name" class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="simpleinput" style="color:black">
                             Thông tin shop <span class="text-danger">*</span>
                         </label>
                         <input required placeholder="nhập thông tin" type="text" name="info" maxlength="20"
-                            class="form-control" style= 'border: 1px solid black;color:black'>
+                        id = "info" class="form-control" style= 'border: 1px solid black;color:black'>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="simpleinput" style="color:black">
+                            Địa chỉ (Tỉnh) <span class="text-danger">*</span>
+                        </label>
+                        <select name="ProvinceID" id="address" required class="form-control" style= 'border: 1px solid black;color:black'>
+    
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <label class="form-label" for="simpleinput" style="color:black">
+                            Địa chỉ (Huyện) <span class="text-danger">*</span>
+                        </label>
+                        <select name="DistrictID" id="huyen" required class="form-control" style= 'border: 1px solid black;color:black'>
+    
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <label class="form-label" for="simpleinput" style="color:black">
+                            Địa chỉ(Xã,Phường) <span class="text-danger">*</span>
+                        </label>
+                        <select name="WardCode" id="xa" required class="form-control" style= 'border: 1px solid black;color:black'>
+    
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
                             data-dismiss="modal">Đóng</button>
-                        <button type="submit"
+                        <button type="button" id="createShop"
                             class="btn btn-primary">Thêm mới</button>
                     </div>
                 </form>
@@ -93,20 +119,6 @@
                         </label>
                         <input required placeholder="nhập thông tin" type="text" name="info" maxlength="20"
                             class="form-control" id="info" style= 'border: 1px solid black;color:black'>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="simpleinput" style="color:black">
-                            Mã Shop <span class="text-danger">*</span>
-                        </label>
-                        <input placeholder="nhập Mã" type="text" name="shopID" maxlength="20"
-                            class="form-control" id="shopid" style= 'border: 1px solid black;color:black'>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="simpleinput" style="color:black">
-                            Token<span class="text-danger">*</span>
-                        </label>
-                        <input placeholder="nhập token" id="token" type="text" name="token" maxlength="20"
-                            class="form-control" style= 'border: 1px solid black;color:black'>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
@@ -202,8 +214,7 @@
                     <td>{{ $total++ }}</td>
                     <td id="names"><p class = 'text'>{{ $value->shop_name }}</p></td>
                     <td id="infos"><p class = 'text'>{{ $value->shop_info }}</p></td>
-                    <td id="shopIDs"><p class = 'text'>{{ App\Repositories\CustomerRepository::chekShip($value->id) ? App\Repositories\CustomerRepository::chekShip($value->id)->shopID : NULL }}</p></td>
-                    <td id="tokens"><p class = 'text'>{{ App\Repositories\CustomerRepository::chekShip($value->id) ? App\Repositories\CustomerRepository::chekShip($value->id)->Token : NULL }}</p></td>
+                    <td id="shopIDs"><p class = 'text'>{{ $value->shopID ? $value->shopID : null }}</p></td>
                     <td>{{ date('Y-m-d', strtotime($value->created_at)) }}</td>
                     <td class="text-center">
                         <a id="delete-item"
@@ -238,6 +249,113 @@
 @push('script')
 <script>
   $(document).ready(function() {
+
+    $.ajax({
+        type:"POST",
+        url: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province",
+        headers: {
+            "Token" : "bf76117c-97a5-11eb-8be2-c21e19fc6803",
+            "Content-Type" : "application/json",
+        },
+    }).done(function(data){
+        $.each(data.data,function(key, value)
+        {
+            $('#address').append('<option value =' + value.ProvinceID + ' >' + value.ProvinceName + '</option>'); 
+        });
+    }).fail(function(res) {
+            swal("System Notification", "Thông tin không đúng" , "error");
+    });
+
+    $('#address').change(function(){
+        var tinh = $('#address').find('option:selected').val();
+        $.ajax({
+            type:"GET",
+            url: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district",
+            headers: {
+                "Token" : "bf76117c-97a5-11eb-8be2-c21e19fc6803",
+                "Content-Type" : "application/json",
+            },
+            data:{
+                "province_id": tinh
+            }
+        }).done(function(responses){
+            $.each(responses.data, function(key, value)
+            {
+                $('#huyen').append('<option value =' + value.DistrictID + ' >' + value.DistrictName + '</option>'); 
+            });
+        }).fail(function(res) {
+             swal("System Notification", "Thông tin không đúng" , "error");
+        });
+    })
+
+    $('#huyen').change(function(){
+        var huyen = $('#huyen').find('option:selected').val();
+        $.ajax({
+            type:"GET",
+            url: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=" + huyen,
+            headers: {
+                "Token" : "bf76117c-97a5-11eb-8be2-c21e19fc6803",
+                "Content-Type" : "application/json",
+            },
+
+        }).done(function(response){
+            $.each(response.data, function(key, value)
+            {
+                $('#xa').append('<option value =' + value.WardCode + ' >' + value.WardName + '</option>'); 
+            });
+        }).fail(function(res) {
+            console.log(res.responseText)
+             swal("System Notification", "Thông tin không đúng" , "error");
+        });
+    })
+
+    $('#createShop').click(function(){
+        var district_id = $('#huyen').val();
+        var ProvinceID	= $('#address').val();
+        var ward_code = $('#xa').val();
+        var phone = "0397368768";
+        var address = "268 Lê Trọng Tấn, Thanh Xuân, Hà Nội";
+        var name = $('#name').val();
+        var info = $('#info').val();
+
+        $.ajax({
+            type:"GET",
+            url: "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shop/register",
+            headers: {
+                "Token" : "bf76117c-97a5-11eb-8be2-c21e19fc6803",
+                "Content-Type" : "application/json",
+            },
+            data:{
+                "district_id": district_id,
+                "ward_code": ward_code,
+                "name": "TEST",
+                "phone": phone,
+                "address": address
+            }
+        }).done(function(response){
+            $.ajax({
+                type:"POST",
+                url: "{{ url('customer/shop/create') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    district_id: district_id,
+                    ward_code: ward_code,
+                    ProvinceID : ProvinceID,
+                    name : name,
+                    info :info,
+                    shopid : response.data.shop_id
+                }
+            }).done(function(message){
+                swal("System Notification", "Tạo mới Thành công" , "success");
+                location.reload();
+            }).fail(function(res){
+                swal("System Notification", "Thông tin không đúng" , "error");
+            })
+        }).fail(function(res) {
+            console.log(res.responseText)
+            swal("System Notification", "Thông tin không đúng" , "error");
+        });
+    })
 
     var val = $('#message').val();
     if((val) && val.length > 0) {
@@ -282,14 +400,10 @@
         var row = el.closest(".data-row");
         var name = row.children("#names").text();
         var info = row.children("#infos").text();
-        var shopid = row.children("#shopIDs").text();
-        var token = row.children("#tokens").text();
 
         $("#id").val(id);
         $("#name").val(name);
         $("#info").val(info);
-        $("#shopid").val(shopid);
-        $("#token").val(token);
     })
   })
 </script>
