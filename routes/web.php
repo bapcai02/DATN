@@ -93,15 +93,15 @@ Route::group(['middleware' => 'checkadmin'], function () {
 
         Route::prefix('addressShip')->group(function () {
             Route::get('/', 'Admin\AddressController@index')->name('addressShip'); 
-            Route::post('/editTinh', 'Admin\AddressController@editTinh'); 
-            Route::post('/deleteTinh', 'Admin\AddressController@deleteTinh'); 
-            Route::post('/createTinh', 'Admin\AddressController@createTinh');
-            Route::post('/editHuyen', 'Admin\AddressController@editHuyen'); 
-            Route::post('/deleteHuyen', 'Admin\AddressController@deleteHuyen'); 
-            Route::post('/createHuyen', 'Admin\AddressController@createHuyen');
-            Route::post('/editXa', 'Admin\AddressController@editXa'); 
-            Route::post('/deleteXa', 'Admin\AddressController@deleteXa'); 
-            Route::post('/createXa', 'Admin\AddressController@createXa');
+            // Route::post('/editTinh', 'Admin\AddressController@editTinh'); 
+            // Route::post('/deleteTinh', 'Admin\AddressController@deleteTinh'); 
+            // Route::post('/createTinh', 'Admin\AddressController@createTinh');
+            // Route::post('/editHuyen', 'Admin\AddressController@editHuyen'); 
+            // Route::post('/deleteHuyen', 'Admin\AddressController@deleteHuyen'); 
+            // Route::post('/createHuyen', 'Admin\AddressController@createHuyen');
+            // Route::post('/editXa', 'Admin\AddressController@editXa'); 
+            // Route::post('/deleteXa', 'Admin\AddressController@deleteXa'); 
+            // Route::post('/createXa', 'Admin\AddressController@createXa');
         });
         
         Route::prefix('coupon')->group(function () {   

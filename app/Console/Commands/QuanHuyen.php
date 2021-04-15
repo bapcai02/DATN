@@ -44,7 +44,7 @@ class QuanHuyen extends Command
         $token = "bf76117c-97a5-11eb-8be2-c21e19fc6803";
         $url = "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district";
 
-        $tinhtp = DB::table('tinhthanhpho')->get();
+        $tinhtp = DB::table('api_tinhthanhpho')->get();
 
         foreach($tinhtp as $value){
             

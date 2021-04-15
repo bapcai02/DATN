@@ -130,7 +130,7 @@
         <div class="card-body">
         <div class="table-responsive">
         <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-          <div class="row mb-3">
+          {{-- <div class="row mb-3">
               <div class="col-12">
                   <a class="btn btn-success btn-sm js-btn-add"
                     id="add-worker"
@@ -144,14 +144,14 @@
                   </span>
                   </a>
               </div>
-          </div>
+          </div> --}}
 
           <thead class="bg-primary-600">
           <tr>
               <th>#</th>
               <th>Tên</th>
-              <th>Phân Loại</th>
-              <th></th>
+              <th>Mã Thành Phố</th>
+              <th>Code</th>
           </tr>
           </thead>
 
@@ -162,9 +162,10 @@
               <tr class="data-row">
                   <td>{{ $total++ }}</td>
                   <td id="name"><p class = 'text'>{{ $value->name }}</p></td>
-                  <td id="type"><p class = 'text'>{{ $value->type }}</p></td>
-                  <td class="text-center">
-                      <a id="delete-item-tinh"
+                  <td id="type"><p class = 'text'>{{ $value->matp }}</p></td>
+                  <td id="type"><p class = 'text'>{{ $value->code }}</p></td>
+                  {{-- <td class="text-center"> --}}
+                      {{-- <a id="delete-item-tinh"
                          class="btn btn-sm btn-danger btn-icon btn-inline-block mr-1 waves-effect waves-themed"
                          data-toggle="modal"
                          data-item-id="{{$value->id}}"
@@ -176,8 +177,8 @@
                          title="Edit"
                          data-item-id="{{$value->id}}">
                           <i class="fa fa-edit"></i>
-                      </a>
-                  </td>
+                      </a> --}}
+                  {{-- </td> --}}
               </tr>
               @endforeach
               </tbody>

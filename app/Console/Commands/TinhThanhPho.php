@@ -62,7 +62,7 @@ class TinhThanhPho extends Command
         $data = json_decode($response->getBody());
         
         foreach($data->data as $value){
-            DB::table('tinhthanhpho')->insert([
+            DB::table('api_tinhthanhpho')->insert([
                 'matp' => $data->ProvinceID,
                 'name' => $data->ProvinceName,
                 "code" => $data->Code,

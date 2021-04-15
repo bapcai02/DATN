@@ -44,7 +44,7 @@ class XaPhuong extends Command
         $token = "bf76117c-97a5-11eb-8be2-c21e19fc6803";
         $url = "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward";
 
-        $quanhuyen = DB::table('quanhuyen')->get();
+        $quanhuyen = DB::table('api_quanhuyen')->get();
         foreach($quanhuyen as $value){
             $body = json_encode([
                 "district_id" => $value->maqh
@@ -69,7 +69,7 @@ class XaPhuong extends Command
             $data = json_decode($response->getBody());
             if($data->data != null){
                 foreach($data->data as $val){
-                    DB::table('xaphuongthitran')->insert([
+                    DB::table('api_xaphuongthitran')->insert([
                         'maxptr' => $val->WardCode,
                         'maqh' => $val->DistrictID,
                         'name' => $val->WardName,
