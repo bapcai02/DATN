@@ -87,9 +87,9 @@ class UpdateOrderAPI extends Command
                     ]);
                 }
 
-                echo date("Y-m-d H:i:s").': '."update success".$val->Order_Code."/n"; 
+                echo date("Y-m-d H:i:s") . ': '. "update mã đơn hàng " . $val->Order_Code . " thành công" . "\n"; 
             }else{
-                echo date("Y-m-d H:i:s").': '."update falde".$val->Order_Code."/n"; 
+                echo date("Y-m-d H:i:s") .': '. "update false". $val->Order_Code ."\n"; 
             }
         }
     }

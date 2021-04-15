@@ -14,6 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\UpdateOrderAPI::class,
+        Commands\TinhThanhPho::class,
+        Commands\QuanHuyen::class,
+        Commands\XaPhuong::class,
     ];
 
     /**
@@ -26,6 +29,12 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('order:start')
+             ->everyMinute();
+        $schedule->command('tinhtp:start')
+             ->everyMinute();
+        $schedule->command('quanhuyen:start')
+             ->everyMinute();
+        $schedule->command('xaphuong:start')
              ->everyMinute();
     }
 
