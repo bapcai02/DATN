@@ -5,8 +5,9 @@ namespace App\Repositories;
 use App\Models\Slider;
 use DB;
 use Hash;
+use App\Repositories\Contracts\SliderInterface as SliderInterface;
 
-class SliderRepository
+class SliderRepository implements SliderInterface
 {
     protected $slider;
 

@@ -6,8 +6,9 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use DB;
 use Auth;
+use App\Repositories\Contracts\OrderInterface as OrderInterface;
 
-class OrderRepository
+class OrderRepository implements OrderInterface
 {
     protected $order;
     protected $orderDetail;
@@ -21,7 +22,8 @@ class OrderRepository
         $this->orderDetail = $orderDetail;
     }
     
-    public function getAll(){
+    public function getAll()
+    {
         return $this->feeship->orderBy('created_at', 'desc')->paginate(6);
     }
 

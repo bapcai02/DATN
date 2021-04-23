@@ -3,9 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Category;
+use App\Repositories\Contracts\CategoryInterface as CategoryInterface;
 use DB;
 
-class CategoryRepository
+class CategoryRepository implements CategoryInterface
 {
     protected $categories;
 
@@ -19,19 +20,23 @@ class CategoryRepository
         return $this->category->orderBy('created_at', 'DESC');
     }
 
-    public function delete(int $id){
+    public function delete(int $id)
+    {
         return $this->category->where('id', $id)->delete();
     }
 
-    public function check($value){
+    public function check($value)
+    {
         return $this->category->where('category_name', $value)->first();
     }
 
-    public function getOne($id){
+    public function getOne($id)
+    {
         return $this->category->where('id', $id)->first();
     }
 
-    public function create($data){
+    public function create($data)
+    {
         return $this->category->create([
             'category_name' => $data['name'],
             'category_status' => $data['status'],
@@ -45,7 +50,8 @@ class CategoryRepository
         return DB::table('categories')->where('id', $id)->first();
     }
     
-    public function update($data){
+    public function update($data)
+    {
         return $this->category->where('id', $data['id'])->update([
             'category_name' => $data['name'],
             'category_status' => $data['status'],
@@ -54,8 +60,8 @@ class CategoryRepository
         ]);
     }
 
-    public function search($data){
-
+    public function search($data)
+    {
         $start_date = isset($data['start-date']) ? $data['start-date'] . "00:00:00" : false;
         $end_date = isset($data['end-date']) ? $data['end-date'] . "00:00:00" : false;
         $name = isset($data['customer']) ? $data['customer'] : false;

@@ -6,8 +6,9 @@ use App\Models\Employee;
 use DB;
 use Auth;
 use App\Repositories\UserRepository;
+use App\Repositories\Contracts\EmployeeInterface as EmployeeInterface;
 
-class EmployeeRepository
+class EmployeeRepository implements EmployeeInterface
 {
     protected $employee;
     protected $userRepository;

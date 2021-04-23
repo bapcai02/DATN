@@ -5,9 +5,10 @@ namespace App\Repositories;
 use App\Models\QuanHuyen;
 use App\Models\TinhThanhPho;
 use App\Models\XaPhuong;
+use App\Repositories\Contracts\AddressInterface as AddressInterface;
 use DB;
 
-class AddressRepository
+class AddressRepository implements AddressInterface
 {
     protected $quanHuyen;
     protected $tinhThanhPho;
@@ -64,7 +65,8 @@ class AddressRepository
         return $this->quanHuyen->get();
     }
 
-    public function getListXaPhuong(){
+    public function getListXaPhuong()
+    {
         return $this->xaPhuong->orderBy('created_at', 'desc')->paginate(6,  ['*'], 'page_xa');
     }
 
@@ -102,6 +104,7 @@ class AddressRepository
     {
         return $this->tinhThanhPho->where('id', $id)->first();
     }
+
     public function createTinh($data)
     {
         return $this->tinhThanhPho->create([

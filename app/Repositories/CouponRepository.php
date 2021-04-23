@@ -3,9 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Coupons;
+use App\Repositories\Contracts\CouponInterface as CouponInterface;
 use DB;
 
-class CouponRepository
+class CouponRepository implements CouponInterface
 {
     protected $coupons;
 
@@ -14,7 +15,8 @@ class CouponRepository
         $this->coupons = $coupons;
     }
     
-    public function getAll(){
+    public function getAll()
+    {
         return $this->coupons->orderBy('created_at', 'desc')->paginate(6);
     }
 

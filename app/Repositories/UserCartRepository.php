@@ -4,8 +4,9 @@ namespace App\Repositories;
 
 use App\Models\UserCart;
 use DB;
+use App\Repositories\Contracts\UserCartInterface as UserCartInterface;
 
-class UserCartRepository
+class UserCartRepository implements UserCartInterface
 {
     protected $userCart;
 
@@ -14,11 +15,13 @@ class UserCartRepository
         $this->userCart = $userCart;
     }
     
-    public static function CountPrice(int $user_id){
+    public static function CountPrice(int $user_id)
+    {
         return DB::table('carts')->select(DB::raw("SUM(price) as totalPrice"))->where('user_id', $user_id)->first();
     }
 
-    public function GetCart($user_id, int $product_id){
+    public function GetCart($user_id, int $product_id)
+    {
         return DB::table('carts')->select('id', 'product_id', 'price', 'name', 'qty')->where('product_id', $product_id)->where('user_id', $user_id)->first();
     }
 
@@ -64,6 +67,7 @@ class UserCartRepository
             'image' => $product->image,
         ]);
     }
+    
     public function update($qty, $user_id, $id)
     {
         return $this->userCart->where('id', $id)->where('user_id', $user_id)->update([

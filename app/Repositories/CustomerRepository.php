@@ -6,9 +6,10 @@ use App\Models\Customer;
 use DB;
 use App\User;
 use App\Repositories\UserRepository;
+use App\Repositories\Contracts\CustomerInterface as CustomerInterface;
 use Hash;
 
-class CustomerRepository
+class CustomerRepository implements CustomerInterface
 {
     protected $categories;
     protected $userRepository;

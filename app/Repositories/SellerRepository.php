@@ -5,8 +5,9 @@ namespace App\Repositories;
 use App\Models\Seller;
 use DB;
 use Hash;
+use App\Repositories\Contracts\SellerInterface as SellerInterface;
 
-class SellerRepository
+class SellerRepository implements SellerInterface
 {
     protected $seller;
 
@@ -17,7 +18,8 @@ class SellerRepository
         $this->seller = $seller;
     }
     
-    public function getAll(){
+    public function getAll()
+    {
         return $this->seller->orderBy('created_at', 'desc')->paginate(6);
     }
 

@@ -4,8 +4,9 @@ namespace App\Repositories;
 
 use App\User;
 use DB;
+use App\Repositories\Contracts\UserInterface as UserInterface;
 
-class UserRepository
+class UserRepository implements UserInterface
 {
     protected $user;
 
@@ -14,7 +15,8 @@ class UserRepository
         $this->user = $user;
     }
     
-    public function getById(int $id){
+    public function getById(int $id)
+    {
         return $this->user->where('id', $id)->first();
     }
 
@@ -23,7 +25,8 @@ class UserRepository
         return $this->user->where('email', $email)->first();
     }
 
-    public function getUserByRole(int $role){
+    public function getUserByRole(int $role)
+    {
         return $this->user->where('role_id', $role);
     }
 

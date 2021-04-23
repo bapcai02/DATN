@@ -6,9 +6,10 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
 use App\Models\Rating;
+use App\Repositories\Contracts\ProductInterface as ProductInterface;
 use DB;
 
-class ProductRepository
+class ProductRepository implements ProductInterface
 {
     protected $product;
     protected $productImage;
@@ -116,11 +117,13 @@ class ProductRepository
         ]);
     
     }
+
     public function delete(int $id)
     {
         $this->productImage->where('product_id', $id)->delete();
         return $this->product->where('id', $id)->delete();
     }
+
     public function getProductByCustomer(int $id)
     {
         return $this->product
@@ -148,7 +151,8 @@ class ProductRepository
         ->paginate(6);
     }
 
-    public function getProductByCategoryId(int $id){
+    public function getProductByCategoryId(int $id)
+    {
         return $this->product
             ->join('categories', 'products.category_id', 'categories.id')
             ->select('products.id', 'products.product_name', 'products.product_desc', 
@@ -160,7 +164,8 @@ class ProductRepository
             ->paginate(9);
     }
 
-    public function Search(string $text){
+    public function Search(string $text)
+    {
         return $this->product
             ->join('categories', 'products.category_id', 'categories.id')
             ->select('products.id', 'products.product_name', 'products.product_desc', 
@@ -172,7 +177,8 @@ class ProductRepository
             ->paginate(9);
     }
 
-    public static function getImage($id){ 
+    public static function getImage($id)
+    { 
         return DB::table('product_images')->where('product_id', $id)->first();
     }
 

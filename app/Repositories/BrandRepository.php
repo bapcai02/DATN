@@ -3,9 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Brand;
+use App\Repositories\Contracts\BrandInterface as BrandInterface;
 use DB;
 
-class BrandRepository
+class BrandRepository implements BrandInterface
 {
     protected $brand;
 
@@ -14,11 +15,13 @@ class BrandRepository
         $this->brand = $brand;
     }
     
-    public function get(){
+    public function get()
+    {
         return $this->brand->orderBy('created_at', 'desc')->get();
     }
 
-    public function getAll(){
+    public function getAll()
+    {
         return $this->brand->orderBy('created_at', 'desc')->paginate(6);
     }
 
