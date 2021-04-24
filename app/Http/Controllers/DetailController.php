@@ -7,8 +7,20 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use DB;
 
+/**
+ * Class DetailController
+ * @property \App\Repositories\CategoryRepository
+ * @property \App\Repositories\ProductRepository
+ */
+
 class DetailController extends Controller
 {
+    /** 
+     * Class DetailController construct
+     * @property CategoryRepository $categoryRepository
+     * @property ProductRepository $productRepository
+     */
+
     protected $categoryRepository;
     protected $productRepository;
 
@@ -21,7 +33,19 @@ class DetailController extends Controller
         $this->productRepository = $productRepository;
     }
 
-    public function index(Request $request, $id){
+    /** 
+     * function index
+     * @property Request $request
+     * @property int $id
+     * @return $category 
+     * @return $product 
+     * @return $productImage 
+     * @return $rating 
+     * @return $productRan 
+     * @return $page 
+     * @return $rating 
+     */
+    public function index(Request $request, int $id){
         $page = $request->page;
         $category = $this->categoryRepository->getListCategory()->get();
         $product = $this->productRepository->getProductById($id)->first();
@@ -42,6 +66,11 @@ class DetailController extends Controller
         );
     }
 
+     /** 
+     * function rating
+     * @property Request $request
+     * @return $message 
+     */
     public function rating(Request $request)
     {
         $this->productRepository->rating($request->all());

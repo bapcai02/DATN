@@ -7,8 +7,22 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\SellerRepository;
 
+/**
+ * Class CustomerController
+ * @property \App\Repositories\CategoryRepository
+ * @property \App\Repositories\ProductRepository
+ * @property \App\Repositories\SellerRepository
+ */
+
 class CustomerController extends Controller
 {
+    /**
+     * CustomerController construct
+     * @property  CategoryRepository $categoryRepository
+     * @property  ProductRepository $productRepository
+     * @property  SellerRepository $sellerRepository
+     */
+
     protected $categoryRepository;
     protected $productRepository;
     protected $sellerRepository;
@@ -23,7 +37,12 @@ class CustomerController extends Controller
         $this->productRepository = $productRepository;
         $this->sellerRepository = $sellerRepository;
     }
-    public function index($id)
+
+    /** function index
+     * @property int $id
+     * @return $category, $product, $seller
+     */
+    public function index(int $id)
     {
         $category = $this->categoryRepository->getListCategory()->get();
         $product = $this->productRepository->getBySeller($id);

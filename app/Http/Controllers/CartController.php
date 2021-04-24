@@ -12,8 +12,26 @@ use Cart;
 use Auth;
 use DB;
 
+/**
+ * Class CartController
+ * @property \App\Repositories\CategoryRepository
+ * @property \App\Repositories\ProductRepository
+ * @property \App\Repositories\AddressRepository
+ * @property \App\Repositories\UserCartRepository
+ * @property \App\Repositories\CouponRepository
+ * @property \App\Models\Cart
+ */
+
 class CartController extends Controller
 {
+    /** CartController __constructer
+     * @property CategoryRepository $categoryRepository
+     * @property ProductRepository $productRepository
+     * @property AddressRepository $addressRepository
+     * @property UserCartRepository $userCartRepository
+     * @property CouponRepository $couponRepository
+     */
+
     protected $categoryRepository;
     protected $productRepository;
     protected $addressRepository;
@@ -34,6 +52,11 @@ class CartController extends Controller
         $this->userCartRepository = $userCartRepository;
         $this->couponRepository = $couponRepository;
     }
+
+    /**
+     * @property Request $request
+     * @return $category, $cart
+     */
     public function index(Request $request){
         $category = $this->categoryRepository->getListCategory()->get();
 
@@ -46,6 +69,10 @@ class CartController extends Controller
         return view('fontend.pages.carts.index', compact('category', 'cart'));
     }
 
+    /** function addCart
+     * @property $request
+     * @return $message
+     */
     public function addCart(Request $request){
         
         $product_id = $request ->productId;
@@ -69,6 +96,10 @@ class CartController extends Controller
         return redirect()->back()->with('message', 'Thêm Giỏ Hàng Thành Công');
     }
 
+    /** function deleteCart
+     * @property Request $request
+     * @return $message
+     */
     public function deleteCart(Request $request){
         $rowId = $request->rowId;
         Cart::remove($rowId);
@@ -76,6 +107,10 @@ class CartController extends Controller
         return redirect()->back()->with('message', 'Xóa sản phẩm thành công');
     }
 
+    /** function updateCart
+     * @property Request $request
+     * @return $message
+     */
     public function updateCart(Request $request){
         $data = $request->data;
         foreach($data as $key => $value){
@@ -85,6 +120,10 @@ class CartController extends Controller
         return response()->json($message);
     }
 
+    /** function CartCoupon
+     * @property Request $request
+     * @return $message
+     */
     public function CartCoupon(Request $request)
     {
         $code = $request->coupons;
@@ -122,6 +161,10 @@ class CartController extends Controller
         }
     }
 
+    /** function checkout
+     * @property int $id
+     * @return $category, $tinhThanhPho, $cartUser
+     */
     public function checkout(int $id){
         $category = $this->categoryRepository->getListCategory()->get();
         $tinhThanhPho = $this->addressRepository->getTinhThanhPho();
@@ -130,6 +173,10 @@ class CartController extends Controller
         return view('fontend.pages.carts.checkout', compact('category', 'tinhThanhPho', 'cartUser'));
     }
 
+    /** function getQuanHuyen
+     * @property Request $request
+     * @return $data
+     */
     public function getQuanHuyen(Request $request){
         $matp = $request->matp;
         $data = $this->addressRepository->getQuanHuyen($matp);
@@ -137,6 +184,10 @@ class CartController extends Controller
         return response()->json($data);
     }
 
+    /** function getXaPhuong
+     * @property Request $request
+     * @return $data
+     */
     public function getXaPhuong(Request $request){
         $maqh = $request->maqh;
         $data = $this->addressRepository->getXaPhuong($maqh);

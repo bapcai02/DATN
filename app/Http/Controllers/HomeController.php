@@ -7,8 +7,22 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\SliderRepository;
 
+/**
+ * Class HomeController
+ * @property \App\Repositories\CategoryRepository
+ * @property \App\Repositories\ProductRepository
+ * @property \App\Repositories\SliderRepository
+ */
+
 class HomeController extends Controller
 {
+    /**
+     * HomeController construct
+     * @property CategoryRepository $categoryRepository
+     * @property ProductRepository $productRepository
+     * @property SliderRepository $sliderRepository
+     */
+
     protected $categoryRepository;
     protected $productRepository;
     protected $sliderRepository;
@@ -23,7 +37,31 @@ class HomeController extends Controller
         $this->productRepository = $productRepository;
         $this->sliderRepository = $sliderRepository;
     }
-    public function index(Request $request){
+
+    /**
+     * function index
+     * @property Request $request
+     * @return $category
+     * @return $product
+     * @return $productMeat
+     * @return $productFui
+     * @return $productVeget
+     * @return $productSea
+     * @return $productDealWeek
+     * @return $productFuiSale
+     * @return $productSeaSale
+     * @return $productSale
+     * @return $productMeatRan
+     * @return $productFuiRan
+     * @return $productSeaRan
+     * @return $productVegetRan
+     * @return $productSeaRan
+     * @return $productRan
+     * @return $slider
+     */
+
+    public function index(Request $request)
+    {
         $category = $this->categoryRepository->getListCategory()->get();
         $product = $this->productRepository->getListProduct()->limit(6)->get();
         $productMeat = $this->productRepository->getListProduct()->limit(6)->where('category_id', 1)->get();
@@ -66,6 +104,12 @@ class HomeController extends Controller
         ));
     }
 
+    /**
+     * function search
+     * @property  Request $request
+     * @return $search
+     * @return $category
+     */
     public function search(Request $request)
     {
         $category = $this->categoryRepository->getListCategory()->get();
@@ -75,12 +119,20 @@ class HomeController extends Controller
         return view('fontend.pages.search.index', compact('search', 'category'));
     }
 
+    /**
+     * function about
+     * @return $category
+     */
     public function about()
     {
         $category = $this->categoryRepository->getListCategory()->get();
         return view('fontend.pages.home.about', compact('category'));
     }
 
+    /**
+     * function contact
+     * @return $category
+     */
     public function contact()
     {
         $category = $this->categoryRepository->getListCategory()->get();
