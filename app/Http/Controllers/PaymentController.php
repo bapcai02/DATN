@@ -89,9 +89,9 @@ class PaymentController extends Controller
     {
         $data = $request->all();
 
-        $tp = DB::table('vn_tinhthanhpho')->where('id', $data['thanhpho'])->first();
-        $qh = DB::table('vn_quanhuyen')->where('id', $data['quanhuyen'])->first();
-        $xp = DB::table('vn_xaphuongthitran')->where('id', $data['xaphuong'])->first();
+        $tp = DB::table('api_tinhthanhpho')->where('matp', $data['thanhpho'])->first();
+        $qh = DB::table('api_quanhuyen')->where('maqh', $data['quanhuyen'])->first();
+        $xp = DB::table('api_xaphuongthitran')->where('maxptr', $data['xaphuong'])->first();
         $userCart = DB::table('carts')->where('id', $data['cartuserID'])->first();
 
         $address = $xp->name . ", " . $qh->name . ", " . $xp->name;

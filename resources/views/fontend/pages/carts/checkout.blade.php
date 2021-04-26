@@ -196,7 +196,7 @@
                 var datas =  {
                   "cod_amount" : parseInt(total),
                   "payment_type_id": 2,
-                  "note": note,
+                  "note": note ? note : "CHOXEMHANGKHONGTHU",
                   "required_note": "CHOXEMHANGKHONGTHU",
                   "to_name": name,
                   "to_phone": phone,
@@ -216,7 +216,7 @@
                     "price":  parseInt(total)
                   }]
                 };
-
+                console.log(datas)
                 $.ajax({
                   url: "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create",
                   type: 'POST', 
@@ -240,15 +240,17 @@
                         'address': address,
                       }
                     }).done(function(response) {
-                      swal("System Notification", response , "success");
+                      swal("System Notification", response ? response : 'đặt hàng thành công' , "success");
                       setTimeout(function(){
                         location.href = "{{ url('cart/') }}";
                       }, 3000);
                     })
                   }else if(res.code == 400){
+                    console.log(res)
                     swal("System Notification", "Thông tin không đúng" , "error");
                   }
                 }).fail(function(res) {
+                    console.log(res)
                     swal("System Notification", "Thông tin không đúng" , "error");
                 });
               }

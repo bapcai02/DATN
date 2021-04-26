@@ -10,8 +10,22 @@ use App\Repositories\AddressRepository;
 use App\Repositories\CategoryRepository;
 use Auth;
 
+/** UserProfileController
+ *  @property UserRepository
+ *  @property EmployeeRepository
+ *  @property OrderRepository
+ *  @property AddressRepository
+ *  @property CategoryRepository
+ */
 class UserProfileController extends Controller
 {
+ 
+    /** UserProfileController __construct
+     * @property OrderRepository $orderRepository
+     * @property EmployeeRepository $employeeRepository,
+     * @property UserRepository $userRepository
+     * @property CategoryRepository $categoryRepository
+     */
     protected $userRepository;
     protected $orderRepository;
     protected $employeeRepository;
@@ -30,6 +44,10 @@ class UserProfileController extends Controller
         $this->categoryRepository = $categoryRepository;
     }
 
+    /** function index
+     * @property Request $request
+     * @return $category, $employee, $page, $orderDetail
+     */
     public function index(Request $request)
     {
         $page = $request->page;
@@ -40,6 +58,10 @@ class UserProfileController extends Controller
         return view('fontend.pages.user.profile', compact('category', 'employee', 'page', 'orderDetail'));
     }
 
+    /** function update
+     * @property Request $request
+     * @return redirect
+     */
     public function update(Request $request)
     {
         $file_name = '';

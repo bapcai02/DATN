@@ -9,11 +9,28 @@ use App\Repositories\AddressRepository;
 use App\Repositories\UserCartRepository;
 use App\Repositories\OrderRepository;
 use Cart;
+use Product;
 use Auth;
 use DB;
 
+/** UserCartController
+ * @property App\Repositories\CategoryRepository
+ * @property App\Repositories\ProductRepository
+ * @property App\Repositories\AddressRepository
+ * @property App\Repositories\UserCartRepository
+ * @property App\Repositories\OrderRepository
+ * @property Cart
+ */
 class UserCartController extends Controller
 {
+
+    /** UserCartController __construct
+     * @property CategoryRepository $categoryRepository
+     * @property  ProductRepository $productRepository
+     * @property  AddressRepository $addressRepository
+     * @property  UserCartRepository $userCartRepository
+     * @property  OrderRepository $orderRepository
+     */
     protected $userCartRepository;
     protected $categoryRepository;
     protected $productRepository;
@@ -38,8 +55,9 @@ class UserCartController extends Controller
     public function addCart(Request $request)
     {
         $product_id = $request ->productId;
-        $product = $this->productRepository->getProductById($product_id)
+        $product = DB::table('products')
                 ->join('product_images', 'products.id', 'product_images.product_id')
+                ->where('products.id', $product_id)
                 ->first();
 
         if(Auth::check()){
@@ -48,7 +66,6 @@ class UserCartController extends Controller
 
             return redirect()->back()->with('message', 'Thêm Giỏ Hàng Thành Công');
         }
-        
     }
 
     public function deleteCart(Request $request){

@@ -12,8 +12,21 @@ use App\Repositories\EmployeeRepository;
 use Hash;
 use Cart;
 
+/** LoginController
+ * @property CategoryRepository
+ * @property UserRepository
+ * @property UserCartRepository
+ * @property EmployeeRepository
+ */
+
 class LoginController extends Controller
 {
+    /** LoginController construct
+     * @property CategoryRepository $categoryRepository
+     * @property UserRepository $userRepository
+     * @property UserCartRepository $userCartRepository
+     * @property EmployeeRepository $employeeRepository
+     */
     protected $categoryRepository;
     protected $userRepository;
     protected $userCartRepository;
@@ -32,13 +45,22 @@ class LoginController extends Controller
         $this->employeeRepository = $employeeRepository;
     }
 
-    public function getLogin(){
+    /**  function getLogin
+     * @return $category
+     */
+    public function getLogin()
+    {
         $category = $this->categoryRepository->getListCategory()->get();
 
         return view('fontend.pages.auth.login', compact('category'));
     }
 
-    public function login(Request $request){
+    /** function login
+     * @property Request $request
+     * @return redirect
+     */
+    public function login(Request $request)
+    {
         $rules = [
             'email' =>'required|email',
             'password' => 'required|min:5'
@@ -74,12 +96,23 @@ class LoginController extends Controller
             }
         }
     }
-    public function getregister(){
+
+    /** function getregister
+     * @return $category
+     */
+    public function getregister()
+    {
         $category = $this->categoryRepository->getListCategory()->get();
 
         return view('fontend.pages.auth.register', compact('category'));
     }
-    public function register(Request $request){
+
+    /** function register
+     *  @property Request $request
+     * @return redirect
+     */
+    public function register(Request $request)
+    {
         $rules = [
             'email' =>'required|email',
             'password' => 'required|min:5'
@@ -115,7 +148,13 @@ class LoginController extends Controller
             }
         }
     }
-    public function logout(Request $request){
+
+    /** function logout
+     * @property Request $request
+     * @return redirect
+     */
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->flush();
         return redirect()->route("home");
