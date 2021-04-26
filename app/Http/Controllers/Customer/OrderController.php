@@ -9,6 +9,8 @@ use App\Repositories\EmployeeRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\AddressRepository;
 use App\Repositories\CategoryRepository;
+use Excel;
+use App\Exports\OrderExport;
 use Auth;
 
 class OrderController extends Controller
@@ -45,5 +47,10 @@ class OrderController extends Controller
         $billInfo = $this->orderRepository->getById($id);
 
         return view('admin.pages.orders.orderDetails', compact('customerInfo', 'billInfo'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new OrderExport, 'OrderExport.xlsx');
     }
 }

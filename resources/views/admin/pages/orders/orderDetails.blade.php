@@ -66,5 +66,17 @@
             </div>
         </section>
     </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <a class="btn btn-success btn-sm js-btn-add"
+                href="{{ url('customer/order/export') }}"
+                type="button">
+            <span>
+                <i class="fa fa-plus mr-1"></i>
+                Xuất excel
+            </span>
+            </a>
+        </div>
+    </div>
 </div>
 @endsection

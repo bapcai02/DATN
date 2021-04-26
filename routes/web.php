@@ -158,6 +158,7 @@ Route::group(['middleware' => 'checkcustomer'], function () {
             Route::get('/', 'Customer\OrderController@index')->name('customer.order'); 
             Route::get('/search', 'Customer\OrderController@search')->name('customer.order.search'); 
             Route::get('/orderDetails/{id}', 'Customer\OrderController@getOrderDetails');
+            Route::get('export', 'Customer\OrderController@export')->name('export');
         });
 
         Route::prefix('shop')->group(function () {
