@@ -73,6 +73,7 @@
                       <th scope="col">Địa chỉ ship</th>
                       <th scope="col">Tình trạng đơn hàng</th>
                       <th scope="col">Ngày đặt hàng</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -101,6 +102,13 @@
                             <td><button type="button" class="btn btn-danger">Đơn Hàng được thất bại</button></td>
                         @endif
                         <td>{{ $value->created_at }}</td>
+                        <td class="text-center">
+                          <a id="delete-item"
+                            class="btn btn-sm btn-primary btn-icon btn-inline-block mr-1"
+                            href="{{ url('customer/order/orderDetails') . '/' . $value->id}}">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        </td>
                       </tr>
                     @endforeach
 

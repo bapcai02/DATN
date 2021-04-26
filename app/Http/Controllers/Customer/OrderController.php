@@ -38,4 +38,12 @@ class OrderController extends Controller
         
         return view('admin.pages.orders.customer',compact('order', 'page'));
     }
+
+    public function getOrderDetails($id)
+    {
+        $customerInfo =  $this->orderRepository->getInfor($id);
+        $billInfo = $this->orderRepository->getById($id);
+
+        return view('admin.pages.orders.orderDetails', compact('customerInfo', 'billInfo'));
+    }
 }
