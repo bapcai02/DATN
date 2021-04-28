@@ -3,45 +3,49 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\UserRepository;
-use App\Repositories\EmployeeRepository;
-use App\Repositories\OrderRepository;
-use App\Repositories\AddressRepository;
-use App\Repositories\CategoryRepository;
+use App\Repositories\Contracts\UserInterface;
+use App\Repositories\Contracts\EmployeeInterface;
+use App\Repositories\Contracts\OrderInterface;
+use App\Repositories\Contracts\AddressInterface;
+use App\Repositories\Contracts\CategoryInterface;
 use Auth;
 
-/** UserProfileController
- *  @property UserRepository
- *  @property EmployeeRepository
- *  @property OrderRepository
- *  @property AddressRepository
- *  @property CategoryRepository
+/** 
+ * UserProfileController
+ * 
+ *  @property UserInterface
+ *  @property EmployeeInterface
+ *  @property OrderInterface
+ *  @property AddressInterface
+ *  @property CategoryInterface
  */
 class UserProfileController extends Controller
 {
  
-    /** UserProfileController __construct
-     * @property OrderRepository $orderRepository
-     * @property EmployeeRepository $employeeRepository,
-     * @property UserRepository $userRepository
-     * @property CategoryRepository $categoryRepository
+    /** 
+     * UserProfileController __construct
+     * 
+     * @property UserInterface $userInterface
+     * @property EmployeeInterface $employeeInterface,
+     * @property OrderInterface $orderInterface
+     * @property CategoryInterface $categoryInterface
      */
-    protected $userRepository;
-    protected $orderRepository;
-    protected $employeeRepository;
-    protected $categoryRepository;
+    protected $userInterface;
+    protected $orderInterface;
+    protected $employeeInterface;
+    protected $categoryInterface;
     
     public function __construct(
-        OrderRepository $orderRepository,
-        EmployeeRepository $employeeRepository,
-        UserRepository $userRepository,
-        CategoryRepository $categoryRepository
+        OrderInterface $orderInterface,
+        EmployeeInterface $employeeInterface,
+        UserInterface $userInterface,
+        CategoryInterface $categoryInterface
     )
     {
-        $this->orderRepository = $orderRepository;
-        $this->employeeRepository = $employeeRepository;
-        $this->userRepository = $userRepository;
-        $this->categoryRepository = $categoryRepository;
+        $this->orderInterface = $orderInterface;
+        $this->employeeInterface = $employeeInterface;
+        $this->userInterface = $userInterface;
+        $this->categoryInterface = $categoryInterface;
     }
 
     /** function index
@@ -51,9 +55,9 @@ class UserProfileController extends Controller
     public function index(Request $request)
     {
         $page = $request->page;
-        $employee = $this->employeeRepository->getEmployee(Auth::user()->id);
-        $category = $this->categoryRepository->getListCategory()->get();
-        $orderDetail = $this->orderRepository->getOrderByUser(Auth::user()->id);
+        $employee = $this->employeeInterface->getEmployee(Auth::user()->id);
+        $category = $this->categoryInterface->getListCategory()->get();
+        $orderDetail = $this->orderInterface->getOrderByUser(Auth::user()->id);
 
         return view('fontend.pages.user.profile', compact('category', 'employee', 'page', 'orderDetail'));
     }
@@ -72,7 +76,7 @@ class UserProfileController extends Controller
 
         }
 
-        $this->employeeRepository->update($request->all(), $file_name);
+        $this->employeeInterface->update($request->all(), $file_name);
 
         return redirect()->back()->with('message', 'chỉnh sửa thành công');
     }

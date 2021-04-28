@@ -3,39 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\CategoryRepository;
-use App\Repositories\ProductRepository;
-use App\Repositories\SliderRepository;
+use App\Repositories\Contracts\CategoryInterface;
+use App\Repositories\Contracts\ProductInterface;
+use App\Repositories\Contracts\SliderInterface;
 
 /**
  * Class HomeController
- * @property \App\Repositories\CategoryRepository
- * @property \App\Repositories\ProductRepository
- * @property \App\Repositories\SliderRepository
+ * @property \App\Repositories\Contracts\CategoryInterface
+ * @property \App\Repositories\Contracts\ProductInterface
+ * @property \App\Repositories\Contracts\SliderInterface
  */
 
 class HomeController extends Controller
 {
     /**
      * HomeController construct
-     * @property CategoryRepository $categoryRepository
-     * @property ProductRepository $productRepository
-     * @property SliderRepository $sliderRepository
+     * @property CategoryInterface $categoryInterface
+     * @property ProductInterface $productInterface
+     * @property SliderInterface $sliderInterface
      */
 
-    protected $categoryRepository;
-    protected $productRepository;
-    protected $sliderRepository;
+    protected $categoryInterface;
+    protected $productInterface;
+    protected $sliderInterface;
 
     public function __construct(
-        CategoryRepository $categoryRepository,
-        ProductRepository $productRepository,
-        SliderRepository $sliderRepository
+        CategoryInterface $categoryInterface,
+        ProductInterface $productInterface,
+        SliderInterface $sliderInterface
     )
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->productRepository = $productRepository;
-        $this->sliderRepository = $sliderRepository;
+        $this->categoryInterface = $categoryInterface;
+        $this->productInterface = $productInterface;
+        $this->sliderInterface = $sliderInterface;
     }
 
     /**
@@ -62,24 +62,24 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $category = $this->categoryRepository->getListCategory()->get();
-        $product = $this->productRepository->getListProduct()->limit(6)->get();
-        $productMeat = $this->productRepository->getListProduct()->limit(6)->where('category_id', 1)->get();
-        $productFui = $this->productRepository->getListProduct()->limit(6)->where('category_id', 3)->get();
-        $productVeget = $this->productRepository->getListProduct()->limit(6)->where('category_id', 2)->get();
-        $productSea = $this->productRepository->getListProduct()->limit(6)->where('category_id', 4)->get();
-        $productDealWeek = $this->productRepository->getListProduct()->orderBy('sale', 'DESC')->limit(5)->get();
-        $productMeatSale = $this->productRepository->getListProduct()->limit(6)->where('category_id', 1)->orderBy('sale', 'DESC')->get();
-        $productFuiSale = $this->productRepository->getListProduct()->limit(6)->where('category_id', 3)->orderBy('sale', 'DESC')->get();
-        $productVegetSale = $this->productRepository->getListProduct()->limit(6)->where('category_id', 2)->orderBy('sale', 'DESC')->get();
-        $productSeaSale = $this->productRepository->getListProduct()->limit(6)->where('category_id', 4)->orderBy('sale', 'DESC')->get();
-        $productSale = $this->productRepository->getListProduct()->orderBy('sale', 'DESC')->limit(6)->get();
-        $productMeatRan = $this->productRepository->getListProduct()->limit(6)->where('category_id', 1)->inRandomOrder()->get();
-        $productFuiRan = $this->productRepository->getListProduct()->limit(6)->where('category_id', 3)->inRandomOrder()->get();
-        $productVegetRan = $this->productRepository->getListProduct()->limit(6)->where('category_id', 2)->inRandomOrder()->get();
-        $productSeaRan = $this->productRepository->getListProduct()->limit(6)->where('category_id', 4)->inRandomOrder()->get();
-        $productRan = $this->productRepository->getListProduct()->inRandomOrder()->limit(6)->get();
-        $slider = $this->sliderRepository->get();
+        $category = $this->categoryInterface->getListCategory()->get();
+        $product = $this->productInterface->getListProduct()->limit(6)->get();
+        $productMeat = $this->productInterface->getListProduct()->limit(6)->where('category_id', 1)->get();
+        $productFui = $this->productInterface->getListProduct()->limit(6)->where('category_id', 3)->get();
+        $productVeget = $this->productInterface->getListProduct()->limit(6)->where('category_id', 2)->get();
+        $productSea = $this->productInterface->getListProduct()->limit(6)->where('category_id', 4)->get();
+        $productDealWeek = $this->productInterface->getListProduct()->orderBy('sale', 'DESC')->limit(5)->get();
+        $productMeatSale = $this->productInterface->getListProduct()->limit(6)->where('category_id', 1)->orderBy('sale', 'DESC')->get();
+        $productFuiSale = $this->productInterface->getListProduct()->limit(6)->where('category_id', 3)->orderBy('sale', 'DESC')->get();
+        $productVegetSale = $this->productInterface->getListProduct()->limit(6)->where('category_id', 2)->orderBy('sale', 'DESC')->get();
+        $productSeaSale = $this->productInterface->getListProduct()->limit(6)->where('category_id', 4)->orderBy('sale', 'DESC')->get();
+        $productSale = $this->productInterface->getListProduct()->orderBy('sale', 'DESC')->limit(6)->get();
+        $productMeatRan = $this->productInterface->getListProduct()->limit(6)->where('category_id', 1)->inRandomOrder()->get();
+        $productFuiRan = $this->productInterface->getListProduct()->limit(6)->where('category_id', 3)->inRandomOrder()->get();
+        $productVegetRan = $this->productInterface->getListProduct()->limit(6)->where('category_id', 2)->inRandomOrder()->get();
+        $productSeaRan = $this->productInterface->getListProduct()->limit(6)->where('category_id', 4)->inRandomOrder()->get();
+        $productRan = $this->productInterface->getListProduct()->inRandomOrder()->limit(6)->get();
+        $slider = $this->sliderInterface->get();
 
         return view('fontend.pages.home.index', compact(
             'category', 
@@ -112,9 +112,9 @@ class HomeController extends Controller
      */
     public function search(Request $request)
     {
-        $category = $this->categoryRepository->getListCategory()->get();
+        $category = $this->categoryInterface->getListCategory()->get();
         $text = $request->text;   
-        $search = $this->productRepository->Search($text);
+        $search = $this->productInterface->Search($text);
 
         return view('fontend.pages.search.index', compact('search', 'category'));
     }
@@ -125,7 +125,7 @@ class HomeController extends Controller
      */
     public function about()
     {
-        $category = $this->categoryRepository->getListCategory()->get();
+        $category = $this->categoryInterface->getListCategory()->get();
         return view('fontend.pages.home.about', compact('category'));
     }
 
@@ -135,7 +135,7 @@ class HomeController extends Controller
      */
     public function contact()
     {
-        $category = $this->categoryRepository->getListCategory()->get();
+        $category = $this->categoryInterface->getListCategory()->get();
         return view('fontend.pages.home.contacts', compact('category'));
     }
 }

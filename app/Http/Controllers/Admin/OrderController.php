@@ -4,23 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\OrderRepository;
+use App\Repositories\Contracts\OrderInterface;
 
 class OrderController extends Controller
 {
-    protected $orderRepository;
+    protected $orderInterface;
 
     public function __construct(
-        OrderRepository $orderRepository
+        OrderInterface $orderInterface
     )
     {
-        $this->orderRepository = $orderRepository;
+        $this->orderInterface = $orderInterface;
     }
 
     public function index(Request $request)
     {
         $page = $request->page;
-        $order = $this->orderRepository->getByAdmin();
+        $order = $this->orderInterface->getByAdmin();
 
         return view('admin.pages.orders.index',compact('order', 'page'));
     }
@@ -29,7 +29,7 @@ class OrderController extends Controller
     {
         $page = $request->page;
         $data = $request->all();
-        $order = $this->orderRepository->search($data);
+        $order = $this->orderInterface->search($data);
         
         return view('admin.pages.orders.index',compact('order', 'page'));
     }

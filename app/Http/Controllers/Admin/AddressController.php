@@ -4,29 +4,46 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\AddressRepository;
+use App\Repositories\Contracts\AddressInterface;
 
+/**
+ * AddressController
+ * 
+ * @property App\Repositories\Contracts\AddressInterface
+ */
 class AddressController extends Controller
 {
-    protected $addressRepository;
+
+    /**
+     * AddressController construct
+     * 
+     * @param AddressInterface $addressInterface
+     */
+    protected $addressInterface;
     
     public function __construct(
-        AddressRepository $addressRepository
+        AddressInterface $addressInterface
     )
     {
-        $this->addressRepository = $addressRepository;
+        $this->addressInterface = $addressInterface;
     }
 
+    
+    /**
+     * function index
+     * @param Request $request
+     * @return view
+     */
     public function index(Request $request)
     {
         $page_tinhtp = $request->page_tinhtp;
         $page_huyen = $request->page_tinhtp;
         $page_xa = $request->page_tinhtp;
-        $tinhtp = $this->addressRepository->getListTinhThanhPho();
-        $listTinhtp = $this->addressRepository->getTinhThanhPho();
-        $listQuanHuyen = $this->addressRepository->getAllQuanHuyen();
-        $quanhuyen = $this->addressRepository->getListQuanHuyen();
-        $xaphuong = $this->addressRepository->getListXaPhuong();
+        $tinhtp = $this->addressInterface->getListTinhThanhPho();
+        $listTinhtp = $this->addressInterface->getTinhThanhPho();
+        $listQuanHuyen = $this->addressInterface->getAllQuanHuyen();
+        $quanhuyen = $this->addressInterface->getListQuanHuyen();
+        $xaphuong = $this->addressInterface->getListXaPhuong();
 
         return view('admin.pages.address.index', compact(
             'tinhtp', 'quanhuyen', 'xaphuong', 'listTinhtp','listQuanHuyen',
@@ -34,113 +51,159 @@ class AddressController extends Controller
         ));
     }
 
+    
+    /**
+     * function createTinh
+     * @param Request $request
+     * @return view
+     */
     public function createTinh(Request $request)
     {
         $data = $request->all();
-        $check = $this->addressRepository->checkNameTinh($data['name']);
+        $check = $this->addressInterface->checkNameTinh($data['name']);
         if($check != null){
             return redirect()->back()->with('error-tinh','du lieu da ton tai, vui long kiem tra lại');
         }
 
-        $this->addressRepository->createTinh($data);
+        $this->addressInterface->createTinh($data);
         return redirect()->back()->with('message-tinh','Them moi thanh cong');
     }
 
+    /**
+     * function editTinh
+     * @param Request $request
+     * @return redirect
+     */
     public function editTinh(Request $request)
     {
         $data = $request->all();
-        $tinh = $this->addressRepository->getTinhById($data['id']);
+        $tinh = $this->addressInterface->getTinhById($data['id']);
         if($tinh->name != $data['name']){
-            $check = $this->addressRepository->checkNameTinh($data['name']);
+            $check = $this->addressInterface->checkNameTinh($data['name']);
             if($check != null){
                 return redirect()->back()->with('error-tinh','du lieu da ton tai, vui long kiem tra lại');
             }
-            $this->addressRepository->editTinh($data);
+            $this->addressInterface->editTinh($data);
             return redirect()->back()->with('message-tinh','Chinh sua thanh cong');
         }
 
-        $this->addressRepository->editTinh($data);
+        $this->addressInterface->editTinh($data);
         return redirect()->back()->with('message-tinh','chinh sua thanh cong');
     }
 
+     /**
+     * function deleteTinh
+     * @param Request $request
+     * @return redirect
+     */
     public function deleteTinh(Request $request)
     {
         $id = $request->id;
-        $this->addressRepository->deleteTinh($id);
+        $this->addressInterface->deleteTinh($id);
 
         return redirect()->back()->with('message-tinh','xoa thanh cong');
     }
 
+      /**
+     * function deleteHuyen
+     * @param Request $request
+     * @return redirect
+     */
     public function deleteHuyen(Request $request)
     {
         $id = $request->id;
-        $this->addressRepository->deleteHuyen($id);
+        $this->addressInterface->deleteHuyen($id);
 
         return redirect()->back()->with('message-huyen','xoa thanh cong');
     }
 
+     /**
+     * function createHuyen
+     * @param Request $request
+     * @return redirect
+     */
     public function createHuyen(Request $request)
     {
         $data = $request->all();
-        $check = $this->addressRepository->checkNameHuyen($data['name']);
+        $check = $this->addressInterface->checkNameHuyen($data['name']);
         if($check != null){
             return redirect()->back()->with('error-huyen','du lieu da ton tai, vui long kiem tra lại');
         }
 
-        $this->addressRepository->createHuyen($data);
+        $this->addressInterface->createHuyen($data);
         return redirect()->back()->with('message-huyen','Them moi thanh cong');
     }
 
+    /**
+     * function editHuyen
+     * @param Request $request
+     * @return redirect
+     */
     public function editHuyen(Request $request)
     {
         $data = $request->all();
-        $huyen = $this->addressRepository->getHuyenById($data['id']);
+        $huyen = $this->addressInterface->getHuyenById($data['id']);
         if($huyen->name != $data['name']){
-            $check = $this->addressRepository->checkNameHuyen($data['name']);
+            $check = $this->addressInterface->checkNameHuyen($data['name']);
             if($check != null){
                 return redirect()->back()->with('error-huyen','du lieu da ton tai, vui long kiem tra lại');
             }
-            $this->addressRepository->editHuyen($data);
+            $this->addressInterface->editHuyen($data);
             return redirect()->back()->with('message-huyen','Chinh sua thanh cong');
         }
 
-        $this->addressRepository->editHuyen($data);
+        $this->addressInterface->editHuyen($data);
         return redirect()->back()->with('message-huyen','Them moi thanh cong');
     }
 
+    /**
+     * function deleteXa
+     * @param Request $request
+     * @return redirect
+     */
     public function deleteXa(Request $request)
     {
-        $this->addressRepository->deleteXa($request->id);
+        $this->addressInterface->deleteXa($request->id);
 
         return redirect()->back()->with('message-xa','xoa thanh cong');
     }
 
+    /**
+     * function createXa
+     * @param Request $request
+     * @return redirect
+     */
     public function createXa(Request $request)
     {
         $data = $request->all();
-        $check = $this->addressRepository->checkNameXa($data['name']);
+        $check = $this->addressInterface->checkNameXa($data['name']);
         if($check != null){
             return redirect()->back()->with('error-xa','du lieu da ton tai, vui long kiem tra lại');
         }
 
-        $this->addressRepository->createXa($data);
+        $this->addressInterface->createXa($data);
         return redirect()->back()->with('message-xa','Them moi thanh cong');
     }
 
+     /**
+     * function editXa
+     * @param Request $request
+     * @return redirect
+     */
     public function editXa(Request $request)
     {
         $data = $request->all();
-        $xa = $this->addressRepository->getXaById($data['id']);
+        $xa = $this->addressInterface->getXaById($data['id']);
         if($xa->name != $data['name']){
-            $check = $this->addressRepository->checkNameXa($data['name']);
+            $check = $this->addressInterface->checkNameXa($data['name']);
             if($check != null){
                 return redirect()->back()->with('error-xa','du lieu da ton tai, vui long kiem tra lại');
             }
-            $this->addressRepository->editXa($data);
+            $this->addressInterface->editXa($data);
             return redirect()->back()->with('message-xa','Chinh sua thanh cong');
         }
 
-        $this->addressRepository->editXa($data);
+        $this->addressInterface->editXa($data);
         return redirect()->back()->with('message-xa','Them moi thanh cong');
     }
 }

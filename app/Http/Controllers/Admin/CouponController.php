@@ -4,30 +4,30 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\CouponRepository;
+use App\Repositories\Contracts\CouponInterface;
 
 class CouponController extends Controller
 {
-    protected $couponRepository;
+    protected $couponInterface;
 
     public function __construct(
-        CouponRepository $couponRepository
+        CouponInterface $couponInterface
     )
     {
-        $this->couponRepository = $couponRepository;
+        $this->couponInterface = $couponInterface;
     }
 
     public function index(Request $request)
     {
         $page = $request->page;
-        $coupons = $this->couponRepository->getAll();
+        $coupons = $this->couponInterface->getAll();
 
         return view('admin.pages.coupon.index', compact('coupons', 'page'));
     }
 
     public function delete(Request $request)
     {
-        $this->couponRepository->delete($request->id);
+        $this->couponInterface->delete($request->id);
 
         return redirect()->back()->with('message-coupon', 'xoa thanh cong');
     }
@@ -35,31 +35,31 @@ class CouponController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-        $code = $this->couponRepository->check($data['code']);
+        $code = $this->couponInterface->check($data['code']);
 
         if($code != null){
             return redirect()->back()->with('error-coupon', 'ma giam gia da duoc tao, vui long kiem tra lai !');
         }
-        $this->couponRepository->create($data);
+        $this->couponInterface->create($data);
         return redirect()->back()->with('message-coupon', 'them moi thanh cong');
     }
 
     public function edit(Request $request)
     {
         $data = $request->all();
-        $code = $this->couponRepository->check($data['code']);
-        $coupon = $this->couponRepository->getById($data['id']);
+        $code = $this->couponInterface->check($data['code']);
+        $coupon = $this->couponInterface->getById($data['id']);
 
         if($coupon->code != $data['code']){
             if($code != null){
                 return redirect()->back()->with('error-coupon', 'ma giam gia da duoc tao, vui long kiem tra lai !');
             }
-            $this->couponRepository->update($data);
+            $this->couponInterface->update($data);
 
             return redirect()->back()->with('message-coupon', 'chinh sua thanh cong');
         }
 
-        $this->couponRepository->update($data);
+        $this->couponInterface->update($data);
 
         return redirect()->back()->with('message-coupon', 'chinh sua thanh cong');
     }
@@ -67,7 +67,7 @@ class CouponController extends Controller
     public function search(Request $request)
     {
         $page = $request->page;
-        $coupons = $this->couponRepository->search($request->all());
+        $coupons = $this->couponInterface->search($request->all());
 
         return view('admin.pages.coupon.index', compact('coupons', 'page'));
     }

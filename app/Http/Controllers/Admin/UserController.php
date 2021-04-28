@@ -4,22 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\UserRepository;
+use App\Repositories\Contracts\UserInterface;
 
 class UserController extends Controller
 {
-    protected $userRepository;
+    protected $userInterface;
     
     public function __construct(
-        UserRepository $userRepository
+        UserInterface $userInterface
     )
     {
-        $this->userRepository = $userRepository;
+        $this->userInterface = $userInterface;
     }
 
     public function index(Request $request)
     { 
-        $user = $this->userRepository->getUserByRole(1)->paginate(6);
+        $user = $this->userInterface->getUserByRole(1)->paginate(6);
         $page = $request->page;
 
         return view('admin.pages.user.index', compact('user', 'page'));

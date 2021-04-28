@@ -3,46 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\CategoryRepository;
+use App\Repositories\Contracts\CategoryInterface;
 use Validator;
 use Auth;
-use App\Repositories\UserRepository;
-use App\Repositories\UserCartRepository;
-use App\Repositories\EmployeeRepository;
+use App\Repositories\Contracts\UserInterface;
+use App\Repositories\Contracts\UserCartInterface;
+use App\Repositories\Contracts\EmployeeInterface;
 use Hash;
 use Cart;
 
 /** LoginController
- * @property CategoryRepository
- * @property UserRepository
- * @property UserCartRepository
- * @property EmployeeRepository
+ * @property CategoryInterface
+ * @property UserInterface
+ * @property UserCartInterface
+ * @property EmployeeInterface
  */
 
 class LoginController extends Controller
 {
     /** LoginController construct
-     * @property CategoryRepository $categoryRepository
-     * @property UserRepository $userRepository
-     * @property UserCartRepository $userCartRepository
-     * @property EmployeeRepository $employeeRepository
+     * @property CategoryInterface $categoryInterface
+     * @property UserInterface $userInterface
+     * @property UserCartInterface $userCartInterface
+     * @property EmployeeInterface $employeeInterface
      */
-    protected $categoryRepository;
-    protected $userRepository;
-    protected $userCartRepository;
-    protected $employeeRepository;
+    protected $categoryInterface;
+    protected $userInterface;
+    protected $userCartInterface;
+    protected $employeeInterface;
 
     public function __construct(
-        CategoryRepository $categoryRepository,
-        UserRepository $userRepository,
-        UserCartRepository $userCartRepository,
-        EmployeeRepository $employeeRepository
+        CategoryInterface $categoryInterface,
+        UserInterface $userInterface,
+        UserCartInterface $userCartInterface,
+        EmployeeInterface $employeeInterface
     )
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->userRepository = $userRepository;
-        $this->userCartRepository = $userCartRepository;
-        $this->employeeRepository = $employeeRepository;
+        $this->categoryInterface = $categoryInterface;
+        $this->userInterface = $userInterface;
+        $this->userCartInterface = $userCartInterface;
+        $this->employeeInterface = $employeeInterface;
     }
 
     /**  function getLogin
@@ -50,7 +50,7 @@ class LoginController extends Controller
      */
     public function getLogin()
     {
-        $category = $this->categoryRepository->getListCategory()->get();
+        $category = $this->categoryInterface->getListCategory()->get();
 
         return view('fontend.pages.auth.login', compact('category'));
     }
@@ -86,7 +86,7 @@ class LoginController extends Controller
                 $cart = Cart::content();
                 if(count($cart) > 0){
                     foreach($cart as $value){
-                        $this->userCartRepository->create($value, $user_id);
+                        $this->userCartInterface->create($value, $user_id);
                         Cart::remove($value->rowId);
                     }                
                 }
@@ -102,7 +102,7 @@ class LoginController extends Controller
      */
     public function getregister()
     {
-        $category = $this->categoryRepository->getListCategory()->get();
+        $category = $this->categoryInterface->getListCategory()->get();
 
         return view('fontend.pages.auth.register', compact('category'));
     }
@@ -131,7 +131,7 @@ class LoginController extends Controller
             $email = $request->input('email');
             $password = $request->input('password');
             
-            if($this->userRepository->checkUser($email)) {
+            if($this->userInterface->checkUser($email)) {
                 return redirect()->route("register")->with('error', 'Email đã tòn tại !');
             } else {
                 $password = Hash::make($password);
@@ -141,8 +141,8 @@ class LoginController extends Controller
                     'role_id' => 1,
                     'name' =>'Employee'
                 ];
-                $this->userRepository->create($data);
-                $this->employeeRepository->create($email);
+                $this->userInterface->create($data);
+                $this->employeeInterface->create($email);
 
                 return redirect()->route("login")->with('success', 'đăng ký thành công !');
             }

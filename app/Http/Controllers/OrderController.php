@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\OrderRepository;
+use App\Repositories\Contracts\OrderInterface;
 
 /** OrderController
- * @property OrderRepository
+ * @property OrderInterface
  */
 class OrderController extends Controller
 {
 
     /** OrderController __construct
-     * @property OrderRepository $orderRepository
+     * @property OrderInterface $orderInterface
      */
-    protected $orderRepository;
+    protected $orderInterface;
 
     public function __construct(
-        OrderRepository $orderRepository
+        OrderInterface $orderInterface
     )
     {
-        $this->orderRepository = $orderRepository;
+        $this->orderInterface = $orderInterface;
     }
 
     /** function create
@@ -30,7 +30,7 @@ class OrderController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-        $this->orderRepository->addOrder($data);
+        $this->orderInterface->addOrder($data);
 
         $message = "Thêm thành công";
     }

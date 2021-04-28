@@ -3,39 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\CategoryRepository;
-use App\Repositories\ProductRepository;
-use App\Repositories\SellerRepository;
+use App\Repositories\Contracts\CategoryInterface;
+use App\Repositories\Contracts\ProductInterface;
+use App\Repositories\Contracts\SellerInterface;
 
 /**
  * Class CustomerController
- * @property \App\Repositories\CategoryRepository
- * @property \App\Repositories\ProductRepository
- * @property \App\Repositories\SellerRepository
+ * @property \App\Repositories\Contracts\CategoryInterface
+ * @property \App\Repositories\Contracts\ProductInterface
+ * @property \App\Repositories\Contracts\SellerInterface
  */
 
 class CustomerController extends Controller
 {
     /**
      * CustomerController construct
-     * @property  CategoryRepository $categoryRepository
-     * @property  ProductRepository $productRepository
-     * @property  SellerRepository $sellerRepository
+     * @property  CategoryInterface $categoryInterface
+     * @property  ProductInterface $productInterface
+     * @property  SellerInterface $sellerInterface
      */
 
-    protected $categoryRepository;
-    protected $productRepository;
-    protected $sellerRepository;
+    protected $categoryInterface;
+    protected $productInterface;
+    protected $sellerInterface;
 
     public function __construct(
-        CategoryRepository $categoryRepository,
-        ProductRepository $productRepository,
-        SellerRepository $sellerRepository
+        CategoryInterface $categoryInterface,
+        ProductInterface $productInterface,
+        SellerInterface $sellerInterface
     )
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->productRepository = $productRepository;
-        $this->sellerRepository = $sellerRepository;
+        $this->categoryInterface = $categoryInterface;
+        $this->productInterface = $productInterface;
+        $this->sellerInterface = $sellerInterface;
     }
 
     /** function index
@@ -44,9 +44,9 @@ class CustomerController extends Controller
      */
     public function index(int $id)
     {
-        $category = $this->categoryRepository->getListCategory()->get();
-        $product = $this->productRepository->getBySeller($id);
-        $seller = $this->sellerRepository->getById($id);
+        $category = $this->categoryInterface->getListCategory()->get();
+        $product = $this->productInterface->getBySeller($id);
+        $seller = $this->sellerInterface->getById($id);
 
         return view('fontend.pages.customer.index',compact('category', 'product', 'seller'));
     }

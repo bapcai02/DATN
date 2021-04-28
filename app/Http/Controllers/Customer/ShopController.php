@@ -10,6 +10,11 @@ use Carbon\Carbon;
 
 class ShopController extends Controller
 {
+    /**
+     * function index
+     * @param Request $request
+     * @return view
+     */
     public function index(Request $request)
     {
         $page = $request->page;
@@ -18,6 +23,11 @@ class ShopController extends Controller
         return view('admin.pages.shops.index', compact('page', 'shop'));
     }
 
+    /**
+     * function create
+     * @param Request $request
+     * @return response
+     */
     public function create(Request $request)
     {
         $customer = DB::table('customers')->where('user_id', Auth::user()->id)->first();
@@ -46,6 +56,11 @@ class ShopController extends Controller
         return response()->json($message);
     }
 
+    /**
+     * function edit
+     * @param Request $request
+     * @return redirect
+     */
     public function edit(Request $request)
     {
         DB::table('sellers')->where('id', $request->id)->update([
@@ -57,6 +72,11 @@ class ShopController extends Controller
         return redirect()->back()->with('message', $message);
     }
 
+    /**
+     * function delete
+     * @param Request $request
+     * @return redirect
+     */
     public function delete(Request $request)
     {
         DB::table('sellers')->where('id', $request->id)->delete();
@@ -65,6 +85,11 @@ class ShopController extends Controller
         return redirect()->back()->with('message', $message);
     }
 
+    /**
+     * function delete
+     * @param Request $request
+     * @return view
+     */
     public function search(Request $request)
     {
         $page = $request->page;

@@ -6,17 +6,17 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use DB;
 use Illuminate\Http\Request;
-use App\Repositories\OrderRepository;
+use App\Repositories\Contracts\OrderInterface;
 
 class PaymentController extends Controller
 {
-    protected $orderRepository;
+    protected $orderInterface;
 
     public function __construct(
-        OrderRepository $orderRepository
+        OrderInterface $orderInterface
     )
     {
-        $this->orderRepository = $orderRepository;
+        $this->orderInterface = $orderInterface;
     }
 
     public function payment(Request $request)
@@ -163,7 +163,7 @@ class PaymentController extends Controller
         $cart = $request->session()->get('cart');
         $ordercode = $data['data']['order_code'];
 
-        $this->orderRepository->orderByPayment($ordercode, $cart);
+        $this->orderInterface->orderByPayment($ordercode, $cart);
 
         $request->session()->forget('cart');
         $request->session()->forget('order');

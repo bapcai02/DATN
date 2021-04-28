@@ -4,27 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\CustomerRepository;
-use App\Repositories\UserRepository;
+use App\Repositories\Contracts\CustomerInterface;
+use App\Repositories\Contracts\UserInterface;
 
 class CustomerController extends Controller
 {
-    protected $customerRepository;
-    protected $userRepository;
+    protected $customerInterface;
+    protected $userInterface;
 
     public function __construct(
-        CustomerRepository $customerRepository,
-        UserRepository $userRepository
+        CustomerInterface $customerInterface,
+        UserInterface $userInterface
     )
     {
-        $this->customerRepository = $customerRepository;
-        $this->userRepository = $userRepository;
+        $this->customerInterface = $customerInterface;
+        $this->userInterface = $userInterface;
     }
 
     public function index(Request $request)
     {
         $page = $request->page;
-        $customer = $this->customerRepository->getListCustomer()->paginate(6);
+        $customer = $this->customerInterface->getListCustomer()->paginate(6);
        
         return view('admin.pages.customer.index', compact('customer', 'page'));
     }
@@ -32,12 +32,12 @@ class CustomerController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-        $check =  $this->customerRepository->check($data['name']);
-        $checkEmail = $this->userRepository->checkUser($data['email']);
+        $check =  $this->customerInterface->check($data['name']);
+        $checkEmail = $this->userInterface->checkUser($data['email']);
         if($check != null || $checkEmail != null){
             return redirect()->back()->with('error', 'thong tin da ton tai, vui long kiem tra lai!');
         }
-        $this->customerRepository->create($data);
+        $this->customerInterface->create($data);
 
         return redirect()->back()->with('message', 'them moi thanh cong !');
     }
@@ -45,7 +45,7 @@ class CustomerController extends Controller
     public function delete(Request $request)
     {
         $id = $request->id;
-        $this->customerRepository->delete($id);
+        $this->customerInterface->delete($id);
 
         return redirect()->back()->with('message', 'xoa thanh thanh cong !');
     }
@@ -53,22 +53,22 @@ class CustomerController extends Controller
     public function edit(Request $request)
     {
         $data = $request->all();
-        $customer = $this->customerRepository->getById($data['id']);
-        $user = $this->userRepository->getById($customer->user_id);
+        $customer = $this->customerInterface->getById($data['id']);
+        $user = $this->userInterface->getById($customer->user_id);
        
         if($user->email != $data['email']){
 
-            $check= $this->userRepository->checkUser($data['email']);
+            $check= $this->userInterface->checkUser($data['email']);
 
             if($check != null){
                 return redirect()->back()->with('error', 'thong tin da ton tai, vui long kiem tra lai!');
             }
-            $this->customerRepository->update($data);
+            $this->customerInterface->update($data);
 
             return redirect()->back()->with('message', 'sua thanh cong !');
         }
         
-        $this->customerRepository->update($data);
+        $this->customerInterface->update($data);
 
         return redirect()->back()->with('message', 'sua thanh cong !');
     }
@@ -77,7 +77,7 @@ class CustomerController extends Controller
     {
         $page = $request->page;
         $data = $request->all();
-        $customer = $this->customerRepository->search($data);
+        $customer = $this->customerInterface->search($data);
 
         return view('admin.pages.customer.index', compact('customer', 'page'));
     }

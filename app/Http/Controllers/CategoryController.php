@@ -3,33 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\CategoryRepository;
-use App\Repositories\ProductRepository;
+use App\Repositories\Contracts\CategoryInterface;
+use App\Repositories\Contracts\ProductInterface;
 
 /**
  * Class CategoryController
- * @property \App\Repositories\CategoryRepository
- * @property \App\Repositories\ProductRepository
+ * @property \App\Repositories\Contracts\CategoryInterface
+ * @property \App\Repositories\Contracts\ProductInterface
  */
 
 class CategoryController extends Controller
 {
     /**
      * Class CategoryController construct
-     * @property CategoryRepository $categoryRepository
-     * @property ProductRepository $productRepository
+     * @property CategoryInterface $categoryInterface
+     * @property ProductInterface $productInterface
      */
 
-    protected $categoryRepository;
-    protected $productRepository;
+    protected $categoryInterface;
+    protected $productInterface;
 
     public function __construct(
-        CategoryRepository $categoryRepository,
-        ProductRepository $productRepository
+        CategoryInterface $categoryInterface,
+        ProductInterface $productInterface
     )
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->productRepository = $productRepository;;
+        $this->categoryInterface = $categoryInterface;
+        $this->productInterface = $productInterface;;
     }
 
     /** function index
@@ -37,8 +37,8 @@ class CategoryController extends Controller
      * @return $category, $product_category
      */
     public function index(int $id){
-        $category = $this->categoryRepository->getListCategory()->get();
-        $product_category = $this->productRepository->getProductByCategoryId($id);
+        $category = $this->categoryInterface->getListCategory()->get();
+        $product_category = $this->productInterface->getProductByCategoryId($id);
 
         return view('fontend.pages.categories.index', compact('category', 'product_category'));
     }
@@ -49,8 +49,8 @@ class CategoryController extends Controller
      */
     public function FilterByPrice(Request $request)
     {
-        $category = $this->categoryRepository->getListCategory()->get();
-        $product_category = $this->productRepository->FilterProductByPrice($request->all());
+        $category = $this->categoryInterface->getListCategory()->get();
+        $product_category = $this->productInterface->FilterProductByPrice($request->all());
         
         return view('fontend.pages.categories.index', compact('category', 'product_category'));
     }

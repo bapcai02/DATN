@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\UserRepository;
+use App\Repositories\Contracts\UserInterface;
 use App\Notifications\ResetPassword;
 use App\Models\PasswordReset;
 use Auth;
@@ -17,11 +17,11 @@ use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
-    protected $userRepository;
+    protected $userInterface;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserInterface $userInterface)
     {
-        $this->userRepository = $userRepository;
+        $this->userInterface = $userInterface;
     }
 
     public function showlogin(){
@@ -90,7 +90,7 @@ class LoginController extends Controller
             return view('admin.pages.auths.confirm');
         }
         
-        $user = $this->userRepository->checkUser($request->email);
+        $user = $this->userInterface->checkUser($request->email);
         if (!$user) {
             $errors = new MessageBag(['errorlogin' => "Account does not exist, please check again !"]);
             return redirect()->back()->withInput()->withErrors($errors);
@@ -118,7 +118,7 @@ class LoginController extends Controller
             return redirect()->back()->withErrors('error', 'Token has expired, please check again!');
         }
 
-        $this->userRepository->resetPassword($passwordReset['email'], Hash::make($password));
+        $this->userInterface->resetPassword($passwordReset['email'], Hash::make($password));
         $passwordReset->delete();
         return redirect(route('auth.login'))->with('reset-success', 'password changed successfully!');
 

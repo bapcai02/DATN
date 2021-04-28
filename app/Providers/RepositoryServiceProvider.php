@@ -35,19 +35,19 @@ class RepositoryServiceProvider extends ServiceProvider
     */
     private function registerRepository()
     {
-        $this->app->bind('App\Repository\Contracts\AddressInterface', 'App\Repository\AddressRepository');
-        $this->app->bind('App\Repository\Contracts\BrandInterface', 'App\Repository\BrandRepository');
-        $this->app->bind('App\Repository\Contracts\CategoryInterface', 'App\Repository\CategoryRepository');
-        $this->app->bind('App\Repository\Contracts\CouponInterface', 'App\Repository\CouponRepository');
-        $this->app->bind('App\Repository\Contracts\CustomerInterface', 'App\Repository\CustomerRepository');
-        $this->app->bind('App\Repository\Contracts\EmployeeInterface', 'App\Repository\EmployeeRepository');
-        $this->app->bind('App\Repository\Contracts\OrderInterface', 'App\Repository\OrderRepository');
-        $this->app->bind('App\Repository\Contracts\ProductInterface', 'App\Repository\ProductRepository');
-        $this->app->bind('App\Repository\Contracts\SellerInterface', 'App\Repository\SellerRepository');
-        $this->app->bind('App\Repository\Contracts\ShopInterface', 'App\Repository\ShopRepository');
-        $this->app->bind('App\Repository\Contracts\SliderInterface', 'App\Repository\SliderRepository');
-        $this->app->bind('App\Repository\Contracts\UserCartInterface', 'App\Repository\UserCartRepository');
-        $this->app->bind('App\Repository\Contracts\UserInterface', 'App\Repository\UserRepository');
+        $this->app->bind('App\Repositories\Contracts\AddressInterface', 'App\Repositories\AddressRepository');
+        $this->app->bind('App\Repositories\Contracts\BrandInterface', 'App\Repositories\BrandRepository');
+        $this->app->bind('App\Repositories\Contracts\CategoryInterface', 'App\Repositories\CategoryRepository');
+        $this->app->bind('App\Repositories\Contracts\CouponInterface', 'App\Repositories\CouponRepository');
+        $this->app->bind('App\Repositories\Contracts\CustomerInterface', 'App\Repositories\CustomerRepository');
+        $this->app->bind('App\Repositories\Contracts\EmployeeInterface', 'App\Repositories\EmployeeRepository');
+        $this->app->bind('App\Repositories\Contracts\OrderInterface', 'App\Repositories\OrderRepository');
+        $this->app->bind('App\Repositories\Contracts\ProductInterface', 'App\Repositories\ProductRepository');
+        $this->app->bind('App\Repositories\Contracts\SellerInterface', 'App\Repositories\SellerRepository');
+        $this->app->bind('App\Repositories\Contracts\ShopInterface', 'App\Repositories\ShopRepository');
+        $this->app->bind('App\Repositories\Contracts\SliderInterface', 'App\Repositories\SliderRepository');
+        $this->app->bind('App\Repositories\Contracts\UserCartInterface', 'App\Repositories\UserCartRepository');
+        $this->app->bind('App\Repositories\Contracts\UserInterface', 'App\Repositories\UserRepository');
     }
 
     /**

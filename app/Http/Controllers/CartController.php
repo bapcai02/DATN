@@ -3,54 +3,54 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\CategoryRepository;
-use App\Repositories\ProductRepository;
-use App\Repositories\AddressRepository;
-use App\Repositories\UserCartRepository;
-use App\Repositories\CouponRepository;
+use App\Repositories\Contracts\CategoryInterface;
+use App\Repositories\Contracts\ProductInterface;
+use App\Repositories\Contracts\AddressInterface;
+use App\Repositories\Contracts\UserCartInterface;
+use App\Repositories\Contracts\CouponInterface;
 use Cart;
 use Auth;
 use DB;
 
 /**
  * Class CartController
- * @property \App\Repositories\CategoryRepository
- * @property \App\Repositories\ProductRepository
- * @property \App\Repositories\AddressRepository
- * @property \App\Repositories\UserCartRepository
- * @property \App\Repositories\CouponRepository
+ * @property \App\Repositories\Contracts\CategoryInterface
+ * @property \App\Repositories\Contracts\ProductInterface
+ * @property \App\Repositories\Contracts\AddressInterface
+ * @property \App\Repositories\Contracts\UserCartInterface
+ * @property \App\Repositories\Contracts\CouponInterface
  * @property \App\Models\Cart
  */
 
 class CartController extends Controller
 {
     /** CartController __constructer
-     * @property CategoryRepository $categoryRepository
-     * @property ProductRepository $productRepository
-     * @property AddressRepository $addressRepository
-     * @property UserCartRepository $userCartRepository
-     * @property CouponRepository $couponRepository
+     * @property CategoryInterface $categoryInterface
+     * @property ProductInterface $productInterface
+     * @property AddressInterface $addressInterface
+     * @property UserCartInterface $userCartInterface
+     * @property CouponInterface $couponInterface
      */
 
-    protected $categoryRepository;
-    protected $productRepository;
-    protected $addressRepository;
-    protected $userCartRepository;
-    protected $couponRepository;
+    protected $categoryInterface;
+    protected $productInterface;
+    protected $addressInterface;
+    protected $userCartInterface;
+    protected $couponInterface;
 
     public function __construct(
-        CategoryRepository $categoryRepository,
-        ProductRepository $productRepository,
-        AddressRepository $addressRepository,
-        UserCartRepository $userCartRepository,
-        CouponRepository $couponRepository
+        CategoryInterface $categoryInterface,
+        ProductInterface $productInterface,
+        AddressInterface $addressInterface,
+        UserCartInterface $userCartInterface,
+        CouponInterface $couponInterface
     )
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->productRepository = $productRepository;
-        $this->addressRepository = $addressRepository;
-        $this->userCartRepository = $userCartRepository;
-        $this->couponRepository = $couponRepository;
+        $this->categoryInterface = $categoryInterface;
+        $this->productInterface = $productInterface;
+        $this->addressInterface = $addressInterface;
+        $this->userCartInterface = $userCartInterface;
+        $this->couponInterface = $couponInterface;
     }
 
     /**
@@ -58,10 +58,10 @@ class CartController extends Controller
      * @return $category, $cart
      */
     public function index(Request $request){
-        $category = $this->categoryRepository->getListCategory()->get();
+        $category = $this->categoryInterface->getListCategory()->get();
 
         if(Auth::check()){
-            $user_cart = $this->userCartRepository->getById(Auth::user()->id);
+            $user_cart = $this->userCartInterface->getById(Auth::user()->id);
             return view('fontend.pages.carts.index', compact('category', 'user_cart'));
         }
         $cart = Cart::content();
@@ -166,9 +166,9 @@ class CartController extends Controller
      * @return $category, $tinhThanhPho, $cartUser
      */
     public function checkout(int $id){
-        $category = $this->categoryRepository->getListCategory()->get();
-        $tinhThanhPho = $this->addressRepository->getTinhThanhPho();
-        $cartUser = $this->userCartRepository->GetCart(Auth::user()->id, $id);
+        $category = $this->categoryInterface->getListCategory()->get();
+        $tinhThanhPho = $this->addressInterface->getTinhThanhPho();
+        $cartUser = $this->userCartInterface->GetCart(Auth::user()->id, $id);
 
         return view('fontend.pages.carts.checkout', compact('category', 'tinhThanhPho', 'cartUser'));
     }
@@ -179,7 +179,7 @@ class CartController extends Controller
      */
     public function getQuanHuyen(Request $request){
         $matp = $request->matp;
-        $data = $this->addressRepository->getQuanHuyen($matp);
+        $data = $this->addressInterface->getQuanHuyen($matp);
 
         return response()->json($data);
     }
@@ -190,7 +190,7 @@ class CartController extends Controller
      */
     public function getXaPhuong(Request $request){
         $maqh = $request->maqh;
-        $data = $this->addressRepository->getXaPhuong($maqh);
+        $data = $this->addressInterface->getXaPhuong($maqh);
         
         return response()->json($data);
     }

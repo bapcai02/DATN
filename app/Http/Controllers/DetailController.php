@@ -3,34 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\CategoryRepository;
-use App\Repositories\ProductRepository;
+use App\Repositories\Contracts\CategoryInterface;
+use App\Repositories\Contracts\ProductInterface;
 use DB;
 
 /**
  * Class DetailController
- * @property \App\Repositories\CategoryRepository
- * @property \App\Repositories\ProductRepository
+ * @property \App\Repositories\Contracts\CategoryInterface
+ * @property \App\Repositories\Contracts\ProductInterface
  */
 
 class DetailController extends Controller
 {
     /** 
      * Class DetailController construct
-     * @property CategoryRepository $categoryRepository
-     * @property ProductRepository $productRepository
+     * @property CategoryInterface $categoryInterface
+     * @property ProductInterface $productInterface
      */
 
-    protected $categoryRepository;
-    protected $productRepository;
+    protected $categoryInterface;
+    protected $productInterface;
 
     public function __construct(
-        CategoryRepository $categoryRepository,
-        ProductRepository $productRepository
+        CategoryInterface $categoryInterface,
+        ProductInterface $productInterface
     )
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->productRepository = $productRepository;
+        $this->categoryInterface = $categoryInterface;
+        $this->productInterface = $productInterface;
     }
 
     /** 
@@ -47,12 +47,12 @@ class DetailController extends Controller
      */
     public function index(Request $request, int $id){
         $page = $request->page;
-        $category = $this->categoryRepository->getListCategory()->get();
-        $product = $this->productRepository->getProductById($id)->first();
-        $productImage = $this->productRepository->getProductImageById($id)->get();
-        $rating = $this->productRepository->getRatingImageById($id);
-        $productRan = $this->productRepository->getListProduct()->inRandomOrder()->limit(6)->get();
-        $rating = $this->productRepository->getRating($id);
+        $category = $this->categoryInterface->getListCategory()->get();
+        $product = $this->productInterface->getProductById($id)->first();
+        $productImage = $this->productInterface->getProductImageById($id)->get();
+        $rating = $this->productInterface->getRatingImageById($id);
+        $productRan = $this->productInterface->getListProduct()->inRandomOrder()->limit(6)->get();
+        $rating = $this->productInterface->getRating($id);
 
         return view('fontend.pages.product.index', compact(
                 'category', 
@@ -73,7 +73,7 @@ class DetailController extends Controller
      */
     public function rating(Request $request)
     {
-        $this->productRepository->rating($request->all());
+        $this->productInterface->rating($request->all());
 
         return response()->json('thành công');
     }

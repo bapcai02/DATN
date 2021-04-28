@@ -3,53 +3,53 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\CategoryRepository;
-use App\Repositories\ProductRepository;
-use App\Repositories\AddressRepository;
-use App\Repositories\UserCartRepository;
-use App\Repositories\OrderRepository;
+use App\Repositories\Contracts\CategoryInterface;
+use App\Repositories\Contracts\ProductInterface;
+use App\Repositories\Contracts\AddressInterface;
+use App\Repositories\Contracts\UserCartInterface;
+use App\Repositories\Contracts\OrderInterface;
 use Cart;
 use Product;
 use Auth;
 use DB;
 
 /** UserCartController
- * @property App\Repositories\CategoryRepository
- * @property App\Repositories\ProductRepository
- * @property App\Repositories\AddressRepository
- * @property App\Repositories\UserCartRepository
- * @property App\Repositories\OrderRepository
+ * @property App\Repositories\Contracts\CategoryInterface
+ * @property App\Repositories\Contracts\ProductInterface
+ * @property App\Repositories\Contracts\AddressInterface
+ * @property App\Repositories\Contracts\UserCartInterface
+ * @property App\Repositories\Contracts\OrderInterface
  * @property Cart
  */
 class UserCartController extends Controller
 {
 
     /** UserCartController __construct
-     * @property CategoryRepository $categoryRepository
-     * @property  ProductRepository $productRepository
-     * @property  AddressRepository $addressRepository
-     * @property  UserCartRepository $userCartRepository
-     * @property  OrderRepository $orderRepository
+     * @property  CategoryInterface $categoryInterface
+     * @property  ProductInterface $productInterface
+     * @property  AddressInterface $addressInterface
+     * @property  UserCartInterface $userCartInterface
+     * @property  OrderInterface $orderInterface
      */
-    protected $userCartRepository;
-    protected $categoryRepository;
-    protected $productRepository;
-    protected $addressRepository;
-    protected $orderRepository;
+    protected $categoryInterface;
+    protected $userCartInterface;
+    protected $productInterface;
+    protected $addressInterface;
+    protected $orderInterface;
 
     public function __construct(
-        CategoryRepository $categoryRepository,
-        ProductRepository $productRepository,
-        AddressRepository $addressRepository,
-        UserCartRepository $userCartRepository,
-        OrderRepository $orderRepository
+        CategoryInterface $categoryInterface,
+        ProductInterface $productInterface,
+        AddressInterface $addressInterface,
+        UserCartInterface $userCartInterface,
+        OrderInterface $orderInterface
     )
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->productRepository = $productRepository;
-        $this->addressRepository = $addressRepository;
-        $this->userCartRepository = $userCartRepository;
-        $this->orderRepository = $orderRepository;
+        $this->categoryInterface = $categoryInterface;
+        $this->productInterface = $productInterface;
+        $this->addressInterface = $addressInterface;
+        $this->userCartInterface = $userCartInterface;
+        $this->orderInterface = $orderInterface;
     }
 
     public function addCart(Request $request)
@@ -62,7 +62,7 @@ class UserCartController extends Controller
 
         if(Auth::check()){
             $user_id = Auth::user()->id;         
-            $this->userCartRepository->addCart($product, $user_id);
+            $this->userCartInterface->addCart($product, $user_id);
 
             return redirect()->back()->with('message', 'Thêm Giỏ Hàng Thành Công');
         }
@@ -70,7 +70,7 @@ class UserCartController extends Controller
 
     public function deleteCart(Request $request){
         $id = $request->id;
-        $this->userCartRepository->delete($id);
+        $this->userCartInterface->delete($id);
 
         return redirect()->back()->with('message', 'Xóa sản phẩm thành công');
     }
