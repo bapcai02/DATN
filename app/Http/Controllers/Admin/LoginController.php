@@ -15,20 +15,43 @@ use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+/**
+ * LoginController
+ * 
+ * @property App\Repositories\Contracts\UserInterface
+ */
 class LoginController extends Controller
 {
     protected $userInterface;
 
+    /**
+     * LoginController construct
+     * 
+     * @property UserInterface $userInterface
+     */
     public function __construct(UserInterface $userInterface)
     {
         $this->userInterface = $userInterface;
     }
 
-    public function showlogin(){
+    /**
+     * function showlogin
+     * 
+     * @return view
+     */
+    public function showlogin()
+    {
         return view('admin.pages.auths.login');
     }
 
-    public function login(Request $request){
+     /**
+     * function showlogin
+     * 
+     * @param Request $request
+     * @return 
+     */
+    public function login(Request $request)
+    {
         if ($request->method() == 'GET') {
             // Check loggedin
             if (!Auth::check()) {
@@ -80,12 +103,24 @@ class LoginController extends Controller
         }
     }
 
-    public function confirm(){
+     /**
+     * function showlogin
+     * 
+     * @return view
+     */
+    public function confirm()
+    {
         return view('admin.pages.auths.confirm');
     }
 
-    public function sendMail(Request $request){
-
+    /**
+     * function sendMail
+     * 
+     * @param Request $request
+     * @return redirect
+     */
+    public function sendMail(Request $request)
+    {
         if ($request->method() == 'GET') {
             return view('admin.pages.auths.confirm');
         }
@@ -103,6 +138,13 @@ class LoginController extends Controller
         return redirect(route('auth.confirm'))->with('message', "please check your email");
     }
 
+     /**
+     * function resetPassword
+     * 
+     * @param Request $request
+     * @param string $token
+     * @return redirect
+     */
     public function resetPassword(Request $request, $token = null)
     {
         if ($request->method() == 'GET') {
@@ -124,7 +166,14 @@ class LoginController extends Controller
 
     }
 
-    public function logout(Request $request){
+     /**
+     * function logout
+     * 
+     * @param Request $request
+     * @return redirect
+     */
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->flush();
         return redirect()->route("auth.login");

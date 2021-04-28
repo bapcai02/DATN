@@ -6,8 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\CouponInterface;
 
+/**
+ * CouponController 
+ * 
+ * @property App\Repositories\Contracts\CouponInterface
+ */
 class CouponController extends Controller
 {
+    /**
+     * CouponController construct 
+     * 
+     * @property CouponInterface $couponInterface
+     */
     protected $couponInterface;
 
     public function __construct(
@@ -17,6 +27,12 @@ class CouponController extends Controller
         $this->couponInterface = $couponInterface;
     }
 
+    /**
+     * function index
+     * 
+     * @param Request $request
+     * @return view
+     */
     public function index(Request $request)
     {
         $page = $request->page;
@@ -25,6 +41,12 @@ class CouponController extends Controller
         return view('admin.pages.coupon.index', compact('coupons', 'page'));
     }
 
+    /**
+     * function delete
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function delete(Request $request)
     {
         $this->couponInterface->delete($request->id);
@@ -32,6 +54,12 @@ class CouponController extends Controller
         return redirect()->back()->with('message-coupon', 'xoa thanh cong');
     }
 
+    /**
+     * function create
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function create(Request $request)
     {
         $data = $request->all();
@@ -44,6 +72,12 @@ class CouponController extends Controller
         return redirect()->back()->with('message-coupon', 'them moi thanh cong');
     }
 
+    /**
+     * function edit
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function edit(Request $request)
     {
         $data = $request->all();
@@ -64,6 +98,12 @@ class CouponController extends Controller
         return redirect()->back()->with('message-coupon', 'chinh sua thanh cong');
     }
 
+    /**
+     * function search
+     * 
+     * @param Request $request
+     * @return view
+     */
     public function search(Request $request)
     {
         $page = $request->page;

@@ -7,11 +7,23 @@ use Illuminate\Http\Request;
 use App\Repositories\Contracts\CustomerInterface;
 use App\Repositories\Contracts\UserInterface;
 
+/**
+ * CustomerController
+ * 
+ * @property App\Repositories\Contracts\CustomerInterface
+ * @property App\Repositories\Contracts\UserInterface
+ */
 class CustomerController extends Controller
 {
     protected $customerInterface;
     protected $userInterface;
 
+    /**
+     * CustomerController construct
+     * 
+     * @property CustomerInterface $customerInterface
+     * @property UserInterface $userInterface
+     */
     public function __construct(
         CustomerInterface $customerInterface,
         UserInterface $userInterface
@@ -21,6 +33,12 @@ class CustomerController extends Controller
         $this->userInterface = $userInterface;
     }
 
+    /**
+     * function index
+     * 
+     * @param Request $request
+     * @return view
+     */
     public function index(Request $request)
     {
         $page = $request->page;
@@ -29,6 +47,12 @@ class CustomerController extends Controller
         return view('admin.pages.customer.index', compact('customer', 'page'));
     }
 
+    /**
+     * function create
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function create(Request $request)
     {
         $data = $request->all();
@@ -42,6 +66,12 @@ class CustomerController extends Controller
         return redirect()->back()->with('message', 'them moi thanh cong !');
     }
 
+    /**
+     * function delete
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function delete(Request $request)
     {
         $id = $request->id;
@@ -50,6 +80,12 @@ class CustomerController extends Controller
         return redirect()->back()->with('message', 'xoa thanh thanh cong !');
     }
 
+    /**
+     * function edit
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function edit(Request $request)
     {
         $data = $request->all();
@@ -73,6 +109,12 @@ class CustomerController extends Controller
         return redirect()->back()->with('message', 'sua thanh cong !');
     }
 
+    /**
+     * function search
+     * 
+     * @param Request $request
+     * @return view
+     */
     public function search(Request $request)
     {
         $page = $request->page;

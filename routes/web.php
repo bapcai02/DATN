@@ -60,6 +60,11 @@ Route::post('/login', 'LoginController@login');
 Route::get('/logout', 'LoginController@logout');
 Route::get('/register', 'LoginController@getregister')->name('register');
 Route::post('/register', 'LoginController@register');
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');
+
+Route::get('/auth/{provider}', 'SocialController@redirectToProvider');
+Route::get('/auth/{provide}/callback', 'SocialController@handleProviderCallback');
 
 Route::prefix('auth')->group(function (){
     Route::get('/login', 'Admin\LoginController@showlogin')->name('auth.login');

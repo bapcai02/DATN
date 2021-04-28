@@ -6,8 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\CategoryInterface;
 
+/**
+ * CategoryController
+ * 
+ * @property App\Repositories\Contracts\CategoryInterface
+ */
 class CategoryController extends Controller
 {
+
+    /**
+     * CategoryController construct
+     * 
+     * @property CategoryInterface $categoryInterface
+     */
     protected $categoryInterface;
 
     public function __construct(
@@ -17,6 +28,12 @@ class CategoryController extends Controller
         $this->categoryInterface = $categoryInterface;
     }
 
+    /**
+     * function index
+     * 
+     * @param Request $request
+     * @return view
+     */
     public function index(Request $request){
         $page = $request->page;
         $category = $this->categoryInterface->getListCategory()->paginate(6);
@@ -24,6 +41,12 @@ class CategoryController extends Controller
         return view('admin.pages.categories.index', compact('category', 'page'));
     }
 
+    /**
+     * function delete
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function delete(Request $request){
         $id = $request->id;
         $this->categoryInterface->delete($id);
@@ -31,6 +54,12 @@ class CategoryController extends Controller
         return redirect()->back()->with('message', 'xoa thanh cong !');
     }
 
+    /**
+     * function create
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function create(Request $request){
         $data = $request->all();
         $check = $this->categoryInterface->check($data['name']);
@@ -43,6 +72,12 @@ class CategoryController extends Controller
         return redirect()->back()->with('error', 'category da duoc tao vui long kiem tra lai !');
     }
 
+    /**
+     * function edit
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function edit(Request $request){
         $data = $request->all();
         $check = $this->categoryInterface->check($data['name']);
@@ -60,6 +95,12 @@ class CategoryController extends Controller
         return redirect()->back()->with('error', 'category da duoc tao vui long kiem tra lai !');
     }
 
+    /**
+     * function search
+     * 
+     * @param Request $request
+     * @return view
+     */
     public function search(Request $request)
     {
         $page = $request->page;

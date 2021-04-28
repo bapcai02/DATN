@@ -13,6 +13,12 @@ use App\Repositories\Contracts\BrandInterface;
  */
 class BrandController extends Controller
 {
+
+    /**
+     * BrandController
+     * 
+     * @property BrandInterface $brandInterface
+     */
     protected $brandInterface;
     
     public function __construct(
@@ -22,6 +28,12 @@ class BrandController extends Controller
         $this->brandInterface = $brandInterface;
     }
 
+      /**
+     *  function index
+     * 
+     * @param Request $request
+     * @return view
+     */
     public function index(Request $request)
     {
         $page = $request->page;
@@ -30,6 +42,12 @@ class BrandController extends Controller
         return view('admin.pages.brands.index', compact('brand', 'page'));
     }
 
+    /**
+     *  function delete
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function delete(Request $request)
     {
         $this->brandInterface->delete($request->id);
@@ -37,6 +55,12 @@ class BrandController extends Controller
         return redirect()->back()->with('message-brand', 'xoa thanh cong');
     }
 
+     /**
+     *  function create
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function create(Request $request)
     {
         $data = $request->all();
@@ -49,6 +73,12 @@ class BrandController extends Controller
         return redirect()->back()->with('message-brand', 'them moi thanh cong');
     }
 
+    /**
+     *  function edit
+     * 
+     * @param Request $request
+     * @return redirect
+     */
     public function edit(Request $request)
     {
         
@@ -70,6 +100,12 @@ class BrandController extends Controller
         return redirect()->back()->with('message-brand', 'chinh sua thanh cong');
     }
 
+    /**
+     *  function search
+     * 
+     * @param Request $request
+     * @return view
+     */
     public function search(Request $request)
     {
         $page = $request->page;

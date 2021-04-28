@@ -7,8 +7,19 @@ use Illuminate\Http\Request;
 use App\Repositories\Contracts\SliderInterface;
 use DB;
 
+/**
+ * SliderController
+ * 
+ * @property App\Repositories\Contracts\SliderInterface
+ */
 class SliderController extends Controller
 {
+
+    /**
+     * SliderController construct
+     * 
+     * @param SliderInterface $sliderInterface
+     */
     protected $sliderInterface;
 
     public function __construct(
@@ -18,6 +29,11 @@ class SliderController extends Controller
         $this->sliderInterface = $sliderInterface;
     }
 
+    /**
+     * function index
+     * 
+     * @param Request $request
+     */
     public function index(Request $request)
     {
         $page = $request->page;
@@ -27,6 +43,9 @@ class SliderController extends Controller
         return view('admin.pages.sliders.index', compact('page', 'slider', 'product'));
     }
 
+    /**
+     * @param Request $request
+     */
     public function create(Request $request)
     {
         $this->sliderInterface->create($request->all());
