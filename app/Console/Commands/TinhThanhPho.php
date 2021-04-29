@@ -60,15 +60,18 @@ class TinhThanhPho extends Command
         ]);
 
         $data = json_decode($response->getBody());
-        
-        foreach($data->data as $value){
-            DB::table('api_tinhthanhpho')->insert([
-                'matp' => $data->ProvinceID,
-                'name' => $data->ProvinceName,
-                "code" => $data->Code,
-            ]);
-            echo "thao tác thành phố => " . $val->ProvinceName . ": " .  $data->ProvinceID . "\n"; 
+        if($data->data != null){
+            foreach($data->data as $value){
+                DB::table('api_tinhthanhpho')->insert([
+                    "matp" => $value->ProvinceID,
+                    "name" => $value->ProvinceName,
+                    "code" => $value->Code,
+                ]);
+                echo "thao tác thành phố => " . $value->ProvinceName . ": " .  $value->ProvinceID . "\n"; 
+            }
+            echo "thêm mới tỉnh thành phố thành công";
+        }else{
+            echo "dữ liệu không tồn tại !" . "\n";
         }
-        echo "thêm mới tỉnh thành phố thành công";
     }
 }
