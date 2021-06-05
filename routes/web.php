@@ -63,8 +63,8 @@ Route::post('/register', 'LoginController@register');
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
 
-Route::get('/auth/{provider}', 'SocialController@redirectToProvider');
-Route::get('/auth/{provide}/callback', 'SocialController@handleProviderCallback');
+Route::get('/auths/{provider}', 'SocialController@redirectToProvider');
+Route::get('/auths/{provide}/callback', 'SocialController@handleProviderCallback');
 
 Route::prefix('auth')->group(function (){
     Route::get('/login', 'Admin\LoginController@showlogin')->name('auth.login');
