@@ -24,7 +24,7 @@
     <div class="footer-credit">
       <div class="container">
         <div class="footer-creadit_block d-flex flex-column flex-md-row justify-content-start justify-content-md-between align-items-baseline align-items-md-center">
-          <p class="author">Copyright © HaDV1998.</p><img class="payment-method" src="{{ asset('HTML/assets/images/payment.png') }}" alt="">
+          <p class="author">Copyright © HaDV1998.</p><img class="payment-method" src="{{ 'http://dvha-datn.herokuapp.com/HTML/assets/images/payment.png' }}" alt="">
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@
     <nav class="navigation d-flex align-items-center">
       <div class="container">
         <div class="row">
-          <div class="col-2"><a class="logo" href="{{ url('/') }}"><img src="{{ asset('HTML/assets/images/logo.png') }}" alt=""></a></div>
+          <div class="col-2"><a class="logo" href="{{ url('/') }}"><img src="{{ 'http://dvha-datn.herokuapp.com/HTML/assets/images/logo.png' }}" alt=""></a></div>
           <div class="col-8">
             <div class="navgition-menu d-flex">
               <ul class="mb-0">
@@ -109,7 +109,7 @@
             </div>
           </div>
           <div class="col-6">
-            <div class="mobile-menu_logo text-center d-flex justify-content-center align-items-center"><a href=""><img src="assets/images/logo.png" alt=""></a></div>
+            <div class="mobile-menu_logo text-center d-flex justify-content-center align-items-center"><a href=""><img src="http://dvha-datn.herokuapp.com/assets/images/logo.png" alt=""></a></div>
           </div>
           <div class="col-3">
             <div class="mobile-product_function d-flex align-items-center justify-content-end"><a class="function-icon icon_heart_alt" href="wishlist.html"></a><a class="function-icon icon_bag_alt" href="shop_cart.html"></a></div>
