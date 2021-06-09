@@ -18,6 +18,7 @@ class CreateRatingsTable extends Migration
             $table->bigInteger('product_id')->unsigned()->index('product_id')->comment('products.id');
             $table->bigInteger('user_id')->unsigned()->index('user_id')->comment('users.id');
             $table->integer('rating');
+            $table->string('message');
             $table->timestamps();
         });
     }

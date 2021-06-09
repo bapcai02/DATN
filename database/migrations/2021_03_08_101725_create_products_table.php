@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->text('product_content');
             $table->string('product_price');
             $table->string('product_status');
+            $table->float('sale');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyToUsersTable extends Migration
+class ApiTinhthanhpho extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddForeignKeyToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreign('role_id', 'users_ibfk_1')->references('id')->on('roles')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+        Schema::create('api_tinhthanhpho', function (Blueprint $table) {
+            $table->bigInteger('id',true)->unsigned();
+            $table->bigInteger('matp');
+            $table->bigInteger('code');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddForeignKeyToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('user_ibfk_1');
-        });
+        Schema::dropIfExists('api_tinhthanhpho');
     }
 }

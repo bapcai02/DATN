@@ -18,9 +18,9 @@ class CreateOrderDetailsTable extends Migration
             $table->bigInteger('order_id')->unsigned()->index('order_id')->comment('orders.id');
             $table->bigInteger('product_id')->unsigned()->index('product_id')->comment('products.id');
             $table->bigInteger('seller_id')->unsigned()->index('seller_id')->comment('sellers.id');
-            $table->string('coupon');
-            $table->integer('fee_ship');   
-            $table->integer('product_sales_quantity');
+            $table->integer('qty');
+            $table->float('price');   
+            $table->string('address_ship');
             $table->timestamps();
         });
     }

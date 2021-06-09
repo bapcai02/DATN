@@ -17,10 +17,9 @@ class CreateCustomersTable extends Migration
             $table->bigInteger('id',true)->unsigned();
             $table->bigInteger('user_id')->unsigned()->index('user_id')->comment('users.id');
             $table->string('name');
-            $table->string('email');
             $table->string('phone');
             $table->string('address');
-            $table->string('password');
+            $table->integer('status');
             $table->timestamps();
         });
     }

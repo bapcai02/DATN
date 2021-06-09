@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyToAdminsTable extends Migration
+class ApiQuanhuyen extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddForeignKeyToAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::table('admins', function (Blueprint $table) {
-            $table->foreign('user_id', 'admins_ibfk_1')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+        Schema::create('api_quanhuyen', function (Blueprint $table) {
+            $table->bigInteger('id',true)->unsigned();
+            $table->bigInteger('maqh');
+            $table->bigInteger('matp');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddForeignKeyToAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::table('admins', function (Blueprint $table) {
-            $table->dropForeign('admins_ibfk_1');
-        });
+        Schema::dropIfExists('api_quanhuyen');
     }
 }
