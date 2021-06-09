@@ -39,7 +39,7 @@
     <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/jquery.fancybox.js' }}"></script>
     <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/numscroller-1.0.js' }}"></script>
     <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/vanilla-tilt.min.js' }}"></script>
-    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/main.js')}}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/main.js'}}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     @stack('script')
