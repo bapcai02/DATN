@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <meta name="keywords" content="blog, business, clean, clear, cooporate, creative, design web, flat, marketing, minimal, portfolio, shop, shopping, unique">
     <meta name="author" content="MARTECH | Deer Creative Theme">
-    <link rel="stylesheet" href="{{ asset('HTML/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('HTML/assets/css/custom_bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('HTML/assets/css/normalize.css') }}">
-    <link rel="stylesheet" href="{{ asset('HTML/assets/css/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('HTML/assets/css/elegant.css') }}">
-    <link rel="stylesheet" href="{{ asset('HTML/assets/css/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('HTML/assets/css/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('HTML/assets/css/scroll.css') }}">
-    <link rel="stylesheet" href="{{ asset('HTML/assets/css/icomoon.css') }}">
-    <link rel="stylesheet" href="{{ asset('HTML/assets/css/jquery.fancybox.min.css') }}">
-    <link rel="shortcut icon" href="{{ asset('HTML/assets/images/shortcut_logo.png') }}">
+    <link rel="stylesheet" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/css/style.css' }}">
+    <link rel="stylesheet" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/css/custom_bootstrap.css' }}">
+    <link rel="stylesheet" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/css/normalize.css' }}">
+    <link rel="stylesheet" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/css/fontawesome.css' }}">
+    <link rel="stylesheet" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/css/elegant.css' }}">
+    <link rel="stylesheet" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/css/animate.css' }}">
+    <link rel="stylesheet" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/css/slick.css' }}">
+    <link rel="stylesheet" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/css/scroll.css' }}">
+    <link rel="stylesheet" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/css/icomoon.css' }}">
+    <link rel="stylesheet" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/css/jquery.fancybox.min.css' }}">
+    <link rel="shortcut icon" href="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/images/shortcut_logo.png' }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
   </head>
   <body>
@@ -29,17 +29,17 @@
         <!-- End footer-->
       </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="{{ asset('HTML/assets/js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('HTML/assets/js/jquery.countdown.min.js') }}"></script>
-    <script src="{{ asset('HTML/assets/js/slick.min.js') }}"></script>
-    <script src="{{ asset('HTML/assets/js/jquery.easing.js') }}"></script>
-    <script src="{{ asset('HTML/assets/js/jquery.scrollUp.min.js') }}"></script>
-    <script src="{{ asset('HTML/assets/js/jquery.zoom.min.js') }}"></script>
-    <script src="{{ asset('HTML/assets/js/parallax.js') }}"></script>
-    <script src="{{ asset('HTML/assets/js/jquery.fancybox.js') }}"></script>
-    <script src="{{ asset('HTML/assets/js/numscroller-1.0.js') }}"></script>
-    <script src="{{ asset('HTML/assets/js/vanilla-tilt.min.js') }}"></script>
-    <script src="{{ asset('HTML/assets/js/main.js') }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/jquery-ui.min.js' }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/jquery.countdown.min.js' }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/slick.min.js' }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/jquery.easing.js' }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/jquery.scrollUp.min.js' }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/jquery.zoom.min.js' }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/parallax.js' }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/jquery.fancybox.js' }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/numscroller-1.0.js' }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/vanilla-tilt.min.js' }}"></script>
+    <script src="{{ 'https://dvha-datn.herokuapp.com/HTML/assets/js/main.js' }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     @stack('script')
