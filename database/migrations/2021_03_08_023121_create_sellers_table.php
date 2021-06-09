@@ -15,7 +15,7 @@ class CreateSellersTable extends Migration
     {
         Schema::create('sellers', function (Blueprint $table) {
             $table->bigInteger('id',true)->unsigned();
-            $table->bigInteger('customer_id')->unsigned()->index('customer_id')->comment('customers.id');
+            $table->bigInteger('customer_id');
             $table->string('shop_info');
             $table->string('shop_name');
             $table->timestamps();

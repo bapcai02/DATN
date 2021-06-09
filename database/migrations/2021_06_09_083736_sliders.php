@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVnXaphuongthitranTable extends Migration
+class Sliders extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateVnXaphuongthitranTable extends Migration
      */
     public function up()
     {
-        Schema::create('vn_xaphuongthitran', function (Blueprint $table) {
+        Schema::create('sliders', function (Blueprint $table) {
             $table->bigInteger('id',true)->unsigned();
-            $table->bigInteger('maqh');
-            $table->string('name');
-            $table->string('type');
+            $table->bigInteger('product_id');
+            $table->string('images');
+            $table->string('descript');
+            $table->string('status');;
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateVnXaphuongthitranTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vn_xaphuongthitran');
+        Schema::dropIfExists('sliders');
     }
 }

@@ -15,7 +15,7 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigInteger('id',true)->unsigned();
-            $table->bigInteger('user_id')->unsigned()->index('user_id')->comment('users.id');
+            $table->bigInteger('user_id');
             $table->string('name');
             $table->string('phone');
             $table->string('address');

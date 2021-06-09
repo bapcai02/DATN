@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVnXaphuongthitranTable extends Migration
+class Ships extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateVnXaphuongthitranTable extends Migration
      */
     public function up()
     {
-        Schema::create('vn_xaphuongthitran', function (Blueprint $table) {
+        Schema::create('ships', function (Blueprint $table) {
             $table->bigInteger('id',true)->unsigned();
-            $table->bigInteger('maqh');
-            $table->string('name');
-            $table->string('type');
+            $table->bigInteger('seller_id');
+            $table->string('shopID');
+            $table->string('Token');
+            $table->string('DistrictID');
+            $table->string('ProvinceID');
+            $table->string('WardCode');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateVnXaphuongthitranTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vn_xaphuongthitran');
+        Schema::dropIfExists('ships');
     }
 }

@@ -17,7 +17,7 @@ class CreateVnQuanhuyenTable extends Migration
             $table->bigInteger('id',true)->unsigned();
             $table->string('name');
             $table->string('type');
-            $table->bigInteger('matp')->unsigned()->index('matp')->comment('vn_tinhthanhpho.id');
+            $table->bigInteger('matp');
             $table->timestamps();
         });
     }
