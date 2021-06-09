@@ -9,24 +9,24 @@
   <title>SHOP</title>
   <!-- loader-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="{{'https://dvha-datn.herokuapp.com/assets/css/pace.min.css'}}" rel="stylesheet"/>
-  <script src="{{'https://dvha-datn.herokuapp.com/assets/js/pace.min.js'}}"></script>
+  <link href="{{asset('assets/css/pace.min.css')}}" rel="stylesheet"/>
+  <script src="{{asset('assets/js/pace.min.js')}}"></script>
   <!--favicon-->
-  <link href="{{'https://dvha-datn.herokuapp.com/assets/plugins/fullcalendar/css/fullcalendar.min.css'}}" rel='stylesheet'/>
-  <link rel="icon" href="{{'https://dvha-datn.herokuapp.com/assets/images/favicon.ico'}}" type="image/x-icon">
+  <link href="{{asset('assets/plugins/fullcalendar/css/fullcalendar.min.css')}}" rel='stylesheet'/>
+  <link rel="icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon">
   <!-- simplebar CSS-->
-  <link href="{{'https://dvha-datn.herokuapp.com/assets/plugins/simplebar/css/simplebar.css'}}" rel="stylesheet"/>
+  <link href="{{asset('assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet"/>
   <!-- Bootstrap core CSS-->
-  <link href="{{'https://dvha-datn.herokuapp.com/assets/css/bootstrap.min.css'}}" rel="stylesheet"/>
+  <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet"/>
 
   <!-- animate CSS-->
-  <link href="{{'https://dvha-datn.herokuapp.com/assets/css/animate.css'}}" rel="stylesheet" type="text/css"/>
+  <link href="{{asset('assets/css/animate.css')}}" rel="stylesheet" type="text/css"/>
   <!-- Icons CSS-->
-  <link href="{{'https://dvha-datn.herokuapp.com/assets/css/icons.css'}}" rel="stylesheet" type="text/css"/>
+  <link href="{{asset('assets/css/icons.css')}}" rel="stylesheet" type="text/css"/>
   <!-- Sidebar CSS-->
-  <link href="{{'https://dvha-datn.herokuapp.com/assets/css/sidebar-menu.css'}}" rel="stylesheet"/>
+  <link href="{{asset('assets/css/sidebar-menu.css')}}" rel="stylesheet"/>
   <!-- Custom Style-->
-  <link href="{{'https://dvha-datn.herokuapp.com/assets/css/app-style.css'}}" rel="stylesheet"/>
+  <link href="{{asset('assets/css/app-style.css')}}" rel="stylesheet"/>
   
 </head>
 
@@ -101,16 +101,16 @@
   </div><!--End wrapper-->
 
   <!-- Bootstrap core JavaScript-->
-  <script src="{{'https://dvha-datn.herokuapp.com/assets/js/jquery.min.js'}}"></script>
-  <script src="{{'https://dvha-datn.herokuapp.com/assets/js/popper.min.js'}}"></script>
-  <script src="{{'https://dvha-datn.herokuapp.com/assets/js/bootstrap.min.js'}}"></script>
+  <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+  <script src="{{asset('assets/js/popper.min.js')}}"></script>
+  <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 	
  <!-- simplebar js -->
-  <script src="{{'https://dvha-datn.herokuapp.com/assets/plugins/simplebar/js/simplebar.js'}}"></script>
+  <script src="{{asset('assets/plugins/simplebar/js/simplebar.js')}}"></script>
   <!-- sidebar-menu js -->
-  <script src="{{'https://dvha-datn.herokuapp.com/assets/js/sidebar-menu.js'}}"></script>
+  <script src="{{asset('assets/js/sidebar-menu.js')}}"></script>
   <!-- Custom scripts -->
-  <script src="{{'https://dvha-datn.herokuapp.com/assets/js/app-script.js'}}"></script>
+  <script src="{{asset('assets/js/app-script.js')}}"></script>
   <!-- Chart js -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   @stack('script')
