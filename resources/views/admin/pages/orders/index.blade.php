@@ -68,6 +68,8 @@
                       <th scope="col">Order Code</th>
                       <th scope="col">Hình thức thanh toán</th>
                       <th scope="col">Cửa hàng</th>
+                      <th scope="col">Người đặt hàng</th>
+                      <th scope="col">Email đặt hàng</th>
                       <th scope="col">Tên sản phẩm</th>
                       <th scope="col">Số lượng</th>
                       <th scope="col">Giá</th>
@@ -89,6 +91,8 @@
                           <td>Thanh toán khi nhận hàng</td>
                         @endif
                         <td>{{ App\Repositories\CustomerRepository::getNameCustomer($value->customer_id)->name }}</td>
+                        <td>{{ App\Repositories\EmployeeRepository::getById($value->user_id)->name ?? null}}</td>
+                        <td>{{ App\Repositories\UserRepository::getUserById($value->user_id)->email }}</td>
                         <td>{{ App\Repositories\ProductRepository::getName($value->product_id)->product_name }}</td>
                         <td>{{ $value->qty }}</td>
                         <td>{{ number_format($value->price) }}VND</td>

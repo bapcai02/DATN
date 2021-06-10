@@ -37,7 +37,7 @@ class OrderController extends Controller
     {
         $page = $request->page;
         $order = $this->orderInterface->getByAdmin();
-
+       
         return view('admin.pages.orders.index',compact('order', 'page'));
     }
 
