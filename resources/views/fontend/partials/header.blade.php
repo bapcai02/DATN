@@ -60,7 +60,7 @@
                 <button class="no-round-btn" id="mobile-menu--closebtn">Close menu</button>
                 <div class="mobile-menu_items">
                   <ul class="mb-0 d-flex flex-column">
-                    <li class="toggleable"> <a class="menu-item active" href="index.html">Home</a><span class="sub-menu--expander"></span>
+                    <!-- <li class="toggleable"> <a class="menu-item active" href="index.html">Home</a><span class="sub-menu--expander"></span>
                     </li>
                     <li class="toggleable"><a class="menu-item" href="shop_grid+list_3col.html">Shop</a><span class="sub-menu--expander"><i class="icon_plus"></i></span>
                       <ul class="sub-menu">
@@ -97,7 +97,7 @@
                         <li><a href="contact_us.html">contact us</a></li>
                         <li><a href="404_error.html">404 error</a></li>
                       </ul>
-                    </li>
+                    </li> -->
                   </ul>
                 </div>
                 <div class="mobile-login">
@@ -123,7 +123,7 @@
           <div class="col-12 col-md-4 col-lg-4 col-xl-3 order-2 order-md-1">
             <div class="department-menu_block down">
               <div class="department-menu d-flex justify-content-between align-items-center"><i class="fas fa-bars"></i>DANH MỤC SẢN PHẨM<span><i class="arrow_carrot-down"></i></span></div>
-              <div class="department-dropdown-menu">
+              <div class="department-dropdown-menu" id = "addClass">
                 <ul>
                   @foreach($category as $key => $value)
                     <li><a href="{{ url('categories') . '/' . $value->id  }}"> <i class="icon-{{ $key+1 }}"></i>{{ $value->category_name }}</a></li>
@@ -149,7 +149,7 @@
               <div class="col-0 col-xl-4">
                 <div class="phone-number">
                   <div class="phone-number_icon"><i class="icon_phone"></i></div>
-                  <h2>+397 368 768</h2>
+                  <h2>+84 397 368 768</h2>
                 </div>
               </div>
             </div>
@@ -158,3 +158,17 @@
       </div>
     </div>
   </header>
+
+@push('script')
+
+<script>
+  $(document).ready(function () {
+    var val = location.href;
+    if(val == "http://datn.com.vn:8000/"){
+      $("#addClass").addClass("down")
+    }
+    console.log(val);
+  });
+</script>
+
+@endpush

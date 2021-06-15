@@ -160,7 +160,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product pink"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style=" margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -198,7 +198,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style=" margin: 12px 0; background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -235,7 +235,7 @@
                   <div class="col-6 col-md-4">
                     <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                       @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style=" margin: 12px 0; background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                       <h5 class="product-type">{{ $value->category_name }}</h5>
                       <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -272,7 +272,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style=" margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -310,7 +310,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -384,7 +384,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -422,7 +422,7 @@
                       <div class="col-6 col-md-4">
                         <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                           @if($value->sale != 0)
-                            <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                            <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                           @endif
                           <h5 class="product-type">{{ $value->category_name }}</h5>
                           <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -460,7 +460,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -498,7 +498,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -536,7 +536,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -594,7 +594,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -632,7 +632,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -670,7 +670,7 @@
                       <div class="col-6 col-md-4">
                         <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                           @if($value->sale != 0)
-                            <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                            <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                           @endif
                           <h5 class="product-type">{{ $value->category_name }}</h5>
                           <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -708,7 +708,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('detail') . '/' . $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -746,7 +746,7 @@
                     <div class="col-6 col-md-4">
                       <div class="product"><a class="product-img" href="{{ url('dateail') .'/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
