@@ -19,6 +19,11 @@ class UserRepository implements UserInterface
     {
         return $this->user->where('id', $id)->first();
     }
+    
+    public static function getUserById(int $id)
+    {
+        return DB::table('users')->where('id', $id)->first();
+    }
 
     public function checkUser(string $email)
     {

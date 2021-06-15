@@ -28,6 +28,11 @@ class EmployeeRepository implements EmployeeInterface
         ->where('user_id', $user_id)
         ->select('employer.*', 'users.email')
         ->first();
+    }  
+
+    public static function getById(int $id)
+    {
+       return DB::table('employer')->where('user_id', $id)->first();
     }
 
     public function create(string $email)
