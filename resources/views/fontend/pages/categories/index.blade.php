@@ -247,9 +247,9 @@
                       @endif
                       @foreach($product_category as $key => $value)
                         <div class="col-6 col-md-4">
-                          <div class="product pink"><a class="product-img" href="shop_detail.html"><img src="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
+                          <div class="product pink"><a class="product-img"  href="{{ url('detail') .'/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                             @if($value->sale != 0)
-                              <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                              <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                             @endif
                             <h5 class="product-type">{{ $value->category_name }}</h5>
                             <h3 class="product-name">{{ $value->product_name }}</h3>
@@ -261,12 +261,20 @@
                               <h3>{{ $value->product_price }}/kg</h3>
                             @endif
                             <div class="product-select">
-                              <form action="{{ url('/cart') }}" method = "POST">
-                                @csrf
-                                <input type="hidden" name="productId" value="{{ $value->id }}" >
-                                <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
-                                <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
-                              </form> 
+                              @if(!Auth::check())
+                                <form action="{{ url('/cart') }}" method = "POST">
+                                  @csrf
+                                  <input type="hidden" name="productId" value="{{ $value->id }}" >
+                                  <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                                </form>   
+                              @else
+                                  <form action="{{ url('/usercart/add') }}" method = "POST">
+                                    @csrf
+                                    <input type="hidden" name="productId" value="{{ $value->id }}" >
+                                    <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                                  </form> 
+                              @endif 
+                              <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
                             </div>
                           </div>
                         </div>
