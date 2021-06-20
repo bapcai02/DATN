@@ -85,16 +85,16 @@
                     <div class="col-6 col-md-4">
                       <div class="product pink"><a class="product-img" href="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                         @if($value->sale != 0)
-                          <h5 class="deal-discount" style="background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          <h5 class="deal-discount" style="background-color: margin: 12px 0;rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
                         @endif
                         <h5 class="product-type">{{ $value->category_name }}</h5>
                         <h3 class="product-name">{{ $value->product_name }}</h3>
                         @if($value->sale != 0)
-                          <h3 class="product-price">{{ number_format(($value->product_price * $value->sale)/100). "VND/kg" }}
-                            <del>{{ $value->product_price }}</del>
+                          <h3 class="product-price">{{ number_format(($value->product_price * $value->sale)/100). " VND/kg" }}
+                            <del>{{ number_format($value->product_price ) }}</del>
                           </h3>
                         @else
-                          <h3>{{ $value->product_price }}/kg</h3>
+                          <h3>{{ number_format($value->product_price ). " VND/kg"  }}</h3>
                         @endif
                         <div class="product-select">
                           <form action="{{ url('/cart') }}" method = "POST">

@@ -59,11 +59,11 @@
                       <div class="shop-detail_info shop-detail_info-full">
                         <div class="price-rate">
                           @if($product->sale != 0)
-                            <h3 class="product-price">{{ number_format(($value->product_price * $value->sale)/100). "VND/kg" }}
-                              <del>{{ $value->product_price }}</del>
-                            </h3>
+                            <h5 class="product-price">{{ number_format(($value->product_price * $value->sale)/100). " VND/kg" }}
+                              <del>{{ number_format($value->product_price ) }}</del>
+                            </h5>
                           @else
-                            <h3>{{ $value->product_price }}/kg</h3>
+                            <h5>{{ number_format($value->product_price ). " VND/kg"  }}</h5>
                           @endif
                           <h5 class="product-rated"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i><span>(15)</span></h5>
                         </div>
@@ -185,12 +185,15 @@
                     <div class="product"><a class="product-img" href="{{ url('/detail') . '/'. $value->id }}"><img src="{{ asset('assets/images').'/'. \App\Repositories\ProductRepository::getImage($value->id)->image }}" alt=""></a>
                       <h5 class="product-type">{{ $value->category_name }}</h5>
                       <h3 class="product-name">{{ $value->product_name }}</h3>
-                        @if($product->sale != 0)
-                          <h3 class="product-price">{{ number_format(($value->product_price * $value->sale)/100). "VND/kg" }}
-                            <del>{{ $value->product_price }}</del>
-                          </h3>
+                         @if($value->sale != 0)
+                             <h5 class="deal-discount" style="margin: 12px 0;background-color: rgb(170, 57, 57); color:white">-{{ $value->sale }}%</h5>
+                          @endif
+                        @if($product->sale > 0)
+                          <h5 class="product-price">{{ number_format(($value->product_price * $value->sale)/100). " VND/kg" }}
+                            <del>{{number_format($value->product_price ) }}</del>
+                          </h5>
                         @else
-                          <h3>{{ $value->product_price }}/kg</h3>
+                          <h5>{{number_format($value->product_price ). " VND/kg"  }}</h5>
                         @endif
                       <div class="product-select">
                         <form action="{{ url('/cart') }}" method = "POST">

@@ -254,11 +254,11 @@
                             <h5 class="product-type">{{ $value->category_name }}</h5>
                             <h3 class="product-name">{{ $value->product_name }}</h3>
                             @if($value->sale != 0)
-                              <h3 class="product-price">{{ number_format(($value->product_price * $value->sale)/100). "VND/kg" }}
-                                <del>{{ $value->product_price }}</del>
-                              </h3>
+                              <h5 class="product-price">{{ number_format(($value->product_price * $value->sale)/100). " VND/kg" }}
+                                <del>{{ number_format($value->product_price )  }}</del>
+                              </h5>
                             @else
-                              <h3>{{ $value->product_price }}/kg</h3>
+                              <h5>{{number_format($value->product_price ). " VND/kg"  }}</h3>
                             @endif
                             <div class="product-select">
                               @if(!Auth::check())
