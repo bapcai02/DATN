@@ -138,7 +138,7 @@
                   <div class="row no-gutters">
                     <form action="{{ url('search') }}" method="GET" class="row no-gutters">
                       <div class="col-md-10 ">
-                          <input name="text" class="no-round-input no-border" type="text" placeholder="Nhập để tìm kiếm">
+                          <input name="text" class="no-round-input no-border" type="text" placeholder="Nhập để tìm kiếm"  maxlength="255" required>
                       </div>
                       <div class="col-md-2 ">
                         <button type="submit" class="no-round-btn black"><i class="icon_search"></i></button>
