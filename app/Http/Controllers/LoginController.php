@@ -62,14 +62,15 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $rules = [
-            'email' =>'required|email',
-            'password' => 'required|min:5'
+            'email' =>'required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+            'password' => 'required|min:5:max:20'
         ];
         $messages = [
             'email.required' => 'Email là trường bắt buộc',
-            'email.email' => 'Email không đúng định dạng',
+            'email.regex' => 'Email không đúng định dạng',
             'password.required' => 'Mật khẩu là trường bắt buộc',
             'password.min' => 'Mật khẩu phải chứa ít nhất 5 ký tự',
+            'password.max' => 'Mật khẩu không nhiều hơn 20 ký tự',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         
