@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 15, 2021 lúc 12:08 PM
--- Phiên bản máy phục vụ: 10.4.17-MariaDB
--- Phiên bản PHP: 7.2.34
+-- Thời gian đã tạo: Th7 13, 2021 lúc 04:45 PM
+-- Phiên bản máy phục vụ: 10.4.13-MariaDB
+-- Phiên bản PHP: 7.3.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -9191,8 +9191,8 @@ CREATE TABLE `brands` (
   `brand_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `brand_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `brand_status` int(11) NOT NULL,
-  `brand_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `brand_keyword` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `brand_slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `brand_keyword` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -9202,7 +9202,8 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `brand_name`, `brand_description`, `brand_status`, `brand_slug`, `brand_keyword`, `created_at`, `updated_at`) VALUES
-(1, 'Hoa Quả Việt', 'hoa quả viet nam', 1, 'hoa-qua-viet', 'hoaquaviet', '2021-03-15 04:08:14', NULL);
+(1, 'Hoa Quả Việt', 'hoa quả viet nam', 1, 'hoa-qua-viet', 'hoaquaviet', '2021-03-15 04:08:14', NULL),
+(4, 'bapyeu9x@gmail.com', 'dvha', 1, '', 'NaN', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -9231,7 +9232,11 @@ INSERT INTO `carts` (`id`, `user_id`, `product_id`, `name`, `qty`, `sale`, `pric
 (3, 8, 3, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-03-31 19:08:53', '2021-03-31 19:08:53'),
 (4, 8, 5, 'Cải Thảo', 1, 10, 20000, 'mua-cai-thao-da-lat-tai-ha-noi.jpg', '2021-03-31 19:09:06', '2021-03-31 19:09:06'),
 (10, 10, 1, 'Xoài ', 2, 22, 10000, '1-1200x676-46.jpg', '2021-04-12 19:26:56', '2021-04-12 19:26:56'),
-(11, 10, 1, 'Xoài ', 1, 22, 10000, '1-1200x676-46.jpg', '2021-04-13 01:41:34', '2021-04-13 01:41:34');
+(11, 10, 1, 'Xoài ', 1, 22, 10000, '1-1200x676-46.jpg', '2021-04-13 01:41:34', '2021-04-13 01:41:34'),
+(16, 29, 6, 'Thịt Bò', 1, 10, 70000, 'photo-1-1482451521171.jpg', '2021-06-08 07:48:20', '2021-06-08 07:48:20'),
+(17, 29, 3, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-06-08 07:48:20', '2021-06-08 07:48:20'),
+(18, 29, 1, 'Xoài ', 1, 22, 10000, '1-1200x676-46.jpg', '2021-06-08 07:50:03', '2021-06-08 07:50:03'),
+(21, 27, 1, 'Xoài ', 1, 22, 10000, '1-1200x676-46.jpg', '2021-07-05 07:38:46', '2021-07-05 07:38:46');
 
 -- --------------------------------------------------------
 
@@ -9244,8 +9249,8 @@ CREATE TABLE `categories` (
   `category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_status` int(11) NOT NULL,
-  `category_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category_keyword` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_keyword` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -9276,7 +9281,7 @@ CREATE TABLE `coupons` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `qty` int(11) NOT NULL,
-  `feature` int(11) NOT NULL,
+  `feature` int(11) DEFAULT NULL,
   `discount_number` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -9337,7 +9342,13 @@ CREATE TABLE `employer` (
 
 INSERT INTO `employer` (`id`, `user_id`, `name`, `phone`, `date`, `address`, `image`, `created_at`, `updated_at`) VALUES
 (1, 8, 'DVHA', '0982932342', NULL, NULL, NULL, '2021-04-01 03:36:11', '2021-04-01 03:36:47'),
-(2, 10, 'Dang Van Ha', '24634634', '2021-03-31', 'Ha Noi', 'hinh-anh-anime-phong-canh-la-nhat-840x504.jpg', '2021-04-01 14:23:03', '2021-04-01 07:23:03');
+(2, 10, 'Dang Van Ha', '24634634', '2021-03-31', 'Ha Noi', 'hinh-anh-anime-phong-canh-la-nhat-840x504.jpg', '2021-04-01 14:23:03', '2021-04-01 07:23:03'),
+(3, 27, NULL, NULL, NULL, NULL, NULL, '2021-06-05 21:10:05', '2021-06-05 21:10:05'),
+(4, 28, NULL, NULL, NULL, NULL, NULL, '2021-06-05 21:47:00', '2021-06-05 21:47:00'),
+(5, 29, NULL, NULL, NULL, NULL, NULL, '2021-06-08 07:43:28', '2021-06-08 07:43:28'),
+(6, 30, NULL, NULL, NULL, NULL, NULL, '2021-06-21 07:00:10', '2021-06-21 07:00:10'),
+(7, 31, NULL, NULL, NULL, NULL, NULL, '2021-06-21 07:15:16', '2021-06-21 07:15:16'),
+(8, 32, NULL, NULL, NULL, NULL, NULL, '2021-06-21 07:23:27', '2021-06-21 07:23:27');
 
 -- --------------------------------------------------------
 
@@ -9439,7 +9450,14 @@ INSERT INTO `orders` (`id`, `Order_Code`, `user_id`, `customer_id`, `ship_id`, `
 (8, 'ZGSAX', 10, 1, 1, 1, 1, '2021-04-09 01:05:11', '2021-04-09 01:05:11'),
 (9, 'ZGSAE', 10, 1, 1, 1, 1, '2021-04-09 01:07:28', '2021-04-09 01:07:28'),
 (10, 'ZGS8Q', 2, 1, 1, 1, 1, '2021-04-09 01:42:41', '2021-04-09 01:42:41'),
-(11, 'ZGXWV', 10, 1, 1, NULL, 1, '2021-04-15 02:27:29', '2021-04-15 02:27:29');
+(11, 'ZGXWV', 10, 1, 1, 0, 1, '2021-04-15 02:27:29', '2021-04-15 02:27:29'),
+(12, 'ZHZXR', 27, 1, 1, 1, 1, '2021-06-06 02:19:30', '2021-06-06 02:19:30'),
+(13, 'ZHZXM', 27, 1, 1, 0, 1, '2021-06-06 02:24:38', '2021-06-06 02:24:38'),
+(14, 'ZHZXE', 27, 1, 1, 0, 1, '2021-06-06 02:28:43', '2021-06-06 02:28:43'),
+(15, 'ZHZAI', 27, 1, 1, 0, 1, '2021-06-06 02:28:43', '2021-06-06 02:28:43'),
+(16, 'ZHZAQ', 27, 1, 1, 0, 1, '2021-06-06 02:28:48', '2021-06-06 02:28:48'),
+(17, 'ZH5YC', 27, 1, 1, 1, 1, '2021-06-15 08:12:43', '2021-06-15 08:12:43'),
+(18, 'ZH11A', 27, 1, 1, 1, 1, '2021-06-21 08:28:53', '2021-06-21 08:28:53');
 
 -- --------------------------------------------------------
 
@@ -9469,7 +9487,12 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `seller_id`, `qty`,
 (4, 7, 6, 1, 1, 70000, 'Phường Phúc Xá,Quận Ba Đình,Thành phố Hà Nội', '2021-04-09 00:35:18', '2021-04-09 00:35:18'),
 (5, 9, 5, 1, 1, 10000, 'Phường Phúc Xá, Quận Ba Đình, Phường Phúc Xá', '2021-04-09 01:07:28', '2021-04-09 01:07:28'),
 (6, 10, 2, 1, 1, 10000, 'Phường Vĩnh Phúc, Quận Ba Đình, Phường Vĩnh Phúc', '2021-04-09 01:42:41', '2021-04-09 01:42:41'),
-(7, 11, 5, 1, 1, 20000, 'Xã Tà Mung,Huyện Than Uyên,Lai Châu', '2021-04-15 02:27:29', '2021-04-15 02:27:29');
+(7, 11, 5, 1, 1, 20000, 'Xã Tà Mung,Huyện Than Uyên,Lai Châu', '2021-04-15 02:27:29', '2021-04-15 02:27:29'),
+(8, 12, 1, 1, 1, 10000, 'Xã Canh Vinh, Huyện Vân Canh, Xã Canh Vinh', '2021-06-06 02:19:30', '2021-06-06 02:19:30'),
+(9, 13, 2, 1, 1, 10000, 'Xã Thiệu Phúc,Huyện Như Xuân,Thanh Hóa', '2021-06-06 02:24:38', '2021-06-06 02:24:38'),
+(10, 14, 2, 1, 1, 10000, 'Xã Đại Đình,Huyện Bình Xuyên,Vĩnh Phúc', '2021-06-06 02:28:43', '2021-06-06 02:28:43'),
+(11, 17, 1, 1, 1, 10000, 'Xã Yên Dương, Huyện Tam Đảo, Xã Yên Dương', '2021-06-15 08:12:43', '2021-06-15 08:12:43'),
+(12, 18, 6, 1, 1, 70000, 'Xã Đại Đồng, Huyện Thanh Chương, Xã Đại Đồng', '2021-06-21 08:28:53', '2021-06-21 08:28:53');
 
 -- --------------------------------------------------------
 
@@ -9503,11 +9526,11 @@ CREATE TABLE `products` (
   `brand_id` bigint(20) UNSIGNED NOT NULL COMMENT 'brands.id',
   `seller_id` bigint(20) UNSIGNED NOT NULL COMMENT 'sellers.id',
   `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_price` float NOT NULL,
-  `sale` int(10) NOT NULL,
+  `sale` int(10) DEFAULT NULL,
   `product_status` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -9521,10 +9544,23 @@ INSERT INTO `products` (`id`, `category_id`, `brand_id`, `seller_id`, `product_n
 (1, 3, 1, 1, 'Xoài ', 'xoai', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 10000, 22, 1, '2021-03-15 04:09:02', NULL),
 (2, 3, 1, 1, 'Xoài ', 'xoai', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 10000, 5, 1, '2021-03-15 04:09:02', NULL),
 (3, 3, 1, 1, 'Xoài ', 'xoai', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 10000, 10, 1, '2021-03-15 04:09:02', NULL),
-(4, 3, 1, 1, 'Xoài ', 'xoai', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 10000, 0, 1, '2021-03-15 04:09:02', NULL),
+(4, 3, 1, 1, 'Xoài ', 'xoai', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 90000, 0, 1, '2021-03-15 04:09:02', NULL),
 (5, 2, 1, 1, 'Cải Thảo', 'cai-thao', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 20000, 10, 1, '2021-03-15 04:09:02', NULL),
 (6, 1, 1, 1, 'Thịt Bò', 'thit-bo', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 70000, 10, 1, '2021-03-15 04:09:02', NULL),
-(7, 4, 1, 1, 'Cá Ngừ Bông', 'ca-ngu-bong', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 70000, 10, 1, '2021-03-15 04:09:02', NULL);
+(7, 4, 1, 1, 'Cá Ngừ Bông', 'ca-ngu-bong', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 70000, 10, 1, '2021-03-15 04:09:02', NULL),
+(8, 4, 1, 1, 'Cá Ngừ Bông', 'ca-ngu-bong', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 70000, 10, 1, '2021-03-15 04:09:02', NULL),
+(9, 4, 1, 1, 'Cá Ngừ Bông', 'ca-ngu-bong', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventor.  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem', 'Xoài chín cây, ngon', 70000, 10, 1, '2021-03-15 04:09:02', NULL);
+
+--
+-- Bẫy `products`
+--
+DELIMITER $$
+CREATE TRIGGER `before_product_update` BEFORE UPDATE ON `products` FOR EACH ROW INSERT INTO product_images
+ SET action = 'update',
+     product_id = products.id,
+     updated_at = NOW()
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -9553,8 +9589,8 @@ INSERT INTO `product_images` (`id`, `product_id`, `image`, `created_at`, `update
 (6, 6, 'photo-1-1482451521171.jpg', '2021-03-15 04:11:32', NULL),
 (7, 7, 'Cá-ngừ-bông_Bonito.jpg', '2021-03-15 04:11:32', NULL),
 (8, 1, '7-diem-danh-9-giong-xoai-thom-ngon-va-pho-bien-tai-viet-nam.jpg', '2021-03-15 04:11:32', NULL),
-(9, 1, 'thum-1200x676-3.jpg', '2021-03-15 04:11:32', NULL),
-(10, 1, '1574750592-4663ca7c57ee00aec30305c0167bf6d9.jpg', '2021-03-15 04:11:32', NULL);
+(9, 8, 'thum-1200x676-3.jpg', '2021-03-15 04:11:32', NULL),
+(10, 9, '1574750592-4663ca7c57ee00aec30305c0167bf6d9.jpg', '2021-03-15 04:11:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -9634,8 +9670,8 @@ INSERT INTO `roles` (`id`, `status`, `display_name`, `created_at`, `updated_at`)
 CREATE TABLE `sellers` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `customer_id` bigint(20) UNSIGNED NOT NULL COMMENT 'customers.id',
-  `shop_info` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `shop_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shop_info` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shop_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -9687,7 +9723,7 @@ CREATE TABLE `sliders` (
   `product_id` int(11) NOT NULL,
   `images` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `descript` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL,
+  `status` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -9762,15 +9798,19 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `created_at`,
 (3, 2, 'Customer', 'customer@gmail.com', '$2y$10$o828wF5m4k5a0V1QzKL6vubd4b6.4IidFEBEIJJ0e5/OJ1M2UZlge', '2021-03-10 02:01:26', NULL),
 (7, 4, 'Shiper', 'shiper@gmail.com', '$2y$10$pgnHUzIVSxhUygt735MhH.K2dfqFpiGMWxMOMOeBZbKQQzZOTIWLy', '2021-03-30 07:11:52', '2021-03-30 07:11:52'),
 (8, 1, 'Employee', 'builder1@gmail.com', '$2y$10$wK1ufsCMUE8aP0MabBIyyuw4Q0/dEKDBXEgnVsGOtvoyzBckRDkYy', '2021-03-31 19:08:38', '2021-03-31 19:08:38'),
-(10, 1, 'Employee', 'builder@2nf.com.vn', '$2y$10$GwvXk9.7nrd8SLTMexhVsuVsn16yGQvjRhHXwl1/VXhBIrrdObgHq', '2021-03-31 21:47:44', '2021-03-31 21:47:44');
+(10, 1, 'Employee', 'builder@2nf.com.vn', '$2y$10$GwvXk9.7nrd8SLTMexhVsuVsn16yGQvjRhHXwl1/VXhBIrrdObgHq', '2021-03-31 21:47:44', '2021-03-31 21:47:44'),
+(26, 1, 'dvha', 'bapyeu9x@gmail.com', '$2b$10$396n8834oHI4TGanKhu0OePWgXAiCmWOBRN60PFSP.LGybbIbm2ky', NULL, NULL),
+(27, 1, 'Employee', 'builder001@2nf.com.vn', '$2y$10$A/cuJbTCl2Xip/u8ubvpbu3CBlihYDdGYspkvAGOhocEGvBMTWGHu', '2021-06-05 21:10:05', '2021-06-05 21:10:05'),
+(28, 1, 'Employee', 'thuthuy99vc@gmail.com', '$2y$10$OOv5EBdL/XvZLaOx/sHa4uYlZCmBsQCi7FfTh/LA1CNZ3FXzJumBS', '2021-06-05 21:47:00', '2021-06-05 21:47:00'),
+(29, 1, 'Employee', 'thuylh74@gmail.com', '$2y$10$WgNWAw7OacvNpfDrI428P.tWSjexbD71U75vPMm35ly2oAuA/kOwK', '2021-06-08 07:43:28', '2021-06-08 07:43:28');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `vn_quanhuyen`
+-- Cấu trúc bảng cho bảng `vn_quanhuyens`
 --
 
-CREATE TABLE `vn_quanhuyen` (
+CREATE TABLE `vn_quanhuyens` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -9780,10 +9820,10 @@ CREATE TABLE `vn_quanhuyen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `vn_quanhuyen`
+-- Đang đổ dữ liệu cho bảng `vn_quanhuyens`
 --
 
-INSERT INTO `vn_quanhuyen` (`id`, `name`, `type`, `matp`, `created_at`, `updated_at`) VALUES
+INSERT INTO `vn_quanhuyens` (`id`, `name`, `type`, `matp`, `created_at`, `updated_at`) VALUES
 (1, 'Quận Ba Đình', 'Quận', 1, NULL, NULL),
 (2, 'Quận Hoàn Kiếm', 'Quận', 1, NULL, NULL),
 (3, 'Quận Tây Hồ', 'Quận', 1, NULL, NULL),
@@ -10501,10 +10541,10 @@ INSERT INTO `vn_quanhuyen` (`id`, `name`, `type`, `matp`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `vn_tinhthanhpho`
+-- Cấu trúc bảng cho bảng `vn_tinhthanhphos`
 --
 
-CREATE TABLE `vn_tinhthanhpho` (
+CREATE TABLE `vn_tinhthanhphos` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -10513,10 +10553,10 @@ CREATE TABLE `vn_tinhthanhpho` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `vn_tinhthanhpho`
+-- Đang đổ dữ liệu cho bảng `vn_tinhthanhphos`
 --
 
-INSERT INTO `vn_tinhthanhpho` (`id`, `name`, `type`, `created_at`, `updated_at`) VALUES
+INSERT INTO `vn_tinhthanhphos` (`id`, `name`, `type`, `created_at`, `updated_at`) VALUES
 (1, 'Thành phố Hà Nội', 'Thành phố Trung ương', NULL, NULL),
 (2, 'Tỉnh Hà Giang', 'Tỉnh', NULL, NULL),
 (4, 'Tỉnh Cao Bằng', 'Tỉnh', NULL, NULL),
@@ -12275,16 +12315,16 @@ ALTER TABLE `users`
   ADD KEY `role_id` (`role_id`);
 
 --
--- Chỉ mục cho bảng `vn_quanhuyen`
+-- Chỉ mục cho bảng `vn_quanhuyens`
 --
-ALTER TABLE `vn_quanhuyen`
+ALTER TABLE `vn_quanhuyens`
   ADD PRIMARY KEY (`id`),
   ADD KEY `matp` (`matp`);
 
 --
--- Chỉ mục cho bảng `vn_tinhthanhpho`
+-- Chỉ mục cho bảng `vn_tinhthanhphos`
 --
-ALTER TABLE `vn_tinhthanhpho`
+ALTER TABLE `vn_tinhthanhphos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -12320,13 +12360,13 @@ ALTER TABLE `api_xaphuongthitran`
 -- AUTO_INCREMENT cho bảng `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -12344,13 +12384,13 @@ ALTER TABLE `coupons`
 -- AUTO_INCREMENT cho bảng `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `employer`
 --
 ALTER TABLE `employer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
@@ -12368,25 +12408,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `product_tags`
@@ -12440,18 +12480,18 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT cho bảng `vn_quanhuyen`
+-- AUTO_INCREMENT cho bảng `vn_quanhuyens`
 --
-ALTER TABLE `vn_quanhuyen`
+ALTER TABLE `vn_quanhuyens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=974;
 
 --
--- AUTO_INCREMENT cho bảng `vn_tinhthanhpho`
+-- AUTO_INCREMENT cho bảng `vn_tinhthanhphos`
 --
-ALTER TABLE `vn_tinhthanhpho`
+ALTER TABLE `vn_tinhthanhphos`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
@@ -12531,16 +12571,16 @@ ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
 
 --
--- Các ràng buộc cho bảng `vn_quanhuyen`
+-- Các ràng buộc cho bảng `vn_quanhuyens`
 --
-ALTER TABLE `vn_quanhuyen`
-  ADD CONSTRAINT `vn_quanhuyen_ibfk_1` FOREIGN KEY (`matp`) REFERENCES `vn_tinhthanhpho` (`id`);
+ALTER TABLE `vn_quanhuyens`
+  ADD CONSTRAINT `vn_quanhuyens_ibfk_1` FOREIGN KEY (`matp`) REFERENCES `vn_tinhthanhphos` (`id`);
 
 --
 -- Các ràng buộc cho bảng `vn_xaphuongthitran`
 --
 ALTER TABLE `vn_xaphuongthitran`
-  ADD CONSTRAINT `vn_xaphuongthitran_ibfk_1` FOREIGN KEY (`maqh`) REFERENCES `vn_quanhuyen` (`id`);
+  ADD CONSTRAINT `vn_xaphuongthitran_ibfk_1` FOREIGN KEY (`maqh`) REFERENCES `vn_quanhuyens` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
