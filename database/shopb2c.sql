@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 13, 2021 lúc 04:45 PM
+-- Thời gian đã tạo: Th7 15, 2021 lúc 06:01 PM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.3.19
 
@@ -9236,7 +9236,10 @@ INSERT INTO `carts` (`id`, `user_id`, `product_id`, `name`, `qty`, `sale`, `pric
 (16, 29, 6, 'Thịt Bò', 1, 10, 70000, 'photo-1-1482451521171.jpg', '2021-06-08 07:48:20', '2021-06-08 07:48:20'),
 (17, 29, 3, 'Xoài ', 1, 10, 10000, 'thum-1200x676-3.jpg', '2021-06-08 07:48:20', '2021-06-08 07:48:20'),
 (18, 29, 1, 'Xoài ', 1, 22, 10000, '1-1200x676-46.jpg', '2021-06-08 07:50:03', '2021-06-08 07:50:03'),
-(21, 27, 1, 'Xoài ', 1, 22, 10000, '1-1200x676-46.jpg', '2021-07-05 07:38:46', '2021-07-05 07:38:46');
+(22, 27, 5, 'Cải Thảo', 1, 10, 20000, 'mua-cai-thao-da-lat-tai-ha-noi.jpg', '2021-07-15 08:27:09', '2021-07-15 08:27:09'),
+(23, 27, 6, 'Thịt Bò', 1, 10, 70000, 'photo-1-1482451521171.jpg', '2021-07-15 08:30:29', '2021-07-15 08:30:29'),
+(25, 27, 1, 'Xoài ', 1, 22, 10000, '1-1200x676-46.jpg', '2021-07-15 08:50:47', '2021-07-15 08:50:47'),
+(26, 27, 1, 'Xoài ', 1, 22, 10000, '1-1200x676-46.jpg', '2021-07-15 08:52:00', '2021-07-15 08:52:00');
 
 -- --------------------------------------------------------
 
@@ -9343,7 +9346,7 @@ CREATE TABLE `employer` (
 INSERT INTO `employer` (`id`, `user_id`, `name`, `phone`, `date`, `address`, `image`, `created_at`, `updated_at`) VALUES
 (1, 8, 'DVHA', '0982932342', NULL, NULL, NULL, '2021-04-01 03:36:11', '2021-04-01 03:36:47'),
 (2, 10, 'Dang Van Ha', '24634634', '2021-03-31', 'Ha Noi', 'hinh-anh-anime-phong-canh-la-nhat-840x504.jpg', '2021-04-01 14:23:03', '2021-04-01 07:23:03'),
-(3, 27, NULL, NULL, NULL, NULL, NULL, '2021-06-05 21:10:05', '2021-06-05 21:10:05'),
+(3, 27, 'HaDV', '0397368768', NULL, 'Ha Noi', 'activity-diagram (9).png', '2021-07-15 15:42:14', '2021-07-15 08:42:14'),
 (4, 28, NULL, NULL, NULL, NULL, NULL, '2021-06-05 21:47:00', '2021-06-05 21:47:00'),
 (5, 29, NULL, NULL, NULL, NULL, NULL, '2021-06-08 07:43:28', '2021-06-08 07:43:28'),
 (6, 30, NULL, NULL, NULL, NULL, NULL, '2021-06-21 07:00:10', '2021-06-21 07:00:10'),
@@ -9457,7 +9460,9 @@ INSERT INTO `orders` (`id`, `Order_Code`, `user_id`, `customer_id`, `ship_id`, `
 (15, 'ZHZAI', 27, 1, 1, 0, 1, '2021-06-06 02:28:43', '2021-06-06 02:28:43'),
 (16, 'ZHZAQ', 27, 1, 1, 0, 1, '2021-06-06 02:28:48', '2021-06-06 02:28:48'),
 (17, 'ZH5YC', 27, 1, 1, 1, 1, '2021-06-15 08:12:43', '2021-06-15 08:12:43'),
-(18, 'ZH11A', 27, 1, 1, 1, 1, '2021-06-21 08:28:53', '2021-06-21 08:28:53');
+(18, 'ZH11A', 27, 1, 1, 1, 1, '2021-06-21 08:28:53', '2021-06-21 08:28:53'),
+(19, 'ZXQGW', 27, 1, 1, 1, 1, '2021-07-15 08:31:56', '2021-07-15 08:31:56'),
+(20, 'ZXQGH', 27, 1, 1, 1, 1, '2021-07-15 08:54:23', '2021-07-15 08:54:23');
 
 -- --------------------------------------------------------
 
@@ -9492,7 +9497,9 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `seller_id`, `qty`,
 (9, 13, 2, 1, 1, 10000, 'Xã Thiệu Phúc,Huyện Như Xuân,Thanh Hóa', '2021-06-06 02:24:38', '2021-06-06 02:24:38'),
 (10, 14, 2, 1, 1, 10000, 'Xã Đại Đình,Huyện Bình Xuyên,Vĩnh Phúc', '2021-06-06 02:28:43', '2021-06-06 02:28:43'),
 (11, 17, 1, 1, 1, 10000, 'Xã Yên Dương, Huyện Tam Đảo, Xã Yên Dương', '2021-06-15 08:12:43', '2021-06-15 08:12:43'),
-(12, 18, 6, 1, 1, 70000, 'Xã Đại Đồng, Huyện Thanh Chương, Xã Đại Đồng', '2021-06-21 08:28:53', '2021-06-21 08:28:53');
+(12, 18, 6, 1, 1, 70000, 'Xã Đại Đồng, Huyện Thanh Chương, Xã Đại Đồng', '2021-06-21 08:28:53', '2021-06-21 08:28:53'),
+(13, 19, 1, 1, 1, 10000, 'Xã Trừng Xá, Huyện Lương Tài, Xã Trừng Xá', '2021-07-15 08:31:56', '2021-07-15 08:31:56'),
+(14, 20, 1, 1, 1, 10000, 'Xã Vĩnh Hưng A, Huyện Vĩnh Lợi, Xã Vĩnh Hưng A', '2021-07-15 08:54:23', '2021-07-15 08:54:23');
 
 -- --------------------------------------------------------
 
@@ -9635,7 +9642,10 @@ CREATE TABLE `ratings` (
 
 INSERT INTO `ratings` (`id`, `product_id`, `user_id`, `rating`, `message`, `created_at`, `updated_at`) VALUES
 (1, 1, 3, 2, 'Sản phẩm tốt', '2021-03-16 03:38:00', NULL),
-(2, 1, 10, 4, 'Sản phẩm rất ngon', '2021-04-12 00:41:29', '2021-04-12 00:41:29');
+(2, 1, 10, 4, 'Sản phẩm rất ngon', '2021-04-12 00:41:29', '2021-04-12 00:41:29'),
+(3, 1, 27, 4, 'ngon', '2021-07-15 08:40:29', '2021-07-15 08:40:29'),
+(4, 1, 27, 4, 'sản phẩm chất lượng tốt', '2021-07-15 08:40:57', '2021-07-15 08:40:57'),
+(5, 3, 27, 5, 'ngon qua', '2021-07-15 08:55:10', '2021-07-15 08:55:10');
 
 -- --------------------------------------------------------
 
@@ -12366,7 +12376,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -12408,13 +12418,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -12438,7 +12448,7 @@ ALTER TABLE `product_tags`
 -- AUTO_INCREMENT cho bảng `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
