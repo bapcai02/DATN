@@ -60,7 +60,7 @@
         </div>    
     </div>
 </div>
-<div class="col-12" style="margin-top:5%;">
+<!-- <div class="col-12" style="margin-top:5%;">
     <div class="shop-detail_more-info">
     <div id="tab-so3">
         <div id="tab-1">
@@ -82,12 +82,12 @@
         </div>
     </div>
     </div>
-</div>
+</div> -->
 <div class="shop-layout">
 <h3 style="margin-left:10%">Danh Sách Sản Phẩm</h3>
     <div class="container" style="margin-left:13%">
         <div class="row">
-            <div class="col-xl-9">
+            <div class="col-xl-12">
                 <div class="shop-grid-list">
                     <div class="shop-products">
                         <div class="shop-products_bottom">
