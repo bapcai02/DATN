@@ -97,12 +97,20 @@
                           <h3>{{ number_format($value->product_price ). " VND/kg"  }}</h3>
                         @endif
                         <div class="product-select">
+                        @if(!Auth::check())
                           <form action="{{ url('/cart') }}" method = "POST">
                             @csrf
                             <input type="hidden" name="productId" value="{{ $value->id }}" >
-                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button>
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
+                          </form>   
+                        @else
+                          <form action="{{ url('/usercart/add') }}" method = "POST">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $value->id }}" >
+                            <button type = 'submit' class="add-to-cart round-icon-btn pink pink">  <i class="icon_bag_alt"></i></button> 
                           </form> 
-                          <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button>
+                        @endif
+                        <button class="round-icon-btn pink"><a href="{{ url('/detail') . '/'. $value->id }}"><i class="far fa-eye"></i></a></button> 
                         </div>
                       </div>
                     </div>
