@@ -20,8 +20,15 @@ jobs:
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-    - name: Check coding convention by PHP_CodeSniffer
-      run: ./vendor/bin/phpcs
+    - name: Install PHP_CodeSniffer
+      run: |
+        curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+        php phpcs.phar --version
+    - uses: tinovyatkin/action-php-codesniffer@v1
+      with:
+        files: "**.php" # you may customize glob as needed
+        phpcs_path: php phpcs.phar
+        standard: phpcs.xml
     - name: PHP mess detector
       run:  ./vendor/bin/phpmd app,database,routes,tests text phpmd.xml
     - name: Generate key
