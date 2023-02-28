@@ -1,5 +1,5 @@
 # GithHub Actions Workflow generated with Ghygen
-# Original configuration: https://ghygen.hi-folks.dev?code=1dfbb650fb092a6bf2a2372df8087b53
+# Original configuration: https://ghygen.hi-folks.dev?code=f672c1c2470c7a22f05bd15e532a3655
 name: Template - Laravel application (Mysql)
 on:
   push:
@@ -44,21 +44,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.x'
-    - name: Cache node_modules directory
-      uses: actions/cache@v3
-      id: node_modules-cache
-      with:
-        path: node_modules
-        key: ${{ runner.OS }}-build-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
-    - name: Install NPM packages
-      if: steps.node_modules-cache.outputs.cache-hit != 'true'
-      run: npm ci
-    - name: Build frontend
-      run: npm run development
     - name: Install PHP versions
       uses: shivammathur/setup-php@v2
       with:
@@ -122,7 +107,9 @@ jobs:
         DB_USER: root
 
       run: vendor/bin/phpunit --testdox
-      
+
+
+
     - name: Execute Code Sniffer via phpcs
       run: |
         composer require --dev squizlabs/php_codesniffer
