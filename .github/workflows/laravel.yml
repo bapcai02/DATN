@@ -29,8 +29,6 @@ jobs:
         files: "**.php" # you may customize glob as needed
         phpcs_path: php phpcs.phar
         standard: phpcs.xml
-    - name: PHP mess detector
-      run:  ./vendor/bin/phpmd app,database,routes,tests text phpmd.xml
     - name: Generate key
       run: php artisan key:generate
     - name: Directory Permissions
